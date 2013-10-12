@@ -1,0 +1,38 @@
+<div id="receipients">
+<table class="noborder">
+ <tr><td valign="top"><b>{translate fonema=LANG_TO_U}:</b></td><td>     
+   {if !isset($user_receipients) && !isset($group_receipients)}
+    <span class="textred">{translate fonema=LANG_PM_ADD_RECEIPIENTS_U}</span>
+   {else}
+    {if isset($user_receipients)}
+     <b>{translate fonema=LANG_USERS_U}:</b>     
+     {foreach $user_receipients as $user_receipient}
+      {$user_receipient.USER_NAME} <a href='javascript:void(0)' onClick="removeUserReceipient('{$pm_id}', '{$user_receipient.USER_ID}', 'receipients'); return false;" onmouseover="Tip('{translate fonema=LANG_DELETE_U}')" onmouseout="UnTip()">[x]</a>;
+      <input type="hidden" name="receipient_user_ids[]" value="{$user_receipient.USER_ID}">
+     {/foreach}<br>
+    {/if}
+    {if isset($user_name_error)}<span class="textred"><b>{translate fonema=LANG_ERROR_BAD_USER_NAMES_U}</b></span>: {$user_name_error}<br>{/if}
+    {if isset($group_receipients)}
+     <b>{translate fonema=LANG_GROUPS_U}:</b>     
+     {foreach $group_receipients as $group_receipient}
+      {$group_receipient.GROUP_NAME} <a href='javascript:void(0)' onClick="removeGroupReceipient('{$pm_id}', '{$group_receipient.GROUP_ID}', 'receipients'); return false;" onmouseover="Tip('{translate fonema=LANG_DELETE_U}')" onmouseout="UnTip()">[x]</a>;
+      <input type="hidden" name="receipient_group_ids[]" value="{$group_receipient.GROUP_ID}">
+     {/foreach}
+    {/if}
+   {/if}
+  <input type="hidden" name="post_pm" value="Y"></td></tr>
+ <tr><td></td><td>     
+  <table class="noborder"><tr><td>
+   {translate fonema=LANG_USERS_U}<br>
+   <textarea name="users" id="users" rows=3 class="input">{if isset($pm_users)}{$pm_users}{/if}</textarea><br>
+   <input class="btn" type="button" value=" {translate fonema=LANG_ADD_USERS_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" onClick="javascript:addUsersReceipients('{$pm_id}', document.getElementById('users').value, 'receipients')"/>
+   </td><td>
+    {if isset($pm_group)} {translate fonema=LANG_GROUPS_U}<br>
+     {$pm_group}<br>
+      <input class="btn" type="button" value=" {translate fonema=LANG_ADD_GROUPS_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" onClick="javascript:addGroupsReceipients('{$pm_id}', document.getElementById('pm_group[]'), 'receipients')"/>
+    {/if}
+   </td></tr>
+  </table>
+ </td></tr>
+</table>
+</div>

@@ -1,0 +1,9 @@
+credit_challenge_{$idata.GAME_ID}@@@{if isset($error)}<span class="textred">{$error.MSG}</span><br>
+{if isset($idata.CHALLENGE)}{translate fonema=LANG_STAKE_U}: <input type="text" name="credit_stake_{$idata.GAME_ID}" id="credit_stake_{$idata.GAME_ID}" size="2" maxlength="4" class="input" value="{$idata.STAKE}" /> {translate fonema=LANG_CREDITS_U}
+<input type="button" class="btn" value=" {translate fonema=LANG_WAGER_CHALLENGE_THROW_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" onClick="javascript:wagerThrowChallenge({$idata.GAME_ID}, document.getElementById('credit_stake_{$idata.GAME_ID}').value, 'credit_challenge_{$idata.GAME_ID}', document.getElementById('game_{$idata.GAME_ID}'))"/>{/if}
+{/if}
+{if isset($idata.CHALLENGE_THROWN)}{translate fonema=LANG_WAGER_CHALLENGE_THROWN_U}<br>{translate fonema=LANG_STAKE_U}: <b>{$idata.STAKE}</b> {translate fonema=LANG_CREDITS_U}<br>
+<input type="button" class="btn" value=" {translate fonema=LANG_CHALLENGE_WITHDRAW_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" onClick="javascript:wagerWithdrawChallenge({$idata.GAME_ID}, 'credit_challenge_{$idata.GAME_ID}')"/>{/if}
+###credits@@@{$idata.USER_CREDITS}###frozen_credits@@@{$idata.FROZEN_CREDITS}
+{if !isset($error)}###text_{$idata.GAME_ID}@@@{$idata.CHALLENGE}
+###game_{$idata.GAME_ID}@@@{/if}

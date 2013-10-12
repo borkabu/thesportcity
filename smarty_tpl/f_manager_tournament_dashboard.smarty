@@ -1,0 +1,17 @@
+<div style="clear:both"></div>
+{$manager_filter_box}
+<div class="background" style="float:left">
+<div class="background" style="float:left;width:200px">
+{$sched}
+</div>
+<div style="float:left;width:200px">
+{$tournaments}
+{$active_tournaments}
+</div>
+<div style="float:left;width:200px">
+{$tournaments_fixtures}
+</div>
+<div style="float:left;width:200px">
+{$countdown}
+</div>
+</div>

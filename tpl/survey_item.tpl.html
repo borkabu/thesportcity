@@ -1,0 +1,87 @@
+<div style="clear:both"></div>
+<TPL_SUB:SURVEY>
+<div class="portlet">
+<div class="content"><h2><TPL:TITLE></h2></div>
+</div>
+<div class="portlet">
+    <TPL_SUB:ITEMS>
+	<TPL_SUB:QUESTIONS_AUTH>        
+	<div class="content">
+		<b><TPL:QUESTION></b> <TPL_SUB:VOTED>(<_TPL:LANG_VOTED_U>: <TPL:VOTED>)</TPL_SUB:VOTED>
+		<ul style="list-style-type: none;margin-left:0px; padding-left:0px;">
+		<TPL_SUB:ANSWERS>		
+		  <li><span><TPL:ANSWER> (<TPL:WIDTH>%)</span><br>
+		       <img src="./img/bg_white.gif" width="<TPL:WIDTH>%" height="1" border="1">
+                  </li>
+		</TPL_SUB:ANSWERS>
+		</ul>
+	</div>
+	</TPL_SUB:QUESTIONS_AUTH>        
+	<TPL_SUB:QUESTIONS>        
+	<div class="content" id="answer_<TPL:QUESTION_ID>">
+        <form name="myform_<TPL:QUESTION_ID>" id="myform_<TPL:QUESTION_ID>" action="javascript:answerQuestion(<TPL:QUESTION_ID>, document.getElementById('myform_<TPL:QUESTION_ID>'), 'answer_<TPL:QUESTION_ID>')">
+		<b><TPL:QUESTION></b> <TPL_SUB:VOTED>(<_TPL:LANG_VOTED_U>: <TPL:VOTED>)</TPL_SUB:VOTED>
+		<ul style="list-style-type: none;margin-left:0px; padding-left:0px;">
+		<TPL_SUB:ANSWERS>		
+		  <li><input type="radio" id="answer_id" name="answer_id" value="<TPL:ANSWER_ID>" /><span><TPL:ANSWER></span>
+			<TPL_SUB:SUGGESTED_BY>(<_TPL:LANG_SUGGESTED_BY_U> <TPL:USER_NAME>)</TPL_SUB:SUGGESTED_BY>
+		</li>
+		</TPL_SUB:ANSWERS>
+		</ul>
+		<input class="btn" type="submit" value=" <_TPL:LANG_VOTE_U> " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" onclick="valButton(document.getElementById('myform_<TPL:QUESTION_ID>'), 'answer_id');return false;" >
+		<TPL_SUB:SUGGEST>
+ 		<div id="suggest_<TPL:QUESTION_ID>" style="float:right">
+		   <a href="javascript:toggleControl('suggest_<TPL:QUESTION_ID>', 'suggest2_<TPL:QUESTION_ID>')"><_TPL:LANG_SUGGEST_ANSWER_U></a>
+		</div>
+ 		<div id="suggest2_<TPL:QUESTION_ID>" style="float:right;display:none">
+		   <input type="text" name="suggested_answer_<TPL:QUESTION_ID>" class="input" size="50" maxsize="128">
+  		   <input class="btn" type="submit" value=" <_TPL:LANG_SUBMIT_U> " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" onclick="suggestAnswer('<TPL:QUESTION_ID>', document.getElementById('suggest2_<TPL:QUESTION_ID>'));return false;" >
+		</div>
+		</TPL_SUB:SUGGEST>		
+		<TPL_SUB:SUGGESTED>
+ 		<div style="float:right" id="suggest_<TPL:QUESTION_ID>">
+		   <TPL_SUB:0>
+                   <span class="textgreen"><_TPL:LANG_SUGGESTED_ANSWER_ALREADY_U></span>
+		   </TPL_SUB:0>
+		   <TPL_SUB:-1>
+                   <span class="textgreen"><_TPL:LANG_SUGGESTED_ANSWER_DISAPPROVED_U></span>
+		   </TPL_SUB:-1>
+		   <TPL_SUB:1>
+                   <span class="textgreen"><_TPL:LANG_SUGGESTED_ANSWER_IGNORED_U></span>
+		   </TPL_SUB:1>
+		   <TPL_SUB:2>
+                   <span class="textgreen"><_TPL:LANG_SUGGESTED_ANSWER_APPROVED_U> <a href="javascript:toggleControl('suggest_<TPL:QUESTION_ID>', 'suggest2_<TPL:QUESTION_ID>')"><_TPL:LANG_SUGGEST_ANSWER_U></a></span>
+		   </TPL_SUB:2>
+                </div>
+ 		<div id="suggest2_<TPL:QUESTION_ID>" style="float:right;display:none">
+		   <input type="text" name="suggested_answer_<TPL:QUESTION_ID>" class="input" size="50" maxsize="128">
+  		   <input class="btn" type="submit" value=" <_TPL:LANG_SUBMIT_U> " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" onclick="suggestAnswer('<TPL:QUESTION_ID>', document.getElementById('suggest2_<TPL:QUESTION_ID>'));return false;" >
+		</div>
+		</TPL_SUB:SUGGESTED>		
+        </form>
+	</div>
+	</TPL_SUB:QUESTIONS>
+	<TPL_SUB:RESULTS>        
+	<div class="content" id="answer_<TPL:QUESTION_ID>">
+		<b><TPL:QUESTION></b> <TPL_SUB:VOTED>(<_TPL:LANG_VOTED_U>: <TPL:VOTED>)</TPL_SUB:VOTED>
+		<ul style="list-style-type: none;margin-left:0px; padding-left:0px;">
+		<TPL_SUB:ANSWERS>		
+		  <li><span><TPL:ANSWER> (<_TPL:LANG_VOTED_U>: <TPL:VOTED> | <TPL:WIDTH>%)</span><br>
+		       <img src="./img/bg_white.gif" width="<TPL:WIDTH>%" height="1" border="1">
+                  </li>
+		</TPL_SUB:ANSWERS>
+		</ul>
+		<TPL_SUB:RESET>
+	   		<input class="btn" type="submit" value=" <_TPL:LANG_RESET_VOTE_U> " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" onclick="resetVote(<TPL:QUESTION_ID>, 'answer_<TPL:QUESTION_ID>');return false;" >
+		</TPL_SUB:RESET>		
+	</div>
+	</TPL_SUB:RESULTS>
+    </TPL_SUB:ITEMS>
+    <TPL_SUB:NORECORDS>
+	<div class="content">
+		<div style="float:left;"><_TPL:LANG_NO_ENTRIES_U></div>
+		<div style="clear:both;"></div>
+	</div>
+    </TPL_SUB:NORECORDS>
+</div>
+</TPL_SUB:SURVEY>

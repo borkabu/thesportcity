@@ -1,0 +1,43 @@
+<div id="challenges">
+<div class="header">{translate fonema=LANG_CHALLENGE_INVITES_U}</div>
+<a name="challenge_invites" ></a>
+<div class="content">
+{foreach $challenges_invites as $challenges_invite}
+  <table width="100%">
+    <tr>
+      <td width="100%" align="center"><a href="f_manager_challenges.php?challenge_id={$challenges_invite.CHALLENGE_ID}"><b>{$challenges_invite.USER_NAME}</b></a><br>
+	<span class="date_font">{translate fonema=LANG_TOUR_POINTS_U}: <b>{$challenges_invite.POINTS}</b><br>
+	{translate fonema=LANG_STAKE_U}: <b>{$challenges_invite.STAKE}</b>  {if isset($challenges_invite.BUDGET)}{translate fonema=LANG_BUDGET_MONEY_ABBR_U}{/if}{if isset($challenges_invite.CREDITS)}{translate fonema=LANG_CREDITS_ABBR_U}{/if}</span></td>
+      <td align="center">
+        {if isset($challenges_invite.ENOUGH_CREDITS)}<img src='./img/icons/red_exclamation.png' onmouseover="Tip('{translate fonema=LANG_CHALLENGE_CREDITS_WARNING_U}')" onmouseout="UnTip()" /><br>{/if}
+        {if isset($challenges_invite.NOT_ENOUGH_CREDITS)}<span class="date_font2">{translate fonema=LANG_ERROR_NOT_ENOUGH_CREDITS_U}</span><br>
+         <input class="btn" type="submit" value=" {translate fonema=LANG_REJECT_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" onClick="javascript:handleChallengeInvitation({$challenges_invite.CHALLENGE_ID}, 'decline_invite', 'challenges')"/>
+        {/if}
+        {if isset($challenges_invite.BUTTONS)}
+         <form action="" method="POST" style="margin:0">
+           <input type="hidden" name="action" value="accept_invite">
+           <input type="hidden" name="challenge_id" value="{$challenges_invite.CHALLENGE_ID}">
+           <input class="btn" type="submit" value=" {translate fonema=LANG_ACCEPT_U} "/>
+         </form>
+         <form action="" method="POST" style="margin:0">
+           <input type="hidden" name="action" value="decline_invite">
+           <input type="hidden" name="challenge_id" value="{$challenges_invite.CHALLENGE_ID}">
+           <input class="btn" type="submit" value=" {translate fonema=LANG_REJECT_U} " />
+         </form>
+        {/if}
+      </td>
+    </tr>
+  </table>
+{foreachelse}
+{translate fonema=LANG_NO_INVITATIONS_U}
+{/foreach}
+</div>
+<div class="header">{translate fonema=LANG_ACCEPTED_CHALLENGES_U}</div>
+{foreach $challenges as $challenge}
+<div class="content">
+  <b>{$challenge.USER_NAME}</b><div style="float:right"><b>{$challenge.STAKE}</b> {if isset($challenge.BUDGET)}{translate fonema=LANG_BUDGET_MONEY_ABBR_U}{/if}{if isset($challenge.CREDITS)}{translate fonema=LANG_CREDITS_ABBR_U}{/if}</div>
+</div>
+{foreachelse}
+<div class="content">{translate fonema=LANG_NO_CHALLENGES_U}</div>
+{/foreach}
+</div>

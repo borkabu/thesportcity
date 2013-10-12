@@ -1,0 +1,22 @@
+<div style="clear:both"></div>
+{$wager_filter_box}
+<div class="background" style="float:left">
+<div class="background" style="float:left;width:200px">
+{$sched}
+</div>
+<div style="float:left;width:200px">
+{$wager_season}
+</div>
+<div style="float:left;width:200px">
+{$wager_standings}
+</div>
+<div style="float:left;width:200px">
+{$openchallenges}
+{$mychallenges}
+<div style="clear:both"></div>
+ <div class="portlet">
+  <div class="header">{translate fonema=LANG_PRIZES_U}</div>
+  <div class="content">{$prizes}</div>
+ </div>
+</div>
+</div>

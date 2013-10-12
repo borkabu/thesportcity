@@ -1,0 +1,76 @@
+<script>
+ $(function() {
+	$( "#wager_seasons" ).tabs({
+		cookie: {
+			expires: 1,
+			name: "wager_seasons"
+			}
+		}); 
+});
+</script>
+<div id="wager_seasons">
+ <ul>
+ <li><a href="#tabs-1" title="{translate fonema=LANG_CURRENT_SEASONS_U}">{translate fonema=LANG_CURRENT_SEASONS_U}</a></li>
+ <li><a href="#tabs-2" title="{translate fonema=LANG_PAST_SEASONS_U}">{translate fonema=LANG_PAST_SEASONS_U}</a></li>
+ </ul>
+ <div id="tabs-1">
+  {if $ongoing == 0}
+    {translate fonema=LANG_NO_SEASONS_U}
+  {else}
+  <table>
+   <tr><td></td>
+       <th>{translate fonema=LANG_CHALLENGES_U}</th>
+   </tr>
+   {foreach $wager_seasons as $wager_season}
+   {if $wager_season.ENDED == 0}
+   <tr>
+     <td><a href="wager_season_dashboard.php?season_id={$wager_season.WAGER_INFO.SEASON_ID}"><b>{$wager_season.WAGER_INFO.TSEASON_TITLE}</b></a><br>
+       {if isset($wager_season.SEASON_OVER)}
+	<div class="content"><span class="textred">{translate fonema=LANG_SEASON_OVER_U}</span></div>
+       {/if}
+     </td>
+     <td>
+       {if isset($wager_season.CHALLENGES)}
+        {translate fonema=LANG_TOTAL_U} / {translate fonema=LANG_OPEN_CHALLENGES_U}: <a href="wager_challenges.php?season_id={$wager_season.WAGER_INFO.SEASON_ID}&all=y"><b>{$wager_season.CHALLENGES.CHALLENGES}</b></a> / <b>{$wager_season.CHALLENGES.OPEN_CHALLENGES}</b>
+         {if isset($wager_season.CHALLENGES.MY_CHALLENGES)}<br>
+          {translate fonema=LANG_MINE_U}: <a href="wager_challenges.php?season_id={$wager_season.WAGER_INFO.SEASON_ID}"><b>{$wager_season.CHALLENGES.MY_CHALLENGES}</b></a>
+         {/if}<br>
+       {else} 
+         <a href="wager_challenges.php?season_id={$wager_season.WAGER_INFO.SEASON_ID}">{translate fonema=LANG_TOTAL_U}</a>: <b>0</b>
+       {/if}
+     </td>
+   </tr>
+   {/if}
+   {/foreach}
+  </table> 
+  {/if}
+</div>
+ <div id="tabs-2">
+  <table>
+   <tr><td></td>
+       <th>{translate fonema=LANG_CHALLENGES_U}</th>
+   </tr>
+   {foreach $wager_seasons as $wager_season}
+   {if $wager_season.ENDED == 1}
+   <tr>
+     <td><a href="wager_season_dashboard.php?season_id={$wager_season.WAGER_INFO.SEASON_ID}"><b>{$wager_season.WAGER_INFO.TSEASON_TITLE}</b></a><br>
+       {if isset($wager_season.SEASON_OVER)}
+	<div class="content"><span class="textred">{translate fonema=LANG_SEASON_OVER_U}</span></div>
+       {/if}
+     </td>
+     <td>
+       {if isset($wager_season.CHALLENGES)}
+        {translate fonema=LANG_TOTAL_U}: <a href="wager_challenges.php?season_id={$wager_season.WAGER_INFO.SEASON_ID}&all=y"><b>{$wager_season.CHALLENGES.CHALLENGES}</b></a></b>
+         {if isset($wager_season.CHALLENGES.MY_CHALLENGES)}<br>
+          {translate fonema=LANG_MINE_U}: <a href="wager_challenges.php?season_id={$wager_season.WAGER_INFO.SEASON_ID}"><b>{$wager_season.CHALLENGES.MY_CHALLENGES}</b></a>
+         {/if}<br>
+       {else} 
+         <a href="wager_challenges.php?season_id={$wager_season.WAGER_INFO.SEASON_ID}">{translate fonema=LANG_TOTAL_U}</a>: <b>0</b>
+       {/if}
+     </td>
+   </tr>
+   {/if}
+   {/foreach}
+  </table> 
+</div>
+</div>

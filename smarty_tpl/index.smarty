@@ -1,0 +1,36 @@
+ <div style="width:200px;float:left;">
+  {$manager_game}
+ </div>
+ <div style="width:200px;float:left;">
+  {$rvs_game}
+ </div>
+ <div style="width:200px;float:left;">
+  {$wager_game}
+ </div>
+ <div style="width:200px;float:left;">
+  {$arranger_game}
+ </div>
+<div style="clear:both"></div>
+<div>
+{$timeline}
+<div style="width:800px;float:left;">
+{$countdown}
+</div>
+</div>
+
+<div style="width:400px;float:left;">
+
+  {$announcements}
+</div>
+
+<div style="width:400px;float:left;">
+
+  {$blogs}
+  <div style="width:200px;float:left;">
+   {$shop}
+  </div>
+  <div style="width:200px;float:left;">
+   {$video}
+  </div>
+
+</div>

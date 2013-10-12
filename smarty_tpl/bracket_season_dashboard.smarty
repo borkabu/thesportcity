@@ -1,0 +1,22 @@
+<div style="clear:both"></div>
+{$bracket_filter_box}
+<div class="background" style="float:left">
+{$participation}
+<div class="background" style="float:left;width:200px">
+{$countdown}
+{$sched}
+ <div class="portlet">
+  <div class="header">{translate fonema=LANG_PRIZES_U}</div>
+  <div class="content">{$prizes}</div>
+ </div>
+</div>
+<div style="float:left;width:200px">
+{$bracket_season}
+</div>
+<div style="float:left;width:200px">
+{$bracket_standings}
+</div>
+<div style="float:left;width:200px">
+<div style="clear:both"></div>
+</div>
+</div>

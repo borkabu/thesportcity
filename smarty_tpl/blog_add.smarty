@@ -1,0 +1,63 @@
+{if isset($blog.ERROR)}
+<div class="portlet" id="message">
+    <div class="content">
+	<span class="textred"><b>{$blog.ERROR.MSG}</b></span>
+    </div>
+</div>
+{/if}
+
+{if isset($blog.LOGGED)}
+  <div class="portlet">
+   <div class="header">{translate fonema=LANG_EDIT_BLOG_U}</div>
+   <div class="content">  
+  <form action="" method="post"  style="margin:0px">
+  <input type="hidden" name="post_news" value="Y">
+  <input type="hidden" name="lang_id" value="{$blog.LOGGED.LANG_ID}">
+  <input type="hidden" name="news_id" value="{$blog.LOGGED.NEWS_ID}">
+<b>{translate fonema=LANG_ITEM_NAME_U}</b>
+<input type="text" name="title" class="input" size="60" maxsize=512 value="{$blog.LOGGED.TITLE}">
+<input class="btn" type="submit" value=" {translate fonema=LANG_CREATE_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+   <div id="editor">
+<script>
+ $(function() {
+	$( "#post" ).tabs({
+		cookie: {
+			expires: 1,
+			name: "post"
+			}
+		}); 
+});
+</script>
+<div id="post">
+ <ul>
+ <li><a href="#tabs-1" title="{translate fonema=LANG_ADVANCED_EDITOR_U}">{translate fonema=LANG_ADVANCED_EDITOR_U}</a></li>
+ <li><a href="#tabs-2" title="{translate fonema=LANG_SIMPLE_EDITOR_U}">{translate fonema=LANG_SIMPLE_EDITOR_U}</a></li>
+ </ul>
+ <div id="tabs-1">
+  <div class="portlet" style="margin:0px">
+   <div class="content">   
+   <textarea name="descr" id="descr">{$blog.LOGGED.DESCR}</textarea>
+    {translate fonema=LANG_ADVANCED_EDITOR_INSTR_U}
+   </div>
+   </div>
+ </div>
+ <div id="tabs-2">
+  <div class="portlet" style="margin:0px">
+   <div class="content">
+   {translate fonema=LANG_EDIT_BLOG_U}
+  <input class="btn" type="submit" value=" {translate fonema=LANG_CREATE_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/><br>
+    <textarea name="simple_text" id="simple_text" rows=15 cols=65"></textarea>
+   </div> 
+  </div>
+ </div>
+   </div>
+	<script type="text/javascript">
+		//<![CDATA[
+		replaceEditor('descr');
+		//]]>
+	</script>
+  </form>
+ </div>
+ </div>
+</div>
+{/if}

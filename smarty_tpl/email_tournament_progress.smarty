@@ -1,0 +1,9 @@
+{translate fonema=LANG_HI_U} {$data.USER_NAME}
+
+"{$data.SEASON_TITLE}"
+{translate fonema=LANG_EMAIL_TOURNAMENT_PROGRESS_LINE_1}
+{translate fonema=LANG_EMAIL_TOURNAMENT_PROGRESS_LINE_2} {$data.URL}
+
+{translate fonema=LANG_EMAIL_TOURNAMENT_PROGRESS_LINE_3}
+
+{translate fonema=LANG_EMAIL_LAST_LINE}

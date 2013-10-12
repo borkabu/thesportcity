@@ -1,0 +1,72 @@
+<TPL_SUB:ERROR>
+<div class="portlet" id="message">
+    <div class="content">
+	<span class="textred"><b><TPL:MSG></b></span>
+    </div>
+</div>
+</TPL_SUB:ERROR>
+
+<TPL_SUB:LOGGED>
+<div class="portlet">
+    <div class="header"><_TPL:LANG_EDIT_NEWS_U></div>
+    <div class="content">
+<form action="" method="post"  style="margin:0px">
+<table class="noborder">
+<tr><td><b><_TPL:LANG_ITEM_NAME_U></b></td><td><TPL_INPUT:news.title>
+<input class="btn" type="submit" value=" <_TPL:LANG_CREATE_U> " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/></td></tr>
+<tr><td><b><_TPL:LANG_SOURCE_U></b></td><td><TPL_INPUT:news.source_name></td></tr>
+<tr><td><b><_TPL:LANG_LINK_U></b></td><td><TPL_INPUT:news.source></td></tr>
+<tr><td><b><_TPL:LANG_CONTENT_REALITY_U></b></td><td><TPL:REALITY></td></tr>
+<tr><td><b><_TPL:LANG_CATEGORY_U></b></td><td><TPL:CAT_ID></td></tr>
+<tr><td colspan=2>
+	<TPL_SUB:SUGGEST>
+	<div id="suggest_cat">
+	   <a href="javascript:toggleControl('suggest_cat', 'suggest2_cat')"><_TPL:LANG_SUGGEST_CATEGORY_U></a>
+	</div>
+	<div id="suggest2_cat" style="display:none">
+	   <input type="text" name="suggested_cat" class="input" size="13" maxsize="64">
+	   <input class="btn" type="button" value=" <_TPL:LANG_SUBMIT_U> " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" onclick="suggestCategory(document.getElementById('suggest2_cat'));return false;" >
+	</div>
+	</TPL_SUB:SUGGEST>		
+</td></tr>
+</table>
+  <input type="hidden" name="post_news" value="Y">
+  <input type="hidden" name="lang_id" value="<TPL:LANG_ID>">
+    <TPL_INPUT:adm_news.descr>
+
+			<script type="text/javascript">
+				//<![CDATA[
+
+					// This call can be placed at any point after the
+					// <textarea>, or inside a <head><script> in a
+					// window.onload event handler.
+
+					// Replace the <textarea id="editor"> with an CKEditor
+					// instance, using default configurations.
+					CKEDITOR.replace( 'descr' ,
+                                            { entities : false,
+						resize_enabled: false,
+                                                  on :
+                                                 {
+					           instanceReady : function( ev )
+					            {
+                                                     // Output paragraphs as <p>Text</p>.
+					                this.dataProcessor.writer.setRules( 'p',
+					                    {
+					                        indent : false,
+                                                                breakBeforeOpen : false,
+					                        breakAfterOpen : false,
+					                        breakBeforeClose : false,
+					                        breakAfterClose : false
+                                                             });
+					            }
+					        }
+					});
+
+				//]]>
+				</script>
+  <input type="hidden" name="news_id" value="<TPL:NEWS_ID>">
+</form>
+	</div>
+</div>
+</TPL_SUB:LOGGED>

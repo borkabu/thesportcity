@@ -1,0 +1,10 @@
+<div style="float:left">
+{if isset($wager_season.WAGER_LOG)}
+{$wager_season.WAGER_LOG}
+{/if}
+
+{if isset($wager_season.WAGER_USER_LOG)}
+{$wager_season.WAGER_USER_LOG}
+{/if}
+</div>
+

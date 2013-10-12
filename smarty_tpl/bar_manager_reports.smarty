@@ -1,0 +1,23 @@
+<div class="portlet">
+<div class="header">{translate fonema=LANG_REPORTS_U}</div>
+ {if isset($reports)}
+  {foreach $reports.REPORT as $report} 
+	<div class="content">
+		<span class="date_font2"><b>{$report.DATE_REPORTED}</b></span>
+		<div style="float:left;">{$report.LAST_NAME}, {$report.FIRST_NAME}: <b><a href="{$report.LINK}" target="outside_report">{$report.STATE}</a></b></div>
+		<div style="float:right;"> {translate fonema=LANG_REPORTED_BY_U}: <b>{$report.USER_NAME}</b></div>
+		<div style="clear:both;"></div>
+	</div>
+  {foreachelse}
+	<div class="content">
+		<div style="float:left;">{translate fonema=LANG_NO_ENTRIES_U}</div>
+		<div style="clear:both;"></div>
+	</div>
+  {/foreach}
+ {else}
+	<div class="content">
+		<div style="float:left;">{translate fonema=LANG_NO_ENTRIES_U}</div>
+		<div style="clear:both;"></div>
+	</div>
+ {/if}
+</div>

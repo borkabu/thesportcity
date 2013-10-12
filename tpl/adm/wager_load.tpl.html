@@ -1,0 +1,90 @@
+<TPL_INCLUDE:../tpl/adm/head.tpl.html>
+<TPL_INCLUDE:../tpl/adm/menu.tpl.html>
+ <script language="JavaScript">
+  <!-- 
+
+function SetAllCheckBoxes(FormName, FieldName, CheckValue)
+{
+	if(!document.forms[FormName]) {
+		return;
+	}
+	var objCheckBoxes = document.forms[FormName].elements[FieldName];
+	if(!objCheckBoxes) {
+		return;
+	}
+	var countCheckBoxes = objCheckBoxes.length;
+	if(!countCheckBoxes) {
+		objCheckBoxes.checked = CheckValue;
+	}
+	else {
+		for(var i = 0; i < countCheckBoxes; i++) {
+			objCheckBoxes[i].checked = CheckValue;
+		 }
+	}
+}
+  // -->
+  </script>
+
+
+<form action="" method="post" name="editform">
+<input type="hidden" name="form_save" value="Y">
+<input type="hidden" name="referer" value="<TPL:REFERER>">
+
+<TPL_SUB:ERROR><span class="error"><TPL:MSG></span></TPL_SUB:ERROR>
+
+<div class="portlet">
+  <div class="header"><_TPL:LANG_GENERAL_DATA_U></div>
+  <div class="content">
+  <table>   
+    <tr>
+      <td>Season</td>
+      <td><b><TPL:WSEASON_ID></b></td>
+    </tr>
+    
+    <tr>
+      <td>Publikuoti</td>
+      <td><TPL_INPUT:adm_tot.publish></td>
+    </tr>
+  </table>
+</div>
+</div>
+
+<div class="portlet">
+  <div class="content">
+        <input type="submit" class="input" value="išsaugoti">
+        <input type="submit" class="input" value="peržiūra" onclick="window.editform.action='news_preview.php'; window.editform.target='editpreview';">
+        <input type="reset" class="input" value="atšaukti" onclick="return confirm('Tikrai?');">
+        <input type="button" class="input" value="atgal" onclick="window.location='<TPL:REFERER>'">
+	<input type="button" onclick="SetAllCheckBoxes('editform', 'include[]', false);" value="Clear all" class="input" >
+       	<input type="button" onclick="SetAllCheckBoxes('editform', 'include[]', true);" value="Check all" class="input" >
+      </td>
+</div>
+</div>
+
+<div class="portlet">
+  <div class="content">
+  <table>
+    <tr bgcolor="#E1E1E1">
+      <th align="center"><b>Pavadinimas</b></td>
+      <th align="center"><b>Sezonas</b></td>
+      <th align="center"><b>Pabaigos data<b></td>
+      <th align="center"><b>Include<b></td>
+    </tr>
+    <TPL_SUB:GAMES>
+    <tr<TPL_SUB:ODD> bgcolor="#CDDDE4"</TPL_SUB:ODD>>
+      <td class="list" align="left"><TPL:TITLE></td>
+      <td class="list" align="left"><TPL:SEASON_TITLE></td>
+      <td class="list" align="left"><TPL:END_DATE></td>
+      <td class="list" align="center">
+        <input type="hidden" name="game_id[]" value="<TPL:GAME_ID>">
+        <TPL:INCLUDE>
+      </td>
+    </tr>
+    </TPL_SUB:GAMES>
+  </table>
+</div>
+</div>
+
+</form>
+
+<TPL_INCLUDE:../tpl/adm/foot.tpl.html>

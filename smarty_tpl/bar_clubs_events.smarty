@@ -1,0 +1,20 @@
+<div style="clear:both">
+<div class="portlet">
+<div class="header">{translate fonema=LANG_CLUBS_EVENTS_U}</div>
+    {foreach $clubs as $club}
+      <div class="content">
+      <a href="clubs.php?club_id={$club.GROUP_ID}"><b>{$club.GROUP_NAME}</b></a>
+      <ul style="margin:0;padding-left:20px">
+      {foreach $club.CLUB_EVENTS as $club_event}
+	 <li><a style="font-size:8pt" href="clubs_events.php?club_id={$club_event.GROUP_ID}&event_id={$club_event.EVENT_ID}&lang_id={$club_event.LANG}">{$club_event.TITLE}</a></li>
+      {/foreach}
+      </ul>
+      </div>
+    {foreachelse}
+	<div class="content">
+		<div style="float:left;">{translate fonema=LANG_NO_ENTRIES_U}</div>
+		<div style="clear:both;"></div>
+	</div>
+    {/foreach}
+</div>
+</div>

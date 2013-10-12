@@ -1,0 +1,11 @@
+<div class="portlet">
+  <div class="content">
+    {if isset($participating)}
+     <img src="./img/icons/green_flag.png" onmouseover="Tip('{translate fonema=LANG_PARTICIPATING_U}')" onmouseout="UnTip()" />
+      {translate fonema=LANG_MANAGER_PARTICIPATION_INFO_U}
+    {else}
+     <img src="./img/icons/black_flag.png" onmouseover="Tip('{translate fonema=LANG_NOT_PARTICIPATING_U}')" onmouseout="UnTip()" />
+      {translate fonema=LANG_MANAGER_NOT_PARTICIPATION_INFO_U}
+    {/if}
+  </div>
+</div>

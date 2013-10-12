@@ -1,0 +1,174 @@
+<TPL_SUB:HTML>
+<html><head><style type="text/css">
+<!-- 
+.nomargin { margin-top: 0}
+.portlet
+{
+	font-size:0.9em;
+	margin:3px;
+	background-color:#FFF;
+        border: 1px solid #D8BC8A;
+}
+
+.portlet .header
+{
+	color:#FFF;
+	font-size:1.1em;
+	font-weight:bold;
+	line-height:1;
+	padding:5px 5px 5px;
+	margin: 0;
+	text-align:center;
+        background: #999 url("http://www.thesportcity.net/img/design/header.gif") repeat left top;
+}
+
+.portlet .header a { color: #FFFFFF; text-decoration: underline }
+.portlet .header a:visited { color: #FFFFFF; text-decoration: underline }
+.portlet .header a:hover { color: #FFFFFF; text-decoration: none }
+
+.portlet .content
+{
+	background:#FFF;
+	padding:0px 3px 3px 3px;
+	display: block;
+	margin: 3px 3px 0 3px;
+        border-bottom: 1px solid #D8BC8A;
+}
+
+.portlet .content_header
+{
+	color:#FFF;
+	font-size:1em;
+	font-weight:bold;
+	background:#999;
+	padding:3px 3px 3px 3px;
+	display: block;
+	margin: 0px 2px 2px 2px;
+        background: #999 url("http://www.thesportcity.net/img/design/header2.gif") repeat 100% 100%;
+}
+
+.portlet .content_header a { color: #FFFFFF; text-decoration: underline }
+.portlet .content_header a:visited { color: #FFFFFF; text-decoration: underline }
+.portlet .content_header a:hover { color: #FFFFFF; text-decoration: none }
+
+
+.portlet table {background: #fafbfb;}
+.portlet a { color: #336699; text-decoration: underline }
+.portlet a:visited { color: #336699; text-decoration: underline }
+.portlet a:hover { color: #336699; text-decoration: none }
+
+.portlet .date_font2 {font-size:6.5pt;font-family: Verdana, Arial, Helvetica, MS Sans Serif;}
+
+
+.portlet table {
+	border-top:1px solid #4c014c;
+	border-right:1px solid #4c014c;
+	border-collapse:collapse;
+}
+
+.portlet th {
+        font-size: 7.5pt; 
+        font-weight: bold; 
+        color: #333333; 
+        text-decoration: none; 
+        background-color: #F2E38F;
+	border-bottom:1px solid #4c014c;                               
+	border-left:1px solid #4c014c;
+	padding: 2px;
+	text-align:center;
+}
+
+.portlet td {
+	color:#000000;
+	border-bottom:1px solid #4c014c;
+	border-left:1px solid #4c014c;
+	padding: 3px;
+}
+
+.textred { color: #FF0000; font-family: Verdana, Arial, Helvetica, MS Sans Serif; font-size: 8pt}
+ -->
+</style></head><body style="font-family: Arial, sans-serif;">
+<div class="portlet">
+  <div class="content">
+<img src="http://www.thesportcity.net/img/herbas.jpg" align="left" margin=5> <h1><TPL:TITLE></h1>
+<span style="color: #999; font-size: 11px;"><TPL:DESCR></span>
+<h3><_TPL:LANG_HI_U>, <TPL:USER_NAME></h3>
+
+<TPL:HEADER>
+</div>
+  <div class="content">
+<div style="float:left;">
+<div class="portlet">
+<div class="header"><_TPL:LANG_SUMMARY_U></div>
+  <div class="content">
+<table>
+<tr><td><_TPL:LANG_PLACE_U></td><td><b><TPL:PLACE></b></td></tr>
+<tr><td><_TPL:LANG_POINTS_U></td><td><b><TPL:POINTS></b></td></tr>
+<tr><td><_TPL:LANG_MONEY_U></td><td><b><TPL:MONEY></b></td></tr>
+<tr><td><_TPL:LANG_TRANSACTIONS_U></td><td><b><TPL:TRANSACTIONS></b></td></tr>
+</table>
+</div>
+</div>
+</div>
+
+<TPL_SUB:MARKET_NEWS>
+<div style="float:left;">
+<div class="portlet">
+<div class="header"><_TPL:LANG_MARKET_NEWS_U></div>
+  <div class="content">
+<TPL_SUB:NO_NEWS><_TPL:LANG_NO_NEWS_U></TPL_SUB:NO_NEWS>
+<table> 
+<TPL_SUB:MARKET_NEWS_4><tr><td><_TPL:LANG_MARKET_NEWS_4></td><td><b><TPL:PLAYERS></b></td></tr></TPL_SUB:MARKET_NEWS_4>
+<TPL_SUB:MARKET_NEWS_5><tr><td><_TPL:LANG_MARKET_NEWS_5></td><td><b><TPL:PLAYERS></b></td></tr></TPL_SUB:MARKET_NEWS_5>
+<TPL_SUB:MARKET_NEWS_6><tr><td><_TPL:LANG_MARKET_NEWS_6></td><td><b><TPL:PLAYERS></b></td></tr></TPL_SUB:MARKET_NEWS_6>
+<TPL_SUB:MARKET_NEWS_7><tr><td><_TPL:LANG_MARKET_NEWS_7></td><td><b><TPL:PLAYERS></b></td></tr></TPL_SUB:MARKET_NEWS_7>
+</table>
+</div>
+</div>
+</div>
+</TPL_SUB:MARKET_NEWS>
+<div  style="clear:both"></div>
+
+<div class="portlet">
+  <div class="content">
+<TPL_SUB:MARKET_TIME>
+<TPL_SUB:MARKET_OPEN_TIME><_TPL:LANG_MARKET_OPEN_TIME_U>: <TPL:DATE><br></TPL_SUB:MARKET_OPEN_TIME>
+<TPL_SUB:MARKET_CLOSE_TIME><_TPL:LANG_MARKET_CLOSE_TIME_U>: <TPL:DATE><br></TPL_SUB:MARKET_CLOSE_TIME>
+</TPL_SUB:MARKET_TIME>
+<TPL_SUB:SEASON_OVER><div class="textred"><_TPL:LANG_SEASON_OVER_U></div> </TPL_SUB:SEASON_OVER> 
+</div>
+</div>
+
+<TPL_SUB:MANAGER_TOURNAMENT>
+<div class="portlet">
+<div class="header"><_TPL:LANG_TOURNAMENTS_U></div>
+<div class="content">
+<a href="http://www.thesportcity.net/f_manager_tournament_control.php?mt_id=<TPL:MT_ID>"><b><TPL:SEASON_TITLE></b></a><br>
+<TPL_SUB:REGISTRATION_CLOSED><_TPL:LANG_REGISTRATION_CLOSED_U><br> </TPL_SUB:REGISTRATION_CLOSED> 
+<TPL_SUB:REGISTRATION_OPEN><_TPL:LANG_REGISTRATION_OPENED_TILL_U><br> <b><TPL:REGISTRATION_END_DATE> <TPL:UTC></b> </TPL_SUB:REGISTRATION_OPEN> 
+</div>
+</div>
+ </TPL_SUB:MANAGER_TOURNAMENT>
+
+<TPL_SUB:MANAGER_NEWS>
+<div class="portlet">
+<div class="header"><_TPL:LANG_NEWS_U></div>
+  <div class="content">
+     <TPL_SUB:ITEMS>
+      <li><TPL:DATE_PUBLISHED> - <a href="http://www.thesportcity.net/news.php?news_id=<TPL:NEWS_ID>&lang_id=<TPL:SHORT_CODE>"><TPL:TITLE></a></li>
+     </TPL_SUB:ITEMS>
+  </div>
+</div>
+ </TPL_SUB:MANAGER_NEWS>
+
+<div  style="clear:both"></div>
+</div>
+  <div class="content">
+<span style="color: #999; font-size: 11px; font-family: Arial, sans-serif;"><_TPL:LANG_NEWSLETTER_UNSUBSCRIBE_INSTR_U>
+<br><a href="<TPL:URL>"><_TPL:LANG_NEWSLETTER_UNSUBSCRIBE_U></a></span><br>
+<br>
+<_TPL:LANG_EMAIL_LAST_LINE>
+</div>
+</div>
+</body></html>
+</TPL_SUB:HTML>

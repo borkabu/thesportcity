@@ -1,0 +1,15 @@
+<div class="content_header">{translate fonema=LANG_BASKET_U}</div>
+{if isset($basket)}
+{foreach $basket as $basket_item}
+<div class="content">
+<a href="shop.php?item_id={$basket_item.ITEM_ID}">{$basket_item.ITEM_NAME}</a> ({$basket_item.QUANTITY})
+</div>
+{/foreach}
+<div class="content">
+<a href="basket.php">{translate fonema=LANG_MORE_U}</a>
+</div>
+{else}
+<div class="content">
+{translate fonema=LANG_BASKET_EMPTY_U}
+</div>
+{/if}

@@ -1,0 +1,24 @@
+<div style="float:left">
+<div class="portlet">
+<div class="header">{translate fonema=LANG_SUMMARY_U}</div>
+{if isset($manager_season.SOLO_LEAGUES_ALLOWED)}
+ {if isset($manager_season.SOLO_LEAGUES_INVITE)}
+ <div class="content"><a href="solo_manager_league.php?mseason_id={$manager_season.MANAGER_INFO.SEASON_ID}#league_invites">{translate fonema=LANG_SOLO_LEAGUE_INVITATIONS_U}:</a> <span class="textred"><b>{$manager_season.SOLO_LEAGUES_INVITE.LEAGUES}</b></span></div>
+  {/if}
+ {if isset($manager_season.SOLO_LEAGUES)}
+  <div class="content">{translate fonema=LANG_SOLO_LEAGUES_U}: <a href="solo_manager_league.php?mseason_id={$manager_season.MANAGER_INFO.SEASON_ID}&all=y"><b>{$manager_season.SOLO_LEAGUES.LEAGUES}</b></a> {if isset($manager_season.SOLO_LEAGUES.MY_LEAGUES)}/ <a href="solo_manager_league.php?mseason_id={$manager_season.MANAGER_INFO.SEASON_ID}"><b>{$manager_season.SOLO_LEAGUES.MY_LEAGUES}</b></a>{/if}</div>
+ {else} 
+  <div class="content"><a href="solo_manager_league.php?mseason_id={$manager_season.MANAGER_INFO.SEASON_ID}&all=y">{translate fonema=LANG_SOLO_LEAGUES_U}</a>: <b>0</b></div>
+ {/if}
+{/if}
+</div>
+
+{if isset($manager_season.MANAGER_LOG)}
+{$manager_season.MANAGER_LOG}
+{/if}
+
+{if isset($manager_season.MANAGER_USER_LOG)}
+{$manager_season.MANAGER_USER_LOG}
+{/if}
+
+</div>

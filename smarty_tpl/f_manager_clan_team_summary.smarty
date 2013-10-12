@@ -1,0 +1,36 @@
+<div class="portlet">
+ <div class="header">{$team_name}</div>
+ <div class="content">
+   <table>
+     <tr>
+       <th rowspan="2">{translate fonema=LANG_TEAM_MEMBER_U}</th>       
+       <th rowspan="2">{translate fonema=LANG_MONEY_U}</th>       
+       <th colspan="{count($tours)}">{translate fonema=LANG_TOURS_U}</th>
+       <th colspan="2">{translate fonema=LANG_CONTRIBUTION_U}</th>
+     </tr>
+     <tr> 
+       {foreach $tours as $tour}
+         <th>{$tour}</th>     
+       {/foreach}
+        <th>&Sigma;</th>     
+        <th>%</th>     
+     </tr>
+     {foreach $users as $user}
+     <tr>
+       <td>{$summary[$user].USER_NAME}</td>
+       <td>{$summary[$user].MONEY}</td>
+       {foreach $tours as $tour}
+         <td style="{if $summary[$user][$tour].IN_TEAM != ""}font-weight:bold;{else}text-decoration: line-through;{/if}">{$summary[$user][$tour].POINTS}</td>
+       {/foreach}              
+       <td align="right">{$contribution[$user].POINTS}</td>
+       <td align="right">{$contribution[$user].PERCENT}</td>
+     </tr>
+     {/foreach}              
+     <tr>
+      <td colspan="{count($tours) + 1}" style="border:0"></td>
+	<td align="right" style="border:1"><b>{$total_points}</b></td>
+	<td align="right" style="border:1">100%</td>
+     </tr>
+   </table>
+ </div>
+</div>

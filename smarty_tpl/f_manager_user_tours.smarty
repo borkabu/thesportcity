@@ -1,0 +1,21 @@
+<div class="portlet">
+<div class="header">{$user_name}</div>
+<div class="content">
+ {if isset($tourstats)} 
+   <table style="width:100%">
+     <tr>
+       <th>{translate fonema=LANG_TOUR_U}</th>
+       <th>{translate fonema=LANG_POINTS_U}</th>
+     </tr>
+     {foreach $tourstats as $tourstat}
+     <tr>
+       <td align="left">{$tourstat.NUMBER}</td>
+       <td align="right">{$tourstat.KOEFF}</td>
+     </tr>
+     {/foreach}
+   </table>
+ {else}
+   {translate fonema=LANG_NO_DATA}
+ {/if}
+</div>
+</div>

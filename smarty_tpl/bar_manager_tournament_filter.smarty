@@ -1,0 +1,9 @@
+<div class="portlet">
+<div class="content">
+<form action=""  style="margin:0px">
+   {translate fonema=LANG_SELECT_SEASON_U}:
+   {$mt}
+   <input class="btn" type="submit" value=" {translate fonema=LANG_OK_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+</form>
+</div>
+</div>

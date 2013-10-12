@@ -1,0 +1,78 @@
+<div style="clear:both"></div>
+{$bracket_filter_box}
+
+<div class="portlet">
+  <div class="header">{translate fonema=LANG_SEARCH_U}</div>
+  <div class="content">
+      <form action="{$search.FORM_URL}" method="get" style="margin:0px">
+        <input type="hidden" name="tseason_id" value="{$season_id}">
+        <input type="hidden" name="tour_id" value="{$tour_id}">
+         {$search.WHERE} {$search.QUERY} 
+         <input class="btn" type="submit" value=" {translate fonema=LANG_OK_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+         {if isset($search.FILTERED)}<a href="{$search.FORM_URL}">[ {translate fonema=LANG_SHOW_ALL_RECORDS} ]</a>{/if}
+         {if isset($search.FORM_TOURS)}<input type="hidden" name="tour_id" value="{$tour_id}">{/if}
+      </form>
+ </div>
+</div>
+
+<div class="portlet">
+  <div class="header">{translate fonema=LANG_FILTER_U}</div>
+  <div class="content">
+   {if isset($tours)}
+    {translate fonema=LANG_TOURS_U}: 
+    {foreach $tours as $tour}
+        {if isset($tour.SELECTED)}<b>[{$tour.NUMBER}]</b>{/if}
+        {if isset($tour.NORMAL)}<a href="bracket_standings.php?tour_id={$tour.NUMBER}&tseason_id={$tour.TSEASON_ID}">{$tour.NUMBER}</a>{/if}
+    {/foreach} 
+   {/if}
+    {if isset($all)}
+        {if isset($all.SELECTED)}<b>[{translate fonema=LANG_SEASON_STANDINGS_U}]</b>{/if}
+        {if isset($all.NORMAL)}<a href="bracket_standings.php?tseason_id={$all.NORMAL.TSEASON_ID}">[{translate fonema=LANG_SEASON_STANDINGS_U}]</a>{/if}
+    {/if}
+ </div>
+</div>
+
+<div class="portlet">
+  <div class="header">{translate fonema=LANG_STANDINGS_U}</div>
+  <div class="content">
+     {if isset($users)}
+       <table>
+         <tr>
+          <th nowrap><span class="sort_arrows"> 
+	  {if isset($sort.PLACE_DESC_A)}&dArr;{/if}
+            {if isset($sort.PLACE_DESC)}<a href="{$sort.PLACE_DESC.URL}">&dArr;</a>{/if}
+            {if isset($sort.PLACE_ASC_A)}&uArr;{/if} 
+	  {if isset($sort.PLACE_ASC)}<a href="{$sort.PLACE_ASC.URL}">&uArr;</a>{/if}</span>
+          </th>
+          <th width="100%">{translate fonema=LANG_PLAYER_U} <span class="sort_arrows"> 
+            {if isset($sort.USER_NAME_DESC_A)}&dArr;{/if}
+	  {if isset($sort.USER_NAME_DESC)}<a href="{$sort.USER_NAME_DESC.URL}">&dArr;</a>{/if} 
+	  {if isset($sort.USER_NAME_ASC_A)}&uArr;{/if}
+	  {if isset($sort.USER_NAME_ASC)}<a href="{$sort.USER_NAME_ASC.URL}">&uArr;</a>{/if}</span>
+          </th>
+          <th>{translate fonema=LANG_POINTS_U} <span class="sort_arrows"> 
+            {if isset($sort.POINTS_DESC_A)}&dArr;{/if}
+            {if isset($sort.POINTS_DESC)}<a href="{$sort.POINTS_DESC.URL}">&dArr;</a>{/if}
+            {if isset($sort.POINTS_ASC_A)}&uArr;{/if}
+	  {if isset($sort.POINTS_ASC)}<a href="{$sort.POINTS_ASC.URL}">&uArr;</a>{/if}</span>
+          </th>
+	  <th nowrap>{translate fonema=LANG_EXACT_MATCHES_U}<br><span class="sort_arrows"> 
+            {if isset($sort.MATCHES_DESC_A)}&dArr;{/if}
+            {if isset($sort.MATCHES_DESC)}<a href="{$sort.MATCHES_DESC.URL}">&dArr;</a>{/if}
+            {if isset($sort.MATCHES_ASC_A)}&uArr;{/if}
+	  {if isset($sort.MATCHES_ASC)}<a href="{$sort.MATCHES_ASC.URL}">&uArr;</a>{/if}</span>
+          </th>
+         </tr>
+	 {foreach $users as $user}
+          <tr {if isset($user.CURRENT)}style="background-color:yellow"{/if}>
+            <td align="left" nowrap>{$user.PLACE} {if isset($user.UP)}<img src="../img/icons/small_up_green.png" border=0>{/if}{if isset($user.DOWN)}<img src="../img/icons/small_down_red.png" border=0>{/if} {if isset($user.PLACE_PREV)}({$user.PLACE_PREV}){/if}</td>
+            <td align="left">{if isset($user.COUNTRY_DB)}<img border=1 src="./img/flags/{$user.COUNTRY_DB.CCTLD}.gif" onmouseover="Tip('{$user.COUNTRY_DB.COUNTRY_NAME}')" onmouseout="UnTip()">{/if}  <a href="user_public_profile.php?user_id={$user.USER_ID}" onmouseover="Tip('{translate fonema=LANG_PUBLIC_PROFILE_U}')" onmouseout="UnTip()" target="user_profile" onClick="window.open('','user_profile','width=450,height=620,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');"><img src="./img/icons/user_profile.png" border=0></a> {if isset($user.ALLOW)}<a href="bracket_arrangement.php?user_id={$user.USER_ID}" target="bracket_arrangement" onClick="window.open('','bracket_arrangement','width=300,height=400,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');">{$user.USER_NAME}</a>{else}{$user.USER_NAME}{/if} </td>
+            <td align="right">{$user.POINTS}</td>
+            <td align="right">{$user.MATCHES}</td>
+          </tr>
+	 {/foreach}
+        </table>
+     {/if}
+   </div>
+</div>
+{$paging}

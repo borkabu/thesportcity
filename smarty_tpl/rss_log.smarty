@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+ <channel>
+   <title>TheSportCity.net {translate fonema=LANG_RSS_FEED_U}: {$log_header.TITLE}</title>
+   <copyright>Copyright 2009-2011.</copyright>
+   <link>http://www.thesportcity.net</link>
+   <language>{$log_header.LANG}</language>
+   <description>TheSportCity.Net is a game driven portal where community is encouraged to communicate and socialize through intelectual gaming experience.</description>
+   <category>Fantasy manager games</category>
+   <lastBuildDate>{$log_header.LAST_BUILD_DATE}</lastBuildDate>
+   <image><url>http://www.thesportcity.net/img/herbas.jpg</url><link>http://www.thesportcity.net</link>
+   <title>TheSportCity.net logo</title></image>
+ {foreach $log as $log_item}
+   {if !isset($log_item._ROWS)}
+   <item>
+      <link>http://www.thesportcity.net/f_manager_log.php?mseason_id={$log_item.MSEASON_ID}&amp;id={$log_item.ENTRY_ID}</link>
+      <description>{$log_item.LOG_ENTRY|htmlspecialchars}</description>
+      <guid>{$log_item.ENTRY_ID}</guid>
+      <pubDate>{$log_item.EVENT_DATE}</pubDate>
+      <title>{$log_item.LOG_ENTRY|strip_tags}</title>
+    </item>
+   {/if}
+ {/foreach}
+ </channel>
+</rss>

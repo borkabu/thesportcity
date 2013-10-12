@@ -1,0 +1,39 @@
+<div style="clear:both"></div>
+
+<div class="portlet">
+  <div class="header">{translate fonema=LANG_SEARCH_U}</div>
+  <div class="content">
+     <form action="" method="get" style="margin:0px">
+	{translate fonema=LANG_USER_NAME_U}: {$query_input} 
+        <input class="btn" type="submit" value=" {translate fonema=LANG_OK_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+        {if isset($filtered)}
+          <a href="ratings_league_owner.php">[ {translate fonema=LANG_SHOW_ALL_RECORDS} ]</a>
+        {/if}
+     </form>
+ </div>
+</div>
+
+<div class="portlet">
+  <div class="header">{translate fonema=LANG_RATING_U}</div>
+  <div class="content">
+     <table>
+      <tr>
+        <th></td>
+        <th width="100%">{translate fonema=LANG_PLAYER_U}</th>
+        <th>{translate fonema=LANG_KOEFF_AB}</th>
+        <th>{translate fonema=LANG_LEAGUES_U}</th>
+        <th>{translate fonema=LANG_AVG_KOEFF_AB}</th>
+      </tr>
+     {foreach $users as $user}
+      <tr>
+        <td align="left" nowrap>{$user.PLACE}</td>
+        <td align="left">{if isset($user.COUNTRY_DB)}<img border=1 src="./img/flags/{$user.COUNTRY_DB.CCTLD}.gif" onmouseover="Tip('{$user.COUNTRY_DB.COUNTRY_NAME}')" onmouseout="UnTip()">{/if} {$user.USER_NAME}</td>
+        <td align="right">{$user.KOEFF}</td>
+        <td align="right">{$user.LEAGUES}</td>
+        <td align="right">{$user.AVG_KOEFF}</td>
+      </tr>
+     {/foreach}
+    </table>
+   </div>
+</div>
+{$paging}

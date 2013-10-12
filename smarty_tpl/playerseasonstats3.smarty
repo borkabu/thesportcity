@@ -1,0 +1,43 @@
+<div class="portlet">
+    <div class="header"><b>{translate fonema=LANG_PLAYERS_SEASON_STATISTICS_U}</b></div>
+    <div class="content">{$stats.FIRST_NAME} {$stats.LAST_NAME}</div>
+     {foreach $stats.SEASONS as $season}
+       <div class="content"><a href="f_manager_player_seasonstats.php?user_id={$season.PLAYER_ID}&seasons={$season.SEASON_ID}">{$season.SEASON_TITLE}</a></div>
+     {/foreach}
+    {if isset($stats.STATS)}
+    {foreach $stats.STATS as $stat}
+     <div class="content">
+      <table>     
+        <tr>
+          <th>{$stat.SEASON_TITLE}</th>
+          {foreach $stat.ITEM as $item}
+            <th align="center">{$item.TITLE}</th>
+          {/foreach}
+        </tr>
+        {foreach $stat.GAME as $game}
+        <tr>
+          <td>{$game.TITLE}<br>({$game.START_DATE})</td>
+          {foreach $game.ITEM.VALUE as $item}
+	   <td align="center">{$item}</td>
+          {/foreach}
+        </tr>
+        {/foreach}
+        
+        {foreach $stat.TOTAL as $game}
+        <tr>
+          <th>{translate fonema=LANG_TOTAL_STATISTICS_U}</th>
+          {foreach $game.ITEM.VALUE as $item}
+	   <th align="center">{$item}</th>
+          {/foreach}
+        </tr>
+        {/foreach}
+      </table>
+      </div>        
+     {/foreach}
+    {/if}
+    <div class="content">      
+    {foreach $legends as $legend}
+      <b>{$legend.KEY}</b> - {$legend.LEGEND};
+    {/foreach}
+    </div>  
+</div>

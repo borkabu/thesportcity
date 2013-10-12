@@ -1,0 +1,66 @@
+<div style="clear:both"></div>
+{$manager_filter_box}
+
+{if isset($error)}
+<div class="portlet" id="message">
+    <div class="content">
+	<span class="textred"><b>{$error.MSG}</b></span>
+    </div>
+</div>
+{/if}
+
+{if isset($allow_stock)}
+{if isset($portfolio)}{$portfolio}{/if}
+
+<div class="portlet">
+<div class="content" style="text-align:center">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7616887564121555";
+/* 468x60, created 17/08/10 */
+google_ad_slot = "4338556037";
+google_ad_width = 468;
+google_ad_height = 60;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+</div>
+
+<div class="portlet">
+  <div class="header">{translate fonema=LANG_STOCK_EXCHANGE_U}</div>
+  <div class="content">
+     {if isset($stock_status.STOCK)}<div class="textgreen">{translate fonema=LANG_STOCK_EXCHANGE_OPENED_U}</div> {/if}
+     {if isset($stock_status.NOSTOCK)}<div class="textred">{translate fonema=LANG_STOCK_EXCHANGE_CLOSED_U}</div> {/if}
+     {if isset($stock_status.SEASON_OVER)}<div class="textred">{translate fonema=LANG_SEASON_OVER_U}</div> {/if}
+  </div>
+</div>
+<div class="portlet">
+  <div class="header">{translate fonema=LANG_SEARCH_U}</div>
+  <div class="content">
+      <table class="noborder">
+         <form action="{$filtering.FORM_URL}" method="get" style="margin:0px">
+           <tr>
+             <td><input type="hidden" name="order" value="{$filtering.ORDER}">
+               {translate fonema=LANG_SURNAME_U} {$filtering.QUERY} {$filtering.WHERE_POS}
+             </td>
+           </tr>
+           <tr>
+             <td>
+	       {translate fonema=LANG_TEAM_NAME_U} {$filtering.WHERE_TEAM}
+               <input class="btn" type="submit" value=" {translate fonema=LANG_OK_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+               {if isset($filtering.FILTERED)}<a href="f_manager_stock_exchange.php">[ {translate fonema=LANG_SHOW_ALL_RECORDS} ]</a>{/if}
+             </td>
+           </tr>
+         </form>
+       </table>
+</div>
+</div>
+
+{if isset($stock)}
+{$stock.PAGING}
+{$stock.STOCK}
+{$stock.PAGING}
+{/if}
+{/if}

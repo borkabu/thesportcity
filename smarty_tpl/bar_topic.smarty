@@ -1,0 +1,8 @@
+<div class="portlet">
+<div class="header">{translate fonema=LANG_TOPIC_U}</div>
+<div class="content" align="center">
+<div id="topics">
+{$topic.SETTINGS}
+</div>
+</div>
+</div>

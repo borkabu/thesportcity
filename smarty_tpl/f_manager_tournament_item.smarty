@@ -1,0 +1,154 @@
+<div style="clear:both"></div>
+
+<div class="portlet">
+  <div class="header">{translate fonema=LANG_TOURNAMENT_U}</div>
+  <div class="content">
+     <h3>{$manager_tournament->title}</h3>
+   <table class="noborder">
+     <tr>
+     <td>
+     {translate fonema=LANG_OWNER_U}: <b>{$manager_tournament->owner}</b><br>
+     {translate fonema=LANG_ENTRY_FEE_U}: <b>{$manager_tournament->fee}</b><br>
+     {translate fonema=LANG_PARTICIPANTS_U}: <b>{$manager_tournament->participants}</b><br>
+     {translate fonema=LANG_JOINED_U}: <b>{$manager_tournament->joined}</b><br>
+     </td>
+     <td>
+       {translate fonema=LANG_TYPE_U}: 
+	<b>{if $manager_tournament->type==0} 
+            {translate fonema=LANG_OLYMPIC_SYSTEM_U}
+	   {elseif $manager_tournament->type==1}
+            {translate fonema=LANG_SWISS_SYSTEM_U}
+	   {elseif $manager_tournament->type==2}
+            {translate fonema=LANG_ROUND_SYSTEM_U}
+           {/if}</b>
+      <br>
+     {if ($manager_tournament->status == 1 || $manager_tournament->status>=2)}
+       {translate fonema=LANG_DURATION_U}: <b>{$manager_tournament->duration}</b><br>
+     {/if}
+     {if $manager_tournament->status >= 2}
+      {translate fonema=LANG_START_TOUR_U}: <b>{$manager_tournament->start_tour}</b><br>
+      {translate fonema=LANG_END_TOUR_U}: <b>{$manager_tournament->end_tour}</b><br>
+     {/if}
+     </td>
+     <td>
+     {translate fonema=LANG_PRIZE_FUND_U}: <span class="textgreenhuge"><b>{$manager_tournament->prize_fund}</b></span><br>
+     </td>
+     </tr>
+   </table>  
+  </div>
+{if isset($registration)}
+  <div class="content_header">{translate fonema=LANG_REGISTRATION_U}</div>
+  <div class="content">
+     {if isset($registration.REGISTRATION_CLOSED)}<div class="textred">{translate fonema=LANG_REGISTRATION_CLOSED_U}</b></div> {/if}
+     {if isset($registration.REGISTRATION_OPEN)}<div class="textgreen">{translate fonema=LANG_REGISTRATION_OPENED_U}</div> {/if}
+  </div>
+  {if $manager_tournament->invite_type==1 && isset($registration.ENTER_TOURNAMENT_OFFER)}
+   <div class="content">
+    {if isset($registration.ERROR)}
+  	 <span class="textred"><b>{$registration.ERROR.MSG}</b></span><br>
+    {/if}
+    {$registration.ENTER_TOURNAMENT_OFFER.MSG}
+      <form method="POST">
+	 <input type="hidden" name="enter_tournament" value="Y">
+	 <input type="text" name="tournament_code" class="input" size="10" maxsize=8>
+         <input class="btn" type="submit" value=" {translate fonema=LANG_JOIN_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+      </form>
+   </div>
+  {else if $manager_tournament->invite_type==0}
+   <div class="content">
+    {translate fonema=LANG_REGISTRATION_INVITE_ONLY_U}     
+   </div>
+  {/if}
+ {if isset($registration.REGISTERED)}
+  <div class="content">{translate fonema=LANG_TOURNAMENT_REGISTERED_U}</div>
+ {/if}
+{/if}
+  <div class="content_header">{translate fonema=LANG_RULES_U}</div>
+  <div class="content">{$manager_tournament->rules}</div>
+</div>
+
+{if isset($tours)}
+<div class="portlet">
+  <div class="header">{translate fonema=LANG_FILTER_U}</div>
+  <div class="content">
+    {translate fonema=LANG_TOURS_U}: 
+    {foreach $tours as $tour}
+        {if isset($tour.SELECTED)}<b>[{$tour.SELECTED.NUMBER}]</b>{/if}
+        {if isset($tour.NORMAL)}<a href="f_manager_tournaments.php?tour={$tour.NORMAL.NUMBER}&mt_id={$tour.NORMAL.MT_ID}">{$tour.NORMAL.NUMBER}</a>{/if}
+    {/foreach}
+    {if isset($tour_filter.SELECTED)}<b>[{translate fonema=LANG_TOURNAMENT_START_LIST_U}]</b>{/if}
+    {if isset($tour_filter.NORMAL)}<a href="f_manager_tournaments.php?tour=0&mt_id={$tour_filter.NORMAL.MT_ID}">[{translate fonema=LANG_TOURNAMENT_START_LIST_U}]</a>{/if}
+ </div>
+</div>
+{/if}
+
+{if isset($players)}
+<div style="width:45%;float:left">
+<div class="portlet">
+  <div class="header">{translate fonema=LANG_PARTICIPANTS_U}</div>
+  <div class="content">
+    {if $manager_tournament->type==0}
+      <table width="100%">
+        {foreach $players as $player}
+          <tr><td align="left">{$player.NUMBER}</td>
+              <td align="left" width="100%">{if isset($player.COUNTRY_DB)}<img border=1 src="./img/flags/{$player.CCTLD}.gif" onmouseover="Tip('{$player.COUNTRY_NAME}')" onmouseout="UnTip()">{/if} 
+                 <a href="user_public_profile.php?user_id={$player.USER_ID}" onmouseover="Tip('{translate fonema=LANG_PUBLIC_PROFILE_U}')" onmouseout="UnTip()" target="user_profile" onClick="window.open('','user_profile','width=450,height=620,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');"><img src="./img/icons/user_profile.png" border=0></a> 
+		{if isset($player.SEEDED)}<b>(+)</b>{/if} {if isset($player.ALLOW)}
+				<a href="f_manager_user_team_compare.php?username={$player.USER_NAME}" target="f_manager_user_team_compare" onClick="window.open('','f_manager_user_team_compare','width=400,height=600,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');"><img src="img/icons/weight.png" ></a>
+				<a href="f_manager_user_team.php?user_id={$player.USER_ID}" target="f_manager_user_team" onClick="window.open('','f_manager_user_team','width=300,height=400,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');">{$player.USER_NAME}</a>{else}{$player.USER_NAME}{/if}</td>
+          </tr>
+        {/foreach}
+      </table>
+    {else if $manager_tournament->type==1 || $manager_tournament->type==2}
+      <table width="100%">
+       <tr>
+        <th></th>
+        <th>{translate fonema=LANG_PARTICIPANT_U}</th>
+        <th>{translate fonema=LANG_POINTS_U}</th>
+        <th>{translate fonema=LANG_WEALTH_U}</th>
+       </tr>
+       {foreach $players as $player}
+        <tr>
+          <tr><td align="left">{$player.NUMBER}</td>
+              <td align="left" width="100%">{if isset($player.COUNTRY_DB)}<img border=1 src="./img/flags/{$player.CCTLD}.gif" onmouseover="Tip('{$player.COUNTRY_NAME}')" onmouseout="UnTip()">{/if} 
+                 <a href="user_public_profile.php?user_id={$player.USER_ID}" onmouseover="Tip('{translate fonema=LANG_PUBLIC_PROFILE_U}')" onmouseout="UnTip()" target="user_profile" onClick="window.open('','user_profile','width=450,height=620,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');"><img src="./img/icons/user_profile.png" border=0></a> 
+		{if isset($player.SEEDED)}<b>(+)</b>{/if} {if isset($player.ALLOW)}
+			<a href="f_manager_user_team_compare.php?username={$player.USER_NAME}" target="f_manager_user_team_compare" onClick="window.open('','f_manager_user_team_compare','width=400,height=600,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');"><img src="img/icons/weight.png" ></a>
+			<a href="f_manager_user_team.php?user_id={$player.USER_ID}" target="f_manager_user_team" onClick="window.open('','f_manager_user_team','width=300,height=400,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');">{$player.USER_NAME}</a>{else}{$player.USER_NAME}{/if}</td>
+              <td>{$player.POINTS}</td>
+              <td>{$player.WEALTH}</td>
+          </tr>
+        </tr>
+       {/foreach}
+      </table>
+    {/if}
+  </div>
+</div>
+</div>
+{/if}
+
+{if isset($pairs)}
+<div style="width:55%;float:left">
+<div class="portlet">
+  <div class="header">{translate fonema=LANG_TOUR_DRAW_RESULTS_U}</div>
+  <div class="content">
+       <table width="100%">
+         {foreach $pairs as $pair}
+           <tr>
+             <td align="left">{$pair.PAIR}</td>
+             <td align="left"><span {if isset($pair.USER_NAME1_WON)}style="font-weight:bold"{/if}>{$pair.USER_NAME1}</span></td>
+             <td align="center">
+		<span {if isset($pair.SCORE1_WON)}style="font-weight:bold"{/if}>{$pair.SCORE1}</span>:<span {if isset($pair.SCORE2_WON)}style="font-weight:bold"{/if}>{$pair.SCORE2}</span><br>
+            </td>
+    	    <td align="left"><span {if isset($pair.USER_NAME2_WON)}style="font-weight:bold"{/if}>{$pair.USER_NAME2}</span></td>
+           </tr>
+         {/foreach}
+       </table>   
+	{if isset($not_final)}{translate fonema=LANG_RESULTS_NOT_FINAL_U}
+	{else}{translate fonema=LANG_RESULTS_FINAL_U}
+        {/if}
+   </div>
+</div>
+</div>
+{/if}
+<div style="clear:both"></div>

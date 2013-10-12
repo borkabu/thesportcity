@@ -1,0 +1,21 @@
+<TPL_SUB:GROUPS_DATA>
+<div class="portlet">
+  <div class="header"><_TPL:LANG_GROUPS_U></div>
+  <div class="content">
+    <table width="100%">
+     <tr>
+      <th><_TPL:LANG_ITEM_NAME_U></th>
+      <th><_TPL:LANG_CURRENT_MEMBERS_U></th>
+      <th></th>
+     </tr>
+     <TPL_SUB:GROUP>
+     <tr>
+      <td width="100%" align="left" <TPL_SUB:SELECTED>style="font-weight:bold"</TPL_SUB:SELECTED>><TPL:GROUP_NAME></td>
+      <td><TPL:GROUP_MEMBERS></td>
+      <td align="left"><a href="?group_id=<TPL:GROUP_ID>"><img src="./img/icons/view_members.png" border=0></a></td>
+     </tr>          
+    </TPL_SUB:GROUP>
+    </table>
+  </div>
+</div>
+</TPL_SUB:GROUPS_DATA>

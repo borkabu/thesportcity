@@ -1,0 +1,9 @@
+{translate fonema=LANG_HI_U} {$data.USER_NAME}
+
+{translate fonema=LANG_EMAIL_STOCK_PROFIT_NOTIFY_LINE_1}
+{translate fonema=LANG_SEASON_U}: {$data.SEASON_TITLE}
+{translate fonema=LANG_PLAYER_U}: {$data.PLAYER_NAME}
+
+{translate fonema=LANG_EMAIL_STOCK_PROFIT_NOTIFY_LINE_2} {$data.URL}
+
+{translate fonema=LANG_EMAIL_LAST_LINE}

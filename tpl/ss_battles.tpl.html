@@ -1,0 +1,143 @@
+<script>
+
+function decint() {
+  var timeleft = document.getElementsByName("timeleft");
+//         alert(timeleft.length);
+  for(i=0; i < timeleft.length; i++) {
+    if (timeleft[i].innerText)  {
+      if (timeleft[i].innerText > 1 ) timeleft[i].innerText--
+      else {
+         if (timeleft[i].innerText == 1) {
+		var tstr = window.location.href;
+		window.location.href = tstr;
+         }
+      }
+    }
+    else if (timeleft[i].textContent)  {
+      if (timeleft[i].textContent > 1 ) timeleft[i].textContent--
+      else {
+         if (timeleft[i].textContent == 1) {
+		var tstr = window.location.href;
+		window.location.href = tstr;
+         }
+      }
+    }
+  }  
+}
+var int1 = window.setInterval( "decint();", 1000 );
+</script>
+
+<div class="portlet">
+    <div class="content">
+<_TPL:LANG_PLAYGROUND_U> - <a href="ss_outside.php"><_TPL:LANG_GO_OUTSIDE_U> </a>
+   </div>
+</div>
+
+    <TPL_SUB:NOT_ENOUGH_STAMINA>
+<div class="portlet">
+    <div class="content">
+      <span class="textred"><b><_TPL:LANG_NOT_ENOUGH_STAMINA_BATTLE_U></b></span>
+   </div>
+</div>
+    </TPL_SUB:NOT_ENOUGH_STAMINA>
+    <TPL_SUB:NOT_ENOUGH_MONEY>
+<div class="portlet">
+    <div class="content">
+      <span class="textred"><b><_TPL:LANG_NOT_ENOUGH_MONEY_BATTLE_U></b></span>
+   </div>
+</div>
+    </TPL_SUB:NOT_ENOUGH_MONEY>
+
+    <TPL_SUB:ALLOW_CREATE>
+<div class="portlet">
+    <div class="content">
+     <form action="ss_battles.php" method="post" style="margin:0">
+	  <_TPL:LANG_BATTLE_TYPE_U>:<TPL:BATTLE_TYPE><br>
+	  <_TPL:LANG_SPORT_U>:<TPL:SPORTS>
+          <_TPL:LANG_ROUNDS_TO_WIN_U>:
+          <select name="rounds">
+	    <option value="9" selected>10</option>
+  	    <option value="14">15</option>
+ 	    <option value="19">20</option>
+ 	    <option value="29">30</option>		
+  	  </select>
+          <_TPL:LANG_POINTS_TO_WIN_U>:
+          <select name="points">
+	    <option value="6" selected>6</option>
+  	    <option value="10">10</option>
+ 	    <option value="16">16</option>
+ 	    <option value="24">24</option>		
+  	  </select>
+       <input type="hidden" name="create_battle" value="y">
+       <input class="btn" type="submit" value=" Go " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'">
+      </form>
+   </div>
+</div>
+    </TPL_SUB:ALLOW_CREATE>
+
+    <TPL_SUB:BATTLES>
+<div class="portlet">
+<div class="header"><b><_TPL:LANG_ACTIVE_BATTLES_U></b></div>
+    <div class="content">
+
+  	 <table width="100%">
+          <tr><th><_TPL:LANG_BATTLE_TYPE_U></th>
+              <th>Home team</th>
+              <th>Visitor team</th>
+              <th>Timeout</th>
+              <th>Management</th>
+          </tr>
+        <TPL_SUB:ITEMS>
+          <tr><td><_TPL:LANG_BATTLE_U>: <TPL:BATTLE_TYPE> | <TPL:SPORT><br>
+		  <_TPL:LANG_ROUNDS_U>: <TPL:ROUNDS> / <_TPL:LANG_POINTS_U>: <TPL:POINTS></td>
+              <td><TPL_SUB:TEAM1><TPL_SUB:USERS><a href="ss_char.php?user_id=<TPL:USER_ID>" target="ss_char" onClick="window.open('','ss_char','width=450,height=620,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');"><TPL:USER_NAME></a> (<TPL:EQUIPED_LEVEL>)</TPL_SUB:USERS></TPL_SUB:TEAM1></td>
+              <td><TPL_SUB:TEAM2><TPL_SUB:USERS><TPL:USER_NAME> (<TPL:EQUIPED_LEVEL>)</TPL_SUB:USERS></TPL_SUB:TEAM2></td>
+              <td><span id="timeleft" name="timeleft"><TPL:TIMELEFT></span>
+                  <TPL_SUB:WAITING> (Waiting) </TPL_SUB:WAITING>
+                  <TPL_SUB:LOGIN>You need to login</TPL_SUB:LOGIN>
+                  </td>
+              <td><table class="noborder"><tr><TPL_SUB:ALLOW_JOIN><td>
+			<form action="ss_battles.php" method="post">
+				<input name="join_battle" type="hidden" value="y">
+                                <input name="battle_id" type="hidden" value="<TPL:BATTLE_ID>">
+				<input type="submit" value="Prisijungti">
+			</form></td>
+                  </TPL_SUB:ALLOW_JOIN>
+                  <TPL_SUB:ALLOW_ESCAPE><td>
+			<form action="ss_battles.php" method="post">
+				<input name="escape_battle" type="hidden" value="y">
+                                <input name="battle_id" type="hidden" value="<TPL:BATTLE_ID>">
+				<input type="submit" value="Pasitraukti">
+			</form></td>
+                  </TPL_SUB:ALLOW_ESCAPE>
+                  <TPL_SUB:ALLOW_ACCEPT><td>
+			<form action="ss_battles.php" method="post">
+				<input name="accept_battle" type="hidden" value="y">
+                                <input name="battle_id" type="hidden" value="<TPL:BATTLE_ID>">
+				<input type="submit" value="Priimti">
+			</form></td>
+                  </TPL_SUB:ALLOW_ACCEPT>
+                  <TPL_SUB:ALLOW_DECLINE><td>
+			<form action="ss_battles.php" method="post">
+				<input name="decline_battle" type="hidden" value="y">
+                                <input name="battle_id" type="hidden" value="<TPL:BATTLE_ID>">
+				<input type="submit" value="Atmesti">
+			</form></td>
+                  </TPL_SUB:ALLOW_DECLINE>
+                  <TPL_SUB:ALLOW_RETREAT><td>
+			<form action="ss_battles.php" method="post" style="margin:0">
+				<input name="retreat_battle" type="hidden" value="y">
+                                <input name="battle_id" type="hidden" value="<TPL:BATTLE_ID>">
+				<input class='btn' type="submit" value=" <_TPL:LANG_RETREAT_U>"  onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'">
+			</form></td>
+                  </TPL_SUB:ALLOW_RETREAT>
+                  </tr></table> 
+              </td>
+          </tr>
+         </TPL_SUB:ITEMS>
+         </table>        
+   </div>
+</div>
+ </TPL_SUB:BATTLES>
+
+<TPL:CUR_BATTLES>

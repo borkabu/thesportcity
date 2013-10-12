@@ -1,0 +1,47 @@
+<div style="clear:both"></div>
+<div class="portlet">
+<div class="header">{translate fonema=LANG_CLANS_U}</div>
+ {if isset($clans)}
+  <div class="content">
+  <table>
+   <tr>
+    <th>{translate fonema=LANG_CLAN_NAME_U}</th>
+    <th>{translate fonema=LANG_LEADER_U}</th>
+    <th>{translate fonema=LANG_PARTICIPANTS_U}</th>
+    <th>{translate fonema=LANG_STATUS_U}</th>
+   </tr>
+  {foreach $clans as $clan}
+   <tr>
+    <td><a href="clans.php?clan_id={$clan.CLAN_ID}"><b>{$clan.CLAN_NAME}</b></a></td>
+    <td>{$clan.USER_NAME}</td>
+    <td>{$clan.MEMBERS}</td>
+    <td>{if isset($clan_leader) && $clan.CLAN_ID==$clan_leader}
+         <img valign="middle" align="left" src="./img/icons/owner.png" onmouseover="Tip('{translate fonema=LANG_LEADER_U}')" onmouseout="UnTip()">    
+        {elseif isset($clan_member) && $clan.CLAN_ID==$clan_member}
+         <img valign="middle" align="left" src="./img/icons/participant.png" onmouseover="Tip('{translate fonema=LANG_PARTICIPANT_U}')" onmouseout="UnTip()">    
+        {/if}
+        {if isset($clan_invite)}
+         {foreach $clan_invite as $invite}
+          {if $clan.CLAN_ID==$invite.CLAN_ID}
+            <img src="./img/icons/warning.png" onmouseover="Tip('{translate fonema=LANG_ATTENTION_REQUIRED_U}')" onmouseout="UnTip()" />
+          {/if}
+         {/foreach}
+       {/if}
+    </td>
+   </tr>
+  {foreachelse}
+   <tr>
+    <td colspan=4>
+     {translate fonema=LANG_NO_CLANS_U}
+    </td>
+   </tr>
+  {/foreach}
+  </table>
+  </div>
+ {else}
+   <div class="content">
+	<div style="float:left;">{translate fonema=LANG_NO_ENTRIES_U}</div>
+	<div style="clear:both;"></div>
+   </div>
+ {/if}
+</div>

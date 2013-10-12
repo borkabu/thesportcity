@@ -1,0 +1,130 @@
+<TPL_INCLUDE:../tpl/adm/head.tpl.html>
+<TPL_INCLUDE:../tpl/adm/menu.tpl.html>
+
+<form action="" method="post">
+<input type="hidden" name="form_save" value="Y">
+<input type="hidden" name="referer" value="<TPL:REFERER>">
+<input type="hidden" name="lang_id" value="<TPL:LANG_ID>">
+
+<TPL_SUB:ERROR><span class="error"><TPL:MSG></span></TPL_SUB:ERROR>
+
+<div class="portlet">
+  <div class="header"><_TPL:LANG_GENERAL_DATA_U></div>
+  <div class="content">
+  <table>
+    <tr><th colspan="2"><_TPL:LANG_PARAMETERS_U></td></tr>
+    
+    <tr>
+      <td class="list_item"><_TPL:LANG_ITEM_NAME_U></td>
+      <td class="list_item"><TPL_INPUT:adm_item.item_name></td>
+    </tr>
+
+    <tr>
+      <td class="list_item"><_TPL:LANG_PRICE_MONEY_U></td>
+      <td class="list_item"><TPL_INPUT:adm_item.price_euro></td>
+    </tr>
+
+    <tr>
+      <td class="list_item"><_TPL:LANG_PRICE_CREDITS_U></td>
+      <td class="list_item"><TPL_INPUT:adm_item.price_credits></td>
+    </tr>
+
+    <tr>
+      <td class="list_item"><_TPL:LANG_PIC_LOCATION_U></td>
+      <td class="list_item"><TPL_INPUT:adm_item.pic_location></td>
+    </tr>
+
+    <tr>
+      <td class="list_item">Publikuoti</td>
+      <td class="list_item"><TPL_INPUT:adm_user.publish></td>
+    </tr>
+   
+  </table>
+</div>
+</div>
+
+<div style="float:left;">
+<div class="portlet">
+  <div class="header"><_TPL:LANG_ATTRIBUTES_U> <a href="shop_stock_attributes_edit.php?item_id=<TPL:ITEM_ID>"><img src="../img/adm_edit.gif" width="12" height="12" border="0" alt="redaguoti"></a></div>
+  <div class="content">
+  <table>
+    <tr>
+      <th>N</td>
+      <th><_TPL:LANG_ITEM_NAME_U></td>
+      <th><_TPL:LANG_PRICE_CREDITS_U></td>
+      <th><_TPL:LANG_PRICE_MONEY_U></td>
+      <th>&nbsp;</td>
+    </tr>
+
+    <TPL_SUB:VALUES>
+
+    <tr class="<TPL_SUB:EVEN>even</TPL_SUB:EVEN><TPL_SUB:ODD>odd</TPL_SUB:ODD>">
+      <td class="list_item"><TPL:NUMBER></td>
+      <td class="list_item"><TPL:ATTR_NAME> - <TPL:VALUE></td>
+      <td class="list_item"><TPL:PRICE_CREDITS></td>
+      <td class="list_item"><TPL:PRICE_EURO></td>
+      <td class="list_item" align="center">
+        <TPL_SUB:DEL><a href="<TPL:DEL_URL>" onClick="return confirm('Tikrai?');"><img src="../img/adm_delete.gif" width="12" height="12" border="0" alt="pašalinti"></a></TPL_SUB:DEL>
+        <a href="shop_stock_attributes_edit.php?item_id=<TPL:ITEM_ID>&entry_id=<TPL:ENTRY_ID>"><img src="../img/adm_edit.gif" width="12" height="12" border="0" alt="redaguoti"></a>
+      </td>
+    </tr>
+    </TPL_SUB:VALUES>
+    <TPL_SUB:VALUE_NORECORDS>
+    <tr bgcolor="#FFFFFF"><td colspan="7" class="list_item">Įrašų nėra</td></tr>
+    </TPL_SUB:VALUE_NORECORDS>   
+  </table>
+  </div>
+</div>
+</div>
+
+
+<div class="portlet">
+  <div class="header">Content</div>
+  <div class="content">
+            <TPL_INPUT:adm_news.descr>
+
+			<script type="text/javascript">
+				//<![CDATA[
+
+					// This call can be placed at any point after the
+					// <textarea>, or inside a <head><script> in a
+					// window.onload event handler.
+
+					// Replace the <textarea id="editor"> with an CKEditor
+					// instance, using default configurations.
+					CKEDITOR.replace( 'descr' ,
+                                            { entities : false,
+                                                  on :
+                                                 {
+					           instanceReady : function( ev )
+					            {
+                                                     // Output paragraphs as <p>Text</p>.
+					                this.dataProcessor.writer.setRules( 'p',
+					                    {
+					                        indent : false,
+                                                                breakBeforeOpen : false,
+					                        breakAfterOpen : false,
+					                        breakBeforeClose : false,
+					                        breakAfterClose : false
+                                                             });
+					            }
+					        }
+					});
+
+				//]]>
+				</script>
+
+</div>
+</div>
+
+<div class="portlet">
+  <div class="content">
+        <input type="submit" class="btn" value="<_TPL:LANG_SAVE_U>" onclick="resettarget();"  onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" >
+        <input type="reset" class="btn" value="<_TPL:LANG_RESET_U>" onclick="return confirm('<_TPL:LANG_REALLY_U>');"  onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'">
+</div>
+</div>
+
+</form>
+
+
+<TPL_INCLUDE:../tpl/adm/foot.tpl.html>

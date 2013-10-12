@@ -1,0 +1,270 @@
+<div style="clear:both"></div>
+{$manager_filter_box}
+
+{if isset($error)}
+<div class="portlet" id="message">
+    <div class="content">
+	<span class="textred"><b>{$error.MSG}</b></span>
+    </div>
+</div>
+{/if}
+
+{if isset($create_league_offer)}
+<div class="portlet" id="message">
+    <div class="content">
+	<span class="textgreen"><b>{translate fonema=LANG_CREATE_LEAGUE_OFFER_INSTR_U}</b></span>
+    </div>
+</div>
+{/if}
+
+{if isset($leagues.LEAGUES)}
+<div class="portlet">
+<div class="header">{translate fonema=LANG_SEARCH_U}</div>
+<div class="content">
+    <form action="" method="post" style="margin:0px">
+      <table class="noborder">
+           <tr>
+             <td>
+               {translate fonema=LANG_TITLE_U} {$filtering.QUERY_TITLE}
+               {translate fonema=LANG_OWNER_U} {$filtering.QUERY_OWNER}          
+             </td>
+           </tr>
+           <tr>
+             <td rowspan=1>{$filtering.QUERY_LESS} &lt;= {$filtering.WHERE_INT} &lt;= {$filtering.QUERY_MORE}
+             </td>
+           </tr>
+           <tr><td>
+  	     </td>
+           </tr>
+       </table>
+      <div style="float:left">
+       <input type="hidden" name="filter" value="y">
+       <input class="btn" type="submit" value=" {translate fonema=LANG_OK_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+      </div>
+     </form>
+      {if isset($filtering.FILTERED)}
+      <div style="float:left;">
+         <form action="" method="post" style="margin:0px">
+     	       <input type="hidden" name="filter" value="n">
+               <input class="btn" type="submit" value=" {translate fonema=LANG_SHOW_ALL_RECORDS} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+         </form>
+      </div>
+      {/if}
+      <div style="clear:both;"></div>
+  </div>
+</div>
+<div class="portlet">
+<div class="header">{translate fonema=LANG_LEAGUES_U}</div>
+<div class="content">
+  <table width="100%">
+    <tr><th>{translate fonema=LANG_TITLE_U} ({translate fonema=LANG_COMMENTS_U})</th>
+      <th>{translate fonema=LANG_PARTICIPANTS_U} ({translate fonema=LANG_MAXIMUM_ABBR_U})</th>
+      <th>{translate fonema=LANG_ENTRY_FEE_U}</th>
+      <th>{translate fonema=LANG_LEAGUE_RATING_U}/<br>{translate fonema=LANG_OWNER_RATING_U}</th>
+      <th></th>
+    <tr>
+    {foreach $leagues.LEAGUES as $league}
+    {if isset($league.OWN_LEAGUE)}
+    <tr>
+      <td>{if isset($league.COUNTRY_DB)}<img border=1 src="./img/flags/{$league.COUNTRY_DB.CCTLD}.gif" onmouseover="Tip('{$league.COUNTRY_DB.COUNTRY_NAME}')" onmouseout="UnTip()">{/if} <a href="f_manager_league.php?league_id={$league.LEAGUE_ID}&all={$league.ALL_LEAGUES}"><b>{$league.TITLE}</b></a> ({$league.POSTS})<br>
+          <img src="./img/icons/owner.png" onmouseover="Tip('{translate fonema=LANG_OWNER_U}')" onmouseout="UnTip()"> {$league.USER_NAME}
+      </td>
+      <td>{$league.USERS} ({$league.PARTICIPANTS})<br>
+	{if isset($league.PROGRESS)}<span class="progress_bar" ><span style="width: {$league.PROGRESS.PERCENTS}%;" class="has_progress"></span>{/if}
+      </td>
+      <td>{$league.ENTRY_FEE}</td>
+      <td>{$league.RATING}/{$league.LEAGUE_OWNER_RATING}</td>
+      <td nowrap>{if isset($league.RECRUITMENT_ON)}<img src='./img/icons/unlocked.png' onmouseover="Tip('{translate fonema=LANG_LEAGUE_RECRUITMENT_ON_U}')" onmouseout="UnTip()" />{/if}
+         {if isset($league.RECRUITMENT_OFF)}<img src='./img/icons/locked.png' onmouseover="Tip('{translate fonema=LANG_LEAGUE_RECRUITMENT_OFF_U}')" onmouseout="UnTip()" />{/if}
+	 {if isset($league.NOVICES)}<img src='./img/icons/baby-cot.png' onmouseover="Tip('{translate fonema=LANG_LEAGUE_NOVICES_ON_U}')" onmouseout="UnTip()" />{/if}
+  	 {if $league.INVITE_TYPE==0 || $league.INVITE_TYPE ==""}<img src='./img/icons/invite.png' onmouseover="Tip('{translate fonema=LANG_INVITE_ONLY_U}')" onmouseout="UnTip()" />
+         {else if $league.INVITE_TYPE==1}<img src='./img/icons/invite_code.png' onmouseover="Tip('{translate fonema=LANG_INVITE_AND_CODE_U}')" onmouseout="UnTip()" />
+         {/if}<br>
+  	 {if isset($league.TOURNAMENT)}<img src='./img/icons/cup.png' onmouseover="Tip('{translate fonema=LANG_TOURNAMENT_U}')" onmouseout="UnTip()" />{/if}
+  	 {if isset($league.PRIZES)}<img src='./img/icons/cow.png' onmouseover="Tip('{translate fonema=LANG_REAL_PRIZES_U}')" onmouseout="UnTip()" />{/if}
+      </td>
+    </tr>
+    {/if}
+    {if isset($league.LEAGUE)}
+    <tr>
+      <td>{if isset($league.COUNTRY_DB)}<img border=1 src="./img/flags/{$league.COUNTRY_DB.CCTLD}.gif" onmouseover="Tip('{$league.COUNTRY_DB.COUNTRY_NAME}')" onmouseout="UnTip()">{/if} <a href="f_manager_league.php?league_id={$league.LEAGUE_ID}&all={$league.ALL_LEAGUES}"><b>{$league.TITLE}</b></a> ({$league.POSTS})<br>
+          <img src="./img/icons/owner.png" onmouseover="Tip('{translate fonema=LANG_OWNER_U}')" onmouseout="UnTip()"> {$league.USER_NAME}
+      </td>
+      <td>{$league.USERS} ({$league.PARTICIPANTS})<br>
+	{if isset($league.PROGRESS)}<span class="progress_bar" ><span style="width: {$league.PROGRESS.PERCENTS}%;" class="has_progress"></span>{/if}
+      </td>
+      <td>{$league.ENTRY_FEE}</td>
+      <td>{$league.RATING}/{$league.LEAGUE_OWNER_RATING}</td>
+      <td nowrap>{if isset($league.RECRUITMENT_ON)}<img src='./img/icons/unlocked.png' onmouseover="Tip('{translate fonema=LANG_LEAGUE_RECRUITMENT_ON_U}')" onmouseout="UnTip()" />{/if}
+         {if isset($league.RECRUITMENT_OFF)}<img src='./img/icons/locked.png' onmouseover="Tip('{translate fonema=LANG_LEAGUE_RECRUITMENT_OFF_U}')" onmouseout="UnTip()" />{/if}
+	 {if isset($league.NOVICES)}<img src='./img/icons/baby-cot.png' onmouseover="Tip('{translate fonema=LANG_LEAGUE_NOVICES_ON_U}')" onmouseout="UnTip()" />{/if}
+  	 {if isset($league.TOURNAMENT)}<img src='./img/icons/cup.png' onmouseover="Tip('{translate fonema=LANG_TOURNAMENT_U}')" onmouseout="UnTip()" />{/if}
+  	 {if isset($league.PRIZES)}<img src='./img/icons/cow.png' onmouseover="Tip('{translate fonema=LANG_REAL_PRIZES_U}')" onmouseout="UnTip()" />{/if}
+       	 {if $league.INVITE_TYPE==0 || $league.INVITE_TYPE ==""}<img src='./img/icons/invite.png' onmouseover="Tip('{translate fonema=LANG_INVITE_ONLY_U}')" onmouseout="UnTip()" />
+         {else if $league.INVITE_TYPE==1}<img src='./img/icons/invite_code.png' onmouseover="Tip('{translate fonema=LANG_INVITE_AND_CODE_U}')" onmouseout="UnTip()" />
+         {/if}
+      </td>
+    </tr>
+    {/if}
+    {foreachelse}
+     <tr><td colspan="5">{translate fonema=LANG_NO_LEAGUES_U}</td></tr>
+    {/foreach}
+  </table>
+</div>
+</div>
+{$leagues.LEAGUES_PAGING}
+{/if}
+
+{if isset($league_item)}
+<div class="portlet">
+  <div class="content">
+<h3>{$league_item.TITLE}</h3>
+{if isset($league_item.VOTING)}
+<div id="thumbs_{$league_item.VOTING.LEAGUE_ID}" style="float:right;">
+ <input type="image" src="img/icons/thumbup.gif" onClick="javascript:voteLeagueThumbUp({$league_item.VOTING.LEAGUE_ID}, 1, 'leagues', 'thumbs_{$league_item.VOTING.LEAGUE_ID}')"/>
+ <input type="image" src="img/icons/thumbdown.gif" onClick="javascript:voteLeagueThumbDown({$league_item.VOTING.LEAGUE_ID}, 1, 'leagues', 'thumbs_{$league_item.VOTING.LEAGUE_ID}')"/>&nbsp;
+{if isset($league_item.VOTING.THUMB_UP)}
+<div style="float:right;">
+<img src="./img/icons/plus.png" onmouseover="Tip('{translate fonema=LANG_VOTE_UP_U}')" onmouseout="UnTip()"/>
+</div>
+{/if}
+{if isset($league_item.VOTING.THUMB_DOWN)}
+<div style="float:right;">
+<img src="./img/icons/minus.png" onmouseover="Tip('{translate fonema=LANG_VOTE_DOWN_U}')" onmouseout="UnTip()"/>
+</div>
+{/if}
+</div>
+{/if}
+     {if isset($league_item.CHAT)}<a href="chat2.php?title={$league_item.CHAT.CHAT_CHANNEL}" target="tsc_chat" onClick="window.open('','tsc_chat','width=821,height=820,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');"><img src="./img/icons/chat.png" border=0></a>{/if}<br>
+     {translate fonema=LANG_OWNER_U}: <b>{$league_item.OWNER}</b><br>
+     {translate fonema=LANG_LEAGUE_RATING_U}: <b>{$league_item.LEAGUE_RATING}</b><br>
+     {translate fonema=LANG_OWNER_RATING_U}: <b>{$league_item.OWNER_RATING}</b><br>
+     {translate fonema=LANG_ENTRY_FEE_U}: <b>{$league_item.ENTRY_FEE}</b><br>
+  </div>
+{if isset($league_item.CAN_REFUND)}
+   <div class="content">
+     {if !isset($league_item.CAN_REFUND.REFUNDED)}
+      Sum to return <b>{$league_item.CAN_REFUND.OWED_CREDITS}</b> credits<br>
+      Onwer has <b>{$league_item.CAN_REFUND.OWNER_CREDITS}</b> credits<br>
+      Fine <b>10%</b>. Everybody else will get <b>{$league_item.CAN_REFUND.REFUND}</b><br>
+      <form method="POST">
+	 <input type="hidden" name="refund_league" value="true">
+	 <input type="hidden" name="league_id" value="{$league_item.CAN_REFUND.LEAGUE_ID}">
+         <input class="btn" type="submit" value=" {translate fonema=LANG_REFUND_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+      </form>
+    {else}
+      <span class="textred"><b>{translate fonema=LANG_REFUNDED_U}</b></span>
+    {/if}
+  </div>
+{/if}
+{if $league_item.REFUNDED==1}
+   <div class="content">
+     <span class="textred"><b>{translate fonema=LANG_REFUNDED_U}</b></span>
+   </div>
+{/if}
+  {if $league_item.INVITE_TYPE==1 && isset($league_item.CAN_JOIN)}
+   <div class="content">
+    {if isset($league_item.ERROR)}
+  	 <span class="textred"><b>{$league_item.ERROR.MSG}</b></span><br>
+    {/if}
+    {translate fonema=LANG_MANAGER_LEAGUE_INVITE_CODE_INSTR_U}<br>
+      <form method="POST">
+	 <input type="hidden" name="join_league" value="true">
+	 <input type="text" name="league_code" class="input" size="10" maxsize=8>
+         <input class="btn" type="submit" value=" {translate fonema=LANG_JOIN_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+      </form>
+   </div>
+  {/if}
+  {if isset($league_item.NOT_ENOUGH_CREDITS)}
+   <div class="content">
+         {translate fonema=LANG_MANAGER_LEAGUE_INVITE_CODE_INSTR_U}<br>
+  	 <span class="textred"><b>{translate fonema=LANG_ERROR_NOT_ENOUGH_CREDITS_U}</b></span><br>
+   </div>
+  {/if}
+  {if isset($league_item.NO_TEAM)}
+   <div class="content">
+  	 <span class="textred"><b>{translate fonema=LANG_MANAGER_LEAGUE_NO_TEAM2_U}</b></span><br>
+   </div>
+  {/if}
+  {if isset($league_item.SUCCESS)}
+   <div class="content">
+  	 <span class="textgreen"><b>{$league_item.SUCCESS.MSG}</b></span><br>
+   </div>
+  {/if}
+</div>
+
+<script>
+ $(function() {
+	$( "#league_info" ).tabs({
+		cookie: {
+			expires: 1,
+			name: "league_info"
+			}
+		}); 
+});
+</script>
+<div id="league_info">
+ <ul>
+  <li><a href="#tabs-1" title="{translate fonema=LANG_DESCRIPTION_U}">{translate fonema=LANG_DESCRIPTION_U}</a></li>
+  <li><a href="#tabs-2" title="{translate fonema=LANG_STANDINGS_U}">{translate fonema=LANG_STANDINGS_U}</a></li>
+ </ul>
+
+ <div id="tabs-1">
+  <div class="portlet" style="margin:0px">
+   {if isset($league_item.RULES)}
+    <div class="content" style="width:780px;overflow:auto">{$league_item.RULES}</div>
+   {/if}
+  </div>
+ </div>
+ <div id="tabs-2">
+  <div class="portlet" style="margin:0px">
+  <div class="content">
+   {if isset($tours)}
+    {translate fonema=LANG_TOURS_U}: 
+    {foreach $tours as $tour}
+        {if isset($tour.NORMAL)}<a href="f_manager_league_standings.php?tour_id={$tour.NORMAL.NUMBER}&league_id={$tour.NORMAL.LEAGUE_ID}"
+               target="f_manager_league_standings" onClick="window.open('','f_manager_league_standings','width=500,height=600,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');"
+	>{$tour.NORMAL.NUMBER}</a>{/if}
+    {/foreach} 
+   {/if}
+  </div>
+
+  <div class="content">
+     <table style="width:100%">
+     <tr >
+      <th>{translate fonema=LANG_PARTICIPANT_U}</th>
+      <th>{translate fonema=LANG_TAG_U}</th>
+      <th>{translate fonema=LANG_POINTS_U}</th>
+      <th>{translate fonema=LANG_POINTS_LAST_TOUR_U}</th>
+      <th>{translate fonema=LANG_PLACE_IN_LEAGUE_U}</th>
+      <th>{translate fonema=LANG_PLACE_U}</th>
+      <th>{translate fonema=LANG_WEALTH_U}</th>
+      <th></th>
+     </tr>   
+     {foreach $league_item.MEMBERS as $member}
+     <tr {if isset($member.CURRENT)}style="background-color:yellow"{/if}>
+      <td nowrap {if isset($member.OWNER)}class="owner"{/if}>
+	  {if isset($member.COUNTRY_DB)}<img border=1 src="./img/flags/{$member.COUNTRY_DB.CCTLD}.gif" onmouseover="Tip('{$member.COUNTRY_DB.COUNTRY_NAME}')" onmouseout="UnTip()">{/if}
+          <a href="user_public_profile.php?user_id={$member.USER_ID}" onmouseover="Tip('{translate fonema=LANG_PUBLIC_PROFILE_U}')" onmouseout="UnTip()" target="user_profile" onClick="window.open('','user_profile','width=450,height=620,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');"><img src="./img/icons/user_profile.png" border=0></a>
+	  {if isset($member.ALLOW)}
+                   <a href="f_manager_user_team_compare.php?username={$member.USER_NAME}" target="f_manager_user_team_compare" onClick="window.open('','f_manager_user_team_compare','width=400,height=600,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');"><img src="img/icons/weight.png" ></a>
+                   <a href="f_manager_user_team.php?user_id={$member.USER_ID}" target="f_manager_user_team" onClick="window.open('','f_manager_user_team','width=300,height=400,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');">{$member.USER_NAME}</a>{/if}
+	  {if isset($member.NOTALLOW)}{$member.USER_NAME}{/if}
+	</td> 
+      <td nowrap {if isset($member.OWNER)}class="owner"{/if}>{$member.TAG}</td>
+      <td {if isset($member.OWNER)}class="owner"{/if}>{$member.POINTS}</td>
+      <td {if isset($member.OWNER)}class="owner"{/if}>{$member.LAST_POINTS}
+		{if $member.POINTS_MAIN > 0}({$member.POINTS_MAIN}){/if}</td>
+      <td {if isset($member.OWNER)}class="owner"{/if}>{$member.LOCAL_PLACE}</td>
+      <td {if isset($member.OWNER)}class="owner"{/if}>{$member.PLACE}</td>
+      <td {if isset($member.OWNER)}class="owner"{/if}>{$member.MONEY}</td>
+      <td {if isset($member.OWNER)}class="owner"{/if} align="right"><a href="f_manager_user_tours.php?user_id={$member.USER_ID}" target="manager_user_tours" onClick="window.open('','manager_user_tours','width=150,height=300,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');">{translate fonema=LANG_TOURS_U}</a></td>
+     </tr>
+     {/foreach}
+    </table>    
+  </div>
+</div>
+ </div>
+</div>
+
+{/if}

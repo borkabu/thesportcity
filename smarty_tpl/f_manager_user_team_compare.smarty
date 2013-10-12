@@ -1,0 +1,83 @@
+<div class="portlet">
+ <div class="header">{translate fonema=LANG_TEAM_COMPARISON_U}</div>
+ <div class="content">
+   {translate fonema=LANG_TEAM_COMPARISON_INSTR_U}
+ </div>
+ {if isset($can_compare)}
+ <div class="content">
+     <form action="f_manager_user_team_compare.php" method="post" style="margin:0">
+        <input type="text" name="user1" value="" size=8 maxsize="24" class="input">
+        <input type="text" name="user2" value="" size=8 maxsize="24" class="input">
+        <input type="hidden" name="mseason_id" value="{$mseason_id}">
+        <input type="hidden" name="compare_teams" value="y">
+   	<input type="submit" class="btn" type="submit" value=" {translate fonema=LANG_COMPARE_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+     </form>
+ </div>
+ {/if}
+ {if isset($error)}
+    <div class="content">
+	<span class="textred"><b>{$error.MSG}</b></span>
+    </div>
+ {/if}
+
+ {if isset($common_players)}
+  <div class="content">
+     <table>
+       <tr>
+        <th colspan=2>{$user_name}</th>
+        <th>{translate fonema=LANG_COMMON_PLAYERS_U}</th>
+        <th colspan=2>{$user_name2}</th>
+       </tr>
+      {foreach $common_players as $player}
+       <tr>
+         <td align="left">
+  	  {if isset($player.CAPTAINCY) && $player.CAPTAINCY == 1}
+	    <img src='./img/icons/captain.png' onmouseover="Tip('<span class=\'textred\'>{translate fonema=LANG_CAPTAIN_U}</span>')" onmouseout="UnTip()" />
+	  {/if}
+         </td>
+         <td align="left">{$player.TOTAL_POINTS}</td>
+         <td align="left">
+ 	   <b>{$player.LAST_NAME}, {$player.FIRST_NAME}</b> <br>({$player.TEAM_NAME2})</td>
+         <td align="left">{$player.TOTAL_POINTS}</td>
+         <td align="left">
+  	  {if isset($team[$user_id2][$player.PLAYER_ID].CAPTAINCY) && $team[$user_id2][$player.PLAYER_ID].CAPTAINCY == 1}
+	    <img src='./img/icons/captain.png' onmouseover="Tip('<span class=\'textred\'>{translate fonema=LANG_CAPTAIN_U}</span>')" onmouseout="UnTip()" />
+	  {/if}
+         </td>
+       </tr>
+       {/foreach}
+     </table>
+ </div>
+ {/if}
+ {if isset($different_players)}
+    <div class="content_header">{translate fonema=LANG_DIFFERENT_PLAYERS_U}</div>
+   <div class="content">
+     <table>
+       <tr>
+        <th colspan=3>{$user_name}</th>
+        <th colspan=3>{$user_name2}</th>
+       </tr>
+       {foreach $different_players as $player}
+       <tr>
+         <td align="left">
+  	  {if isset($player[0].CAPTAINCY) && $player[0].CAPTAINCY == 1}
+	    <img src='./img/icons/captain.png' onmouseover="Tip('<span class=\'textred\'>{translate fonema=LANG_CAPTAIN_U}</span>')" onmouseout="UnTip()" />
+	  {/if}
+         </td>
+         <td align="left">{$player[0].TOTAL_POINTS}</td>
+         <td align="left"><b>{$player[0].LAST_NAME}, {$player[0].FIRST_NAME}</b> <br>({$player[0].TEAM_NAME2})</td>
+         <td align="left"><b>{$player[1].LAST_NAME}, {$player[1].FIRST_NAME}</b> <br>({$player[1].TEAM_NAME2})</td>
+         <td align="left">{$player[1].TOTAL_POINTS}</td>
+         <td align="left">
+  	  {if isset($player[1])}
+  	  {if isset($player[1].CAPTAINCY) && $player[1].CAPTAINCY == 1}
+	    <img src='./img/icons/captain.png' onmouseover="Tip('<span class=\'textred\'>{translate fonema=LANG_CAPTAIN_U}</span>')" onmouseout="UnTip()" />
+	  {/if}
+	  {/if}
+         </td>
+       </tr>
+       {/foreach}
+     </table>
+ </div>
+ {/if}
+</div>

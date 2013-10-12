@@ -1,0 +1,2 @@
+{if isset($thumb.THUMB_UP)}<img src="./img/icons/plus.png"/>{/if}
+{if isset($thumb.THUMB_DOWN)}<img src="./img/icons/minus.png"/>{/if}

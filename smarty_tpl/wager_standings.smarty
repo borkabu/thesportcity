@@ -1,0 +1,45 @@
+<div style="clear:both"></div>
+
+{$wager_filter_box}
+
+<div class="portlet">
+  <div class="header">{translate fonema=LANG_SEARCH_U}</div>
+  <div class="content">
+    <form action="{$search.FORM_URL}" method="get" style="margin:0px">
+      <input type="hidden" name="tseason_id" value="{$season_id}">
+       {$search.WHERE} {$search.QUERY} 
+       <input class="btn" type="submit" value=" {translate fonema=LANG_OK_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+       {if isset($search.FILTERED)}<a href="{$search.FORM_URL}">[ {translate fonema=LANG_SHOW_ALL_RECORDS} ]</a>{/if}
+       {if isset($search.FORM_TOURS)}<input type="hidden" name="tour_id" value="{$tour_id}">{/if}
+    </form>
+ </div>
+</div>
+
+<div class="portlet">
+  <div class="header">{translate fonema=LANG_STANDINGS_U}</div>
+  <div class="content">
+    {if isset($users)}
+      <table>
+        <tr>
+          <th></td>
+          <th width="100%">{translate fonema=LANG_PLAYER_U}</th>
+          <th>{translate fonema=LANG_BALANCE_U}</th>
+          <th>{translate fonema=LANG_BETS_U}</th>
+          <th>{translate fonema=LANG_SUCCESS_LEVEL_U}</th>
+          <th>{translate fonema=LANG_STAKES_AVERAGE_U}</th>
+        </tr>
+	{foreach $users as $user}
+         <tr {if isset($user.CURRENT)}style="background-color:yellow"{/if}>
+          <td align="left" nowrap>{$user.PLACE} {if isset($user.UP)}<img src="../img/icons/small_up_green.png" border=0>{/if}{if isset($user.DOWN)}<img src="../img/icons/small_down_red.png" border=0>{/if} {if isset($user.PLACE_PREV)}({$user.PLACE_PREV}){/if}</td>
+          <td align="left">{if isset($user.COUNTRY_DB)}<img border=1 src="./img/flags/{$user.COUNTRY_DB.CCTLD}.gif" onmouseover="Tip('{$user.COUNTRY_DB.COUNTRY_NAME}')" onmouseout="UnTip()">{/if}  <a href="user_public_profile.php?user_id={$user.USER_ID}" onmouseover="Tip('{translate fonema=LANG_PUBLIC_PROFILE_U}')" onmouseout="UnTip()" target="user_profile" onClick="window.open('','user_profile','width=450,height=620,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');"><img src="./img/icons/user_profile.png" border=0></a> {$user.USER_NAME}</td>
+          <td align="right">{$user.BALANCE}</td>
+          <td align="right"><a href="wager_user_bets.php?user_id={$user.USER_ID}&season_id={$user.SEASON_ID}" target="wager_user_bets" onClick="window.open('','wager_user_bets','width=650,height=700,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');">{$user.GAMES}</a></td>
+          <td align="right">{$user.KOEFF}%</td>
+          <td align="right">{$user.STAKE_AVG}</td>
+         </tr>
+	{/foreach}
+      </table>
+    {/if}
+  </div>
+</div>
+{$paging}

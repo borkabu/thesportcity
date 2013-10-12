@@ -1,0 +1,76 @@
+<script>
+ $(function() {
+	$( "#arranger_seasons" ).tabs({
+		cookie: {
+			expires: 1,
+			name: "arranger_seasons"
+			}
+		}); 
+});
+</script>
+<div id="arranger_seasons">
+ <ul>
+ <li><a href="#tabs-1" title="{translate fonema=LANG_CURRENT_SEASONS_U}">{translate fonema=LANG_CURRENT_SEASONS_U}</a></li>
+ <li><a href="#tabs-2" title="{translate fonema=LANG_PAST_SEASONS_U}">{translate fonema=LANG_PAST_SEASONS_U}</a></li>
+ </ul>
+ <div id="tabs-1">
+  {if $ongoing==0}
+   {translate fonema=LANG_NO_SEASONS_U}    
+  {else}
+ <table>
+  <tr><td></td>
+      <th>{translate fonema=LANG_LEAGUES_U}</th>
+  </tr>  
+  {foreach $bracket_seasons as $bracket_season}
+  {if $bracket_season.EXPIRED == 0}
+  <tr>
+    <td><a href="bracket_season_dashboard.php?season_id={$bracket_season.BRACKET_INFO.SEASON_ID}"><b>{$bracket_season.BRACKET_INFO.SEASON_TITLE}</b></a><br>
+     {if isset($bracket_season.MARKET.SEASON_OVER)}<div class="textred">{translate fonema=LANG_SEASON_OVER_U}</div>
+     {elseif isset($bracket_season.MARKET.MARKET_OPEN)}
+     <div>{translate fonema=LANG_ARRANGER_NEXT_TOUR_U} <span class="date_font2"><b>{$bracket_season.MARKET.MARKET_OPEN.START_DATE} {$bracket_season.MARKET.MARKET_OPEN.UTC}</b></span></div> 
+     {/if}
+    </td>
+    <td nowrap>
+    {if isset($bracket_season.LEAGUES)}
+      {translate fonema=LANG_TOTAL_U}: <a href="bracket_league.php?season_id={$bracket_season.BRACKET_INFO.SEASON_ID}&all=y"><b>{$bracket_season.LEAGUES.LEAGUES}</b></a><br>
+      {if isset($bracket_season.LEAGUES.MY_LEAGUES)}{translate fonema=LANG_MINE_U}: <a href="bracket_league.php?season_id={$bracket_season.BRACKET_INFO.SEASON_ID}&all=n"><b>{$bracket_season.LEAGUES.MY_LEAGUES}</b></a>{/if}<br>
+      {if isset($bracket_season.LEAGUES_INVITE)}
+       <a href="bracket_control.php?season_id={$bracket_season.LEAGUES_INVITE.SEASON_ID}#league_invites">{translate fonema=LANG_INVITATIONS_U}</a>: <span class="textred"><b>{$bracket_season.LEAGUES_INVITE.LEAGUES}</b></span>
+      {/if}
+    {/if}
+    </td>
+  </tr>
+  {/if}
+  {/foreach}
+ </table>
+ {/if}
+</div>
+ <div id="tabs-2">
+ <table>
+  <tr><td></td>
+      <th>{translate fonema=LANG_LEAGUES_U}</th>
+  </tr>
+  {foreach $bracket_seasons as $bracket_season}
+  {if $bracket_season.EXPIRED == 1}
+  <tr>
+    <td><a href="bracket_season_dashboard.php?season_id={$bracket_season.BRACKET_INFO.SEASON_ID}"><b>{$bracket_season.BRACKET_INFO.SEASON_TITLE}</b></a><br>
+     {if isset($bracket_season.MARKET.SEASON_OVER)}<div class="textred">{translate fonema=LANG_SEASON_OVER_U}</div>
+     {elseif isset($bracket_season.MARKET.MARKET_OPEN)}
+     <div>{translate fonema=LANG_ARRANGER_NEXT_TOUR_U} <span class="date_font2"><b>{$bracket_season.MARKET.MARKET_OPEN.START_DATE} {$bracket_season.MARKET.MARKET_OPEN.UTC}</b></span></div> 
+     {/if}
+    </td>
+    <td nowrap>
+    {if isset($bracket_season.LEAGUES)}
+      {translate fonema=LANG_TOTAL_U}: <a href="bracket_league.php?season_id={$bracket_season.BRACKET_INFO.SEASON_ID}&all=y"><b>{$bracket_season.LEAGUES.LEAGUES}</b></a><br>
+      {if isset($bracket_season.LEAGUES.MY_LEAGUES)}{translate fonema=LANG_MINE_U}: <a href="bracket_league.php?season_id={$bracket_season.BRACKET_INFO.SEASON_ID}&all=n"><b>{$bracket_season.LEAGUES.MY_LEAGUES}</b></a>{/if}<br>
+      {if isset($bracket_season.LEAGUES_INVITE)}
+       <a href="bracket_control.php?season_id={$bracket_season.LEAGUES_INVITE.SEASON_ID}#league_invites">{translate fonema=LANG_INVITATIONS_U}</a>: <span class="textred"><b>{$bracket_season.LEAGUES_INVITE.LEAGUES}</b></span>
+      {/if}
+    {/if}
+    </td>
+  </tr>
+  {/if}
+  {/foreach}
+ </table>
+</div>
+</div>

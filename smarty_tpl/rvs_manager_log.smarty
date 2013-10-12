@@ -1,0 +1,7 @@
+<div style="clear:both"></div>
+{if isset($manager_log)}
+
+{$manager_log.MANAGER_LOG}
+
+{$manager_log.MANAGER_LOG_PAGING}
+{/if}

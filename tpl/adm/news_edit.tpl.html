@@ -1,0 +1,124 @@
+<TPL_INCLUDE:../tpl/adm/head.tpl.html>
+<TPL_INCLUDE:../tpl/adm/menu.tpl.html>
+<form action="" method="post" name="editform">
+<input type="hidden" name="form_save" value="Y">
+<input type="hidden" name="referer" value="<TPL:REFERER>">
+<input type="hidden" name="lang_id" value="<TPL:LANG_ID>">
+
+<TPL_SUB:ERROR><span class="error"><TPL:MSG></span></TPL_SUB:ERROR>
+
+<div class="portlet">
+  <div class="header"><_TPL:LANG_GENERAL_DATA_U></div>
+  <div class="content">
+  <table>
+    <tr>
+      <td class="list_item_mand"><_TPL:LANG_TITLE_U></td>
+      <td class="list_item"><TPL_INPUT:adm_news.title></td>
+    </tr>
+    <tr>
+      <td class="list_item"><_TPL:LANG_DATE_PUBLISHED_U></td>
+      <td class="list_item"><TPL_INPUT:adm_news.date_published></td>
+    </tr>
+    <tr>
+      <td class="list_item"><_TPL:LANG_DATE_EXPIRED_U></td>
+      <td class="list_item"><TPL_INPUT:adm_news.date_expired></td>
+    </tr>
+    <tr>
+      <td class="list_item_mand" valign="top"><_TPL:LANG_SOURCE_U></td>
+      <td class="list_item">
+        <TPL_INPUT:adm_news.source_name><br>
+      </td>
+    </tr>
+    <tr>
+      <td class="list_item_mand" valign="top"><_TPL:LANG_LINK_U></td>
+      <td class="list_item">
+        <TPL_INPUT:adm_news.source><br>
+      </td>
+    </tr>
+    <tr>
+      <td class="list_item_mand" valign="top"><_TPL:LANG_CATEGORIES_U></td>
+      <td class="list_item">
+        <TPL:CAT_ID>
+      </td>
+    </tr>
+    <tr>
+	<td class="list_item" valign="top"><_TPL:LANG_GENRE_U></td>
+	<td class="list_item"><TPL:GENRE></td>
+    </tr>
+    <tr>
+	<td class="list_item" valign="top"><_TPL:LANG_REALITY_U></td>
+	<td class="list_item"><TPL:REALITY></td>
+    </tr>
+    <tr>
+	<td class="list_item" valign="top"><_TPL:LANG_SEASON_U></td>
+	<td class="list_item"><TPL:SEASON_ID></td>
+    </tr>
+    <tr>
+	<td class="list_item" valign="top"><_TPL:LANG_WAGER_SEASON_U></td>
+	<td class="list_item"><TPL:WSEASON_ID></td>
+    </tr>
+    <tr>
+	<td class="list_item" valign="top"><_TPL:LANG_TOURNAMENT_U></td>
+	<td class="list_item"><TPL:TOURNAMENT_ID></td>
+    </tr>
+     <tr>
+      <td class="list_item"><_TPL:LANG_PRIORITY_U> (1-9)</td>
+      <td class="list_item"><TPL_INPUT:adm_news.priority></td>
+     </tr>
+    <tr>
+      <td class="list_item"><_TPL:LANG_PUBLISH_U></td>
+      <td class="list_item"><TPL_INPUT:adm_news.publish></td>
+    </tr>
+  </table>
+</div>
+</div>
+
+<div class="portlet">
+  <div class="header"><_TPL:LANG_CONTENT_U></div>
+  <div class="content">
+            <TPL_INPUT:adm_news.descr>
+
+			<script type="text/javascript">
+				//<![CDATA[
+
+					// This call can be placed at any point after the
+					// <textarea>, or inside a <head><script> in a
+					// window.onload event handler.
+
+					// Replace the <textarea id="editor"> with an CKEditor
+					// instance, using default configurations.
+					CKEDITOR.replace( 'descr' ,
+                                            { entities : false,
+                                                  on :
+                                                 {
+					           instanceReady : function( ev )
+					            {
+                                                     // Output paragraphs as <p>Text</p>.
+					                this.dataProcessor.writer.setRules( 'p',
+					                    {
+					                        indent : false,
+                                                                breakBeforeOpen : false,
+					                        breakAfterOpen : false,
+					                        breakBeforeClose : false,
+					                        breakAfterClose : false
+                                                             });
+					            }
+					        }
+					});
+
+				//]]>
+				</script>
+
+</div>
+</div>
+
+<div class="portlet">
+  <div class="content">
+        <input type="submit" class="btn" value="<_TPL:LANG_SAVE_U>" onclick="resettarget();"  onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" >
+        <input type="reset" class="btn" value="<_TPL:LANG_RESET_U>" onclick="return confirm('<_TPL:LANG_REALLY_U>');"  onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'">
+</div>
+</div>
+
+</form>
+
+<TPL_INCLUDE:../tpl/adm/foot.tpl.html>

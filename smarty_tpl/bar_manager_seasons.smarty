@@ -1,0 +1,108 @@
+<div class="portlet">
+<div class="header">{translate fonema=LANG_FANTASY_MANAGER_U}</div>
+{foreach $manager_seasons as $manager_season}
+<div class="content_header">
+  {if isset($manager_season.MANAGER_INFO)}
+     <a href="f_manager_control.php?mseason_id={$manager_season.MANAGER_INFO.SEASON_ID}">
+      {if isset($manager_season.PIC_LOCATION)}  
+       <img src="../img/{$manager_season.PIC_LOCATION}" align="left" height=25 style="margin-right:5px"/>
+      {/if}
+    {$manager_season.MANAGER_INFO.SEASON_TITLE}</a>
+     <div style="float:right"><img id="toggle_image_manager_season_{$manager_season.MANAGER_INFO.SEASON_ID}" style="vertical-align: middle; margin:2px" src="{if isset($manager_season.MANAGER_INFO.VISIBLE)}./img/icons/plus.png{/if}{if isset($manager_season.MANAGER_INFO.INVISIBLE)}./img/icons/minus.png{/if}./img/icons/small_minus.png" onclick="toggleSmall('manager_season_{$manager_season.MANAGER_INFO.SEASON_ID}', 'toggle_image_manager_season_{$manager_season.MANAGER_INFO.SEASON_ID}'); return false;"></div>
+  {/if}
+</div>
+<div class="collapsable" id="manager_season_{$manager_season.SEASON_ID}">
+<div class="content">
+  {if isset($manager_season.MANAGER_INFO)}
+     <a href="f_manager_control.php?mseason_id={$manager_season.MANAGER_INFO.SEASON_ID}">{translate fonema=LANG_TEAM_MANAGEMENT_U}</a> 
+     {if $manager_season.MANAGER_INFO.ALLOW_SOLO}
+       | <a href="solo_manager_control.php?mseason_id={$manager_season.MANAGER_INFO.SEASON_ID}">{translate fonema=LANG_SOLO_MANAGER_U}</a>
+     {/if}
+  {/if}
+</div>
+{if isset($manager_season.LEAGUES_INVITE)}
+<div class="content"><a href="f_manager_control.php?mseason_id={$manager_season.LEAGUES_INVITE.SEASON_ID}#league_invites">{translate fonema=LANG_LEAGUE_INVITATIONS_U}:</a> <span class="textred"><b>{$manager_season.LEAGUES_INVITE.LEAGUES}</b></span></div>
+{/if}
+{if isset($manager_season.LEAGUES)}
+<div class="content">{translate fonema=LANG_LEAGUES_U}: <a href="f_manager_league.php?mseason_id={$manager_season.MANAGER_INFO.SEASON_ID}&all=y"><b>{$manager_season.LEAGUES.LEAGUES}</b></a> {if isset($manager_season.LEAGUES.MY_LEAGUES)}/ <a href="f_manager_league.php?mseason_id={$manager_season.MANAGER_INFO.SEASON_ID}&all=n"><b>{$manager_season.LEAGUES.MY_LEAGUES}</b></a>{/if}</div>
+{/if}
+{if isset($manager_season.SOLO_LEAGUES_INVITE)}
+<div class="content"><a href="solo_manager_control.php?mseason_id={$manager_season.SOLO_LEAGUES_INVITE.SEASON_ID}#league_invites">{translate fonema=LANG_LEAGUE_INVITATIONS_U}:</a> <span class="textred"><b>{$manager_season.LEAGUES_INVITE.LEAGUES}</b></span></div>
+{/if}
+{if isset($manager_season.SOLO_LEAGUES)}
+<div class="content">{translate fonema=LANG_SOLO_LEAGUES_U}: <a href="solo_manager_league.php?mseason_id={$manager_season.MANAGER_INFO.SEASON_ID}&all=y"><b>{$manager_season.SOLO_LEAGUES.LEAGUES}</b></a> {if isset($manager_season.LEAGUES.MY_LEAGUES)}/ <a href="solo_manager_league.php?mseason_id={$manager_season.MANAGER_INFO.SEASON_ID}&all=n"><b>{$manager_season.SOLO_LEAGUES.MY_LEAGUES}</b></a>{/if}</div>
+{/if}
+{if isset($manager_season.TOURNAMENTS_INVITE)}
+<div class="content"><a href="f_manager_tournaments.php?mseason_id={$manager_season.TOURNAMENTS_INVITE.SEASON_ID}&all=y#tournament_invites">{translate fonema=LANG_TOURNAMENT_INVITATIONS_U}:</a> <span class="textred"><b>{$manager_season.TOURNAMENTS_INVITE.TOURNAMENTS}</b></span></div>
+{/if}
+{if isset($manager_season.TOURNAMENTS)}
+  <div class="content">{translate fonema=LANG_TOURNAMENTS_U}: <a href="f_manager_tournaments.php?mseason_id={$manager_season.MANAGER_INFO.SEASON_ID}&all=y"><b>{$manager_season.TOURNAMENTS.TOURNAMENTS}</b></a> {if isset($manager_season.TOURNAMENTS.MY_TOURNAMENTS)}/ <a href="f_manager_tournaments.php?mseason_id={$manager_season.MANAGER_INFO.SEASON_ID}"><b>{$manager_season.TOURNAMENTS.MY_TOURNAMENTS}</b></a>{/if}</div>
+{/if} 
+{if isset($manager_season.CHALLENGES)}
+<div class="content">{translate fonema=LANG_ACCEPTED_CHALLENGES_U}: <b><a href="f_manager_challenges_all.php?mseason_id={$manager_season.MANAGER_INFO.SEASON_ID}" target="manager_challenges" onClick="window.open('','manager_challenges','width=500,height=700,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');">{$manager_season.CHALLENGES.CHALLENGES}</a></b> {if isset($manager_season.CHALLENGES.MY_CHALLENGES)}/ <b>{$manager_season.CHALLENGES.MY_CHALLENGES}</b>{/if}</div>
+{/if}
+{if isset($manager_season.CHALLENGES_INVITE)}
+<div class="content"><a href="f_manager_challenges.php?mseason_id={$manager_season.CHALLENGES_INVITE.SEASON_ID}#challenge_invites">{translate fonema=LANG_CHALLENGE_INVITES_U}:</a> <span class="textred"><b>{$manager_season.CHALLENGES_INVITE.CHALLENGES}</b></span></div>
+{/if}
+{if isset($manager_season.BATTLES)}
+<div class="content">{translate fonema=LANG_ACTIVE_CLOSED_BATTLES_U}: <a href="f_manager_battles.php?mseason_id={$manager_season.MANAGER_INFO.SEASON_ID}#active_closed_battles"><b>{$manager_season.BATTLES.BATTLES}</b></a> {if isset($manager_season.BATTLES.MY_BATTLES)}/ <b>{$manager_season.BATTLES.MY_BATTLES}</b>{/if}</div>
+{/if}
+{if isset($manager_season.OPEN_BATTLES)}
+<div class="content">{translate fonema=LANG_ACTIVE_OPEN_BATTLES_U}: <a href="f_manager_battles.php?mseason_id={$manager_season.MANAGER_INFO.SEASON_ID}#active_open_battles"><b>{$manager_season.OPEN_BATTLES.OPEN_BATTLES}</b></a> {if isset($manager_season.OPEN_BATTLES.MY_OPEN_BATTLES)}/ <b>{$manager_season.OPEN_BATTLES.MY_OPEN_BATTLES}</b>{/if}</div>
+{/if}
+{if isset($manager_season.RVS_LEAGUES_ALLOWED)}
+ {if isset($manager_season.RVS_LEAGUES_INVITE)}
+ <div class="content"><a href="rvs_manager_league.php?mseason_id={$manager_season.MANAGER_INFO.SEASON_ID}#league_invites">{translate fonema=LANG_RVS_LEAGUE_INVITATIONS_U}:</a> <span class="textred"><b>{$manager_season.RVS_LEAGUES_INVITE.LEAGUES}</b></span></div>
+  {/if}
+ {if isset($manager_season.RVS_LEAGUES)}
+  <div class="content">{translate fonema=LANG_RVS_LEAGUES_U}: <a href="rvs_manager_league.php?mseason_id={$manager_season.MANAGER_INFO.SEASON_ID}&all=y"><b>{$manager_season.RVS_LEAGUES.LEAGUES}</b></a> {if isset($manager_season.RVS_LEAGUES.MY_LEAGUES)}/ <a href="rvs_manager_league.php?mseason_id={$manager_season.MANAGER_INFO.SEASON_ID}"><b>{$manager_season.RVS_LEAGUES.MY_LEAGUES}</b></a>{/if}</div>
+ {else} 
+  <div class="content"><a href="rvs_manager_league.php?mseason_id={$manager_season.MANAGER_INFO.SEASON_ID}&all=y">{translate fonema=LANG_RVS_LEAGUES_U}</a>: <b>0</b></div>
+ {/if}
+{/if}
+{if isset($manager_season.MANAGER_STAND)}
+<div class="content">
+    <table>
+	<tr>
+		<th></th>
+		<th align="left">{translate fonema=LANG_PARTICIPANT_U}</th>
+		<th>{translate fonema=LANG_POINTS_U}</th>
+	</tr>
+	{foreach $manager_season.MANAGER_STAND.USERS as $user}          
+         {if isset($user.GAP)}
+	  <tr><td colspan="3">...</td></tr>
+	 {/if}
+	   <tr>
+	  	<td>{$user.PLACE}</td>
+		<td align="left"  width="100%">{$user.USER_NAME}</td>
+		<td>{$user.KOEFF}</td>
+	   </tr>
+        {/foreach}
+    </table>
+</div>
+{/if}
+<div class="content"><a href="f_manager_standings.php?mseason_id={$manager_season.SEASON_ID}">{translate fonema=LANG_STANDINGS_U}</a></div>
+{if isset($manager_season.MANAGER_LOG) && !isset($manager_season.MARKET.SEASON_OVER)}
+{foreach $manager_season.MANAGER_LOG.LOG as $log_item}
+<div class="content">
+    <a href="rss_log.php?season_id={$log_item.MSEASON_ID}"><img src="./img/icons/rss.png" align="left" style="margin-right: 3px; margin-bottom:3px;" border=0></a>
+    <b><span class="date_font2">{$log_item.EVENT_DATE} {$log_item.UTC}</span></b><br>{$log_item.LOG_ENTRY}
+    <a href="f_manager_log.php?mseason_id={$log_item.MSEASON_ID}">{translate fonema=LANG_FULL_LOG_U}</a>
+</div>
+{/foreach}
+{/if}
+{if isset($manager_season.MARKET)}
+<div class="content">
+     {if isset($manager_season.MARKET.SEASON_OVER)}<div class="textred">{translate fonema=LANG_SEASON_OVER_U}</div>
+     {elseif isset($manager_season.MARKET.NOMARKET)}
+     <div>{translate fonema=LANG_MARKET_CLOSED_3_U} <span class="date_font2"><b>{$manager_season.MARKET.NOMARKET.START_DATE} {$manager_season.MARKET.NOMARKET.UTC}</b></span></div> 
+     {elseif isset($manager_season.MARKET.NOMARKET_DELAY)}
+     <div>{translate fonema=LANG_MARKET_CLOSED_2_U}</b></div> 
+     {elseif isset($manager_season.MARKET.MARKET_OPEN)}
+     <div>{translate fonema=LANG_MARKET_OPENED_2_U} <span class="date_font2"><b>{$manager_season.MARKET.MARKET_OPEN.START_DATE} {$manager_season.MARKET.MARKET_OPEN.UTC}</b></span></div> 
+     {/if}
+</div>
+{/if}
+</div>
+{/foreach}
+</div>

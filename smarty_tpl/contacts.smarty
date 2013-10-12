@@ -1,0 +1,24 @@
+<div class="portlet">
+<div class="header">{translate fonema=LANG_CONTACT_INFO_U}</div>
+  <div class="content">
+<table class="noborder">
+<tr><td>
+TheSportCity.Net {translate fonema=LANG_ADMINISTRATION_U}: </td><td><a href="mailto:admin@thesportcity.net"><b>admin@thesportcity.net</b></a>
+</td></tr>
+</table>
+     </div>     
+</div>
+<div class="portlet">
+<div class="header">{translate fonema=LANG_QUICK_FEEDBACK_U}</div>
+  <div class="content">
+     {translate fonema=LANG_QUICK_FEEDBACK_INSTR_U}<br>
+     <textarea name="text" id="text"></textarea>
+	<script type="text/javascript">
+		//<![CDATA[
+		replaceEditor('text');
+		//]]>
+	</script>
+     <input class="btn" type="submit" value=" {translate fonema=LANG_SUBMIT_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/><br>
+  </div>     
+</div>
+

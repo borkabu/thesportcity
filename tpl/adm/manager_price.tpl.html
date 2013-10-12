@@ -1,0 +1,142 @@
+<TPL_INCLUDE:../tpl/adm/head.tpl.html>
+<TPL_INCLUDE:../tpl/adm/menu.tpl.html>
+
+<a href="manager_season_edit.php?season_id=<TPL:SEASON_ID>">Edit season</a>
+
+<form action="<_TPL:FORM_URL>" method="get">
+<div class="portlet">
+  <div class="content">
+      <input type="hidden" name="season_id" value="<TPL:SEASON_ID>">
+      <input type="hidden" name="order" value="<TPL:ORDER>">
+      <_TPL:LANG_SEARCH_U>: <TPL:WHERE> <TPL:QUERY> <input type="submit" class="btn" value="<_TPL:LANG_OK_U>" onclick="resettarget();"  onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'">
+      <TPL_SUB:FILTERED><a href="<_TPL:FORM_URL>">[ <_TPL:LANG_SHOW_ALL_RECORDS> ]</a></TPL_SUB:FILTERED>
+  </div>
+</div>
+</form>
+
+<TPL_SUB:PAGING>
+<div class="portlet">
+  <div class="content">
+      <_TPL:LANG_TOTAL_RECORDS_U>: <b><TPL:NUMROWS></b> | 
+      <_TPL:LANG_PAGES_U>:
+      <TPL_SUB:PAGES>
+        <TPL_SUB:SELECTED><b>[<TPL:PAGENUM>]</b></TPL_SUB:SELECTED>
+        <TPL_SUB:NORMAL><a href="<TPL:URL>">[<TPL:PAGENUM>]</a></TPL_SUB:NORMAL>
+      </TPL_SUB:PAGES>
+  </div>
+</div>
+</TPL_SUB:PAGING>
+
+<TPL_SUB:LET>
+<div class="portlet">
+  <div class="content">
+      <_TPL:LANG_SURNAME_U>: 
+      <TPL_SUB:LETTER>
+        <TPL_SUB:SELECTED><b>[<TPL:TXT>]</b></TPL_SUB:SELECTED>
+        <TPL_SUB:NORMAL><a href="<TPL:URL>">[<TPL:TXT>]</a></TPL_SUB:NORMAL>
+      </TPL_SUB:LETTER>
+  </div>
+</div>
+</TPL_SUB:LET>
+
+<div class="portlet">
+  <div class="content">
+<form action="" method="POST">
+  <input type="hidden" name="season_id" value="<TPL:SEASON_ID>">
+  <input type="hidden" name="set_price" value="Y">
+  <table>
+    <tr>
+      <th>&nbsp;</td>
+      <th>
+        <_TPL:LANG_LAST_NAME_U>, <_TPL:LANG_FIRST_NAME_U>
+        <TPL_SUB:LAST_NAME_DESC_A><img src="../img/adm_desc_a.gif" width="11" height="11" border="0"></TPL_SUB:LAST_NAME_DESC_A>
+        <TPL_SUB:LAST_NAME_DESC><a href="<TPL:URL>"><img src="../img/adm_desc.gif" width="11" height="11" border="0"></a></TPL_SUB:LAST_NAME_DESC>
+        <TPL_SUB:LAST_NAME_ASC_A><img src="../img/adm_asc_a.gif" width="11" height="11" border="0"></TPL_SUB:LAST_NAME_ASC_A>
+        <TPL_SUB:LAST_NAME_ASC><a href="<TPL:URL>"><img src="../img/adm_asc.gif" width="11" height="11" border="0"></a></TPL_SUB:LAST_NAME_ASC>
+      </td>
+      <th>
+        <_TPL:LANG_TYPE_U>
+        <TPL_SUB:USER_TYPE_DESC_A><img src="../img/adm_desc_a.gif" width="11" height="11" border="0"></TPL_SUB:USER_TYPE_DESC_A>
+        <TPL_SUB:USER_TYPE_DESC><a href="<TPL:URL>"><img src="../img/adm_desc.gif" width="11" height="11" border="0"></a></TPL_SUB:USER_TYPE_DESC>
+        <TPL_SUB:USER_TYPE_ASC_A><img src="../img/adm_asc_a.gif" width="11" height="11" border="0"></TPL_SUB:USER_TYPE_ASC_A>
+        <TPL_SUB:USER_TYPE_ASC><a href="<TPL:URL>"><img src="../img/adm_asc.gif" width="11" height="11" border="0"></a></TPL_SUB:USER_TYPE_ASC>
+        </td>
+      <th>
+        <_TPL:LANG_TEAM_NAME_U>
+        <TPL_SUB:TEAM_NAME2_DESC_A><img src="../img/adm_desc_a.gif" width="11" height="11" border="0"></TPL_SUB:TEAM_NAME2_DESC_A>
+        <TPL_SUB:TEAM_NAME2_DESC><a href="<TPL:URL>"><img src="../img/adm_desc.gif" width="11" height="11" border="0"></a></TPL_SUB:TEAM_NAME2_DESC>
+        <TPL_SUB:TEAM_NAME2_ASC_A><img src="../img/adm_asc_a.gif" width="11" height="11" border="0"></TPL_SUB:TEAM_NAME2_ASC_A>
+        <TPL_SUB:TEAM_NAME2_ASC><a href="<TPL:URL>"><img src="../img/adm_asc.gif" width="11" height="11" border="0"></a></TPL_SUB:TEAM_NAME2_ASC>
+        </td>
+      <th>Startinis naudingumas</td>
+      <th>SPE</td>
+      <th>DPV</td>
+      <th>&nbsp;</td>
+      <th><_TPL:LANG_INJURY_U></td>
+    </tr>
+    
+    <TPL_SUB:ITEMS>
+    <tr class="<TPL_SUB:EVEN>even</TPL_SUB:EVEN><TPL_SUB:ODD>odd</TPL_SUB:ODD>">
+      <td class="list_item"><TPL:NUM></td>
+      <td class="list_item"><a href="ppl_edit.php?user_id=<TPL:USER_ID>"><TPL:LAST_NAME>, <TPL:FIRST_NAME></a></td>
+      <td class="list_item"><TPL:TYPE_NAME></td>
+      <td class="list_item">
+        <a href="team_edit.php?team_id=<TPL:TEAM_ID>"><TPL:TEAM_NAME2></a> (<TPL:DATE_EXPIRED>)
+        <TPL_SUB:SYNCHRONISE>
+          <form action="" method="POST">
+	    <input type="hidden" name="player_id" value="<TPL:PLAYER_ID>">
+	    <input type="hidden" name="synchronise" value="Y">
+            <input type="submit" class="btn" value="<_TPL:LANG_SYNCHRONISE_U>" onclick="resettarget();"  onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" >
+	  </form>
+        </TPL_SUB:SYNCHRONISE>
+      </td>
+      <td class="list_item" align="center"><TPL:START_VALUE>
+	  <TPL_SUB:NO_VALUE>
+            <input type="text" name="player_<TPL:USER_ID>" size="4" class="input" value="<TPL:SUGGESTED_VALUE>">
+	  </TPL_SUB:NO_VALUE>
+	</td>
+      <td class="list_item" align="right"><TPL:START_VALUE_MONEY></td>
+      <td class="list_item" align="center"><TPL:CURRENT_VALUE_MONEY></td>
+      <td class="list_item" align="center">
+       <div id="publish_<TPL:USER_ID>_<TPL:SEASON_ID>">
+        <TPL_SUB:ACTIVATED>
+	<a href="#" onclick="setPublish(<TPL:USER_ID>,<TPL:SEASON_ID>, '<TPL:TYPE>', 'deactivate', 'publish_<TPL:USER_ID>_<TPL:SEASON_ID>'); return false"><img src="../img/adm_publish_Y.gif" width="12" height="12" border="0"></a>
+	</TPL_SUB:ACTIVATED>
+	<TPL_SUB:DEACTIVATED>
+	<a href="#" onclick="setPublish(<TPL:USER_ID>,<TPL:SEASON_ID>, '<TPL:TYPE>', 'activate', 'publish_<TPL:USER_ID>_<TPL:SEASON_ID>'); return false"><img src="../img/adm_publish_N.gif" width="12" height="12" border="0"></a>
+	</TPL_SUB:DEACTIVATED>
+       </div> 
+        <a href="manager_price_edit.php?type=<TPL:TYPE>&player_id=<TPL:USER_ID>&season_id=<TPL:SEASON_ID>"><img src="../img/adm_edit.gif" width="12" height="12" border="0" alt="redaguoti"></a>
+      </td>
+      <td class="list_item" align="center">
+        <TPL:PLAYER_STATE_DIV>
+      </td>
+    </tr>
+    </TPL_SUB:ITEMS>   
+    <TPL_SUB:NORECORDS>
+      <tr bgcolor="#FFFFFF"><td colspan="8" class="list_item">Įrašų nėra</td></tr>
+    </TPL_SUB:NORECORDS> 
+  </table>
+</div>
+<div class="content">
+<input type="submit" class="btn" value="<_TPL:LANG_SUBMIT_U>" onclick="resettarget();"  onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" ><br>
+<_TPL:LANG_AVERAGE_U>: <TPL:START_VALUE_SUM> <TPL:CURRENT_VALUE_SUM>
+</form>
+<form action="" method="POST">
+  <input type="hidden" name="season_id" value="<TPL:SEASON_ID>">
+  Suggest prices from season: <TPL:REF_SEASON_ID>
+  <input type="hidden" name="suggest_price" value="Y">
+  <input type="submit" class="btn" value="<_TPL:LANG_SUGGEST_PRICE_U>" onclick="resettarget();"  onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" ><br>
+</form>
+<form action="" method="POST">
+  <input type="hidden" name="season_id" value="<TPL:SEASON_ID>">
+  Extend players expiry date
+  <input type="hidden" name="extend_expiry_date" value="Y">
+  <input type="submit" class="btn" value="<_TPL:LANG_EXTEND_EXPIRY_DATE_U>" onclick="resettarget();"  onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" ><br>
+</form>
+</div>
+</div>
+
+<TPL_SUB:PAGING></TPL_SUB:PAGING>
+
+<TPL_INCLUDE:../tpl/adm/foot.tpl.html>

@@ -1,0 +1,106 @@
+<TPL_INCLUDE:../tpl/adm/head.tpl.html>
+<TPL_INCLUDE:../tpl/adm/menu.tpl.html>
+
+
+  <form action="<_TPL:FORM_URL>" method="get">
+<div class="portlet">
+  <div class="content">
+      <input type="hidden" name="order" value="<TPL:ORDER>">
+      <_TPL:LANG_SEARCH_U>: <TPL:WHERE> <TPL:QUERY> <input type="submit" class="btn" value="<_TPL:LANG_OK_U>" onclick="resettarget();"  onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'">
+      <TPL_SUB:FILTERED><a href="<_TPL:FORM_URL>">[ <_TPL:LANG_SHOW_ALL_RECORDS> ]</a></TPL_SUB:FILTERED>
+  </div>
+</div>
+  </form>
+
+<TPL_SUB:PAGING>
+<div class="portlet">
+  <div class="content">
+      <_TPL:LANG_TOTAL_RECORDS_U>: <b><TPL:NUMROWS></b> | 
+      <_TPL:LANG_PAGES_U>:
+      <TPL_SUB:PAGES>
+        <TPL_SUB:SELECTED><b>[<TPL:PAGENUM>]</b></TPL_SUB:SELECTED>
+        <TPL_SUB:NORMAL><a href="<TPL:URL>">[<TPL:PAGENUM>]</a></TPL_SUB:NORMAL>
+      </TPL_SUB:PAGES>
+  </div>
+</div>
+</TPL_SUB:PAGING>
+
+<div class="portlet">
+  <div class="content">
+   <table>
+    <tr>
+      <th>
+        <_TPL:LANG_ITEM_NAME_U> 
+      </th>
+      <th>
+        <_TPL:LANG_TITLE_U> 
+        <TPL_SUB:TITLE_DESC_A><img src="../img/adm_desc_a.gif" width="11" height="11" border="0"></TPL_SUB:TITLE_DESC_A>
+        <TPL_SUB:TITLE_DESC><a href="<TPL:URL>"><img src="../img/adm_desc.gif" width="11" height="11" border="0"></a></TPL_SUB:TITLE_DESC>
+        <TPL_SUB:TITLE_ASC_A><img src="../img/adm_asc_a.gif" width="11" height="11" border="0"></TPL_SUB:TITLE_ASC_A>
+        <TPL_SUB:TITLE_ASC><a href="<TPL:URL>"><img src="../img/adm_asc.gif" width="11" height="11" border="0"></a></TPL_SUB:TITLE_ASC>
+      </td>
+      <th align="center">
+        <_TPL:LANG_FREQUENCY_U> 
+      </td>
+      <th align="center">
+        <_TPL:LANG_SUBSCRIBERS_U> 
+      </td>
+      <th align="center">
+        <_TPL:LANG_STOP_DATE_U> 
+      </td>
+      <th align="center">
+        <_TPL:LANG_ACTIVATE_U> 
+        <TPL_SUB:publish_DESC_A><img src="../img/adm_desc_a.gif" width="11" height="11" border="0"></TPL_SUB:publish_DESC_A>
+        <TPL_SUB:publish_DESC><a href="<TPL:URL>"><img src="../img/adm_desc.gif" width="11" height="11" border="0"></a></TPL_SUB:publish_DESC>
+        <TPL_SUB:publish_ASC_A><img src="../img/adm_asc_a.gif" width="11" height="11" border="0"></TPL_SUB:publish_ASC_A>
+        <TPL_SUB:publish_ASC><a href="<TPL:URL>"><img src="../img/adm_asc.gif" width="11" height="11" border="0"></a></TPL_SUB:publish_ASC>
+      </td>
+      <th>&nbsp;</td>
+      <th>&nbsp;</td>
+      <th>&nbsp;</td>
+      <th>&nbsp;</td>
+    </tr>
+    
+    <TPL_SUB:ITEM>
+    <tr class="<TPL_SUB:EVEN>even</TPL_SUB:EVEN><TPL_SUB:ODD>odd</TPL_SUB:ODD>">
+      <td class="list_item"><TPL:NAME></td>
+      <td class="list_item"><TPL:TITLE></td>
+      <td class="list_item" align="center"><TPL:FREQUENCY></td>
+      <td class="list_item" align="center"><TPL:USERS></td>
+      <td class="list_item" align="center"><TPL:END_DATE></td>
+      <td class="list_item" align="center"><a href="<TPL:ACT_URL>"><img src="../img/adm_publish_<TPL:PUBLISH>.gif" width="12" height="12" border="0"></a></td>
+      <td align="center" class="list_item" >
+        <TPL_SUB:DEL><a href="<TPL:DEL_URL>" onClick="return confirm('<_TPL:LANG_REALLY_U>');"><img src="../img/adm_delete.gif" width="12" height="12" border="0" alt="<_TPL:LANG_DELETE_U>"></a></TPL_SUB:DEL>
+        <a href="newsletter_edit.php?id=<TPL:ID>"><img src="../img/adm_edit.gif" width="12" height="12" border="0" alt="redaguoti"></a>
+        <a href="newsletter.php?newsletter_id=<TPL:ID>&copy_newsletter=true" onClick="return confirm('Tikrai?');">Copy</a>
+      </td>
+      <td class="list_item"><TPL_SUB:LANGS>
+				<TPL_SUB:USED><a href="newsletter_edit.php?id=<TPL:ID>&lang_id=<TPL:SHORT_CODE>"><b><TPL:SHORT_CODE></b></a></TPL_SUB:USED>
+				<TPL_SUB:NOTUSED><a href="newsletter_edit.php?id=<TPL:ID>&lang_id=<TPL:SHORT_CODE>"><TPL:SHORT_CODE></a></TPL_SUB:NOTUSED>
+                            </TPL_SUB:LANGS> 
+      </td>
+      <td align="center" class="list_item">
+        <!-- <a href="?subscribe=all&id=<TPL:ID>&type=<TPL:TYPE>"  onClick="return confirm('<_TPL:LANG_REALLY_U>');"><_TPL:LANG_NEWSLETTER_SUBSCRIBE_U></a> -->
+        <a href="newsletter_preview.php?id=<TPL:ID>" target="_blank"><_TPL:LANG_NEWSLETTER_PREVIEW_U></a>
+      </td>
+      <td align="center" class="list_item">
+        <a href="../newsletter_queue.php?id=<TPL:ID>" target="_blank"><_TPL:LANG_NEWSLETTER_GENERATE_U></a>
+        <a href="../newsletter_sender.php?id=<TPL:ID>" target="_blank"><_TPL:LANG_NEWSLETTER_SEND_U></a>
+      </td>
+    </tr>
+    </TPL_SUB:ITEM>
+    
+    <TPL_SUB:NORECORDS>
+    <tr bgcolor="<TPL_SUB:EVEN>#FFFFFF</TPL_SUB:EVEN><TPL_SUB:ODD>#A4BED4</TPL_SUB:ODD>">
+      <td colspan="5" class="list_item"><_TPL:LANG_NO_ENTRIES_U></td>
+    </tr>
+    </TPL_SUB:NORECORDS>
+  
+  </table>
+  </div>
+</div>
+
+
+<TPL_SUB:PAGING></TPL_SUB:PAGING>
+
+<TPL_INCLUDE:../tpl/adm/foot.tpl.html>

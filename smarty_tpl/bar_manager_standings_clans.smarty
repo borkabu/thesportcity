@@ -1,0 +1,24 @@
+{if isset($manager_standings)}
+<div class="portlet">
+<div class="header"><a href="f_manager_standings_clans.php?mseason_id={$season_id}">{translate fonema=LANG_STANDINGS_CLANS_U}</a></div>
+<div class="content">
+    <table>
+	<tr>
+	  <th></th>
+	  <th align="left">{translate fonema=LANG_TEAM_U}</th>
+	  <th>{translate fonema=LANG_POINTS_U}</th>
+	</tr>
+	{foreach $manager_standings.USERS as $team}          
+         {if isset($team.GAP)}
+	  <tr><td colspan="3">...</td></tr>
+	 {/if}
+	   <tr>
+	  	<td>{$team.PLACE}</td>
+		<td align="left"  width="100%">{$team.CLAN_NAME}</td>
+		<td>{$team.KOEFF}</td>
+	   </tr>
+        {/foreach}
+    </table>
+</div>
+</div>
+{/if}

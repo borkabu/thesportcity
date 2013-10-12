@@ -1,0 +1,76 @@
+<div style="clear:both;"></div>
+<div class="portlet">
+<div class="header">{translate fonema=LANG_BASKET_U}</div>
+<div class="content">
+{if isset($basket)}
+<table>
+ <tr>
+  <th>{translate fonema=LANG_ITEM_NAME_U}</th>
+  <th>{translate fonema=LANG_PRICE_CREDITS_U}</th>
+  <th>{translate fonema=LANG_PRICE_MONEY_U}</th>
+  <th>{translate fonema=LANG_QUANTITY_U}</th>
+   <th></th>
+ </tr>
+{foreach $basket as $basket_item}
+ <tr>
+   <td><a href="shop.php?item_id={$basket_item.ITEM_ID}&basket_item_id={$basket_item.BASKET_ITEM_ID}">{$basket_item.ITEM_NAME}</a>
+       {foreach $basket_item.ATTRIBUTES as $attribute}
+         <br> <b>{$attribute.ATTR_NAME}</b>: {$attribute.VALUE}
+       {/foreach}
+	</td>
+   <td>{$basket_item.QUANTITY*$basket_item.PRICE_CREDITS}</td>
+   <td>{$basket_item.QUANTITY*$basket_item.PRICE_EURO}&euro;</td>
+   <td>
+     <form action="" method="post" style="margin:0">
+        <input type="hidden" name="update_quantity" value="y">
+        <input type="hidden" name="item_id" value="{$basket_item.ITEM_ID}">
+        <input type="hidden" name="basket_item_id" value="{$basket_item.BASKET_ITEM_ID}">
+        <input type="text" name="quantity" value="{$basket_item.QUANTITY}" size="3" maxlength="2" class="input">
+        <input type="submit" class="btn" value=" {translate fonema=LANG_UPDATE_U} "  onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" >
+     </form>
+   </td>
+   <td>
+     <form action="" method="post" style="margin:0">
+        <input type="hidden" name="delete_item" value="y">
+        <input type="hidden" name="basket_item_id" value="{$basket_item.BASKET_ITEM_ID}">
+        <input type="hidden" name="item_id" value="{$basket_item.ITEM_ID}">
+   	<input type="image" src="img/icons/delete.png" onClick="return confirm('{translate fonema=LANG_REALLY_U}');" onmouseover="Tip('{translate fonema=LANG_DELETE_U}')" onmouseout="UnTip()" />
+     </form>
+   </td>
+ </tr>
+{/foreach}
+ <tr>
+   <td>{translate fonema=LANG_DELIVERY_U}</td>
+   <td>{$basket_totals.DELIVERY_CREDITS}</td>
+   <td>{$basket_totals.DELIVERY_EURO}&euro;</td>
+   <td>1</td>
+   <td></td>
+ </tr>
+ <tr>
+   <td><b>{translate fonema=LANG_TOTAL_U}</b></td>
+   <td>{$basket_totals.CREDITS}</td>
+   <td>{$basket_totals.EURO}&euro;<br>
+ 
+   <td></td>
+   <td></td>
+ </tr>
+</table>
+{else}
+{translate fonema=LANG_BASKET_EMPTY_U}
+{/if}
+</div>
+{if isset($basket) && count($basket) > 0}
+<div class="content">
+<form action="" method="post" style="float:left">
+   <input type="hidden" name="empty_basket" value="y">
+   <input type="submit" class="btn" value=" {translate fonema=LANG_EMPTY_BASKET_U} "  onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" >
+</form>
+<form action="shop_checkout.php" method="get">
+   <input type="submit" class="btn" value=" {translate fonema=LANG_REVIEW_U} "  onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" >
+</form>
+</div>
+{/if}
+<div class="content">
+{translate fonema=LANG_BASKET_EMPTY_SESSION_U}
+</div>
+</div>

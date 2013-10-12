@@ -1,0 +1,21 @@
+<table>
+<TPL_SUB:ANSWERS>
+  <tr class="<TPL_SUB:EVEN>even</TPL_SUB:EVEN><TPL_SUB:ODD>odd</TPL_SUB:ODD>">
+     <td class="list_item"><TPL:PRIORITY></td>
+     <td class="list_item"  nowrap><TPL:ANSWER></td>
+     <td class="list_item" align="center"><a href="<TPL:ACT_URL>"><img src="../img/adm_publish_<TPL:PUBLISH>.gif" width="12" height="12" border="0"></a></td>
+     <td class="list_item" align="center"  nowrap>
+       <TPL_SUB:DEL><a href="<TPL:DEL_URL>" onClick="return confirm('Tikrai?');"><img src="../img/adm_delete.gif" width="12" height="12" border="0" alt="pašalinti"></a></TPL_SUB:DEL>
+       <a href="survey_answers_edit.php?survey_id=<TPL:SURVEY_ID>&question_id=<TPL:QUESTION_ID>&answer_id=<TPL:ANSWER_ID>"><img src="../img/adm_edit.gif" width="12" height="12" border="0" alt="redaguoti"></a>
+     </td>
+     <td class="list_item" nowrap>
+	<TPL_SUB:LANGS>
+		<TPL_SUB:USED><a href="survey_answers_edit.php?survey_id=<TPL:SURVEY_ID>&question_id=<TPL:QUESTION_ID>&answer_id=<TPL:ANSWER_ID>&lang_id=<TPL:SHORT_CODE>"><b><TPL:SHORT_CODE></b></a></TPL_SUB:USED>
+		<TPL_SUB:NOTUSED><a href="survey_answers_edit.php?survey_id=<TPL:SURVEY_ID>&question_id=<TPL:QUESTION_ID>&answer_id=<TPL:ANSWER_ID>&lang_id=<TPL:SHORT_CODE>"><TPL:SHORT_CODE></a></TPL_SUB:NOTUSED>
+       </TPL_SUB:LANGS>
+     </td>
+  </tr>
+</TPL_SUB:ANSWERS>
+</table>
+<textarea id="answers_<TPL:QUESTION_ID>" name="answers_<TPL:QUESTION_ID>" cols="70" rows="5" class="input"></textarea><br>
+<input class="btn" type="submit" value=" Submit " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" onClick="javascript:updateAnswers(<TPL:QUESTION_ID>, document.getElementById('answers_<TPL:QUESTION_ID>').value, 'answers_div_<TPL:QUESTION_ID>')"/>

@@ -1,0 +1,22 @@
+<TPL_SUB:ERROR>
+<div class="portlet" id="message">
+    <div class="content">
+	<span class="textred"><b><TPL:MSG></b></span>
+    </div>
+</div>
+</TPL_SUB:ERROR>
+
+<TPL_SUB:CAN_CREATE>
+<div class="portlet">
+  <div class="header"><_TPL:LANG_CREATE_LEAGUE_U></div>
+  <div class="content">
+  <form action="" method="post">
+        <_TPL:LANG_MANAGER_CREATE_LEAGUE_INSTR_U>.<br>
+        <b><_TPL:LANG_TOURNAMENT_NAME_U></b>:
+        <TPL_INPUT:adm_manager.title>
+          <input type="hidden" name="create_tournament" value="y">
+          <input type="submit"  class="btn" type="submit" value=" <_TPL:LANG_CREATE_U> " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+  </form>
+  </div>
+</div>
+</TPL_SUB:CAN_CREATE>

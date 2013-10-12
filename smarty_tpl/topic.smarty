@@ -1,0 +1,312 @@
+<div style="clear:both"></div>
+{if isset($flood_protection)}
+<script> 
+ var seconds= {$flood_protection.TIMETAG}
+
+function display(){ 
+ if (seconds<=1){ 
+   window.location = "{$flood_protection.REQUEST_URI}";
+    //ShowHide()
+ } 
+ else {
+    seconds-=1 
+    document.getElementById('post').style.display = "none";
+    document.getElementById('counter').innerText=seconds
+    document.getElementById('counter').textContent=seconds
+    setTimeout("display()",1000) 
+ } 
+} 
+
+function ShowHide()
+{
+   document.getElementById('message').style.display = "none";
+   document.getElementById('post').style.display = "block";
+}
+ 
+window.onload = display;
+</script>
+{/if}
+
+{if isset($topic)}
+{if isset($topic.FORUM)}
+{if isset($topic.FORUM.NAVIGATION)}
+<div class="portlet">
+	<div class="header">{translate fonema="LANG_FORUM_U"}</div>
+	<div class="content_header">
+		<div style="float:left;"><a href="forum.php?cat_id={$topic.FORUM.CAT_ID}">{$topic.FORUM.CAT_NAME}</a> -> <a href="forum.php?forum_id={$topic.FORUM.FORUM_ID}">{$topic.FORUM.FORUM_NAME}</a></div>
+		<div style="float:right;">
+   	        </div>
+		<div style="clear:both;"></div>
+	</div>
+        <div class="content"><h3>{$topic.FORUM.TOPIC_NAME}</h3>
+        {if !empty($topic.FORUM.TOPIC_DESCR)}
+           <br><span class="date_font">{$topic.FORUM.TOPIC_DESCR}</span>
+        {else if isset($topic.FORUM.DESCR)}             
+           <br><span class="date_font">{$topic.FORUM.DESCR}</span>
+        {/if}
+	</div>
+</div>
+{/if}
+
+{if isset($topic.FORUM.ERROR)}
+<div class="portlet" id="message">
+    <div class="content">
+	<span class="textred"><b>{$topic.FORUM.ERROR.MSG}</b></span>
+    </div>
+</div>
+{/if}
+
+{if isset($topic.FORUM.ERROR_FLOOD)}
+<div class="portlet" id="message">
+    <div class="content">
+	<span class="textred"><b>{$topic.FORUM.ERROR_FLOOD.MSG}</b>: <b><span class="textred" id="counter"></span></b></span>
+    </div>
+</div>
+{/if}
+{if isset($topic.FORUM.LOGGED) && $editor_window_position==1}
+<div class="portlet" id="message">
+    <div class="content">
+	<a href="javascript:void(0);" onclick="$('html,body').scrollTop($('#post_comment').offset().top);">{translate fonema="LANG_WRITE_COMMENT_U"}</a>
+    </div>
+</div>
+{/if}
+
+{if isset($topic.FORUM.LOGGED) && $editor_window_position==0}
+  <form action="" method="post"  style="margin:0px">
+  <input type="hidden" name="post_comment" value="Y">
+  <input type="hidden" name="lang_id" value="{$topic.FORUM.LOGGED.LANG_ID}">
+  <input type="hidden" name="topic_id" value="{$topic.FORUM.LOGGED.TOPIC_ID}">
+  <input type="hidden" name="forum_id" value="{$topic.FORUM.LOGGED.FORUM_ID}">
+  {if isset($topic.FORUM.LOGGED.ITEM_ID)}
+  <input type="hidden" name="item_id" value="{$topic.FORUM.LOGGED.ITEM_ID}">
+  {/if}
+   <div id="editor">
+<script>
+ $(function() {
+	$( "#post" ).tabs({
+		cookie: {
+			expires: 1,
+			name: "post"
+			}
+		}); 
+});
+</script>
+<div id="post_comment"></div>
+<div id="post">
+ <ul>
+ <li><a href="#tabs-1" title="{translate fonema=LANG_ADVANCED_EDITOR_U}">{translate fonema=LANG_ADVANCED_EDITOR_U}</a></li>
+ <li><a href="#tabs-2" title="{translate fonema=LANG_SIMPLE_EDITOR_U}">{translate fonema=LANG_SIMPLE_EDITOR_U}</a></li>
+ </ul>
+ <div id="tabs-1">  
+  <div class="portlet" style="margin:0px">
+   <div class="content">
+   {translate fonema=LANG_CREATE_NEW_POST_U}
+  <input class="btn" type="submit" value=" {translate fonema=LANG_CREATE_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/><br>
+   <textarea name="text" id="text"></textarea>
+    {translate fonema=LANG_ADVANCED_EDITOR_INSTR_U}
+   </div>
+   </div>
+ </div>
+ <div id="tabs-2">
+  <div class="portlet" style="margin:0px">
+   <div class="content">
+   {translate fonema=LANG_CREATE_NEW_POST_U}
+  <input class="btn" type="submit" value=" {translate fonema=LANG_CREATE_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/><br>
+    <textarea name="simple_text" id="simple_text" rows=15 cols=65"></textarea>
+   </div> 
+  </div>
+ </div>
+   </div>
+	<script type="text/javascript">
+		//<![CDATA[
+		replaceEditor('text');
+		//]]>
+	</script>
+  </form>
+ </div>
+{/if}
+
+<div class="portlet">
+<div class="content" style="text-align:center">
+{translate fonema=LANG_PRESS_BANNER_U}
+<!-- TheSportCity.Net_comment_468x60 -->
+<script type='text/javascript'>
+GA_googleFillSlot("TheSportCity.Net_comment_468x60");
+</script>
+</div>
+</div>
+
+<div id="forum">
+<div class="portlet">
+    {if isset($posts)}
+     {foreach $posts as $post}
+	<div>
+	<table width="100%">
+	<tr>
+	   <td style="width:150px;vertical-align:top">
+	     {if isset($post.COUNTRY_DB)}
+              <img border=1 src="./img/flags/{$post.COUNTRY_DB.CCTLD}.gif" onmouseover="Tip('{$post.COUNTRY_DB.COUNTRY_NAME}')" onmouseout="UnTip()">
+             {/if}
+              <b><a href="user_public_profile.php?user_id={$post.USER_ID}" target="user_profile" onClick="window.open('','user_profile','width=450,height=620,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');">{$post.USER_NAME}</a></b><br>
+      	      {if isset($post.CITY)}
+                 <span class="date_font2">{translate fonema=LANG_TOWN_U}: <b>{$post.CITY.TOWN}</b></span><br>
+	      {/if}
+              <span class="date_font">{translate fonema=LANG_POSTED_U}:<br>{$post.DATE_POSTED} {$post.UTC}<br>
+      	      {if isset($post.EDITED_POST)}{translate fonema=LANG_EDITED_U}:<br>{$post.EDITED_POST.DATE_EDITED} {$post.EDITED_POST.UTC}<br>
+                                   {translate fonema=LANG_EDITED_TIMES_U}: {$post.EDITED_POST.EDITED}<br>
+              {/if}
+              <b>{translate fonema=LANG_COMMENT_TRUST_U}</b>: {$post.COMMENT_TRUST}<br>
+              <b>{translate fonema=LANG_CONTENT_TRUST_U}</b>: {$post.CONTENT_TRUST}<br>
+               </span>
+		<a href="compose_message.php?folder_id=2&user_name={$post.USER_NAME}"><img border=0 src="./img/icons/send_pm.png"  onmouseover="Tip('{translate fonema=LANG_COMPOSE_PM_U}')" onmouseout="UnTip()" ></a>
+	   </td>
+	   <td align="left" style="vertical-align:text-top">
+	{if isset($post.QUOTE)}
+	 <div style="float:right;"><a href="javascript:quote('text', '{$post.POST_ID}', '{$post.USER_NAME} @ {$post.DATE_POSTED}')"><img src="./img/icons/quote.png" border="0" onmouseover="Tip('{translate fonema=LANG_QUOTE_U}')" onmouseout="UnTip()"
+                onclick="$('html,body').scrollTop($('#post_comment').offset().top);"></a></div>
+	{/if}
+	{if isset($post.DELETE)}
+	 <div style="float:right;"><input type="image" src="img/icons/delete.png" onClick="if(confirm('{translate fonema=LANG_REALLY_U}')) { deletePost({$post.POST_ID}, {$post.TOPIC_ID}, 'forum'); setEditor();}" onmouseover="Tip('{translate fonema=LANG_DELETE_U}')" onmouseout="UnTip()" /></div>
+	{/if}
+	{if isset($post.EDIT)}
+<form method="post" style="float:right" action="post_add.php">
+ <input type="image" src="img/icons/edit.png" onmouseover="Tip('{translate fonema=LANG_EDIT_POST_U}')" onmouseout="UnTip()" />
+ <input type="hidden" name="edit_post" value="y">
+ <input type="hidden" name="topic_id" value="{$post.TOPIC_ID}">
+ <input type="hidden" name="post_id" value="{$post.POST_ID}">
+</form>
+	{/if}
+	{if isset($post.VOTING)}
+<div id="thumbs_{$post.POST_ID}" style="float:right;">
+ <input type="image" src="img/icons/thumbup.gif" onClick="javascript:voteCommentThumbUp({$post.POST_ID}, 'thumbs_{$post.POST_ID}')"  onmouseover="Tip('{translate fonema=LANG_VOTE_UP_U}')" onmouseout="UnTip()"/>
+ <input type="image" src="img/icons/thumbdown.gif" onClick="javascript:voteCommentThumbDown({$post.POST_ID}, 'thumbs_{$post.POST_ID}')" onmouseover="Tip('{translate fonema=LANG_VOTE_DOWN_U}')" onmouseout="UnTip()"/>&nbsp;
+</div>
+	{/if}
+	{if isset($post.THUMB_UP)}
+<div style="float:right;"><img src="./img/icons/plus.png"/></div>
+	{/if}
+	{if isset($post.THUMB_DOWN)}
+<div style="float:right;"><img src="./img/icons/minus.png" /></div>
+	{/if}
+	{if isset($post.VOTED_PLUS)}
+<div style="float:right;"><img src="./img/icons/voted_plus.png" onmouseover="Tip('{translate fonema=LANG_VOTED_UP_U}')" onmouseout="UnTip()"/></div>
+	{/if}
+	{if isset($post.VOTED_MINUS)}
+<div style="float:right;"><img src="./img/icons/voted_minus.png"  onmouseover="Tip('{translate fonema=LANG_VOTED_DOWN_U}')" onmouseout="UnTip()"/></div>
+	{/if}
+	{if isset($post.POST_PINNED)}
+<div style="float:left;"><img src="./img/icons/pinned.png" border="0" onmouseover="Tip('{translate fonema=LANG_POST_PINNED_U}')" onmouseout="UnTip()"></div>
+	{/if}
+         {if isset($post.PIN)}
+	  <form method="post" style="float:right">
+	   <input type="image" src="img/icons/pin.png" onmouseover="Tip('{translate fonema=LANG_POST_PIN_U}')" onmouseout="UnTip()" />
+	   <input type="hidden" name="pin_post" value="y">
+	   <input type="hidden" name="topic_id" value="{$post.TOPIC_ID}">
+	   <input type="hidden" name="post_id" value="{$post.POST_ID}">
+	  </form>
+ 	 {/if}
+         {if isset($post.UNPIN)}
+	  <form method="post" style="float:right">
+	   <input type="image" src="img/icons/unpin.png" onmouseover="Tip('{translate fonema=LANG_POST_UNPIN_U}')" onmouseout="UnTip()" />
+	   <input type="hidden" name="unpin_post" value="y">
+	   <input type="hidden" name="topic_id" value="{$post.TOPIC_ID}">
+	   <input type="hidden" name="post_id" value="{$post.POST_ID}">
+	  </form>
+ 	 {/if}
+
+	{if isset($post.HIDDEN_POST)}
+    <img style="vertical-align: middle; margin:2px" src="{if isset($post.HIDDEN_POST.VISIBLE)}./img/icons/plus.png{/if}{if isset($post.HIDDEN_POST.INVISIBLE)}./img/icons/minus.png{/if}" onclick="toggle('{$post.POST_ID}', this); return false;">
+	{/if}
+<div style="width:600px;overflow:auto">
+      <span {if isset($post.VISIBLE_DIV)}style="display: block;"{/if} {if isset($post.INVISIBLE_DIV)}style="display: none;"{/if} id="{$post.POST_ID}">{if isset($post.VISIBLE_TEXT)}{$post.VISIBLE_TEXT}{/if}</span>
+	{if isset($post.INVISIBLE_POST)}
+           <span class="textred">{translate fonema=LANG_ERROR_COMMENT_MODERATION_U}</span>
+	{/if}
+	{if isset($post.INVISIBLE_POST_REVIEWED)}
+           <span class="textred">{translate fonema=LANG_ERROR_COMMENT_MODERATION_BAD_U}</span>
+	{/if}
+</div>
+           </td>
+         </tr>
+	</table>
+	</div>
+	{if isset($post.UNREAD_POST)}
+	<div class="content_header">{translate fonema=LANG_UNREAD_POSTS_START_U}</div>
+	{/if}
+      {/foreach}
+     {else}
+	<div class="content">
+		<div style="float:left;">{translate fonema=LANG_NO_ENTRIES_U}</div>
+		<div style="clear:both;"></div>
+	</div>
+    {/if}
+</div>
+{$topic.FORUM.PAGING}
+</div>
+{if isset($topic.FORUM.UNREAD_POST)}
+<script type="text/javascript">
+ // window.location.hash="{$topic.FORUM.UNREAD_POST.UNREAD_POST_ID}"; 
+ // $('html,body').scrollTop($('#{$topic.FORUM.UNREAD_POST.UNREAD_POST_ID}').offset().bottom);
+  $(document).ready(function(){ 
+    element_to_scroll_to = document.getElementById('{$topic.FORUM.UNREAD_POST.UNREAD_POST_ID}');
+    element_to_scroll_to.scrollIntoView();
+   })
+</script>
+{/if}
+{/if}
+{/if}
+
+{if isset($topic.FORUM.LOGGED) && $editor_window_position==1}
+  <form action="" method="post"  style="margin:0px">
+  <input type="hidden" name="post_comment" value="Y">
+  <input type="hidden" name="lang_id" value="{$topic.FORUM.LOGGED.LANG_ID}">
+  <input type="hidden" name="topic_id" value="{$topic.FORUM.LOGGED.TOPIC_ID}">
+  <input type="hidden" name="forum_id" value="{$topic.FORUM.LOGGED.FORUM_ID}">
+  {if isset($topic.FORUM.LOGGED.ITEM_ID)}
+  <input type="hidden" name="item_id" value="{$topic.FORUM.LOGGED.ITEM_ID}">
+  {/if}
+   <div id="editor">
+<script>
+ $(function() {
+	$( "#post" ).tabs({
+		cookie: {
+			expires: 1,
+			name: "post"
+			}
+		}); 
+});
+</script>
+<div id="post_comment"></div>
+<div id="post">
+ <ul>
+ <li><a href="#tabs-1" title="{translate fonema=LANG_ADVANCED_EDITOR_U}">{translate fonema=LANG_ADVANCED_EDITOR_U}</a></li>
+ <li><a href="#tabs-2" title="{translate fonema=LANG_SIMPLE_EDITOR_U}">{translate fonema=LANG_SIMPLE_EDITOR_U}</a></li>
+ </ul>
+ <div id="tabs-1">                     
+  <div class="portlet" style="margin:0px">
+   <div class="content">
+   {translate fonema=LANG_CREATE_NEW_POST_U}
+  <input class="btn" type="submit" value=" {translate fonema=LANG_CREATE_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/><br>
+   <textarea name="text" id="text"></textarea>
+    {translate fonema=LANG_ADVANCED_EDITOR_INSTR_U}
+   </div>
+   </div>
+ </div>
+ <div id="tabs-2">
+  <div class="portlet" style="margin:0px">
+   <div class="content">
+   {translate fonema=LANG_CREATE_NEW_POST_U}
+  <input class="btn" type="submit" value=" {translate fonema=LANG_CREATE_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/><br>
+    <textarea name="simple_text" id="simple_text" rows=15 cols=65"></textarea>
+   </div> 
+  </div>
+ </div>
+   </div>
+	<script type="text/javascript">
+		//<![CDATA[
+		replaceEditor('text');
+		//]]>
+	</script>
+  </form>
+ </div>
+{/if}

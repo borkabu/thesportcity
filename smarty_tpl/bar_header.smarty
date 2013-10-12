@@ -1,0 +1,5 @@
+<div class="portlet">
+<div class="header_background" style="text-align:left;padding:3px">
+<h1>{$game_title}</h1>      
+</div>
+</div>

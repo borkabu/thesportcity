@@ -1,0 +1,96 @@
+<div style="clear:both"></div>
+<form action="" method="post">
+<div class="portlet">
+  <div class="header"><_TPL:LANG_CREATE_CLUB_EVENT_U></div>
+  <div class="content">
+        <_TPL:LANG_CREATE_CLUB_EVENT_INSTR_U><br>
+        <b><_TPL:LANG_TITLE_U></b>:
+        <TPL_INPUT:forum_group_event.title>
+         <input type="hidden" name="group_id" value="<TPL:GROUP_ID>">
+         <input type="hidden" name="lang_id" value="<TPL:LANG_ID>">
+         <input type="hidden" name="event_id" value="<TPL:EVENT_ID>">
+         <input type="hidden" name="add_club_event" value="y">
+  </div>
+  <div class="content">
+    <b><_TPL:LANG_DESCRIPTION_U></b>
+    <TPL:DESCR>
+    <TPL_INPUT:forum_group_event.descr>
+			<script type="text/javascript">
+				//<![CDATA[
+
+					// This call can be placed at any point after the
+					// <textarea>, or inside a <head><script> in a
+					// window.onload event handler.
+
+					// Replace the <textarea id="editor"> with an CKEditor
+					// instance, using default configurations.
+					CKEDITOR.replace( 'descr' ,
+                                            { entities : false,
+						resize_enabled: false,
+                                                  on :
+                                                 {
+					           instanceReady : function( ev )
+					            {
+                                                     // Output paragraphs as <p>Text</p>.
+					                this.dataProcessor.writer.setRules( 'p',
+					                    {
+					                        indent : false,
+                                                                breakBeforeOpen : false,
+					                        breakAfterOpen : false,
+					                        breakBeforeClose : false,
+					                        breakAfterClose : false
+                                                             });
+					            }
+					        }
+					});
+
+				//]]>
+				</script>
+  </div>
+  <div class="content">
+     <b><_TPL:LANG_RESULTS_U></b>
+     <TPL:RESULTS>
+     <TPL_INPUT:forum_group_event.results>
+			<script type="text/javascript">
+				//<![CDATA[
+
+					// This call can be placed at any point after the
+					// <textarea>, or inside a <head><script> in a
+					// window.onload event handler.
+
+					// Replace the <textarea id="editor"> with an CKEditor
+					// instance, using default configurations.
+					CKEDITOR.replace( 'results' ,
+                                            { entities : false,
+						resize_enabled: false,
+                                                  on :
+                                                 {
+					           instanceReady : function( ev )
+					            {
+                                                     // Output paragraphs as <p>Text</p>.
+					                this.dataProcessor.writer.setRules( 'p',
+					                    {
+					                        indent : false,
+                                                                breakBeforeOpen : false,
+					                        breakAfterOpen : false,
+					                        breakBeforeClose : false,
+					                        breakAfterClose : false
+                                                             });
+					            }
+					        }
+					});
+
+				//]]>
+				</script>
+  </div>
+  <div class="header"><_TPL:LANG_SETTINGS_U></div>
+  <div class="content">
+    <table class="noborder">
+	<tr><td><_TPL:LANG_PARTICIPANTS_U>:</td><td> <input type="text" name="participants" value="<TPL:PARTICIPANTS>" maxlength="3" size="3" class="input"> <img src='./img/icons/information.png' onmouseover="Tip('<_TPL:LANG_CLUB_EVENT_PARTICIPANTS_INFO_U>')" onmouseout="UnTip()" /></td></tr>
+    </table>
+  </div>
+  <div class="content">
+          <input type="submit"  class="btn" type="submit" value=" <_TPL:LANG_CREATE_U> " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+  </div>
+</div>
+</form>

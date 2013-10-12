@@ -1,0 +1,45 @@
+{translate fonema=LANG_HI_U} {$data.USER_NAME}
+
+{translate fonema=LANG_EMAIL_RVS_LEAGUE_PEX_NOTIFY_LINE_1}
+
+{if isset($data.ACCEPTED_TRANSFERS)}
+{translate fonema=LANG_ACCEPTED_TRANSFERS_U}
+{foreach $data.ACCEPTED_TRANSFERS as $transfer}
+{$transfer.ROW.TITLE} | {$transfer.ROW.SEASON_TITLE} (http://www.thesportcity.net/rvs_manager_league.php?league_id={$transfer.ROW.LEAGUE_ID})
+{$transfer.ROW.USER_NAME2} {translate fonema=LANG_ACCEPTED_TRANSFER_U}:
+ {foreach $transfer.PLAYERS as $player}
+  {if $transfer.ROW.USER_ID2 == $player.OWNER}
+   {$player.LAST_NAME}, {$player.FIRST_NAME} ({$player.CURRENT_VALUE_MONEY})
+  {/if}
+ {/foreach}
+      -
+ {foreach $transfer.PLAYERS as $player}
+  {if $transfer.ROW.USER_ID == $player.OWNER}
+   {$player.LAST_NAME}, {$player.FIRST_NAME} ({$player.CURRENT_VALUE_MONEY})
+  {/if}
+ {/foreach}
+{/foreach}
+=============================
+{/if}
+{if isset($data.OFFERED_TRANSFERS)}
+{translate fonema=LANG_SUGGESTED_TRANSFERS_U}
+{foreach $data.OFFERED_TRANSFERS as $transfer}
+{$transfer.ROW.TITLE} | {$transfer.ROW.SEASON_TITLE} (http://www.thesportcity.net/rvs_manager_league.php?league_id={$transfer.ROW.LEAGUE_ID})
+{$transfer.ROW.USER_NAME2} {translate fonema=LANG_SUGGESTS_TRANSFER_U}:
+ {foreach $transfer.PLAYERS as $player}
+  {if $transfer.ROW.USER_ID2 == $player.OWNER}
+   {$player.LAST_NAME}, {$player.FIRST_NAME} ({$player.CURRENT_VALUE_MONEY})
+  {/if}
+ {/foreach}
+     - 
+ {foreach $transfer.PLAYERS as $player}
+  {if $transfer.ROW.USER_ID == $player.OWNER}
+   {$player.LAST_NAME}, {$player.FIRST_NAME} ({$player.CURRENT_VALUE_MONEY})
+  {/if}
+ {/foreach}
+{/foreach}
+{/if}
+
+{translate fonema=LANG_EMAIL_RVS_LEAGUE_PEX_NOTIFY_LINE_2}
+
+{translate fonema=LANG_EMAIL_LAST_LINE}

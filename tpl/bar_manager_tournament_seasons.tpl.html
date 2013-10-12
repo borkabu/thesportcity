@@ -1,0 +1,22 @@
+<TPL_SUB:TOURNAMENTS>
+<div class="portlet">
+<div class="header"><_TPL:LANG_TOURNAMENTS_U></div>
+<TPL_SUB:TOURNAMENT>
+<div class="content_header">
+<a href="f_manager_tournament_control.php?mt_id=<TPL:MT_ID>"><b><TPL:SEASON_TITLE></b></a>
+<TPL_SUB:REGISTRATION_CLOSED><_TPL:LANG_REGISTRATION_CLOSED_U><br> </TPL_SUB:REGISTRATION_CLOSED> 
+<TPL_SUB:REGISTRATION_OPEN><_TPL:LANG_REGISTRATION_OPENED_TILL_U><br> <b><TPL:REGISTRATION_END_DATE> <TPL:UTC></b></TPL_SUB:REGISTRATION_OPEN> 
+<TPL_SUB:TOURNAMENT_OVER><_TPL:LANG_TOURNAMENT_OVER_U> <b><TPL:USER_NAME></b><br> </TPL_SUB:TOURNAMENT_OVER> 
+<_TPL:LANG_PARTICIPANTS_U>: <b><TPL:REGISTERED></b>
+</div>
+<TPL_SUB:MANAGER_TOURNAMENT_LOG>
+<TPL_SUB:ITEMS>
+<div class="content">
+    <b><span class="date_font2"><TPL:EVENT_DATE> <TPL:UTC></span></b><br><TPL:LOG_ENTRY>
+    <a href="f_manager_tournament_log.php?mt_id=<TPL:MT_ID>"><_TPL:LANG_FULL_LOG_U></a>
+</div>
+</TPL_SUB:ITEMS>
+</TPL_SUB:MANAGER_TOURNAMENT_LOG>
+</TPL_SUB:TOURNAMENT>
+</div>
+</TPL_SUB:TOURNAMENTS>

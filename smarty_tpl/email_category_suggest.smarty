@@ -1,0 +1,13 @@
+{translate fonema=LANG_EMAIL_CATEGORY_SUGGEST_LINE_1}
+----------------------------
+{translate fonema=LANG_USER_NAME_U}: {$data.USER_NAME}
+----------------------------
+{translate fonema=LANG_EMAIL_CATEGORY_SUGGEST_LINE_2}
+----------------------------
+{$data.CATEGORY}
+----------------------------
+{translate fonema=LANG_APPROVE_ANSWER_U} {$data.URL_APPROVE}
+{translate fonema=LANG_IGNORE_ANSWER_U} {$data.URL_IGNORE}
+{translate fonema=LANG_DISAPPROVE_ANSWER_U} {$data.URL_DISAPPROVE}
+
+{translate fonema=LANG_EMAIL_LAST_LINE}

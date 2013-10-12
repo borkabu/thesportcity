@@ -1,0 +1,13 @@
+{if isset($error)}
+<div class="portlet" id="message">
+    <div class="content">
+	<span class="textred"><b>{$error.MSG}</b></span>
+    </div>
+</div>
+{/if}
+
+{$pm_menu}
+<div style="clear:both"></div>
+{if isset($bar_compose_message)}
+{$bar_compose_message}
+{/if}

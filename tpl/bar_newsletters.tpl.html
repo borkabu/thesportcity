@@ -1,0 +1,32 @@
+<TPL_SUB:NEWSLETTERS>
+<div class="portlet">
+  <div class="header"><_TPL:LANG_SUBSCRIPTION_U></div>
+<TPL_SUB:ITEMS>
+  <div class="content">
+     <table><tr><td>
+         <b><TPL:TITLE></b><br>
+  	 <TPL:DESCR>
+       </td>
+       <td align="center">
+       <div id="<TPL:ID>">
+        <TPL_SUB:SUBSCRIBE>
+          <_TPL:LANG_NEWSLETTER_NOT_SUBSCRIBED_U><br>
+          <input class="btn" type="submit" value=" <_TPL:LANG_NEWSLETTER_SUBSCRIBE_U> " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" onClick="javascript:subscribeNewsletter(<TPL:ID>, '<TPL:ID>')"/>
+        </TPL_SUB:SUBSCRIBE> 
+        <TPL_SUB:UNSUBSCRIBE>
+        <_TPL:LANG_NEWSLETTER_SUBSCRIBED_U><br>
+          <input class="btn" type="submit" value=" <_TPL:LANG_NEWSLETTER_UNSUBSCRIBE_U> " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" onClick="javascript:unsubscribeNewsletter(<TPL:ID>, '<TPL:ID>')"/>
+        </TPL_SUB:UNSUBSCRIBE> 
+        </div>
+       </td>
+     </tr>
+     </table>
+  </div>
+</TPL_SUB:ITEMS>
+<TPL_SUB:NORECORDS>
+  <div class="content">
+         <_TPL:LANG_NO_ENTRIES_U>
+  </div>
+</TPL_SUB:NORECORDS>
+</div>
+</TPL_SUB:NEWSLETTERS>      

@@ -1,0 +1,63 @@
+<div class="portlet">
+  <div class="content">
+    <table class="statistics-list">
+      <tr>
+        <th>{translate fonema=LANG_PLAYER_U}<span class="sort_arrows">
+	    {if isset($stock.LAST_NAME_DESC_A)}&dArr;{/if}
+  	    {if isset($stock.LAST_NAME_DESC)}<a href="{$stock.LAST_NAME_DESC.URL}">&dArr;</a>{/if}
+  	    {if isset($stock.LAST_NAME_ASC_A)}&uArr;{/if}
+  	    {if isset($stock.LAST_NAME_ASC)}<a href="{$stock.LAST_NAME_ASC.URL}">&uArr;</a>{/if}
+	  </span>
+         </th>
+        <th>{translate fonema=LANG_PLAYED_U}
+	{if isset($stock.TIMES_SUPPORT_H)}
+          / {translate fonema=LANG_WILL_PLAY_NEXT_TOUR_U}<span class="sort_arrows"> 
+  	    {if isset($stock.TIMES_SUPPORT_H.TIMES_DESC_A)}&dArr;{/if}
+  	    {if isset($stock.TIMES_SUPPORT_H.TIMES_DESC)}<a href="{$stock.TIMES_SUPPORT_H.TIMES_DESC.URL}">&dArr;</a>{/if}
+  	    {if isset($stock.TIMES_SUPPORT_H.TIMES_ASC_A)}&uArr;{/if}
+  	    {if isset($stock.TIMES_SUPPORT_H.TIMES_ASC)}<a href="{$stock.TIMES_SUPPORT_H.TIMES_ASC.URL}">&uArr;</a>{/if}</span>
+	{/if}
+	</th>
+        <th>{translate fonema=LANG_BUYING_PRICE_U}<span class="sort_arrows">
+	    {if isset($stock.BUYING_PRICE_DESC_A)}&dArr;{/if}
+  	    {if isset($stock.BUYING_PRICE_DESC)}<a href="{$stock.BUYING_PRICE_DESC.URL}">&dArr;</a>{/if}
+  	    {if isset($stock.BUYING_PRICE_ASC_A)}&uArr;{/if}
+  	    {if isset($stock.BUYING_PRICE_ASC)}<a href="{$stock.BUYING_PRICE_ASC.URL}">&uArr;</a>{/if}
+	  </span>
+        </th>
+          <th>{translate fonema=LANG_SELLING_PRICE_U} </th>
+	  <th></th>
+        </tr>
+        {foreach $players as $player}
+        <tr valign="top">
+           <td><a href="f_manager_player_info.php?user_id={$player.USER_ID}"  target="f_manager_player_info" onClick="window.open('','f_manager_player_info','width=400,height=400,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');"><b>{$player.LAST_NAME}, {$player.FIRST_NAME}</b></a> <br>
+            <span class="date_font2">{$player.TYPE_NAME} ({$player.TEAM_NAME2})</span></td>
+           <td align="right">{if isset($player.NO_STATS)}{$player.PLAYED}{/if}
+                {if isset($player.PLAYER_SEASON_STATS)}<a href="f_manager_player_seasonstats.php?user_id={$player.USER_ID}&seasons={$player.SUBSEASONS}" target="f_manager_player_season_stats" onClick="window.open('','f_manager_player_season_stats','width=800,height=700,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');">{$player.PLAYED}</a>{/if}
+   	        {if isset($player.TIMES_SUPPORT)} / {$player.WILL_PLAY}{/if}
+           </td>
+           <td nowrap><b>{$player.BUYING_PRICE}</b> {if isset($player.UP)}<img src="./img/icons/chart_up.png" border=0>{/if} {if isset($player.DOWN)}<img src="./img/icons/chart_down.png" border=0>{/if}</td>
+           <td nowrap><b>{$player.SELLING_PRICE}</b></td>
+	   <td nowrap>
+           {if isset($player.BUY)}
+	   <form action="" method="post">
+               {translate fonema=LANG_MAXIMUM_ABBR_U} {$player.BUY.MAX_SIZE}
+               <input type="hidden" name="player" value="{$player.BUY.USER_ID}">
+               <input type="hidden" name="buy" value="y">
+               <input type="hidden" name="price" value="{$player.BUY.CURRENT_VALUE_MONEY}">
+               <input type="text" name="size" value="0" maxsize="3" size="3" class="input">
+	       <input type="submit"  class="btn" type="submit" value=" {translate fonema=LANG_BUY_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+           </form>
+           {/if}
+        {if isset($player.BUY_DISABLED)}<img src='./img/icons/red_exclamation.png' onmouseover="Tip('<span class=\'textred\'>{if isset($player.BUY_DISABLED.LOW_MONEY)}{translate fonema=LANG_NOT_ENOUGH_MONEY_U}{/if} {if isset($player.BUY_DISABLED.WRONG_DAY)}{translate fonema=LANG_STOCK_EXCHANGE_CLOSED_U}{/if} {if isset($player.BUY_DISABLED.WRONG_GAME)}{translate fonema=LANG_STOCK_EXCHANGE_POSITION_CLOSED_U}{/if}</span>')" onmouseout="UnTip()" />
+        {/if}
+           </td>
+        </tr>
+	{foreachelse}
+        <tr >
+          <td colspan="6">{translate fonema=LANG_NO_ENTRIES_U}</td>
+        </tr>
+        {/foreach}
+      </table>
+	</div>
+</div>

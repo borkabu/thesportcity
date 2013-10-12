@@ -1,0 +1,42 @@
+<div class="portlet">
+    <div class="header"><b>{translate fonema=LANG_PROTOCOL_U}</b></div>
+    <div class="content_header"><b>{$stats.SEASON_TITLE}</b></div>
+    <div class="content">
+	<b>{$stats.TEAM_NAME1}-{$stats.TEAM_NAME2}</b> <br>{$stats.DATE}</div>
+    {if isset($stats.STATS)}
+    {foreach $stats.STATS as $stat}
+    <div class="content">      
+      <table style="width:100%">      
+        <tr>
+          <th>{$stat.TEAM_NAME}</th>
+          {foreach $stat.ITEM as $item}
+            <th align="center">{$item.TITLE}</th>
+          {/foreach}
+        </tr>
+        {foreach $stat.PLAYER as $player}
+        <tr>
+          <td>{$player.LAST_NAME}, {$player.FIRST_NAME}</td>
+          {foreach $player.ITEM.VALUE as $item}
+	   <td align="center">{$item}</td>
+          {/foreach}
+        </tr>
+        {/foreach}
+        
+        {foreach $stat.TEAM as $team}
+        <tr>
+          <th>{translate fonema=LANG_TEAM_U}</th>
+          {foreach $team.ITEM.VALUE as $item}
+	   <th align="center">{$item}</th>
+          {/foreach}
+        </tr>
+        {/foreach}
+      </table>
+      </div>  
+     {/foreach}
+    {/if}
+    <div class="content">      
+    {foreach $legends as $legend}
+      <b>{$legend.KEY}</b> - {$legend.LEGEND};
+    {/foreach}
+    </div>  
+ </div>

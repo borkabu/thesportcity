@@ -1,0 +1,42 @@
+{if isset($message)}
+<div class="portlet">
+<div class="header">{translate fonema=LANG_MESSAGE_U}</div>
+<div class="content">
+  <div style="float:left">
+    {translate fonema=LANG_SUBJECT_U}: <b id="subject_{$message.PM_ID}">{$message.SUBJECT}</b> <br>
+    {translate fonema=LANG_TO_U}: 		
+                {if isset($message.USER_NAME)}
+		  <b>{translate fonema=LANG_USERS_U}:</b> {$message.USER_NAME}<br>
+		{/if}
+		{if isset($message.GROUP_NAME)}
+		  <b>{translate fonema=LANG_GROUPS_U}:</b> {$message.GROUP_NAME}<br>
+                {/if} 
+    {translate fonema=LANG_FROM_U}: <b>{$message.AUTHOR}</b> <br>
+    {translate fonema=LANG_DATE_SENT_U}: <b>{$message.SENT_DATE}</b>
+  </div>
+    <form method="post" style="float:right;margin:0">
+        <input type="image" border="0" src="img/icons/delete.png"  onClick="return confirm('{translate fonema=LANG_REALLY_U}');" onmouseover="Tip('{translate fonema=LANG_DELETE_U}')" onmouseout="UnTip()" />
+	<input type="hidden" name="delete_pm" value="y">
+	<input type="hidden" name="pm_id" value="{$message.PM_ID}">
+	<input type="hidden" name="folder_id" value="{$message.FOLDER_ID}">
+    </form>
+  {if isset($message.EDIT)}
+    <form method="post" style="float:right;margin:0">
+        <input type="image" src="img/icons/edit.png" onmouseover="Tip('{translate fonema=LANG_EDIT_POST_U}')" onmouseout="UnTip()" />
+	<input type="hidden" name="edit_pm" value="y">
+	<input type="hidden" name="pm_id" value="{$message.PM_ID}">
+	<input type="hidden" name="folder_id" value="{$message.FOLDER_ID}">
+    </form>
+  {/if}
+  {if isset($message.REPLY)}
+    <div style="float:right;">
+    <a href="javascript:void()" onClick="reply('descr', '{$message.PM_ID}', '{$message.AUTHOR}', 'subject_{$message.PM_ID}');"><img border=0 src="./img/icons/reply_pm.png"  onmouseover="Tip('{translate fonema=LANG_REPLY_PM_U}')" onmouseout="UnTip()" ></a>
+    </div>
+  {/if}
+  <div style="clear:both;"></div>
+</div>
+<div class="content" id="{$message.PM_ID}">
+  {$message.DESCR}
+</div>
+</div>
+{/if}

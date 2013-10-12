@@ -1,0 +1,14 @@
+<div class="portlet">
+<div class="content">
+<div class="background">
+<form action=""  style="margin:0px">
+ <img src="./img/{$bracket->season_info.PIC2_LOCATION}" style="float:left;overflow:auto;height:50px;padding-right:5px; ">
+<h2>{$bracket->title}</h2>      
+       {translate fonema=LANG_SELECT_SEASON_U}:
+      {$season_id}
+      <input class="btn" type="submit" value=" {translate fonema=LANG_OK_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+</form>
+</div>
+<div style="clear:both"></div>
+</div>
+</div>

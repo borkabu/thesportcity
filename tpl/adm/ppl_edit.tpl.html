@@ -1,0 +1,225 @@
+<TPL_INCLUDE:../tpl/adm/head.tpl.html>
+<TPL_INCLUDE:../tpl/adm/menu.tpl.html>
+
+<div  style="float:left;">
+<form action="" method="post" name="editform">
+<input type="hidden" name="form_save" value="Y">
+<input type="hidden" name="referer" value="<TPL:REFERER>">
+
+<TPL_SUB:ERROR><span class="error"><TPL:MSG></span></TPL_SUB:ERROR>
+<div class="portlet" >
+  <div class="header"><_TPL:LANG_GENERAL_DATA_U></div>
+  <div class="content">
+   <table>  
+    <tr>
+      <td class="list_item"><_TPL:LANG_NAME_U></td>
+      <td class="list_item"><TPL_INPUT:adm_user.first_name></td>
+    </tr>
+    
+    <tr>
+      <td class="list_item"><_TPL:LANG_SURNAME_U></td>
+      <td class="list_item"><TPL_INPUT:adm_user.last_name></td>
+    </tr>
+
+    <tr>
+      <td class="list_item"><_TPL:LANG_NICKNAME_U></td>
+      <td class="list_item"><TPL_INPUT:adm_user.nickname></td>
+    </tr>
+
+    <tr>
+      <td class="list_item"><_TPL:LANG_ORIGINAL_NAME_U></td>
+      <td class="list_item"><TPL_INPUT:adm_user.original_name></td>
+    </tr>
+
+    <tr>
+      <td class="list_item"><_TPL:LANG_SPORT_U></td>
+      <td class="list_item"><TPL:SPORT_ID></td>
+    </tr>
+         
+    <tr>
+      <td class="list_item"><_TPL:LANG_HEIGHT_U></td>
+      <td class="list_item"><TPL_INPUT:adm_user.height> cm</td>
+    </tr>
+    
+    <tr>
+      <td class="list_item"><_TPL:LANG_WEIGTH_U></td>
+      <td class="list_item"><TPL_INPUT:adm_user.weight> kg</td>
+    </tr>
+    
+    <tr>
+      <td class="list_item">Vyras</td>
+      <td class="list_item"><TPL_INPUT:adm_user.male></td>
+    </tr>
+    
+    <tr>
+      <td class="list_item"><_TPL:LANG_BIRTHDAY_U></td>
+      <td class="list_item"><TPL_INPUT:adm_user.birth_date></td>
+    </tr>
+
+    <tr>
+      <td class="list_item">Mirties diena</td>
+      <td class="list_item"><TPL_INPUT:adm_user.death_date></td>
+    </tr>
+    
+    <tr>
+      <td class="list_item"><_TPL:LANG_COUNTRY_U></td>
+      <td class="list_item"><TPL:CITIZENSHIP></td>
+    </tr>
+    
+    <tr>
+      <td class="list_item"><_TPL:LANG_PUBLISH_U></td>
+      <td class="list_item"><TPL_INPUT:adm_user.publish></td>
+    </tr>
+    
+  </table>
+</div>
+</div>
+
+<div class="portlet">
+  <div class="content">
+        <input type="submit" class="btn" value="<_TPL:LANG_SAVE_U>" onclick="resettarget();"  onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" >
+        <input type="reset" class="btn" value="<_TPL:LANG_RESET_U>" onclick="return confirm('<_TPL:LANG_REALLY_U>');"  onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'">
+</div>
+</div>
+</form>
+</div>
+
+<div style="float:left;width:300px">
+<TPL_SUB:TEAMS>
+<div class="portlet">
+  <div class="header">Komandos <a href="ppl_edit_members.php?type=2&user_id=<TPL:USER_ID>"><img src="../img/adm_edit.gif" width="12" height="12" border="0" alt="redaguoti"></a></div>
+  <div class="content">
+  <table>
+    <tr>
+      <th><_TPL:LANG_TEAM_NAME_U></td>
+      <th>Periodas</td>
+      <th align="center"></td>
+      <th>&nbsp;</td>
+      <th>&nbsp;</td>
+    </tr>
+
+    <TPL_SUB:TEAMS>
+
+    <tr class="<TPL_SUB:EVEN>even</TPL_SUB:EVEN><TPL_SUB:ODD>odd</TPL_SUB:ODD>">
+      <td class="list_item"><TPL:TEAM_NAME></td>
+      <td class="list_item"><TPL:DATE_STARTED><br><TPL:DATE_EXPIRED></td>
+      <td class="list_item" align="center"><a href="<TPL:ACT_URL>"><img src="../img/adm_publish_<TPL:APPROVED>.gif" width="12" height="12" border="0"></a></td>
+      <td class="list_item" align="center">
+        <TPL_SUB:DEL><a href="<TPL:DEL_URL>" onClick="return confirm('Tikrai?');"><img src="../img/adm_delete.gif" width="12" height="12" border="0" alt="pašalinti"></a></TPL_SUB:DEL>
+        <a href="ppl_edit_members.php?type=1&user_id=<TPL:USER_ID>&id=<TPL:ID>"><img src="../img/adm_edit.gif" width="12" height="12" border="0" alt="redaguoti"></a>
+      </td>
+      <td class="list_item" align="left" nowrap>  
+        <form action="" method="post" style="margin:0">        
+           <input type="submit" class="btn" value="<_TPL:LANG_MOVE_TO_U>" onclick="resettarget();"  onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" > 
+	   <input type="hidden" name="move_from" value="<TPL:ID>">
+	   <TPL:MOVE_TEAM_ID>
+	 </form>
+        <form action="" method="post" style="margin:0">        
+           <input type="submit" class="btn" value="<_TPL:LANG_PROLONG_TILL_NOW_U>" onclick="resettarget();"  onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" > 
+	   <input type="hidden" name="prolong" value="<TPL:ID>">
+        </form>
+      </td>
+    </tr>
+    </TPL_SUB:TEAMS>
+    <TPL_SUB:TEAM_NORECORDS>
+    <tr bgcolor="#FFFFFF"><td colspan="4" class="list_item"><_TPL:LANG_NO_ENTRIES_U></td></tr>
+    </TPL_SUB:TEAM_NORECORDS>
+
+  </table>
+</div>
+</div>
+</TPL_SUB:TEAMS>
+
+<TPL_SUB:MANAGERS>
+<div class="portlet">
+  <div class="content">
+  <table>
+    <tr>
+      <th>&nbsp;</td>
+      <th>
+        Pavardė, Vardas 
+        <TPL_SUB:LAST_NAME_DESC_A><img src="../img/adm_desc_a.gif" width="11" height="11" border="0"></TPL_SUB:LAST_NAME_DESC_A>
+        <TPL_SUB:LAST_NAME_DESC><a href="<TPL:URL>"><img src="../img/adm_desc.gif" width="11" height="11" border="0"></a></TPL_SUB:LAST_NAME_DESC>
+        <TPL_SUB:LAST_NAME_ASC_A><img src="../img/adm_asc_a.gif" width="11" height="11" border="0"></TPL_SUB:LAST_NAME_ASC_A>
+        <TPL_SUB:LAST_NAME_ASC><a href="<TPL:URL>"><img src="../img/adm_asc.gif" width="11" height="11" border="0"></a></TPL_SUB:LAST_NAME_ASC>
+      </td>
+      <th>
+        <_TPL:LANG_TYPE_U>
+        <TPL_SUB:USER_TYPE_DESC_A><img src="../img/adm_desc_a.gif" width="11" height="11" border="0"></TPL_SUB:USER_TYPE_DESC_A>
+        <TPL_SUB:USER_TYPE_DESC><a href="<TPL:URL>"><img src="../img/adm_desc.gif" width="11" height="11" border="0"></a></TPL_SUB:USER_TYPE_DESC>
+        <TPL_SUB:USER_TYPE_ASC_A><img src="../img/adm_asc_a.gif" width="11" height="11" border="0"></TPL_SUB:USER_TYPE_ASC_A>
+        <TPL_SUB:USER_TYPE_ASC><a href="<TPL:URL>"><img src="../img/adm_asc.gif" width="11" height="11" border="0"></a></TPL_SUB:USER_TYPE_ASC>
+        </td>
+      <th>
+        <_TPL:LANG_TEAM_NAME_U>
+        <TPL_SUB:TEAM_NAME2_DESC_A><img src="../img/adm_desc_a.gif" width="11" height="11" border="0"></TPL_SUB:TEAM_NAME2_DESC_A>
+        <TPL_SUB:TEAM_NAME2_DESC><a href="<TPL:URL>"><img src="../img/adm_desc.gif" width="11" height="11" border="0"></a></TPL_SUB:TEAM_NAME2_DESC>
+        <TPL_SUB:TEAM_NAME2_ASC_A><img src="../img/adm_asc_a.gif" width="11" height="11" border="0"></TPL_SUB:TEAM_NAME2_ASC_A>
+        <TPL_SUB:TEAM_NAME2_ASC><a href="<TPL:URL>"><img src="../img/adm_asc.gif" width="11" height="11" border="0"></a></TPL_SUB:TEAM_NAME2_ASC>
+        </td>
+      <th>Startinis naudingumas</td>
+      <th>SPE</td>
+      <th>DPV</td>
+      <th>&nbsp;</td>
+      <th><_TPL:LANG_INJURY_U></td>
+      <th><_TPL:TEAMS></td>
+    </tr>
+    
+    <TPL_SUB:ITEMS>
+    <tr class="<TPL_SUB:EVEN>even</TPL_SUB:EVEN><TPL_SUB:ODD>odd</TPL_SUB:ODD>">
+      <td class="list_item"><TPL:NUM></td>
+      <td class="list_item"><a href="ppl_edit.php?user_id=<TPL:USER_ID>"><TPL:LAST_NAME>, <TPL:FIRST_NAME></a></td>
+      <td class="list_item"><TPL:TYPE_NAME></td>
+      <td class="list_item">
+        <a href="manager_price.php?season_id=<TPL:SEASON_ID>&order=TEAM_NAME2%2C+LAST_NAME&where=T.TEAM_NAME2&query=<TPL:TEAM_NAME2>"><TPL:TEAM_NAME2></a>
+        <TPL_SUB:SYNCHRONISE>
+          <form action="" method="POST">
+	    <input type="hidden" name="player_id" value="<TPL:PLAYER_ID>">
+	    <input type="hidden" name="season_id" value="<TPL:SEASON_ID>">
+	    <input type="hidden" name="synchronise" value="Y">
+	    <input type="hidden" name="team_id" value="<TPL:TEAM_ID>">
+            <input type="submit" class="btn" value="<_TPL:LANG_SYNCHRONISE_U>" onclick="resettarget();"  onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" >
+	  </form>
+        </TPL_SUB:SYNCHRONISE>
+      </td>
+      <td class="list_item" align="center"><TPL:START_VALUE>
+	  <TPL_SUB:NO_VALUE>
+<form action="" method="POST">
+  <input type="hidden" name="season_id" value="<TPL:SEASON_ID>">
+  <input type="hidden" name="set_price" value="Y">
+            <input type="text" name="player_<TPL:USER_ID>" size="4" class="input">
+  <input type="submit" class="btn" value="<_TPL:LANG_SUBMIT_U>" onclick="resettarget();"  onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" ><br>
+</form>
+	  </TPL_SUB:NO_VALUE>
+	</td>
+      <td class="list_item" align="right"><TPL:START_VALUE_MONEY></td>
+      <td class="list_item" align="center"><TPL:CURRENT_VALUE_MONEY></td>
+      <td class="list_item" align="center">
+       <div id="publish_<TPL:USER_ID>_<TPL:SEASON_ID>">
+        <TPL_SUB:ACTIVATED>
+	<a href="#" onclick="setPublish(<TPL:USER_ID>,<TPL:SEASON_ID>, '<TPL:TYPE>', 'deactivate', 'publish_<TPL:USER_ID>_<TPL:SEASON_ID>'); return false"><img src="../img/adm_publish_Y.gif" width="12" height="12" border="0"></a>
+	</TPL_SUB:ACTIVATED>
+	<TPL_SUB:DEACTIVATED>
+	<a href="#" onclick="setPublish(<TPL:USER_ID>,<TPL:SEASON_ID>, '<TPL:TYPE>', 'activate', 'publish_<TPL:USER_ID>_<TPL:SEASON_ID>'); return false"><img src="../img/adm_publish_N.gif" width="12" height="12" border="0"></a>
+	</TPL_SUB:DEACTIVATED>
+       </div> 
+        <a href="manager_price_edit.php?type=<TPL:TYPE>&player_id=<TPL:USER_ID>&season_id=<TPL:SEASON_ID>"><img src="../img/adm_edit.gif" width="12" height="12" border="0" alt="redaguoti"></a>
+      </td>
+      <td class="list_item" align="center">
+        <TPL:PLAYER_STATE_DIV>
+      </td>
+      <td class="list_item" align="center"><TPL:CNT></td>
+    </tr>
+    </TPL_SUB:ITEMS>   
+    <TPL_SUB:NORECORDS>
+      <tr bgcolor="#FFFFFF"><td colspan="8" class="list_item">Įrašų nėra</td></tr>
+    </TPL_SUB:NORECORDS> 
+  </table>
+</div>
+<div class="content">
+</div>
+</div>
+</TPL_SUB:MANAGERS>
+</div>
+
+<TPL_INCLUDE:../tpl/adm/foot.tpl.html>

@@ -1,0 +1,54 @@
+<TPL_INCLUDE:../tpl/adm/head.tpl.html>
+<TPL_INCLUDE:../tpl/adm/menu.tpl.html>
+
+<form action="" method="post">
+<div class="portlet" >
+  <div class="header"><_TPL:LANG_GENERAL_DATA_U></div>
+  <div class="content">
+   <table>  
+    <tr>
+      <td class="list_item"><_TPL:LANG_SPORT_U></td>
+      <td class="list_item"><TPL:SPORT_ID></td>
+    </tr>
+
+    <tr>
+      <td class="list_item">Vyras</td>
+      <td class="list_item"><TPL_INPUT:adm_user.male></td>
+    </tr>
+
+    <tr>
+      <td class="list_item"><_TPL:LANG_COUNTRY_U></td>
+      <td class="list_item"><TPL:CITIZENSHIP></td>
+    </tr>
+
+    <tr>
+      <td class="list_item"><_TPL:LANG_TEAM_NAME_U></td>
+      <td class="list_item"><TPL:TEAM_ID></td>
+    </tr>
+    
+  </table>
+</div>
+</div>
+<div class="portlet" >
+  <div class="header"><_TPL:LANG_CONTENT_U></div>
+  <div class="content">
+first name, last name, birth_date, start_date, expired date, position1/position2, number <br>
+      <textarea name="descr" cols="100" rows="12" class="input"><TPL:DESCR></textarea>
+</div>
+</div>
+
+<br>
+
+<div class="portlet">
+  <div class="content">
+        <input type="submit" class="btn" value="<_TPL:LANG_SAVE_U>" onclick="resettarget();"  onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" >
+        <input type="reset" class="btn" value="<_TPL:LANG_RESET_U>" onclick="return confirm('<_TPL:LANG_REALLY_U>');"  onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'">
+</div>
+</div>
+
+
+  <TPL:OUTCOME>
+  <span class="txtlinkred"><TPL:ERROR></span>
+</form>
+
+<TPL_INCLUDE:../tpl/adm/foot.tpl.html>

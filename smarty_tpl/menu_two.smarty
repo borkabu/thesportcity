@@ -1,0 +1,17 @@
+<div id="topmenu" style="float:{$align};width:{$width}px;">
+  <ul>
+  {foreach $items1 as $item}
+    <li  {if $height>0}style="height:{$height}px"{/if}><a href="{$item.LINK}" {if isset($item.SEL)}class="active"{/if} {if isset($item.TIP)}onmouseover="Tip('{$item.TIP}')" onmouseout="UnTip()"{/if}>{$item.TITLE}</a>
+    </li>
+  {/foreach}
+  </ul>
+</div>
+<div id="topmenu" style="float:{$align};width:{$width}px;">
+  <ul>
+  {foreach $items2 as $item}
+    <li {if $height>0}style="height:{$height}px"{/if}><a href="{$item.LINK}" {if isset($item.SEL)}class="active"{/if} {if isset($item.TIP)}onmouseover="Tip('{$item.TIP}')" onmouseout="UnTip()"{/if}>{$item.TITLE}</a>
+    </li>
+  {/foreach}
+  </ul>
+</div>
+

@@ -1,0 +1,80 @@
+<div class="portlet">
+ <div class="header">{translate fonema=LANG_DAYS_U}</div>  
+ <div class="content">
+  <table>
+   <tr>
+    <th>{translate fonema=LANG_DAYS_U}</th>
+    <th>{translate fonema=LANG_PLAYER_U}</th>
+    <th>{translate fonema=LANG_MATCH_U}</th>
+    <th>{translate fonema=LANG_POINTS_U}</th>
+    <th></th>
+   </tr>
+{foreach $days as $tour}
+   <tr>
+    <td>{$tour.GAME_DAY}</td>
+    <td>
+     {if !empty($tour.PLAYER_ID)}
+<div style="float:left">
+{if isset($tour.PLAYER_STATE_DIV)}
+ <div id="player_state_{$tour.PLAYER_ID}>_{$tour.SEASON_ID}" style="float:left;">
+  {if isset($tour.PLAYER_STATE_DIV.INJURY_STATE_DEFAULT) &&
+      isset($tour.PLAYER_STATE_DIV.QUESTIONABLE_STATE_DEFAULT)}<!--
+  {elseif isset($tour.PLAYER_STATE_DIV.INJURY_STATE_ON)}<img src="./img/injury.gif" width="12" height="12" border="0" 
+    {if isset($tour.PLAYER_STATE_DIV.INJURY_STATE_ON.ADMIN)}onClick="javascript:playerStateUpdate({$tour.SEASON_ID}, {$tour.PLAYER_ID}, -1, 'player_state_{$tour.PLAYER_ID}_{$tour.SEASON_ID}')"{/if}
+   onmouseover="Tip('{translate fonema=LANG_UNFIT_TO_PLAY_U}')" onmouseout="UnTip()" /><!--
+  {elseif isset($tour.PLAYER_STATE_DIV.QUESTIONABLE_STATE_ON)}<img src="./img/questionable.png" width="12" height="12" border="0" 
+    {if isset($tour.PLAYER_STATE_DIV.QUESTIONABLE_STATE_ON.ADMIN)}onClick="javascript:playerStateUpdate({$tour.SEASON_ID}, {$tour.PLAYER_ID}, -4, 'player_state_{$tour.PLAYER_ID}_{$tour.SEASON_ID}')"{/if}
+   onmouseover="Tip('{translate fonema=LANG_QUESTIONABLE_U}')" onmouseout="UnTip()"/><!--
+  {elseif isset($tour.PLAYER_STATE_DIV.INJURY_STATE_OFF) ||
+	  isset($tour.PLAYER_STATE_DIV.QUESTIONABLE_STATE_OFF)}<img src="./img/no_injury.gif" width="12" height="12" border="0" 
+    {if isset($tour.PLAYER_STATE_DIV.INJURY_STATE_OFF.ADMIN)}onClick="javascript:playerStateUpdate({$tour.SEASON_ID}, {$tour.PLAYER_ID}, 1, 'player_state_{$tour.PLAYER_ID}_{$tour.SEASON_ID}')"{/if}
+    {if isset($tour.PLAYER_STATE_DIV.QUESTIONABLE_STATE_OFF.ADMIN)}onClick="javascript:playerStateUpdate({$tour.SEASON_ID}, {$tour.PLAYER_ID}, 4, 'player_state_{$tour.PLAYER_ID}_{$tour.SEASON_ID}')"{/if}
+   onmouseover="Tip('{translate fonema=LANG_FIT_TO_PLAY_U}')" onmouseout="UnTip()"><!--
+  {/if}
+  {if isset($tour.PLAYER_STATE_DIV.SUSPENSION_STATE_DEFAULT)}-->
+  {elseif isset($tour.PLAYER_STATE_DIV.SUSPENSION_STATE_ON)}--><img src="./img/red_card.gif" width="12" height="12" border="0" 
+    {if isset($tour.PLAYER_STATE_DIV.SUSPENSION_STATE_ON.ADMIN)}onClick="javascript:playerStateUpdate({$tour.SEASON_ID}, {$tour.PLAYER_ID}, -2, 'player_state_{$tour.PLAYER_ID}_{$tour.SEASON_ID}')"
+    {/if}
+   onmouseover="Tip('{translate fonema=LANG_SUSPENDED_U}')" onmouseout="UnTip()"/>
+  {elseif isset($tour.PLAYER_STATE_DIV.SUSPENSION_STATE_OFF)}--><img src="./img/no_card.gif" width="12" height="12" border="0" 
+    {if isset($tour.PLAYER_STATE_DIV.SUSPENSION_STATE_OFF.ADMIN)}onClick="javascript:playerStateUpdate({$tour.SEASON_ID}, {$tour.PLAYER_ID}, 2, 'player_state_{$tour.PLAYER_ID}_{$tour.SEASON_ID}')"
+    {/if}
+   onmouseover="Tip('{translate fonema=LANG_ALLOWED_TO_PLAY_U}')" onmouseout="UnTip()"/>
+  {/if}
+</div>
+{/if}
+</div>
+
+      <a href="f_manager_player_seasonstats.php?user_id={$tour.PLAYER_ID}&seasons={$tour.SUBSEASONS}" target="f_manager_player_season_stats" onClick="window.open('','f_manager_player_season_stats','width=800,height=700,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');"><b>{$tour.LAST_NAME}, {$tour.FIRST_NAME}</b></a> <br>
+            <span class="date_font2">{$tour.TYPE_NAME} ({$tour.TEAM_NAME3})</span>
+     {else}
+       
+     {/if}
+    </td>
+    <td>{if !empty($tour.GAME_ID)}
+	  {$tour.TEAM_NAME1} - {$tour.TEAM_NAME2}
+        {/if}
+    </td>
+    <td>{if isset($tour.KOEFF)}
+          {$tour.KOEFF}
+        {/if}
+    </td>
+    <td>
+     {if $tour.CAN_CHANGE}
+       <a href="solo_manager_select_player.php?season_id={$tour.SEASON_ID}&day={$tour.GAME_DAY}" target="solo_manager_select" onClick="window.open('','solo_manager_select','width=800,height=800,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');">{translate fonema=LANG_SELECT_PLAYER_U}</a>
+	<form action="" method="post" style="margin:0;;" name="form_{$tour.GAME_DAY}" id="form_{$tour.GAME_DAY}">
+	  <input type="hidden" name="player" value="">
+	  <input type="hidden" name="season_id" value="{$tour.SEASON_ID}">
+	  <input type="hidden" name="game_day" value="{$tour.GAME_DAY}">
+	  <input type="hidden" name="appoint" value="y">
+	</form>        
+     {else if isset($tour.CAN_VIEW)}
+        <a href="solo_manager_day_stats.php?season_id={$tour.SEASON_ID}&day={$tour.GAME_DAY}" target="solo_manager_day_stats" onClick="window.open('','solo_manager_day_stats','width=800,height=800,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');">{translate fonema=LANG_MARKET_STATS_U}</a>       
+     {/if}
+
+    </td>
+   </tr>
+{/foreach} 
+  </table>
+  </div>
+</div>

@@ -1,0 +1,163 @@
+<TPL_INCLUDE:../tpl/adm/head.tpl.html>
+<TPL_INCLUDE:../tpl/adm/menu.tpl.html>
+
+<div  style="float:left;">
+<form action="" method="post" name="editform">
+<input type="hidden" name="form_save" value="Y">
+<input type="hidden" name="referer" value="<TPL:REFERER>">
+
+<TPL_SUB:ERROR><span class="error"><TPL:MSG></span></TPL_SUB:ERROR>
+
+<div class="portlet" >
+  <div class="header"><_TPL:LANG_GENERAL_DATA_U></div>
+  <div class="content">
+  <table width="100%" border="0" cellspacing="0" cellpadding="3" bgcolor="#FFFFFF">
+   
+    <tr>
+      <td class="list_item">Vardas</td>
+      <td class="list_item"><TPL_INPUT:adm_user.first_name></td>
+    </tr>
+    
+    <tr>
+      <td class="list_item">Pavardė</td>
+      <td class="list_item"><TPL_INPUT:adm_user.last_name></td>
+    </tr>
+    
+    <tr>
+      <td class="list_item">Vartotojo vardas</td>
+      <td class="list_item"><TPL_INPUT:adm_user.user_name></td>
+    </tr>
+    
+    <tr>
+      <td class="list_item">El. paštas</td>
+      <td class="list_item"><TPL_INPUT:adm_user.email></td>
+    </tr>
+    
+    <tr>
+      <td class="list_item">Telefonas</td>
+      <td class="list_item"><TPL_INPUT:adm_user.phone></td>
+    </tr>
+    
+    <tr>
+      <td class="list_item">Mobilus tel.</td>
+      <td class="list_item"><TPL_INPUT:adm_user.mobile_phone></td>
+    </tr>
+    
+    <tr>
+      <td class="list_item">Adresas</td>
+      <td class="list_item"><TPL_INPUT:adm_user.address1><br>
+			<TPL_INPUT:adm_user.address2><br>
+			<TPL_INPUT:adm_user.town><TPL_INPUT:adm_user.postcode><br>
+			<TPL:COUNTRY></td>
+    </tr>
+    
+    <tr>
+      <td class="list_item"><_TPL:LANG_SEX_U>:</td>
+      <td class="list_item"><TPL:SEX_M> <_TPL:LANG_SEX_MALE_L> &nbsp;&nbsp;&nbsp;<TPL:SEX_F> <_TPL:LANG_SEX_FEMALE_L></td>
+    </tr>
+    
+    <tr>
+      <td class="list_item">Gimimo diena</td>
+      <td class="list_item"><TPL_INPUT:adm_user.birth_date></td>
+    </tr>
+
+    <tr>
+      <td class="list_item" valign="top"><b>Administratorius</b></td>
+      <td class="list_item"><TPL_INPUT:adm_user.admin></td>
+    </tr>
+    
+    <tr>
+      <td class="list_item" valign="top"><b><_TPL:LANG_CREDITS_U></b></td>
+      <td class="list_item"><TPL_INPUT:adm_user.credit></td>
+    </tr>
+
+    <tr>
+      <td class="list_item">Leidzhiamas blogas</td>
+      <td class="list_item"><TPL_INPUT:adm_user.allow_blog></td>
+    </tr>
+    
+    <tr>
+      <td class="list_item">Publikuoti</td>
+      <td class="list_item"><TPL_INPUT:adm_user.publish></td>
+    </tr>
+
+    <tr>
+      <td class="list_item">Acitve</td>
+      <td class="list_item"><TPL_INPUT:adm_user.active></td>
+    </tr>
+    
+  </table>
+</div>
+</div>
+
+
+<div class="portlet">
+  <div class="content">
+        <input type="submit" class="btn" value="<_TPL:LANG_SAVE_U>" onclick="resettarget();"  onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" >
+        <input type="reset" class="btn" value="<_TPL:LANG_RESET_U>" onclick="return confirm('<_TPL:LANG_REALLY_U>');"  onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'">
+</div>
+</div>
+</form>
+</div>
+
+<div  style="float:left;">
+<div class="portlet">
+  <div class="header"><_TPL:LANG_AWARDS_DATA_U> <a href="award_user_edit.php?user_id=<TPL:USER_ID>"><img src="../img/adm_edit.gif" width="12" height="12" border="0" alt="add"></a></div>
+  <div class="content">
+  <table>
+    <tr>
+      <th>Apdovanijimas</td>
+      <th>Akcija</td>
+      <th>&nbsp;</td>
+    </tr>
+    
+    <TPL_SUB:AWARDS>
+
+    <tr bgcolor="<TPL_SUB:EVEN>#FFFFFF</TPL_SUB:EVEN><TPL_SUB:ODD>#CDDDE4</TPL_SUB:ODD>">
+      <td class="list_item"><TPL:TITLE></td>
+      <td class="list_item"><TPL:COMMENT></td>
+      <td class="list_item" align="center">
+        <TPL_SUB:DEL><a href="<TPL:DEL_URL>" onClick="return confirm('Really?');"><img src="../img/adm_delete.gif" width="12" height="12" border="0" alt="remove"></a></TPL_SUB:DEL>
+        <a href="award_user_edit.php?user_id=<TPL:USER_ID>&id=<TPL:ID>"><img src="../img/adm_edit.gif" width="12" height="12" border="0" alt="edit"></a>
+        </td>
+    </tr>
+    </TPL_SUB:AWARDS>
+    <TPL_SUB:AWARDS_NORECORDS>
+    <tr bgcolor="#FFFFFF"><td colspan="7" class="list_item">Nera apdovanojimu</td></tr>
+    </TPL_SUB:AWARDS_NORECORDS>
+      
+  </table>
+</div>
+</div>
+
+<div class="portlet">
+  <div class="header"><_TPL:LANG_GROUPS_U> <a href="forum_group_user_edit.php?user_id=<TPL:USER_ID>"><img src="../img/adm_edit.gif" width="12" height="12" border="0" alt="add"></a></div>
+  <div class="content">
+  <table>
+    <tr>
+      <th><_TPL:LANG_GROUP_U></td>
+      <th><_TPL:LANG_LEVEL_U></td>
+      <th>&nbsp;</td>
+    </tr>
+    
+    <TPL_SUB:GROUPS>
+
+    <tr class="<TPL_SUB:EVEN>even</TPL_SUB:EVEN><TPL_SUB:ODD>odd</TPL_SUB:ODD>">
+      <td class="list_item"><TPL:GROUP_NAME></td>
+      <td class="list_item"><TPL:LEVEL></td>
+      <td class="list_item" align="center">
+        <TPL_SUB:DEL><a href="<TPL:DEL_URL>" onClick="return confirm('Really?');"><img src="../img/adm_delete.gif" width="12" height="12" border="0" alt="remove"></a></TPL_SUB:DEL>
+        <a href="forum_group_user_edit.php?user_id=<TPL:USER_ID>&group_id=<TPL:GROUP_ID>"><img src="../img/adm_edit.gif" width="12" height="12" border="0" alt="edit"></a>
+        </td>
+    </tr>
+    </TPL_SUB:GROUPS>
+    <TPL_SUB:GROUPS_NORECORDS>
+    <tr bgcolor="#FFFFFF"><td colspan="7" class="list_item">Nera grupiu</td></tr>
+    </TPL_SUB:GROUPS_NORECORDS>
+      
+  </table>
+</div>
+</div>
+</div>
+
+<TPL_INCLUDE:../tpl/adm/foot.tpl.html>

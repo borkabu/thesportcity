@@ -1,0 +1,116 @@
+<TPL_INCLUDE:../tpl/adm/head.tpl.html>
+<TPL_INCLUDE:../tpl/adm/menu.tpl.html>
+
+
+<form action="<_TPL:FORM_URL>" method="get">
+<div class="portlet">
+  <div class="content">
+      <input type="hidden" name="order" value="<TPL:ORDER>">
+      <_TPL:LANG_SEARCH_U>: <TPL:WHERE> <TPL:QUERY> <input type="submit" class="btn" value="<_TPL:LANG_OK_U>" onclick="resettarget();"  onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'">
+      <TPL_SUB:FILTERED><a href="<_TPL:FORM_URL>">[ <_TPL:LANG_SHOW_ALL_RECORDS> ]</a></TPL_SUB:FILTERED>
+  </div>
+</div>
+</form>
+
+<TPL_SUB:PAGING>
+<div class="portlet">
+  <div class="content">
+      <_TPL:LANG_TOTAL_RECORDS_U>: <b><TPL:NUMROWS></b> | 
+      <_TPL:LANG_PAGES_U>:
+      <TPL_SUB:PAGES>
+        <TPL_SUB:SELECTED><b>[<TPL:PAGENUM>]</b></TPL_SUB:SELECTED>
+        <TPL_SUB:NORMAL><a href="<TPL:URL>">[<TPL:PAGENUM>]</a></TPL_SUB:NORMAL>
+      </TPL_SUB:PAGES>
+  </div>
+</div>
+</TPL_SUB:PAGING>
+
+<div class="portlet">
+  <div class="content">
+    Current folder <TPL:CURRENT_DIR>
+  </div>
+  <div class="content"> 
+    <form action="<TPL:SELF>" method="post" style="margin:0">
+    Choose folder <TPL:CHOOSE_DIRS>
+    <input type="submit" class="btn" value="<_TPL:LANG_OK_U>" onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'">
+    </form>
+  </div>
+</div>
+
+<div class="portlet">
+  <div class="content">
+  <table>
+    <tr>
+      <th>Failas</td>
+      <th  align="center">Dydis (b)</td>
+      <th  align="center">Pervadinti</td>
+      <th >&nbsp;</td>
+    </tr>
+    
+    <TPL_SUB:ITEM>
+    <form action="<TPL:SELF>" method="post">
+    <tr class="<TPL_SUB:EVEN>even</TPL_SUB:EVEN><TPL_SUB:ODD>odd</TPL_SUB:ODD>">
+      <td class="list_item">
+        <a href="../img/<TPL:FILE>" target="_blank"><img src="../img/adm_view.gif" width="12" height="12" border="0" alt="peržiūrėti"></a>
+        <TPL:FILE>
+      </td>
+      <td class="list_item" align="center"><TPL:SIZE></td>
+      <td class="list_item" align="center">
+        <TPL:RENAME>
+        <input type="hidden" name="rename" value="<TPL:FILE>">
+        <input type="text" name="rename_to" class="input">
+        <input type="image" src="../img/adm_enter.gif">
+      </td>
+      <td class="list_item" align="center">
+        <TPL_SUB:DEL><a href="<TPL:DEL_URL>" onClick="return confirm('Tikrai?');"><img src="../img/adm_delete.gif" width="12" height="12" border="0" alt="pašalinti"></a></TPL_SUB:DEL>
+      </td>
+    </tr>
+    </form>
+    </TPL_SUB:ITEM>
+    
+    <TPL_SUB:NORECORDS>
+    <tr bgcolor="<TPL_SUB:EVEN>#FFFFFF</TPL_SUB:EVEN><TPL_SUB:ODD>#A4BED4</TPL_SUB:ODD>">
+      <td colspan="5" class="list_item">Paveiksliukų nėra</td>
+    </tr>
+    </TPL_SUB:NORECORDS>
+    
+  </table>
+  </div>
+</div>
+
+<TPL_SUB:PAGING></TPL_SUB:PAGING>
+
+<TPL_SUB:SHOW>
+<a name="show"></a><br>
+  <table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#FFFFFF">
+    <tr>
+      <td class="list_item" bgcolor="#FFFFFF" valign="top" width="40%"><img src="<TPL:SRC>" border="0"></td>
+      <td class="list_item" bgcolor="#E1E1E1" valign="top" width="60%">
+        Failas:<br><br>
+        <b><TPL:SRC></b>
+      </td>
+    </tr>
+  </table>
+</TPL_SUB:SHOW>
+
+
+
+<a name="upload"></a><br>
+<div class="portlet">
+  <div class="content">
+  <table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#FFFFFF">
+    <form action="<TPL:SELF>" method="post" enctype="multipart/form-data">
+    <tr bgcolor="#E1E1E1">
+      <td class="list_item" align="right"><b>Įkelti naują failą:</b></td>
+      <td class="list_item">
+        <TPL:DIRS>
+        <input type="file" name="upload" class="btn">
+        <input type="submit" class="btn" value="<_TPL:LANG_OK_U>" onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'">
+      </td>
+    </tr>
+    </form>
+  </table>
+  </div>
+</div>
+
+<TPL_INCLUDE:../tpl/adm/foot.tpl.html>

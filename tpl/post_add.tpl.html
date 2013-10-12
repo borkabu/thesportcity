@@ -1,0 +1,64 @@
+<TPL_SUB:POST>
+<div class="portlet">
+	<div class="content">
+		<div style="float:left;"><a href="forum.php?forum_id=<TPL:FORUM_ID>"><TPL:FORUM_NAME></a> -> <b><TPL:TOPIC_NAME></b></div>
+		<div style="float:right;">
+   	        </div>
+		<div style="clear:both;"></div>
+	</div>
+</div>
+
+<TPL_SUB:ERROR>
+<div class="portlet" id="message">
+    <div class="content">
+	<span class="textred"><b><TPL:MSG></b></span>
+    </div>
+</div>
+</TPL_SUB:ERROR>
+
+<div class="portlet">
+    <div class="header"><_TPL:LANG_EDIT_POST_U></div>
+    <div class="content">
+<form action="" method="post"  style="margin:0px">
+  <input type="hidden" name="post_comment" value="Y">
+  <input type="hidden" name="lang_id" value="<TPL:LANG_ID>">
+    <TPL_INPUT:adm_forum.text>
+
+			<script type="text/javascript">
+				//<![CDATA[
+
+					// This call can be placed at any point after the
+					// <textarea>, or inside a <head><script> in a
+					// window.onload event handler.
+
+					// Replace the <textarea id="editor"> with an CKEditor
+					// instance, using default configurations.
+					CKEDITOR.replace( 'text' ,
+                                            { entities : false,
+                                                  on :
+                                                 {
+					           instanceReady : function( ev )
+					            {
+                                                     // Output paragraphs as <p>Text</p>.
+					                this.dataProcessor.writer.setRules( 'p',
+					                    {
+					                        indent : false,
+                                                                breakBeforeOpen : false,
+					                        breakAfterOpen : false,
+					                        breakBeforeClose : false,
+					                        breakAfterClose : false
+                                                             });
+					            }
+					        }
+					});
+
+				//]]>
+				</script>
+  <input type="hidden" name="post_id" value="<TPL:POST_ID>">
+  <input type="hidden" name="topic_id" value="<TPL:TOPIC_ID>">
+  <input type="hidden" name="forum_id" value="<TPL:FORUM_ID>">
+  <input class="btn" type="submit" value=" <_TPL:LANG_CREATE_U> " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+</form>
+	</div>
+</div>
+</TPL_SUB:POST>

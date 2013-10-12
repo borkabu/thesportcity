@@ -1,0 +1,4 @@
+<div style="clear:both"></div>
+  {$comment_queue}
+  {$content_queue}
+

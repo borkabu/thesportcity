@@ -1,0 +1,82 @@
+<div  style="clear:both"></div>
+{if isset($logged)}
+<form action="compose_message.php?folder_id=3" method="post"  style="margin:0px">
+<div class="portlet">
+ <div class="header">{translate fonema=LANG_COMPOSE_PM_U}</div>
+ <div class="content">
+   <table class="noborder">
+    <tr><td><b>{translate fonema=LANG_SUBJECT_U}</b></td><td>
+      <input type="text" size="60" class="input" maxlength="128" name="subject" id="subject" value="{if isset($logged.SUBJECT)}{$logged.SUBJECT}{/if}">
+      <input class="btn" type="submit" value=" {translate fonema=LANG_SEND_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/></td></tr>
+    <tr><td colspan="2">
+      {$receipients_box}
+    </td></tr>
+   </table>
+ </div>
+</div>
+
+<script>
+ $(function() {
+	$( "#post" ).tabs({
+		cookie: {
+			expires: 1,
+			name: "post"
+			}
+		}); 
+});
+</script>
+<div id="post">
+ <ul>
+ <li><a href="#tabs-1" title="{translate fonema=LANG_ADVANCED_EDITOR_U}">{translate fonema=LANG_ADVANCED_EDITOR_U}</a></li>
+ <li><a href="#tabs-2" title="{translate fonema=LANG_SIMPLE_EDITOR_U}">{translate fonema=LANG_SIMPLE_EDITOR_U}</a></li>
+ </ul>
+ <div id="tabs-1">
+  <div class="portlet" style="margin:0px">
+   <div class="content">
+      <textarea name="descr" id="descr">{if isset($logged.DESCR)}{$logged.DESCR}{/if}</textarea>
+	<script type="text/javascript">
+	//<![CDATA[
+		// This call can be placed at any point after the
+		// <textarea>, or inside a <head><script> in a
+		// window.onload event handler.
+		// Replace the <textarea id="editor"> with an CKEditor
+		// instance, using default configurations.
+		CKEDITOR.replace( 'descr' ,
+                      { entities : false,
+			resize_enabled: false,
+                              on :
+                                 {
+			           instanceReady : function( ev )
+			            {
+                                     // Output paragraphs as <p>Text</p>.
+			                this.dataProcessor.writer.setRules( 'p',
+		                       {
+			                   indent : false,
+                                           breakBeforeOpen : false,
+			                   breakAfterOpen : false,
+			                   breakBeforeClose : false,
+			                   breakAfterClose : false
+                                       });
+			            }
+			        }
+			});
+
+		//]]>
+		</script>
+   </div>
+  </div>
+ </div>
+ <div id="tabs-2">
+  <div class="portlet" style="margin:0px">
+   <div class="content">
+    <textarea name="simple_text" id="simple_text" rows=15 cols=65"></textarea>
+   </div> 
+  </div>
+ </div>
+</div>
+ {if isset($logged.PM_ID)}
+  <input type="hidden" name="pm_id" value="{$logged.PM_ID}">
+  <input type="hidden" name="post_pm" value="Y">
+ {/if}
+</form>
+{/if}

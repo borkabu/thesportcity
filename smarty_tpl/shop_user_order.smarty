@@ -1,0 +1,95 @@
+<div style="clear:both"></div>
+<div class="portlet">
+<div class="header">{translate fonema=LANG_ORDER_U} TSC000{$order.ORDER_ID}</div>
+<div class="content">
+            {translate fonema=LANG_ORDER_NUMBER_U}: <a href="shop_user_orders.php?order_id={$order.ORDER_ID}"><b>TSC000{$order.ORDER_ID}</b></a><br>
+            {translate fonema=LANG_PRICE_CREDITS_U}: <b>{$order.TOTAL_CREDITS+$order.DELIVERY_CREDITS}</b><br>
+            {translate fonema=LANG_PRICE_MONEY_U}: <b>{$order.TOTAL_EURO+$order.DELIVERY_EURO}</b>&euro;</b><br>
+            {translate fonema=LANG_ORDER_DATE_U}: <b>{$order.ORDER_DATE}</b><br>
+            {translate fonema=LANG_ITEMS_U}: <b>{$order.ITEMS}</b><br>
+	    {translate fonema=LANG_STATUS_U}: {if $order.STATUS==0}<b class="textred">{translate fonema=LANG_UNPAID_U}</b>
+               {else if $order.STATUS==1}<b class="textgreen">{translate fonema=LANG_PAID_U}</b>
+               {else if $order.STATUS==2}<b class="textgreen">{translate fonema=LANG_DISPATCHED_U}</b>{/if}
+
+        {if $order.STATUS==0}
+<table class="noborder">
+ <tr><td><form action="shop_user_orders.php?order_id={$order.ORDER_ID}" method="POST">
+	    <input type="hidden" name="accept_payment" value="1"> 
+	    <input type="hidden" name="order_id" value="{$order.ORDER_ID}"> 
+            <input class="btn" type="submit" value=" {translate fonema=LANG_CHECKOUT_CREDITS_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" onClick="return confirm('{translate fonema=LANG_REALLY_U}');" />
+         </form>
+     </td>
+     <td> / </td>
+     <td>
+          <form action="https://www.paypal.com/cgi-bin/webscr" method="post"> 
+	    <input type="hidden" name="cmd" value="_cart"> 
+	    <input type="hidden" name="upload" value="1"> 
+	    <input type="hidden" name="business" value="paypal@thesportcity.net"> 
+	    <input type="hidden" name="currency_code" value="EUR"> 
+	    <input type="hidden" name="custom" value="{$order.ORDER_ID}"> 
+            <INPUT TYPE="hidden" name="charset" value="utf-8"> 
+	     {foreach from=$order.ORDER_ITEMS item=order_item name=items}
+	      <input type="hidden" name="item_name_{$smarty.foreach.items.iteration}" value="{$order_item.ITEM_NAME}"> 
+	      <input type="hidden" name="amount_{$smarty.foreach.items.iteration}" value="{$order_item.ITEM_PRICE_EURO}">
+	      <input type="hidden" name="quantity_{$smarty.foreach.items.iteration}" value="{$order_item.QUANTITY}">
+               {if $smarty.foreach.items.last}
+    	        <input type="hidden" name="item_name_{$smarty.foreach.items.total+1}" value="{translate fonema=LANG_DELIVERY_U}"> <input type="hidden" name="amount_{$smarty.foreach.items.total+1}" value="{$order.DELIVERY_EURO}">
+               {/if}
+             {/foreach}
+            <input type="image" name="submit" border="0" src="https://www.paypal.com/en_US/i/btn/btn_buynow_LG.gif"  alt="PayPal - The safer, easier way to pay online">  </form>
+   </td>
+   <td> / </td>
+   <td><form action="shop_user_orders.php" method="POST">
+	    <input type="hidden" name="cancel_order" value="1"> 
+	    <input type="hidden" name="order_id" value="{$order.ORDER_ID}"> 
+            <input class="btn" type="submit" value=" {translate fonema=LANG_CANCEL_ORDER_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" onClick="return confirm('{translate fonema=LANG_REALLY_U}');" />
+       </form>
+   </td>
+  </tr>
+</table>
+        {/if}
+
+</div>
+<div class="content">
+<table>
+ <tr>
+  <th></th>
+  <th>{translate fonema=LANG_ITEM_NAME_U}</th>
+  <th>{translate fonema=LANG_PRICE_CREDITS_U}</th>
+  <th>{translate fonema=LANG_PRICE_MONEY_U}</th>
+  <th>{translate fonema=LANG_QUANTITY_U}</th>
+ </tr>
+  {foreach $order.ORDER_ITEMS as $order_item}
+ <tr>
+   <td><img src="./img/{$order_item.PIC_LOCATION}" height="80" vspace="5" hspace="5" align="left"></td>
+   <td>
+    <a href="shop.php?item_id={$order_item.ITEM_ID}">{$order_item.ITEM_NAME}</a>
+       {foreach $order_item.ATTRIBUTES as $attribute}
+         <br> <b>{$attribute.ATTR_NAME}</b>: {$attribute.VALUE}
+       {/foreach}
+   </td>
+   <td>{$order_item.TOTAL_CREDITS}</td>
+   <td>{$order_item.TOTAL_EURO}&euro;</td>
+   <td>{$order_item.QUANTITY}</td>
+ </tr>
+  {/foreach}
+ <tr>
+   <td></td>
+   <td>{translate fonema=LANG_DELIVERY_U}</td>
+   <td>{$order.DELIVERY_CREDITS}</td>
+   <td>{$order.DELIVERY_EURO}&euro;</td>
+   <td>1</td>
+ </tr>
+ <tr>
+   <td></td>
+   <td><b>{translate fonema=LANG_TOTAL_U}</b></td>
+   <td>{$order.TOTAL_CREDITS+$order.DELIVERY_CREDITS} {translate fonema=LANG_CREDITS_U}</td>
+   <td>{$order.TOTAL_EURO+$order.DELIVERY_EURO}&euro;</td>
+   <td></td>
+ </tr>
+</table>
+</div>
+<div class="content">
+{$order.NOTE}
+</div>
+</div>

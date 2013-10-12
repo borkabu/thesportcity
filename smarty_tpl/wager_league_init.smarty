@@ -1,0 +1,12 @@
+<div class="portlet">
+  <div class="header">{translate fonema=LANG_CREATE_LEAGUE_U}</div>
+  <div class="content">
+  <form action="" method="post">
+        {translate fonema=LANG_WAGER_CREATE_LEAGUE_INSTR_U}.<br>
+        <b>{translate fonema=LANG_LEAGUE_NAME_U}</b>:
+        <input type="text" value="" class="input" size="64" maxlength="64" name="title" id="title">
+          <input type="hidden" name="create_league" value="y">
+          <input type="submit"  class="btn" type="submit" value=" {translate fonema=LANG_CREATE_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+  </form>
+  </div>
+</div>

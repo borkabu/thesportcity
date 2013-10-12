@@ -1,0 +1,231 @@
+<div style="clear:both"></div>
+<TPL:MANAGER_FILTER_BOX>
+
+<TPL_SUB:ERROR>
+<div class="portlet" id="message">
+    <div class="content">
+	<span class="textred"><b><TPL:MSG></b></span>
+    </div>
+</div>
+</TPL_SUB:ERROR>
+
+<TPL_SUB:CREATE_LEAGUE_OFFER>
+<div class="portlet" id="create_league_offer">
+    <div class="content">
+	<_TPL:LANG_CREATE_LEAGUE_OFFER_U>
+	<input type="button" class="btn" value=" <_TPL:LANG_YES_PLEASE_U> " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" onClick="javascript:createFMLeague('create_league', 'create_league_offer')"/>
+    </div>
+</div>
+<div id="create_league">
+</div>
+</TPL_SUB:CREATE_LEAGUE_OFFER>
+
+<TPL_SUB:LOGGED>
+<div class="portlet">
+  <div class="header"><_TPL:LANG_LEAGUE_U>: <b><TPL:TITLE></b></div>
+  <form action="f_manager_league_control.php" method="post">
+  <div class="content">
+     <b><_TPL:LANG_DESCRIPTION_U></b>
+     <TPL:DESCR>
+        <input type="hidden" name="league_id" value="<TPL:LEAGUE_ID>">
+        <input type="hidden" name="set_rules" value="Y">
+        <TPL_INPUT:adm_manager_league.rules>
+	<script type="text/javascript">
+		//<![CDATA[
+
+			// This call can be placed at any point after the
+			// <textarea>, or inside a <head><script> in a
+			// window.onload event handler.
+
+			// Replace the <textarea id="editor"> with an CKEditor
+			// instance, using default configurations.
+			CKEDITOR.replace( 'rules' ,
+                            {   
+				entities : true,
+                                  on :
+                                 {
+			           instanceReady : function( ev )
+			            {
+                                     // Output paragraphs as <p>Text</p>.
+			                this.dataProcessor.writer.setRules( 'p',
+			                    {
+			                        indent : false,
+                                                breakBeforeOpen : false,
+			                        breakAfterOpen : false,
+			                        breakBeforeClose : false,
+			                        breakAfterClose : false
+                                             });
+			            }
+			        }
+			});
+
+		//]]>
+		</script>
+            <input class="btn" type="submit" value=" <_TPL:LANG_SUBMIT_U> " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+
+  </div>
+  <div class="header"><_TPL:LANG_SETTINGS_U></div>
+  <div class="content">
+    <table class="noborder">
+	<tr><td><_TPL:LANG_COUNTRY_U>:</td><td> <TPL:COUNTRY> <img src='./img/icons/information.png' onmouseover="Tip('<_TPL:LANG_LEAGUE_COUNTRY_INFO_U>')" onmouseout="UnTip()" /></td></tr>
+	<tr><td><_TPL:LANG_TYPE_U>:</td><td> <TPL:TYPE> <img src='./img/icons/information.png' onmouseover="Tip('<_TPL:LANG_LEAGUE_TYPE_INFO_U>')" onmouseout="UnTip()" /></td></tr>
+	<tr><td><_TPL:LANG_ENTRY_FEE_U>:</td><td> <input type="text" name="entry_fee" value="<TPL:ENTRY_FEE>" maxlength="3" size="3" class="input"></td></tr>
+	<tr><td><_TPL:LANG_PARTICIPANTS_U>:</td><td> <input type="text" name="participants" value="<TPL:PARTICIPANTS>" maxlength="3" size="3" class="input"> <img src='./img/icons/information.png' onmouseover="Tip('<_TPL:LANG_LEAGUE_PARTICIPANTS_INFO_U>')" onmouseout="UnTip()" /></td></tr>
+	<tr><td><_TPL:LANG_RECRUITMENT_U>:</td><td> <TPL_INPUT:league.recruitment_active> <img src='./img/icons/information.png' onmouseover="Tip('<_TPL:LANG_LEAGUE_RECRUITMENT_INFO_U>')" onmouseout="UnTip()" /></td></tr>
+	<tr><td><_TPL:LANG_ACCEPT_NEWBIES_U>:</td><td> <TPL_INPUT:league.accept_newbies> <img src='./img/icons/information.png' onmouseover="Tip('<_TPL:LANG_LEAGUE_ACCEPT_NEWBIES_INFO_U>')" onmouseout="UnTip()" /></td></tr>
+	<tr><td><_TPL:LANG_REAL_PRIZES_U>:</td><td> <TPL_INPUT:league.real_prizes> <img src='./img/icons/information.png' onmouseover="Tip('<_TPL:LANG_LEAGUE_REAL_PRIZES_INFO_U>')" onmouseout="UnTip()" /></td></tr>
+	<tr><td><_TPL:LANG_INVITE_TYPE_U>:</td><td> <TPL:INVITE_TYPE> <img src='./img/icons/information.png' onmouseover="Tip('<_TPL:LANG_LEAGUE_INVITE_TYPE_INFO_U>')" onmouseout="UnTip()" /></td></tr>
+        <TPL_SUB:INVITES>
+	<tr><td><_TPL:LANG_INVITE_CODE_U>:</td><td><b><TPL:INVITE_CODE></b></td></tr>
+        </TPL_SUB:INVITES>
+        <tr><td colspan=2><input class="btn" type="submit" value=" <_TPL:LANG_SUBMIT_U> " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/></td></tr>
+    </table>
+  </div>
+  </form>
+  <div class="header"><_TPL:LANG_PARTICIPANTS_U></div>
+  <div class="content">
+       <TPL_SUB:LEAGUE>
+        <table width="100%">
+          <tr valign="top">
+            <th><_TPL:LANG_PARTICIPANT_U></th>
+            <th><_TPL:LANG_POINTS_U></th>
+            <th><_TPL:LANG_PLACE_U></th>
+            <th><_TPL:LANG_STATUS_U></th>
+            <th><_TPL:LANG_TAG_U></th>
+            <th></th>
+          </tr>
+          <TPL_SUB:OWNER>
+          <tr valign="top">
+            <td><b><TPL:USER_NAME></b></td>
+            <td><TPL:POINTS></td>
+            <td><TPL:PLACE></td>
+            <td><_TPL:LANG_OWNER_U></td>
+              <form action="<TPL:SELF>" method="post">
+		  <td>
+		    <input type="text" name="tag" value="<TPL:TAG>" maxlength="20" size="12" class="input">
+                    <input class="btn" type="submit" value=" <_TPL:LANG_OK_U> " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+		    <input type="hidden" name="league_id" value="<TPL:LEAGUE_ID>">
+                    <input type="hidden" name="user_id" value="<TPL:USER_ID>">
+                    <input type="hidden" name="tag_user" value="Y">
+                  </td>
+              </form>
+            <td></td>
+          </tr>
+          </TPL_SUB:OWNER> 
+          <tr valign="top">
+           <th colspan=6 align="center"><_TPL:LANG_CURRENT_MEMBERS_U></th>
+          </tr>
+          <TPL_SUB:CURRENT_MEMBERS>
+          <form action="<TPL:SELF>" method="post">
+            <tr valign="top">
+              <td><b><TPL:USER_NAME></b></td>
+              <td><TPL:POINTS></td>
+              <td><TPL:PLACE></td>
+              <td><_TPL:LANG_PARTICIPANT_U></td>
+              <form action="<TPL:SELF>" method="post" style="margin:0">
+	      <td>
+		    <input type="text" name="tag" value="<TPL:TAG>" maxlength="20" size="12" class="input">
+                    <input class="btn" type="submit" value=" <_TPL:LANG_OK_U> " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+		    <input type="hidden" name="league_id" value="<TPL:LEAGUE_ID>">
+                    <input type="hidden" name="user_id" value="<TPL:USER_ID>">
+                    <input type="hidden" name="tag_user" value="Y">
+              </td>
+              </form>
+              <form action="<TPL:SELF>" method="post">
+	      <td>
+		<input class="btn" type="submit" value=" <_TPL:LANG_DELETE_U> " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"  onClick="return confirm('<_TPL:LANG_REALLY_U>?');"/>
+	        <input type="hidden" name="league_id" value="<TPL:LEAGUE_ID>">
+                <input type="hidden" name="user_id" value="<TPL:USER_ID>">
+                <input type="hidden" name="remove_user" value="Y">
+              </td>
+              </form>
+            </tr>
+          </form>
+          </TPL_SUB:CURRENT_MEMBERS> 
+          <tr valign="top">
+           <th colspan=6 align="center"><_TPL:LANG_INVITED_MEMBERS_U></th>
+          </tr>
+          <TPL_SUB:INVITED_MEMBERS>
+          <tr valign="top">
+            <td><b><TPL:USER_NAME></b></td>
+            <td><TPL:POINTS></td>
+            <td><TPL:PLACE></td>
+            <td><_TPL:LANG_INVITED_U></td>
+            <td></td>
+            <form action="<TPL:SELF>" method="post">
+            <td>
+                <input class="btn" type="submit" value=" <_TPL:LANG_DELETE_U> " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" onClick="return confirm('<_TPL:LANG_REALLY_U>?');"/>
+		<input type="hidden" name="league_id" value="<TPL:LEAGUE_ID>">
+                <input type="hidden" name="user_id" value="<TPL:USER_ID>">
+                <input type="hidden" name="remove_user2" value="Y">
+            </td>
+            </form>
+          </tr>
+          </TPL_SUB:INVITED_MEMBERS> 
+          <tr valign="top">
+           <th colspan=6 align="center"><_TPL:LANG_PAST_MEMBERS_U></th>
+          </tr>
+          <TPL_SUB:FORMER_MEMBERS>
+          <tr valign="top">
+            <td><b><TPL:USER_NAME></b></td>
+            <td><TPL:POINTS></td>
+            <td><TPL:PLACE></td>
+            <td><_TPL:LANG_PAST_MEMBER_U></td>
+            <td></td>
+          </tr>
+          </TPL_SUB:FORMER_MEMBERS>
+          <tr valign="top">
+           <th colspan=6 align="center"><_TPL:LANG_REJECTERS_U></th>
+          </tr>
+          <TPL_SUB:DECLINE_MEMBERS>
+          <tr valign="top">
+            <td><b><TPL:USER_NAME></b></td>
+            <td><TPL:POINTS></td>
+            <td><TPL:PLACE></td>
+            <td><_TPL:LANG_REJECTERS_U></td>
+            <td></td>
+          </tr>
+          </TPL_SUB:DECLINE_MEMBERS> 
+        </table>
+        </TPL_SUB:LEAGUE> 
+  </div>
+<TPL_SUB:INVITE_FORM>
+  <div class="header"><_TPL:LANG_INVITATIONS_U></div>
+    <TPL_SUB:INVITE_ERROR>
+    <div class="content">
+        <span class="textred"><TPL_SUB:NOTEAM><_TPL:LANG_MANAGER_LEAGUE_NO_TEAM_U></TPL_SUB:NOTEAM> 
+                              <TPL_SUB:NOUSER><_TPL:LANG_MANAGER_LEAGUE_NO_USER_U></TPL_SUB:NOUSER> 
+                              <TPL_SUB:USERDOUBLE><_TPL:LANG_MANAGER_LEAGUE_USER_DOUBLE_U></TPL_SUB:USERDOUBLE> 
+			      <TPL_SUB:USERIGNORE><_TPL:LANG_MANAGER_LEAGUE_USER_IGNORE_U></TPL_SUB:USERIGNORE> 
+        </span>
+    </div>
+    </TPL_SUB:INVITE_ERROR> 
+  <div class="content">
+     <form action="<TPL:SELF>" method="post" style="margin:0">			  
+        <_TPL:LANG_INVITE_USER_U>
+        <input id="user_name" class="input" type="text" value="borka" maxlength="40" name="user_name" size="30">
+        <input type="hidden" name="invite" value="y">
+        <input type="hidden" name="league_id" value="<TPL:LEAGUE_ID>">
+        <input type="hidden" name="mseason_id" value="<TPL:SEASON_ID>">
+	<input class="btn" type="submit" value=" <_TPL:LANG_INVITE_U> " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+     </form>
+  </div>
+</TPL_SUB:INVITE_FORM> 
+  <div class="content">
+     <form action="<TPL:SELF>" method="post" style="margin:0">			  
+        <input type="hidden" name="cancel_all_invites" value="y">
+        <input type="hidden" name="league_id" value="<TPL:LEAGUE_ID>">
+        <input type="hidden" name="mseason_id" value="<TPL:SEASON_ID>">
+	<input class="btn" type="submit" value=" <_TPL:LANG_CANCEL_ALL_INVITES_U> " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" onClick="return confirm('<_TPL:LANG_REALLY_U>?');"/>
+     </form>
+  </div>
+<TPL_SUB:DELETE_FORM>
+  <div class="content">
+       <form action="" method="post" style="margin:0">			  
+        <input type="hidden" name="delete_league" value="y">
+	<input class="btn" type="submit" value=" <_TPL:LANG_DELETE_LEAGUE_U> " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" onClick="return confirm('<_TPL:LANG_REALLY_U>?');"/>
+       </form>      
+  </div>
+</TPL_SUB:DELETE_FORM> 
+</div>
+</TPL_SUB:LOGGED> 

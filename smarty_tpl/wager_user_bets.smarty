@@ -1,0 +1,31 @@
+<div class="portlet">
+<div class="header">{$user_name}: {$season_title}</div>
+<div class="content">
+ {if isset($bets)} 
+   <table style="width:100%">
+     <tr>
+	<th width="200px">{translate fonema=LANG_STOP_DATE_U}</td>
+	<th>{translate fonema=LANG_HOST_U}</td>
+	<th>{translate fonema=LANG_PREDICTED_RESULT_U}</td>
+	<th>{translate fonema=LANG_VISITOR_U}</td>
+	<th>{translate fonema=LANG_RESULT_U}</th>
+	<th>{translate fonema=LANG_STAKE_U})</th>
+	<th>{translate fonema=LANG_WINNINGS_U}</th>
+     </tr>
+     {foreach $bets as $bet}
+     <tr>
+	<td align="center" nowrap>{$bet.GAME_DAY}</td>
+	<td style="{if isset($bet.WINNER1)}font-weight:bold;{/if}{if isset($bet.CHOICE1)}color:#0000FF;font-weight:bold;{/if}" align="center">{$bet.TEAM_NAME1}</td>
+	<td style="{if isset($bet.WINNER0)}font-weight:bold;{/if}{if isset($bet.CHOICE0)}color:#0000FF;font-weight:bold;{/if}" align="center">{$bet.HOST_SCORE}:{$bet.VISITOR_SCORE}</td>
+	<td style="{if isset($bet.WINNER_1)}font-weight:bold;{/if}{if isset($bet.CHOICE_1)}color:#0000FF;font-weight:bold;{/if}" align="center">{$bet.TEAM_NAME2}</td> 
+	<td align="center">{$bet.SCORE1}:{$bet.SCORE2}</td>
+        <td>{$bet.STAKE}</td>
+	<td>{$bet.RETURN}</td> 
+     </tr>
+     {/foreach}
+   </table>
+ {else}
+   {translate fonema=LANG_NO_DATA}
+ {/if}
+</div>
+</div>

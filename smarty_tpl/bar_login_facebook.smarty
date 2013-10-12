@@ -1,0 +1,85 @@
+{if !isset($logged) && !isset($facebook_logged)}
+<div class="portlet" style="float:left;width:468px;margin-left:10px;padding:0px">
+<div class="content" style="margin:0;padding:0px">
+<table style="width:100%;" class="noborder background">
+<form method="post">
+<tr><td><b>{translate fonema=LANG_USER_U}</b></td><td><input type="text" name="l_user_name" class="input" size="11" tabindex=1></td><td>{translate fonema=LANG_LANGUAGE_U}</td><td>{$notlogged.LANGUAGE}</td><td><a href="register.php">{translate fonema=LANG_REGISTER_U}</a></td></tr>
+<tr><td><b>{translate fonema=LANG_PASSWORD_U}</b></td><td><input type="password" name="l_password" class="input" size="11" tabindex=2></td><td colspan="2"><input class="btn" type="submit" value=" {translate fonema=LANG_ENTER_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"></td><td><a href="remind.php">{translate fonema=LANG_PASSWORD_REMINDER_U}</a></td></tr>
+<tr><td><b>{translate fonema=LANG_REMEMBER_ME_U}</b></td><td><input type="checkbox" name="l_remember" class="input" size="7" tabindex=3></td><td colspan="3"><div class="fb-login-button" scope="email">{translate fonema=LANG_LOGIN_FACEBOOK_U}</div></td></tr>
+</form>
+</table>
+</div>
+{else if !isset($logged) && isset($facebook_logged)}
+<div class="portlet" style="float:left;width:468px;margin-left:10px;padding:0px">
+<div class="content" style="margin:0;padding:3px">
+{translate fonema=LANG_LOGGED_INTO_FACEBOOK_U}: <b>{$external_user['USER_NAME']}</b><br>
+</div>
+ <script>
+	$(function() {
+		$( "#create").button();
+		$( "#link").button();
+	});
+ </script>
+  <div class="content" style="margin:0;padding:3px">
+   <b>{translate fonema=LANG_EXTERNAL_ACCOUNT_INSTR_U}</b><br>
+   <form method="post" style="float:right">
+    <input type="hidden" name="propagate" value="true">
+    <input id="create" type="submit" value=" {translate fonema=LANG_CREATE_U} ">
+   </form>
+   1. {translate fonema=LANG_CREATE_NEW_ACCOUNT_FOR_U} <b>{$external_user['USER_NAME']}@{$external_user['SOURCE']}</b>.<br>
+    {translate fonema=LANG_CREATE_NEW_ACCOUNT_FOR2_U}
+   <div style="height:5px;padding:0px"></div>
+   2. {translate fonema=LANG_LINK_TO_EXISTING_ACCOUNT_U}
+   <table class="noborder background">
+    <form method="post">
+     <tr><td><b>{translate fonema=LANG_USER_U}</b></td><td width="100%"><input type="text" name="l_user_name" class="input" size="11" tabindex=1></td><td rowspan="2"><input id="link" type="submit" value=" {translate fonema=LANG_LINK_ACCOUNT_U} "></td></tr>
+     <tr><td><b>{translate fonema=LANG_PASSWORD_U}</b></td><td><input type="password" name="l_password" class="input" size="11" tabindex=2></td></tr>
+    </form>
+   </table>
+   {if isset($external_message)}
+    <span class="textgreen">{$external_message}</span>
+   {/if}
+   {if isset($external_error)}
+    <span class="textred">{$external_error}</span>
+   {/if}
+  </div>
+  </div>
+
+{else}
+<div class="portlet" style="float:left;width:468px;margin-left:10px;padding:0px">
+<div class="content">
+<table style="width:100%;" class="noborder background">
+<tr><td valign="top">
+<b>{translate fonema=LANG_HI_U}, 
+<a href="user_public_profile.php" onmouseover="Tip('{translate fonema=LANG_PUBLIC_PROFILE_U}')" onmouseout="UnTip()" target="user_profile" onClick="window.open('','user_profile','width=450,height=620,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');">{$logged.FIRST_NAME}</a></b><br>
+<b><a href="user_credits_manager.php" onmouseover="Tip('{translate fonema=LANG_CREDITS_INFO_U}')" onmouseout="UnTip()">{translate fonema=LANG_CREDITS_U}</b></a>: <b><span id="credits" class="textbluehuge">{$logged.CREDIT}</span></b> | <b><span id="frozen_credits" class="textbluehuge" onmouseover="Tip('{translate fonema=LANG_FROZEN_CREDITS_U}')" onmouseout="UnTip()">{$logged.FROZEN_CREDITS}</span></b> <br>
+{translate fonema=LANG_NEW_MESSAGES_U}: <a href="compose_message.php?folder_id=1"><span class="{if isset($logged.UNREAD_PMS) && $logged.UNREAD_PMS > 0}textred{/if}"><b>{$logged.UNREAD}</b></span></a><br>
+{if isset($logged.CHAT)}
+<a href="chat2.php" target="tsc_chat" onClick="window.open('','tsc_chat','width=821,height=820,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');">{translate fonema=LANG_CHAT_U}</a> ({$logged.CHAT.USERS})<br>
+{/if}
+</td>
+<td valign="top">
+<a href="user_management_panel.php">{translate fonema=LANG_USER_MANAGEMENT_PANEL}</a><br>
+{if isset($logged.MODERATOR_PANEL)}
+{if isset($logged.MODERATOR_PANEL.CC_MANAGEMENT_PANEL)}<a href="moderator_panel.php">{translate fonema=LANG_MODERATOR_MANAGEMENT_PANEL}</a><br>{/if}
+{if isset($logged.MODERATOR_PANEL.GROUP_MANAGEMENT_PANEL)}<a href="group_management_panel.php">{translate fonema=LANG_GROUP_MANAGEMENT_PANEL}</a><br>{/if}
+{/if}
+<a href="register.php">{translate fonema=LANG_EDIT_PROFILE_U}</a><br>
+</td>
+<td valign="top">
+<form method="post"  style="margin:0px">
+<table class="noborder">
+<tr><td>{translate fonema=LANG_LANGUAGE_U}</td><td>{$logged.LANGUAGE}</td></tr>
+</table>
+<input class="btn" type="submit" value=" {translate fonema=LANG_CHANGE_LANGUAGE_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+</form>
+<form method="post" action="index.php" style="margin:0px">
+<input type="hidden" name="logout" value="out">
+<input class="btn" type="submit" value=" {translate fonema=LANG_EXIT_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+</form>
+</td>
+</tr>
+</table>
+</div>
+{/if}
+</div>

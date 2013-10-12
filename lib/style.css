@@ -1,0 +1,420 @@
+#html, body {
+  text-align: center;
+  background: #8FBEF2;
+  margin: 0px;
+  padding: 0px;
+} 
+.topimage {
+  background: url("../img/design/top-sport-city.jpg") no-repeat center top;
+  height: 180px;
+} 
+.middleimage {
+  background: url("../img/design/middle-sport-city.jpg") repeat-y center top;
+} 
+
+.bottomimage {
+  background: url("../img/design/bottom-sport-city.jpg") no-repeat center bottom;
+  height: 838px;
+} 
+
+p {margin-top:0;}
+
+body, tr, td, p, span, table { color: #000; font-family: Verdana, Arial, Helvetica, MS Sans Serif; font-size: 8pt; }
+table {background: #fafbfb;}
+.text { font-size: 8.5pt; color: #000000; font-family: Verdana, Arial, Helvetica, MS Sans Serif}
+a { color: #336699; text-decoration: underline }
+a:visited { color: #336699; text-decoration: underline }
+a:hover { color: #336699; text-decoration: none }
+
+.copyright { color: #15193c; font-family: Verdana, Arial, Helvetica, MS Sans Serif; font-size: 7pt}
+.copyright:link { color: #15193c; font-family: Verdana, Arial, Helvetica, MS Sans Serif; font-size: 7pt; text-decoration: none}
+.copyright:visited { color: #15193c; font-family: Verdana, Arial, Helvetica, MS Sans Serif; font-size: 7pt; text-decoration: none}
+.copyright:hover { color: #15193c; font-family: Verdana, Arial, Helvetica, MS Sans Serif; font-size: 7pt; text-decoration: underline}
+
+.input { color: #000000; background: #ffffff; font-family: Verdana, Arial, Helvetica, MS Sans Serif; font-size: 8pt; border: 1px solid #336699;}
+.input_short { color: #000000; background: #ffffff; font-family: Verdana, Arial, Helvetica, MS Sans Serif; font-size: 8pt; width: 40px; border: 1px solid #336699;}
+
+.nomargin { margin-top: 0}
+
+.textred { color: #FF0000; font-family: Verdana, Arial, Helvetica, MS Sans Serif; font-size: 8pt}
+.textgreen { color: #006633; font-family: Verdana, Arial, Helvetica, MS Sans Serif; font-size: 8pt}
+.textblue { color: #0000FF; font-family: Verdana, Arial, Helvetica, MS Sans Serif; font-size: 8pt}
+
+.textbluehuge { color: #0000FF; font-family: Verdana, Arial, Helvetica, MS Sans Serif; font-size: 10pt}
+.textgreenhuge { color: #006633; font-family: Verdana, Arial, Helvetica, MS Sans Serif; font-size: 10pt}
+.verysmall { color: #000000; font-family: Arial, Helvetica, sans-serif; font-size: 8pt}
+.date_font {font-size:6.5pt;font-family:Tahoma}
+.date_font2 {font-size:6.5pt;font-family: Verdana, Arial, Helvetica, MS Sans Serif;}
+.date_font7 {font-size:7.5pt;font-family: Verdana, Arial, Helvetica, MS Sans Serif;}
+
+input.btn{
+   color:#15193c;
+   font-family:Verdana, Helvetica, MS Sans Serif;
+   font-size:90%;
+   font-weight:bold;
+   background-color:#fff;
+   border:1px solid;
+   border-top-color:#555;
+   border-left-color:#555;
+   border-right-color:#555;
+   border-bottom-color:#555;}
+
+input.btnhov{
+   border:1px solid;
+   background: url("../img/design/header2.gif") repeat 100% 100%;
+   color:#fff;
+   border-top-color:#15193c;
+   border-left-color:#15193c;
+   border-right-color:#15193c;
+   border-bottom-color:#15193c;
+   cursor: pointer}
+
+
+#container {
+	width: 800;
+	height: 700;
+	float:left;
+	display:block;
+}
+
+.main_container {
+	width: 1010px;
+	display:block;
+	margin: 0 auto;
+	text-align: left;
+}
+
+
+#header {
+	width: 1000;
+	display:block;
+}
+
+#login {
+	float:left;
+	display:block;
+}
+
+
+.logo
+{
+	padding: 0px 0px 0px 0px;
+	margin:10px 0px 0px 0px;
+        height: 170px;  
+}
+
+.portlet
+{
+	font-size:0.9em;
+	margin:3px;
+	background-color:#FFF;
+        border: 1px solid #D8BC8A;
+}
+
+.portlet .header
+{
+	color:#FFF;
+	font-size:1.1em;
+	font-weight:bold;
+	line-height:1;
+	padding:5px 5px 5px;
+	margin: 0;
+	text-align:center;
+        background: #999 url("../img/design/header.gif") repeat left top;
+}
+
+.portlet .header a { color: #FFFFFF; text-decoration: underline }
+.portlet .header a:visited { color: #FFFFFF; text-decoration: underline }
+.portlet .header a:hover { color: #FFFFFF; text-decoration: none }
+
+.portlet .content
+{
+	background:#FFF;
+	padding:0px 3px 3px 3px;
+	display: block;
+	margin: 3px 3px 0 3px;
+        border-bottom: 1px solid #D8BC8A;
+}
+
+.portlet .content_header
+{
+	color:#FFF;
+	font-size:1em;
+	font-weight:bold;
+	background:#999;
+	padding:3px 3px 3px 3px;
+	display: block;
+	margin: 0px 2px 2px 2px;
+        background: #999 url("../img/design/header2.gif") repeat 100% 100%;
+}
+
+.portlet .content_header a { color: #FFFFFF; text-decoration: underline }
+.portlet .content_header a:visited { color: #FFFFFF; text-decoration: underline }
+.portlet .content_header a:hover { color: #FFFFFF; text-decoration: none }
+
+
+.portlet .content_forum_left
+{
+	-moz-border-radius-bottomleft:5px;
+	-moz-border-radius-bottomright:5px;
+	-moz-border-radius-topleft:5px;
+	-moz-border-radius-topright:5px;
+
+	background:#F5F5F5;
+	padding:5px 5px 5px 5px;
+	display:block;
+	margin: 1px;
+	float:left;
+	width: 150px;
+}
+
+.portlet .content_forum_right
+{
+	-moz-border-radius-bottomleft:5px;
+	-moz-border-radius-bottomright:5px;
+	-moz-border-radius-topleft:5px;
+	-moz-border-radius-topright:5px;
+
+	background:#F5F5F5;
+	padding:5px 5px 5px 5px;
+	display:block;
+	margin: 1px;
+	float:left;
+	width: 400px;
+}
+
+
+#topmenu {
+	font-size:1em;
+        float:left; 
+	position:relative;top: 10px;
+}
+
+#topmenu ul {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+	overflow: hidden;
+}
+
+
+.toptop {float:right;
+         font-weight:bold;}
+.toptop a { color: #FFFFFF; text-decoration: none }
+.toptop a:visited { color: #FFFFFF; text-decoration: none }
+.toptop a:hover { color: #FFFFFF; text-decoration: underline }
+
+#topmenu ul li {
+	display:block;
+	position:relative;
+	padding: 1px;
+	margin: 0;	
+}
+
+#topmenu li a {
+	display: block;
+	padding: 4px 9px 4px 9px;
+	color: #000;
+	font-weight: bold;
+	text-decoration: none;
+	background-color: #F2C28F;
+}
+#topmenu li a:hover {
+	color: #ffffff;
+	font-weight: bold;
+	background-color: #F2A18F;
+	text-decoration: underline;
+}
+#topmenu li a.active {
+	color: #ffffff;
+	background-color: #F2A18F;
+}
+
+
+
+#submenu {
+	float:left;
+	position: relative;
+	width: 100%;
+	font-size:0.9em;
+}
+
+#submenu ul {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+	overflow: hidden;
+        background: url("../img/design/clouds1.jpg") no-repeat top right;
+	width: 100%;
+}
+
+#submenu ul li {
+	display:block;
+	position:relative;
+	float: left;
+	margin: 0;
+        border-right: 2px solid #ffffff;
+}
+
+#submenu li a {
+	display: block;
+	padding: 4px 12px 4px 12px;
+	color: #000;
+	font-weight: bold;
+	text-decoration: none;
+}
+#submenu li a:hover {
+	color: #ffffff;
+	font-weight: bold;
+	text-decoration: underline;
+        background: url("../img/design/header2.gif") repeat 100% 100%;
+}
+#submenu li a.active {
+	color: #ffffff;
+        background: url("../img/design/header2.gif") repeat 100% 100%;
+}
+
+table {
+	border-top:1px solid #4c014c;
+	border-right:1px solid #4c014c;
+	border-collapse:collapse;
+}
+
+th {
+        font-size: 7.5pt; 
+        font-weight: bold; 
+        color: #333333; 
+        text-decoration: none; 
+        background-color: #F2E38F;
+	border-bottom:1px solid #4c014c;                               
+	border-left:1px solid #4c014c;
+	padding: 2px;
+	text-align:center;
+}
+
+td {
+	color:#000000;
+	border-bottom:1px solid #4c014c;
+	border-left:1px solid #4c014c;
+	padding: 3px;
+}
+
+td.opened {
+	background-image: url(../img/icons/open_market.png); /* forward slash for the path */
+	width: 8px; /* use you own image size; */
+	height: 8px; /* use you own image size; */
+	background-repeat: repeat-x;
+	background-position: left center;
+	vertical-align: middle; 
+}
+
+td.closed {
+	background-image: url(../img/icons/closed_market.png); /* forward slash for the path */
+	width: 8px; /* use you own image size; */
+	height: 8px; /* use you own image size; */
+	background-repeat: repeat-x;
+	background-position: left center;
+	vertical-align: middle; 
+}
+
+.even {
+          background-color: #eeeeee;
+}
+.odd {
+          background-color: #ffffff;
+}
+.owner {
+          background-color: #f1f1f1;
+}
+
+
+table.noborder{
+	border-style: none none none none;
+	border-collapse:collapse;
+}
+
+table.noborder th {
+        font-size: 8pt; 
+        font-weight: bold; 
+        color: #333333; 
+        text-decoration: none; 
+        background-color: #cccccc;
+	padding: 3px;
+	text-align:center;
+	cursor: pointer;
+}
+
+table.noborder td {
+        font-size: 7.5pt; 
+	color:#000000;
+	padding: 3px;
+	border-style: none none none none;
+}
+
+
+.quotetitle {
+	margin: 10px 5px 0 5px;
+	padding: 4px;
+	border-width: 1px 1px 0 1px;
+	border-style: solid;
+	border-color: #8FBEF2;
+	color: #333333;
+	background-color: #8FBEF2;
+	font-size: 0.85em;
+	font-weight: bold;
+}
+
+.quotetitle .quotetitle {
+	font-size: 1em;
+}
+
+.quotecontent {
+	margin: 0 5px 10px 5px;
+	padding: 5px;
+	border-color: #AAA;
+	border-width: 0 1px 1px 1px;
+	border-style: solid;
+	font-weight: normal;
+	font-size: 1em;
+	line-height: 1.4em;
+	font-family: "Lucida Grande", "Trebuchet MS", Helvetica, Arial, sans-serif;
+	background-color: #FAFAFA;
+	color: #4B5C77;
+}
+
+
+.progress_bar {
+  background-color: #FFFFFF;
+  border:1px solid #666666;
+  display:block;
+  height:3px;
+}
+.has_progress {
+  background-color: #e7ffe7;
+  border-right:1px solid #666666;
+  display:block;
+  height:3px;
+}
+
+.sort_arrows {
+  font-size:10pt;
+  color:#ff0000;
+}
+
+.sort_arrows a{
+  font-size:10pt;
+  color:#000000;
+}
+
+
+/* css for timepicker */
+.ui-timepicker-div .ui-widget-header{ margin-bottom: 8px; }
+.ui-timepicker-div dl{ text-align: left; }
+.ui-timepicker-div dl dt{ height: 25px; }
+.ui-timepicker-div dl dd{ margin: -25px 0 10px 65px; }
+.ui-timepicker-div td { font-size: 90%; }
+
+.background
+{
+     background: url("../img/design/background.png") repeat-x scroll 50% 50% #E14F14;
+}

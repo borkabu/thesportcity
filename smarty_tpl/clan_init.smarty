@@ -1,0 +1,12 @@
+<div class="portlet">
+  <div class="header">{translate fonema=LANG_CREATE_CLAN_U}</div>
+  <div class="content">
+  <form action="" method="post">
+        {translate fonema=LANG_CREATE_CLAN_INSTR_U}.<br>
+        <b>{translate fonema=LANG_CLAN_NAME_U}</b>:
+          <input type="text" name="clan_name" id="clan_name" maxlength=32 size="20" class="input">
+          <input type="hidden" name="create_clan" value="y">
+          <input type="submit"  class="btn" type="submit" value=" {translate fonema=LANG_CREATE_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/><br/>
+  </form>
+  </div>
+</div>

@@ -1,0 +1,38 @@
+{if count($clans) > 0}
+<div class="portlet">
+  <div class="header">{translate fonema=LANG_CLANS_U}</div>
+  <div class="content">
+    <table width="100%">
+     <tr>
+      <th>{translate fonema=LANG_CLAN_NAME_U}</th>
+      <th>{translate fonema=LANG_JOINED_U}</th>
+      <th>{translate fonema=LANG_LEFT_U}</th>
+      <th>{translate fonema=LANG_TEAMS_U}</th>
+      <th></th>
+     </tr>
+     {foreach $clans as $clan}
+     <tr>
+      <td align="left">{$clan.CLAN_NAME}</td>
+      <td align="right">{$clan.DATE_JOINED}</td>
+      <td align="right">{$clan.DATE_LEFT}</td>
+      <td align="right">{$clan.TEAMS}</td>
+      <td align="right">
+        {if isset($clan.CAN_LEAVE)}
+          <form action="" method="post" style="margin:0">
+ 	    <input class="btn" type="submit" value=" {translate fonema=LANG_LEAVE_CLAN_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"  onClick="return confirm('{translate fonema=LANG_REALLY_U}?');"/>
+            <input type="hidden" name="leave_clan" value="Y">
+          </form>
+        {/if}
+      </td>
+     </tr>          
+     {/foreach}
+    </table>
+  </div>
+</div>
+{else}
+<div class="portlet">
+  <div class="content">
+    {translate fonema=LANG_NO_CLANS_U}
+  </div>
+</div>
+{/if}

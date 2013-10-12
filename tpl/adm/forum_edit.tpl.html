@@ -1,0 +1,52 @@
+<TPL_INCLUDE:../tpl/adm/head.tpl.html>
+<TPL_INCLUDE:../tpl/adm/menu.tpl.html>
+
+
+<form action="" method="post">
+<input type="hidden" name="form_save" value="Y">
+<input type="hidden" name="referer" value="<TPL:REFERER>">
+<input type="hidden" name="lang_id" value="<TPL:LANG_ID>">
+
+<TPL_SUB:ERROR><span class="error"><TPL:MSG></span></TPL_SUB:ERROR>
+
+<div class="portlet">
+  <div class="header"><_TPL:LANG_GENERAL_DATA_U></div>
+  <div class="content">
+  <table>
+    <tr><th colspan="2"><_TPL:LANG_PARAMETERS_U></td></tr>
+    
+    <tr>
+      <td class="list_item"><_TPL:LANG_TITLE_U></td>
+      <td class="list_item"><TPL_INPUT:adm_forum.forum_name></td>
+    </tr>
+
+    <tr>
+      <td class="list_item"><_TPL:LANG_CATEGORY_U></td>
+      <td class="list_item"><TPL:CAT_ID></td>
+    </tr>
+
+    <tr>
+      <td class="list_item"><_TPL:LANG_GROUP_U></td>
+      <td class="list_item"><TPL:GROUP_ID></td>
+    </tr>
+    
+    <tr>
+      <td class="list_item"><_TPL:LANG_PUBLISH_U></td>
+      <td class="list_item"><TPL_INPUT:adm_forum.publish></td>
+    </tr>
+  
+  </table>
+</div>
+</div>
+
+<div class="portlet">
+  <div class="content">
+        <input type="submit" class="btn" value="<_TPL:LANG_SAVE_U>" onclick="resettarget();"  onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" >
+        <input type="reset" class="btn" value="<_TPL:LANG_RESET_U>" onclick="return confirm('<_TPL:LANG_REALLY_U>');"  onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'">
+</div>
+</div>
+
+</form>
+
+
+<TPL_INCLUDE:../tpl/adm/foot.tpl.html>

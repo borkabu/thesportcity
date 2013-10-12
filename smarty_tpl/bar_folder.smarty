@@ -1,0 +1,122 @@
+{if isset($folder)}
+{if isset($folder.SEARCH)}
+<div class="portlet">
+  <div class="header">{translate fonema=LANG_SEARCH_U}</div>
+  <div class="content">
+      <form action="" method="get" style="margin:0px">
+           <input type="hidden" name="folder_id" value="{$folder.SEARCH.FOLDER_ID}">
+           {translate fonema=LANG_USER_NAME_U}: {$folder.SEARCH.WHERE}
+           <input class="btn" type="submit" value=" {translate fonema=LANG_OK_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+           {if isset($folder.SEARCH.FILTERED)}<a href="compose_message.php?folder_id={$folder.SEARCH.FILTERED.FOLDER_ID}">[ {translate fonema=LANG_SHOW_ALL_RECORDS} ]</a>{/if}
+      </form>
+ </div>
+</div>
+{/if}
+<div class="portlet">
+<div class="header">{$folder.FOLDER}</div>
+ <div class="content">
+
+  {if isset($folder.ITEMS)}
+    <table style="width:100%" id="msg_table">
+    <tr>
+      <th><input type="checkbox" id="selectall"></th>
+      <th></th>
+      <th>{translate fonema=LANG_FROM_U}</th>
+      <th>{translate fonema=LANG_SUBJECT_U}</th>
+      <th></th>
+    </tr>
+    {foreach $folder.ITEMS as $item}
+	  <tr>
+            <td style="width:20px" class="date_font2"><input type="checkbox" value="{$item.PM_ID}" name="msg" class="msg"></td>
+  	    <td style="width:130px" class="date_font2">{$item.SENT_DATE}</td>
+	    <td style="width:80px" nowrap>
+              {if isset($item.SYSTEM)}
+                <span class="textred"><b>System</b></span>
+              {else}
+		{if isset($item.USER_NAME)}
+		  <b>{translate fonema=LANG_USERS_U}:</b><br>
+                  {$item.USER_NAME}<br>{/if}
+		{if isset($item.GROUP_NAME)}
+		  <b>{translate fonema=LANG_GROUPS_U}:</b><br>
+		  {$item.GROUP_NAME}
+                {/if}
+              {/if}
+            </td>
+	    <td><a href="compose_message.php?folder_id={$item.FOLDER_ID}&message_id={$item.PM_ID}" style="{if isset($item.CLOSED)}font-weight:bold{/if}">{$item.SUBJECT}</a></td>
+            <td>
+	      <form method="post" style="margin:0px;float:right">
+	         <input type="image" style="vertical-align:top;" border="0" src="img/icons/delete.png" onClick="return confirm('{translate fonema=LANG_REALLY_U}');" onmouseover="Tip('{translate fonema=LANG_DELETE_U}')" onmouseout="UnTip()" />
+		 <input type="hidden" name="delete_pm" value="y">
+		 <input type="hidden" name="pm_id" value="{$item.PM_ID}">
+	 	 <input type="hidden" name="folder_id" value="{$item.FOLDER_ID}">
+	      </form>
+          {if isset($item.EDIT)}
+            <form action="compose_message.php?folder_id={$item.FOLDER_ID}&message_id={$item.PM_ID}" method="post" style="float:right;margin:0">
+                <input type="image" src="img/icons/edit.png" onmouseover="Tip('{translate fonema=LANG_EDIT_POST_U}')" onmouseout="UnTip()" />
+	     <input type="hidden" name="edit_pm" value="y">
+	     <input type="hidden" name="pm_id" value="{$item.PM_ID}">
+	     <input type="hidden" name="folder_id" value="{$item.FOLDER_ID}">
+            </form>
+          {/if}
+         </td>
+	</tr>
+      </div>
+    {foreachelse}
+	<div class="content">
+		<div style="float:left;">{translate fonema=LANG_NO_ENTRIES_U}</div>
+		<div style="clear:both;"></div>
+	</div>
+    {/foreach}
+    <tr><td colspan="5">
+	<form method="post" style="margin:0px;" id="all_form">
+	   <input type="image" style="vertical-align:top;" border="0" src="img/icons/delete.png" onClick="if (confirm('{translate fonema=LANG_REALLY_U}')) submitform(); return false;" onmouseover="Tip('{translate fonema=LANG_DELETE_U}')" onmouseout="UnTip()" />
+		 <input type="hidden" name="msgs" value="">
+		 <input type="hidden" name="delete_all" value="y">
+		 <input type="hidden" name="folder_id" value="{$item.FOLDER_ID}">
+	</form>
+     </td></tr>
+    </table>
+  {/if}
+</div>
+</div>
+
+<script language="javascript">
+$(function(){
+    // add multiple select / deselect functionality
+    $("#selectall").click(function () {
+          $('.msg').attr('checked', this.checked);
+    });
+ 
+    // if all checkbox are selected, check the selectall checkbox
+    // and viceversa
+    $(".msg").click(function(){
+ 
+        if($(".msg").length == $(".msg:checked").length) {
+            $("#selectall").attr("checked", "checked");
+        } else {
+            $("#selectall").removeAttr("checked");
+        }
+ 
+    });
+});
+
+function submitform()
+{
+  
+   var getstr= "";
+   var inputs = document.getElementsByName("msg");
+   for (i=0; i<inputs.length; i++) {
+      if (inputs[i].type == "checkbox") {
+        if (inputs[i].checked) {
+           getstr += inputs[i].value + ",";
+        }
+      }
+   } 
+
+//alert(getstr);
+   document.forms['all_form'].elements['msgs'].value = getstr;
+   document.forms['all_form'].submit();
+}
+</script>
+
+{/if}

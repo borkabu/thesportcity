@@ -1,0 +1,31 @@
+<div style="clear:both"></div>
+
+<div class="portlet">
+<div class="header"><_TPL:LANG_COMPLETED_CHALLENGES_U>: <TPL:SEASON_TITLE> </div>
+  <TPL_SUB:USER_DATA>
+<div class="header"><TPL_SUB:COUNTRY_DB><img border=1 src="./img/flags/<TPL:CCTLD>.gif" onmouseover="Tip('<TPL:COUNTRY_NAME>')" onmouseout="UnTip()"></TPL_SUB:COUNTRY_DB> <TPL:USER_NAME></div>
+  </TPL_SUB:USER_DATA>
+<div class="content">
+<TPL_SUB:COMPLETED>
+  <table width="100%">
+    <tr><th></th>
+	<th><_TPL:LANG_TOUR_U></th>
+	<th width="40%"></th>
+        <th></th>
+        <th width="40%"></th>
+	<th><_TPL:LANG_STAKE_U></th>
+    </tr>
+    <TPL_SUB:CHALLENGES>
+    <tr>
+      <td><TPL:NUMBER></td>
+      <td><TPL:TOUR_ID></td>
+      <td align="right"  <TPL_SUB:USER_NAME1_WON>style="font-weight:bold"</TPL_SUB:USER_NAME1_WON>><TPL:USER_NAME1></td>
+      <td nowrap><TPL:POINTS1> : <TPL:POINTS2></td>
+      <td <TPL_SUB:USER_NAME2_WON>style="font-weight:bold"</TPL_SUB:USER_NAME2_WON>><TPL:USER_NAME2></td>
+      <td align="right"><TPL:STAKE>  <TPL_SUB:BUDGET><_TPL:LANG_BUDGET_MONEY_ABBR_U></TPL_SUB:BUDGET><TPL_SUB:CREDITS><_TPL:LANG_CREDITS_ABBR_U></TPL_SUB:CREDITS></td>
+    </tr>
+    </TPL_SUB:CHALLENGES>
+</TPL_SUB:COMPLETED>
+  </table>
+</div>
+</div>

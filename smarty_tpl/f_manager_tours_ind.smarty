@@ -1,0 +1,36 @@
+<div style="clear:both"></div>
+
+{$manager_filter_box}
+
+<div class="portlet">
+ <div class="header">{translate fonema=LANG_TOURS_U}</div>
+{foreach $tours as $tour}
+  <div class="content">
+  <a name="tour_{$tour.NUMBER}"></a>
+      <img style="vertical-align: middle; margin:2px" src="{if isset($tour.VISIBLE)}./img/icons/plus.png{/if}{if isset($tour.INVISIBLE)}./img/icons/minus.png{/if}" onclick="toggle('tour_{$tour.NUMBER}', this); return false;">
+	{translate fonema=LANG_TOUR_U} {$tour.NUMBER}. {$tour.TOUR_START_DATE} {$tour.UTC} - {$tour.TOUR_END_DATE} {$tour.UTC} .
+  	<div id="tour_{$tour.NUMBER}" {if isset($tour.VISIBLE_DIV)}style="display: block;"{/if} {if isset($tour.INVISIBLE_DIV)}style="display: none;"{/if}>
+         <table  width="100%">
+           <tr>
+             <th>{translate fonema=LANG_MATCHES_U}</th>
+             <th>{translate fonema=LANG_START_DATE_U}</td>
+           </tr>
+           {foreach $tour.GAMES as $game}
+           <tr>
+             <td align="left">{$game.TITLE}
+                 {if isset($game.RESULT)}(<a href="game_race_protocol.php?game_id={$game.RESULT.GAME_ID}" target="game_race_protocol" onClick="window.open('','game_race_protocol','width=340,height=700,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');">{translate fonema=LANG_RESULTS_U}</a>){/if}
+	     </td>
+             <td align="right" nowrap>{$game.START_DATE} {$game.UTC}</td>
+           </tr>
+           {/foreach}
+         </table>
+	</div>
+  </div>
+{/foreach}
+</div>
+
+<script type="text/javascript">
+
+location.href = "#tour_{$current_tour}";
+
+</script>

@@ -1,0 +1,66 @@
+<div class="portlet">
+{if isset($supporter.SUPPORTER)}
+<div class="content">
+    {$supporter.SUPPORTER.MSG}
+</div>
+{/if}
+{if isset($supporter.PURCHASE_SUPPORTER)}
+{if isset($supporter.PURCHASE_SUPPORTER.DAY)}
+<div class="content">
+  <form action="" method="post">
+    <input type="hidden" name="get_gc" value="Y">
+    <input type="hidden" name="duration" value="0.3">
+    {translate fonema=LANG_GC_PRICING0_U}
+    <input class="btn" type="submit" value=" {translate fonema=LANG_BUY_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+  </form>
+</div>
+{/if}
+{if isset($supporter.PURCHASE_SUPPORTER.DAY_UNAVAILABLE)}
+<div class="content">{translate fonema=LANG_GC_PRICING1_U}</div>
+{/if}
+{if isset($supporter.PURCHASE_SUPPORTER.WEEK)}
+<div class="content">
+  <form action="" method="post">
+    <input type="hidden" name="get_gc" value="Y">
+    <input type="hidden" name="duration" value="2">
+    {translate fonema=LANG_GC_PRICING1_U}
+    <input class="btn" type="submit" value=" {translate fonema=LANG_BUY_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+  </form>
+</div>
+{/if}
+{if isset($supporter.PURCHASE_SUPPORTER.WEEK_UNAVAILABLE)}
+<div class="content">{translate fonema=LANG_GC_PRICING1_U}</div>
+{/if}
+{if isset($supporter.PURCHASE_SUPPORTER.MONTH)}
+<div class="content">
+  <form action="" method="post">
+    <input type="hidden" name="get_gc" value="Y">
+    <input type="hidden" name="duration" value="9">
+    {translate fonema=LANG_GC_PRICING2_U}
+    <input class="btn" type="submit" value=" {translate fonema=LANG_BUY_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+  </form>
+</div>
+{/if}
+{if isset($supporter.PURCHASE_SUPPORTER.MONTH_UNAVAILABLE)}
+<div class="content">{translate fonema=LANG_GC_PRICING2_U}</div>
+{/if}
+{if isset($supporter.PURCHASE_SUPPORTER.YEAR)}
+<div class="content">
+  <form action="" method="post">
+    <input type="hidden" name="get_gc" value="Y">
+    <input type="hidden" name="duration" value="99">
+    {translate fonema=LANG_GC_PRICING3_U}
+    <input class="btn" type="submit" value=" {translate fonema=LANG_BUY_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+  </form>
+</div>
+{/if}
+{if isset($supporter.PURCHASE_SUPPORTER.YEAR_UNAVAILABLE)}
+<div class="content">{translate fonema=LANG_GC_PRICING3_U}</div>
+{/if}
+{/if}
+{if isset($supporter.SUPPORTER_NO_CREDITS)}
+<div class="content">
+    {translate fonema=LANG_GC_NOT_ENOUGH_CREDITS_U}
+</div>
+{/if}
+</div>

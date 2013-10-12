@@ -1,0 +1,47 @@
+<div id="tournaments_invites">
+<div class="header">{translate fonema=LANG_TOURNAMENT_INVITATIONS_U}</div>
+{foreach $tournament_invites as $invite}
+<a name="tournament_invites" />
+<div class="content">
+      <a href="f_manager_tournaments.php?mt_id={$invite.MT_ID}"><b>{$invite.TITLE}</b></a><br>
+      {if isset($invite.ENTRY)}{translate fonema=LANG_ENTRY_FEE_U}: <b>{$invite.ENTRY.ENTRY_FEE}</b> {translate fonema=LANG_CREDITS_ABBR_U}{/if}
+       {if isset($invite.ENOUGH_CREDITS)}
+          <img src='./img/icons/red_exclamation.png' onmouseover="Tip('{translate fonema=LANG_MANAGER_TOURNAMENT_ENTRY_FEE_INSTR_U}')" onmouseout="UnTip()" /><br>
+       {/if}
+      {if isset($invite.NOT_ENOUGH_CREDITS)}
+        {translate fonema=LANG_ERROR_NOT_ENOUGH_CREDITS_U}<br>
+        <input class="btn" type="submit" value=" {translate fonema=LANG_REJECT_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" onClick="javascript:handleTournamentInvitation({$invite.MT_ID}, 'decline_invite', 'tournaments_invites')"/><br>
+      {/if}
+      {if isset($invite.BUTTONS)}
+      <input class="btn" type="submit" value=" {translate fonema=LANG_ACCEPT_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" onClick="javascript:handleTournamentInvitation({$invite.MT_ID}, 'accept_invite', 'tournaments_invites')"/>
+      <input class="btn" type="submit" value=" {translate fonema=LANG_REJECT_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" onClick="javascript:handleTournamentInvitation({$invite.MT_ID}, 'decline_invite', 'tournaments_invites')"/><br>
+      {/if}
+</div>
+{foreachelse}
+<div class="content">{translate fonema=LANG_NO_INVITATIONS_U}</div>
+{/foreach}
+<div class="header">{translate fonema=LANG_TOURNAMENTS_U}</div>
+{foreach $trnms as $tournament}
+ <div class="content">
+    {if isset($tournament.OWN_TOURNAMENT)}
+      <img style="margin-right:3px" valign="middle" align="left" src="./img/icons/owner.png" onmouseover="Tip('{translate fonema=LANG_OWNER_U}')" onmouseout="UnTip()"><br>
+    {/if}
+    {if isset($tournament.TOURNAMENT)}
+      <img style="margin-right:3px" align="left" src="./img/icons/participant.png" onmouseover="Tip('{translate fonema=LANG_PARTICIPANT_U}')" onmouseout="UnTip()">
+    {/if}
+    <span class="date_font2">{if isset($tournament.TRACK)}<a href="f_manager_tournaments.php?mt_id={$tournament.MT_ID}&topic_id={$tournament.TOPIC_ID}&tstmp={$tournament.TSTMP}"><img src="./img/icons/flag_red.gif" border="0"  onmouseover="Tip('{translate fonema=LANG_UNREAD_MESSAGES_U}')" onmouseout="UnTip()"></a>{/if} <a href="f_manager_tournaments.php?mt_id={$tournament.MT_ID}"><b>{$tournament.TITLE}</b></a> 
+      {if isset($tournament.CHAT)}<a href="chat2.php?title={$tournament.CHAT_CHANNEL}" target="tsc_chat" onClick="window.open('','tsc_chat','width=821,height=820,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');" onmouseover="Tip('{translate fonema=LANG_CHAT_U}')" onmouseout="UnTip()"><img src="./img/icons/chat.png" border=0></a>{/if}
+      {if $tournament.TOURNAMENT_STATUS==1}
+        <div style="float:right;position:relative;top:50%"><img style="margin-left:3px;vertical-align:top" align="right" src="./img/icons/not_ready.png" onmouseover="Tip('{translate fonema=LANG_NOT_STARTED_U}')" onmouseout="UnTip()"></div>
+      {else if $tournament.TOURNAMENT_STATUS==2}
+        <div style="float:right;position:relative;top:50%"><img style="margin-left:3px;vertical-align:top" align="right" src="./img/icons/ongoing.png" onmouseover="Tip('{translate fonema=LANG_ONGOING_U}')" onmouseout="UnTip()"></div>
+      {else}
+        <div style="float:right;position:relative;top:50%"><img style="margin-left:3px" align="right" src="./img/icons/finished.png" onmouseover="Tip('{translate fonema=LANG_FINISHED_U}')" onmouseout="UnTip()"></div>
+      {/if}
+       <br>{$tournament.USER_NAME}
+    </span>
+ </div>
+  {foreachelse}
+    <div class="content">{translate fonema=LANG_NO_TOURNAMENTS_U}</div>
+   {/foreach}
+</div>

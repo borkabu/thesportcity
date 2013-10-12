@@ -1,0 +1,10 @@
+<div class="content">
+{if isset($few_money)}{translate fonema=LANG_FEW_MONEY_U}<br>{/if}
+{if isset($get_money)}
+   {translate fonema=LANG_CONVERT_CREDITS_MONEY}
+   <input class="btn" type="submit" value=" {translate fonema=LANG_REFILL_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" onClick="javascript:refillWagerAccount({$get_money.SEASON_ID}, 'get_money')"/>
+{/if}
+{if isset($not_enough_credits)}
+  <br>{translate fonema=LANG_ERROR_NOT_ENOUGH_CREDITS_U} <a href="page.php?page_id=11">{translate fonema=LANG_GET_MORE_CREDITS_U}</a>
+{/if}
+</div>

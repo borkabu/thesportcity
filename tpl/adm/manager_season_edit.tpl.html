@@ -1,0 +1,343 @@
+<TPL_INCLUDE:../tpl/adm/head.tpl.html>
+<TPL_INCLUDE:../tpl/adm/menu.tpl.html>
+
+<TPL_SUB:ERROR><span class="error"><TPL:MSG></span></TPL_SUB:ERROR>
+
+<div  style="float:left;">
+<form action="" method="post" name="editform">
+<input type="hidden" name="form_save" value="Y">
+<input type="hidden" name="referer" value="<TPL:REFERER>">
+<input type="hidden" name="lang_id" value="<TPL:LANG_ID>">
+
+<div class="portlet">
+  <div class="header"><_TPL:LANG_GENERAL_DATA_U></div>
+  <div class="content">
+  <table>  
+    <tr>
+      <td class="list_item"><_TPL:LANG_TITLE_U></td>
+      <td class="list_item"><TPL_INPUT:adm_season.season_title></td>
+    </tr>
+
+    <tr>
+      <td class="list_item"><_TPL:LANG_SPORT_U></td>
+      <td class="list_item"><TPL:SPORT_ID></td>
+    </tr>
+
+    <tr>
+      <td class="list_item">Pradžia</td>
+      <td class="list_item"><TPL_INPUT:adm_season.start_date></td>
+    </tr>
+    
+    <tr>
+      <td class="list_item">Pabaiga</td>
+      <td class="list_item"><TPL_INPUT:adm_season.end_date></td>
+    </tr>
+
+    <tr>
+      <td class="list_item"><_TPL:LANG_MONEY_U></td>
+      <td class="list_item"><TPL_INPUT:adm_manager.money><br>
+                            <TPL:RECOMMENDED_MONEY></td>
+    </tr>
+
+    <tr>
+      <td class="list_item"><_TPL:LANG_STOCK_EXCHANGE_BUDGET_U></td>
+      <td class="list_item"><TPL_INPUT:adm_manager.money_stock></td>
+    </tr>
+
+    <tr>
+      <td class="list_item">Transakcijos</td>
+      <td class="list_item"><TPL_INPUT:adm_manager.transactions><br>
+                            <TPL:RECOMMENDED_TRANSACTIONS></td>
+    </tr>
+
+    <tr>
+      <td class="list_item">Max players</td>
+      <td class="list_item"><TPL_INPUT:adm_manager.max_players></td>
+    </tr>
+
+    <tr>
+      <td class="list_item">Logo</td>
+      <td class="list_item"><TPL_INPUT:adm_news.pic_location> <a href="pic.php?iform=editform&ifield=pic_location" target="picnet" onClick="window.open('','picnet','width=250,height=500,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');"><img src="../img/adm_more.gif" width="16" height="12" alt="iliustracijos" border="0"></a></td>
+    </tr>
+
+    <tr>
+      <td class="list_item">Big Logo</td>
+      <td class="list_item"><TPL_INPUT:adm_news.pic2_location> <a href="pic.php?iform=editform&ifield=pic_location" target="picnet" onClick="window.open('','picnet','width=250,height=500,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');"><img src="../img/adm_more.gif" width="16" height="12" alt="iliustracijos" border="0"></a></td>
+    </tr>
+
+    <tr>
+      <td class="list_item">Prize Fund</td>
+      <td class="list_item"><TPL_INPUT:adm_manager.prize_fund></td>
+    </tr>
+  
+    <tr>
+      <td class="list_item">Donated</td>
+      <td class="list_item"><TPL_INPUT:adm_manager.donated></td>
+    </tr>
+
+    <tr>
+      <td class="list_item"><_TPL:LANG_NEWSLETTER_U></td>
+      <td class="list_item"><TPL:NEWSLETTER_ID></td>
+    </tr>
+
+    <tr>
+      <td class="list_item">Captaincy</td>
+      <td class="list_item"><TPL_INPUT:adm_manager.captaincy></td>
+    </tr>
+
+    <tr>
+      <td class="list_item">Substitutes allowed</td>
+      <td class="list_item"><TPL_INPUT:adm_manager.allow_substitutes></td>
+    </tr>
+
+    <tr>
+      <td class="list_item">Stock exchange allowed</td>
+      <td class="list_item"><TPL_INPUT:adm_manager.allow_stock></td>
+    </tr>
+
+    <tr>
+      <td class="list_item">RVS leagues allowed</td>
+      <td class="list_item"><TPL_INPUT:adm_manager.allow_rvs_leagues></td>
+    </tr>
+
+    <tr>
+      <td class="list_item">Clan teams allowed</td>
+      <td class="list_item"><TPL_INPUT:adm_manager.allow_clan_teams></td>
+    </tr>
+
+    <tr>
+      <td class="list_item">Solo manager allowed</td>
+      <td class="list_item"><TPL_INPUT:adm_manager.allow_solo></td>
+    </tr>
+
+    <tr>
+      <td class="list_item">RVS leagues last tour</td>
+      <td class="list_item"><TPL_INPUT:adm_manager.rvs_leagues_last_tour></td>
+    </tr>
+
+    <tr>
+      <td class="list_item"><_TPL:LANG_PUBLISH_U></td>
+      <td class="list_item"><TPL_INPUT:adm_season.publish></td>
+    </tr>
+    
+  </table>
+</div>
+</div>
+
+<div class="portlet">
+  <div class="header"><_TPL:LANG_PRIZES_U></div>
+  <div class="content">
+      <TPL_INPUT:adm_tseason.prizes>
+  </div>
+</div>
+
+<div class="portlet">
+  <div class="content">
+        <input type="submit" class="btn" value="<_TPL:LANG_SAVE_U>" onclick="resettarget();"  onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" >
+        <input type="reset" class="btn" value="<_TPL:LANG_RESET_U>" onclick="return confirm('<_TPL:LANG_REALLY_U>');"  onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'">
+</div>
+</div>
+</form>
+</div>
+<form action="" method="post">
+<div style="float:left;">
+<div class="portlet">
+  <div class="header"><_TPL:LANG_MARKET_U></div>
+  <div class="content">
+    <TPL_SUB:MARKET_CLOSE>
+      <input type="hidden" name="market_close" value="true">
+      <input type="submit" class="btn" value="<_TPL:LANG_MARKET_CLOSE_U>" onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'">
+      <input type="hidden" name="season_id" value="<TPL:SEASON_ID>">
+   </TPL_SUB:MARKET_CLOSE>    
+   <TPL_SUB:MARKET_OPEN>
+      <input type="hidden" name="market_open" value="true">
+      <input type="hidden" name="season_id" value="<TPL:SEASON_ID>">
+      <input type="submit" class="btn" value="<_TPL:LANG_MARKET_OPEN_U>" onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'">
+   </TPL_SUB:MARKET_OPEN>
+</div>
+</div>
+</form>
+
+<form action="" method="post">
+<div class="portlet">
+  <div class="header"><_TPL:LANG_SEASON_U></div>
+  <div class="content">
+    <TPL_SUB:SEASON_OVER>
+      <input type="hidden" name="season_over" value="true">
+      <input type="submit" class="btn" value="<_TPL:LANG_SEASON_OVER_U>" onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'">
+      <input type="hidden" name="season_id" value="<TPL:SEASON_ID>">
+   </TPL_SUB:SEASON_OVER>    
+   <TPL_SUB:SEASON_NOT_OVER>
+      <input type="hidden" name="season_not_over" value="true">
+      <input type="hidden" name="season_id" value="<TPL:SEASON_ID>">
+      <input type="submit" class="btn" value="<_TPL:LANG_SEASON_NOT_OVER_U>" onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'">
+   </TPL_SUB:SEASON_NOT_OVER>
+</div>
+</div>
+</form>
+
+ <TPL_SUB:PRICE_ADJUSTMENT>
+<form action="manager_adjust_prices.php" method="post">
+<div class="portlet">
+ <div class="content">
+      <input type="hidden" name="adjust_price" value="true">
+      <input type="hidden" name="season_id" value="<TPL:SEASON_ID>">
+      <input type="submit" class="btn" value="<_TPL:LANG_ADJUST_PRICES_U>" onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'">
+ </div>
+</div>
+</form>
+  </TPL_SUB:PRICE_ADJUSTMENT>
+
+
+<div class="portlet">
+  <div class="header"><_TPL:LANG_STOCK_EXCHANGE_U></div>
+  <div class="content"><a href="manager_stock_exchange.php?season_id=<TPL:SEASON_ID>" target="stock"><_TPL:LANG_STOCK_EXCHANGE_U></a>
+ </div>
+</div>
+
+<div class="portlet">
+  <div class="header"><_TPL:LANG_SEASONS_U> <a href="manager_subseasons_edit.php?mseason_id=<TPL:SEASON_ID>"><img src="../img/adm_edit.gif" width="12" height="12" border="0" alt="redaguoti"></a></div>
+  <div class="content">
+  <table>     
+    <tr>
+      <th><_TPL:LANG_TITLE_U></td>
+      <th>&nbsp;</td>
+    </tr>
+
+    <TPL_SUB:SUBSEASONS>
+
+    <tr class="<TPL_SUB:EVEN>even</TPL_SUB:EVEN><TPL_SUB:ODD>odd</TPL_SUB:ODD>">
+      <td class="list_item"><TPL:SEASON_TITLE></td>
+      <td class="list_item" align="center">
+        <TPL_SUB:DEL><a href="<TPL:DEL_URL>" onClick="return confirm('Tikrai?');"><img src="../img/adm_delete.gif" width="12" height="12" border="0" alt="pašalinti"></a></TPL_SUB:DEL>
+        <a href="manager_subseasons_edit.php?id=<TPL:ID>&mseason_id=<TPL:MSEASON_ID>"><img src="../img/adm_edit.gif" width="12" height="12" border="0" alt="redaguoti"></a>
+        </td>
+    </tr>
+    </TPL_SUB:SUBSEASONS>
+    <TPL_SUB:SUBSEASON_NORECORDS>
+    <tr bgcolor="#FFFFFF"><td colspan="7" class="list_item">Įrašų nėra</td></tr>
+    </TPL_SUB:SUBSEASON_NORECORDS>   
+  </table>
+</div>
+</div>
+
+<div class="portlet">
+  <div class="header"><_TPL:LANG_PLAYERS_U> <a href="manager_price.php?season_id=<TPL:SEASON_ID>&manager_type=1"><img src="../img/adm_edit.gif" width="12" height="12" border="0" alt="redaguoti"></a></div>
+  <div class="content">
+	Average: <TPL:AVG>
+  </div>   
+  <div class="content"><a href="manager_price.php?season_id=<TPL:SEASON_ID>&manager_type=1&injury_list=true"><_TPL:LANG_INJURY_LIST_U></a></div>
+  <div class="content">
+   <a href="manager_ind_load_res.php?season_id=<TPL:SEASON_ID>&tour_id=0" method="get" target="_blank">load initials</a>
+  </div>
+</div>
+
+
+<div class="portlet">
+  <div class="header"><_TPL:LANG_CHALLENGES_U> </td><td class="list_item"><a href="manager_price.php?season_id=<TPL:SEASON_ID>&manager_type=1"><img src="../img/adm_edit.gif" width="12" height="12" border="0" alt="redaguoti"></a></div>
+  <div class="content">
+	<a href="manager_challenges.php?season_id=<TPL:SEASON_ID>"><_TPL:LANG_CURRENT_CHALLENGES_U></a>
+  </div>   
+</div>
+
+</div>
+
+<div style="float:left;">
+<div class="portlet">
+  <div class="header"><_TPL:LANG_TOURS_U> <a href="manager_season_tours_edit.php?season_id=<TPL:SEASON_ID>"><img src="../img/adm_edit.gif" width="12" height="12" border="0" alt="redaguoti"></a></div>
+  <div class="content">
+  <TPL_SUB:TOUR_ERRORS><span class="textred"><b>ERROR</b></span></TPL_SUB:TOUR_ERRORS>
+  <table>
+    <tr>
+      <th>N</td>
+      <th><_TPL:LANG_PERIOD_U></td>
+      <th>&nbsp;</td>
+      <th>&nbsp;</td>
+    </tr>
+
+    <TPL_SUB:TOURS>
+
+    <tr class="<TPL_SUB:EVEN>even</TPL_SUB:EVEN><TPL_SUB:ODD>odd</TPL_SUB:ODD>">
+      <td class="list_item"><TPL:NUMBER></td>
+      <td class="list_item"><TPL:START_DATE><br><TPL:END_DATE></td>
+      <td class="list_item" align="center">
+        <TPL_SUB:DEL><a href="<TPL:DEL_URL>" onClick="return confirm('Tikrai?');"><img src="../img/adm_delete.gif" width="12" height="12" border="0" alt="pašalinti"></a></TPL_SUB:DEL>
+        <a href="manager_season_tours_edit.php?tour_id=<TPL:TOUR_ID>&season_id=<TPL:SEASON_ID>"><img src="../img/adm_edit.gif" width="12" height="12" border="0" alt="redaguoti"></a>
+      </td>
+      <td class="list_item" align="center">
+      <TPL_SUB:UPDATE>
+       <form action="manager_update.php" method="post" target="_blank">
+         <input type="hidden" name="update" value="Y">
+         <input type="hidden" name="season_id" value="<TPL:SEASON_ID>">
+         <input type="hidden" name="tour_id" value="<TPL:TOUR_ID>">
+	 <input type="submit" class="btn" value="<_TPL:LANG_UPDATE_U>" onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"> <TPL:COUNTED_GAMES>/<TPL:TOTAL_GAMES>
+       </form>
+<!--       <form action="manager_fix_rating.php" method="post" target="_blank">
+         <input type="hidden" name="update" value="Y">
+         <input type="hidden" name="season_id" value="<TPL:SEASON_ID>">
+         <input type="hidden" name="tour_id" value="<TPL:TOUR_ID>">
+	 <input type="submit" class="btn" value="<_TPL:LANG_FIX_RATING_U>" onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'">
+       </form> -->
+      </TPL_SUB:UPDATE>
+      <TPL_SUB:UPDATE_IND>
+       <form action="manager_update_ind.php" method="post" target="_blank" style="margin:0">
+         <input type="hidden" name="update" value="Y">
+         <input type="hidden" name="season_id" value="<TPL:SEASON_ID>">
+         <input type="hidden" name="tour_id" value="<TPL:TOUR_ID>">
+	 <input type="submit" class="btn" value="<_TPL:LANG_UPDATE_U>" onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'">
+       </form>
+       <form action="manager_fix_rating.php" method="post" target="_blank">
+         <input type="hidden" name="update" value="Y">
+         <input type="hidden" name="season_id" value="<TPL:SEASON_ID>">
+         <input type="hidden" name="tour_id" value="<TPL:TOUR_ID>">
+	 <input type="submit" class="btn" value="<_TPL:LANG_FIX_RATING_U>" onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'">
+       </form>
+      </TPL_SUB:UPDATE_IND>
+      <TPL_SUB:LOAD_RES>
+       <a href="manager_ind_load_res.php?season_id=<TPL:SEASON_ID>&tour_id=<TPL:TOUR_ID>" method="get" target="_blank">load res</a>
+      </TPL_SUB:LOAD_RES>
+      <TPL_SUB:UPDATE_CHALLENGES>
+       <form action="manager_update_challenges.php" method="post" target="_blank">
+         <input type="hidden" name="update" value="Y">
+         <input type="hidden" name="season_id" value="<TPL:SEASON_ID>">
+         <input type="hidden" name="tour_id" value="<TPL:TOUR_ID>">
+	 <input type="submit" class="btn" value="<_TPL:LANG_UPDATE_CHALLENGES_U>" onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"> 
+       </form>
+      </TPL_SUB:UPDATE_CHALLENGES>
+      <TPL_SUB:COMPLETE_TOUR>
+       <form action="manager_tournament_complete_tour.php" method="post" target="_blank">
+         <input type="hidden" name="complete" value="Y">
+         <input type="hidden" name="season_id" value="<TPL:SEASON_ID>">
+         <input type="hidden" name="tour_id" value="<TPL:TOUR_ID>">
+	 <input type="submit" class="btn" value="<_TPL:LANG_COMPLETE_TOUR_U>" onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'">
+       </form>
+      </TPL_SUB:COMPLETE_TOUR>
+<!--      <TPL_SUB:UPDATE_RATING>
+       <form action="manager_update_rating.php" method="post" target="_blank">
+         <input type="hidden" name="update_rating" value="Y">
+         <input type="hidden" name="season_id" value="<TPL:SEASON_ID>">
+         <input type="hidden" name="tour_id" value="<TPL:TOUR_ID>">
+	 <input type="submit" class="btn" value="<_TPL:LANG_UPDATE_RATING_U>" onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'">
+       </form>
+      </TPL_SUB:UPDATE_RATING>-->
+      </td>
+    </tr>
+    </TPL_SUB:TOURS>
+    <TPL_SUB:TOUR_NORECORDS>
+    <tr bgcolor="#FFFFFF"><td colspan="7" class="list_item">Įrašų nėra</td></tr>
+    </TPL_SUB:TOUR_NORECORDS>   
+  </table>
+  </div>
+  <div class="content">
+  Date1, Date2, Number
+  <form action="" method="post">
+    <textarea name="descr" cols="65" rows="12" class="input"><TPL:DESCR></textarea>
+    <input type="hidden" name="season_id" value="<TPL:SEASON_ID>" >
+    <input type="hidden" name="load_tours" value="Y" ><br>
+    <input type="submit" class="btn" value="<_TPL:LANG_SAVE_U>" onclick="resettarget();"  onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" >
+  </form>
+</div>
+</div>
+</div>
+
+<TPL_INCLUDE:../tpl/adm/foot.tpl.html>

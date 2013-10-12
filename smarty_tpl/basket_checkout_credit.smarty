@@ -1,0 +1,62 @@
+<div style="clear:both;"></div>
+<div class="portlet">
+<div class="header">{translate fonema=LANG_BASKET_U}</div>
+<div class="content">
+{if isset($basket)}
+<table>
+ <tr>
+  <th>{translate fonema=LANG_ITEM_NAME_U}</th>
+  <th>{translate fonema=LANG_PRICE_CREDITS_U}</th>
+  <th>{translate fonema=LANG_QUANTITY_U}</th>
+ </tr>
+{foreach $basket as $basket_item}
+ <tr>
+   <td><a href="shop.php?item_id={$basket_item.ITEM_ID}">{$basket_item.ITEM_NAME}</a>
+       {foreach $basket_item.ATTRIBUTES as $attribute}
+         <br> <b>{$attribute.ATTR_NAME}</b>: {$attribute.VALUE}
+       {/foreach}
+   </td>
+   <td>{$basket_item.QUANTITY*$basket_item.PRICE_CREDITS}</td>
+   <td>{$basket_item.QUANTITY}</td>
+ </tr>
+{/foreach}
+ <tr>
+   <td>{translate fonema=LANG_DELIVERY_U}</td>
+   <td>{$basket_totals.DELIVERY_CREDITS}</td>
+   <td>1</td>
+ </tr>
+ <tr>
+   <td><b>{translate fonema=LANG_TOTAL_U}</b></td>
+   <td>{$basket_totals.CREDITS}</td>
+   <td></td>
+ </tr>
+</table>
+{else}
+{translate fonema=LANG_BASKET_EMPTY_U}
+{/if}
+</div>
+{if $not_enough_credits == 1}
+<div class="content">
+	<span class="textred"><b>{translate fonema=LANG_ERROR_NOT_ENOUGH_CREDITS_U}</b></span>
+</div>
+{else if isset($basket) && count($basket) > 0}
+<form action="" method="post" style="margin:0">
+<div class="content">
+   <div id="editor">
+   <b>{translate fonema=LANG_NOTE_U}</b>
+   <textarea name="note" id="note"></textarea>
+   </div>
+	<script type="text/javascript">
+		//<![CDATA[
+		replaceEditor('note');
+		//]]>
+	</script>
+</div>
+<div class="content">
+   <input type="hidden" name="confirm_order" value="y">
+   <input type="submit" class="btn" value=" {translate fonema=LANG_CONFIRM_U} "  onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" >
+</div>
+</form>
+{/if}
+</div>
+</div>

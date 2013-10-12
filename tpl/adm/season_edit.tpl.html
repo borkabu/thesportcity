@@ -1,0 +1,89 @@
+<TPL_INCLUDE:../tpl/adm/head.tpl.html>
+<TPL_INCLUDE:../tpl/adm/menu.tpl.html>
+
+<div  style="float:left;">
+<form action="" method="post" name="editform">
+<input type="hidden" name="form_save" value="Y">
+<input type="hidden" name="referer" value="<TPL:REFERER>">
+<input type="hidden" name="lang_id" value="<TPL:LANG_ID>">
+
+<TPL_SUB:ERROR><span class="error"><TPL:MSG></span></TPL_SUB:ERROR>
+<div class="portlet" >
+  <div class="header"><_TPL:LANG_GENERAL_DATA_U></div>
+  <div class="content">
+   <table>  
+    <tr>
+      <td class="list_item">Pavadinimas</td>
+      <td class="list_item"><TPL_INPUT:adm_season.season_title></td>
+    </tr>
+
+    <tr>
+      <td class="list_item">Turnyras</td>
+      <td class="list_item"><TPL:TOURNAMENT></td>
+    </tr>    
+
+    <tr>
+      <td class="list_item"><_TPL:LANG_SPORT_U></td>
+      <td class="list_item"><TPL:SPORT_ID></td>
+    </tr>
+
+    <tr>
+      <td class="list_item">Pradžia</td>
+      <td class="list_item"><TPL_INPUT:adm_season.start_date></td>
+    </tr>
+    
+    <tr>
+      <td class="list_item">Pabaiga</td>
+      <td class="list_item"><TPL_INPUT:adm_season.end_date></td>
+    </tr>
+    
+    <tr>
+      <td class="list_item"><_TPL:LANG_PUBLISH_U></td>
+      <td class="list_item"><TPL_INPUT:adm_season.publish></td>
+    </tr>
+    
+  </table>
+</div>
+</div>
+
+<div class="portlet">
+  <div class="content">
+        <input type="submit" class="btn" value="<_TPL:LANG_SAVE_U>" onclick="resettarget();"  onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" >
+        <input type="reset" class="btn" value="<_TPL:LANG_RESET_U>" onclick="return confirm('<_TPL:LANG_REALLY_U>');"  onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'">
+</div>
+</div>
+</form>
+</div>
+
+<div style="float:left;width:300px">
+<div class="portlet">
+  <div class="header">Dalyvaujančios komandos <a href="season_teams_edit.php?season_id=<TPL:SEASON_ID>"><img src="../img/adm_edit.gif" width="12" height="12" border="0" alt="redaguoti"></a></div>
+  <div class="content">
+  <table>
+  
+    <tr>
+      <th></td>
+      <th><_TPL:LANG_TITLE_U></td>
+      <th>&nbsp;</td>
+    </tr>
+
+    <TPL_SUB:TEAM>
+    <tr class="<TPL_SUB:EVEN>even</TPL_SUB:EVEN><TPL_SUB:ODD>odd</TPL_SUB:ODD>">
+      <td class="list_item"><TPL:NO></td>
+      <td class="list_item"><TPL:TEAM_NAME></td>
+      <td class="list_item" align="center">
+        <TPL_SUB:DEL><a href="<TPL:DEL_URL>" onClick="return confirm('Tikrai?');"><img src="../img/adm_delete.gif" width="12" height="12" border="0" alt="pašalinti"></a></TPL_SUB:DEL>
+        <a href="season_teams_edit.php?id=<TPL:ID>&team_id=<TPL:TEAM_ID>&season_id=<TPL:SEASON_ID>"><img src="../img/adm_edit.gif" width="12" height="12" border="0" alt="redaguoti"></a>
+        </td>
+    </tr>
+    </TPL_SUB:TEAM>
+    <TPL_SUB:TEAM_NORECORDS>
+    <tr bgcolor="#FFFFFF"><td colspan="7" class="list_item">Įrašų nėra</td></tr>
+    </TPL_SUB:TEAM_NORECORDS>   
+  </table>
+</div>
+</div>
+</div>
+
+
+<TPL_INCLUDE:../tpl/adm/foot.tpl.html>

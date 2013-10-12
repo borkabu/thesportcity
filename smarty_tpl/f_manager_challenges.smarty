@@ -1,0 +1,175 @@
+<div style="clear:both"></div>
+{$manager_filter_box}
+
+{$rules}
+
+{if isset($error)}
+<div class="portlet" id="message">
+    <div class="content">
+	<span class="textred"><b>{$error}</b></span>
+    </div>
+</div>
+{/if}
+
+{if isset($logged)}
+<script>
+ $(function() {
+	$( "#challenges" ).tabs({
+		cookie: {
+			expires: 1,
+			name: "challenges"
+			}
+		}); 
+});
+</script>
+
+<div id="challenges">
+ <ul>
+  <li><a href="#tabs-1" title="{translate fonema=LANG_CANDIDATES_U}">{translate fonema=LANG_CANDIDATES_U}</a></li>
+  <li><a href="#tabs-2" title="{translate fonema=LANG_ACCEPTED_CHALLENGES_U}">{translate fonema=LANG_ACCEPTED_CHALLENGES_U}</a></li>
+  <li><a href="#tabs-3" title="{translate fonema=LANG_COMPLETED_CHALLENGES_U}">{translate fonema=LANG_COMPLETED_CHALLENGES_U}</a></li>
+ </ul>
+
+ <div id="tabs-1">
+{if isset($cleared)}
+  <div class="portlet" style="margin:0px">
+   <div class="header">{translate fonema=LANG_CANDIDATES_U}</div>
+<form method="post" action="">
+<input type="hidden" name="multiple_challenges" value="true">
+   <div class="content">
+{if count($cleared)>0}
+  <table width="100%">
+    <tr><th>{translate fonema=LANG_USER_NAME_U}</th>
+        <th>{translate fonema=LANG_POINTS_U}</th>
+        <th>{translate fonema=LANG_PLACE_U}</th>
+        <th width="100%"></th>
+    </tr>
+    {foreach $cleared.CANDIDATES as $candidate}
+    <tr>
+      <td>{$candidate.USER_NAME}</td>
+      <td>{$candidate.POINTS}</td>
+      <td>{$candidate.PLACE}</td>
+      <td><div id="credit_challenge_{$candidate.USER_ID}">
+          {if isset($candidate.CHALLENGED)}
+            {translate fonema=LANG_CHALLENGE_ACCEPTED_U}<br>
+	  {/if}
+          {if isset($candidate.CHALLENGE)}
+		{translate fonema=LANG_STAKE_U}: <input type="text" name="credit_stake_{$candidate.USER_ID}" id="credit_stake_{$candidate.USER_ID}" size="2" maxlength="4" class="input" value="{$candidate.MAX_CREDIT}" /> {translate fonema=LANG_CREDITS_U}
+             	<input type="button" class="btn" value=" {translate fonema=LANG_CHALLENGE_USER_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" onClick="javascript:challengeUser({$candidate.USER_ID}, {$candidate.SEASON_ID}, 'credit_challenge_{$candidate.USER_ID}', 2, document.getElementById('credit_stake_{$candidate.USER_ID}').value)"/>
+	  {/if}
+          {if isset($candidate.CHALLENGE_THROWN)}
+          {translate fonema=LANG_CHALLENGE_THROWN_U}<br>
+	    {translate fonema=LANG_STAKE_U}: <b>{$candidate.STAKE}</b> {translate fonema=LANG_CREDITS_U}
+            <input type="button" class="btn" value=" {translate fonema=LANG_CHALLENGE_WITHDRAW_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" onClick="javascript:unchallengeUser({$candidate.USER_ID}, {$candidate.SEASON_ID}, 2, 'credit_challenge_{$candidate.USER_ID}')"/>
+	  {/if}
+          {if isset($candidate.CHALLENGE_REJECTED)}
+            {translate fonema=LANG_CHALLENGE_REJECTED_U}
+	  {/if}
+          </div>
+      </td>
+    </tr>
+   {/foreach}
+  </table> 
+   </div>
+   <!-- div class="content">
+   <input class="input" type="submit" value="{translate fonema=LANG_SUBMIT_ALL_U}">
+   </div -->
+</form>
+  {else}
+   <div class="content">
+	<span>{translate fonema=LANG_ERROR_MANAGER_NO_CANDIDATES}</span> 
+   </div>
+  {/if}   
+ </div>
+{/if}
+
+</div>
+ <div id="tabs-2">
+{if isset($accepted_challenges)}
+<div class="portlet">
+<div class="header">{translate fonema=LANG_ACCEPTED_CHALLENGES_U}</div>
+<div class="content">{translate fonema=LANG_TOUR_POINTS_U}: <b>{$accepted_points}</b><br>
+		     {translate fonema=LANG_STAKES_U}: <b>{$accepted_stake_credits}</b> {translate fonema=LANG_CREDITS_U}
+</div>
+<div class="content">
+  <table>
+    <tr><th width="100%">{translate fonema=LANG_USER_NAME_U}</th>
+        <th>{translate fonema=LANG_POINTS_U}</th>
+        <th>{translate fonema=LANG_TOUR_POINTS_U}</th>
+        <th>{translate fonema=LANG_PLACE_U}</th>
+        <th>{translate fonema=LANG_CHALLENGE_THROWN_U}</th>
+        <th>{translate fonema=LANG_CHALLENGE_ACCEPTED_U}</th>
+        <th>{translate fonema=LANG_STAKE_U}</th>
+    </tr>
+    {foreach $accepted_challenges as $accepted_challenge}
+    <tr>
+      <td>{if isset($accepted_challenge.COUNTRY_DB)}<img border=1 src="./img/flags/{$accepted_challenge.COUNTRY_DB.CCTLD}.gif" onmouseover="Tip('<TPL:COUNTRY_NAME>')" onmouseout="UnTip()">{/if}
+          <a href="f_manager_user_team_compare.php?username={$accepted_challenge.USER_NAME}" target="f_manager_user_team_compare" onClick="window.open('','f_manager_user_team_compare','width=400,height=600,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');"><img src="img/icons/weight.png" ></a>
+	  {if isset($accepted_challenge.ALLOW)}<a href="f_manager_user_team.php?user_id={$accepted_challenge.USER_ID}" target="f_manager_user_team" onClick="window.open('','f_manager_user_team','width=300,height=400,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');">{$accepted_challenge.USER_NAME}</a>{/if}
+	  {if isset($accepted_challenge.NOTALLOW)}{$accepted_challenge.USER_NAME}{/if}
+      </td>
+      <td>{$accepted_challenge.POINTS}</td>
+      <td>{$accepted_challenge.TOUR_POINTS}</td>
+      <td>{$accepted_challenge.PLACE}</td>
+      <td class="date_font2" nowrap>{$accepted_challenge.DATE_CHALLENGED}</td>
+      <td class="date_font2" nowrap>{$accepted_challenge.DATE_ACCEPTED}</td>
+      <td align="right">{$accepted_challenge.STAKE} {translate fonema=LANG_CREDITS_ABBR_U}</td>
+    </tr>
+    {foreachelse}
+	<tr><td colspan=7>{translate fonema=LANG_NO_CHALLENGES_U}</td></tr> 
+    {/foreach}
+  </table>
+</div>
+</div>
+{/if}
+</div>
+ <div id="tabs-3">
+
+<div class="portlet">
+  <div class="header">{translate fonema=LANG_FILTER_U}</div>
+  <div class="content">
+   {if isset($tours)}
+    {translate fonema=LANG_TOURS_U}: 
+    {foreach $tours as $tour}
+        {if isset($tour.SELECTED)}<b>[{$tour.NUMBER}]</b>{/if}
+        {if isset($tour.NORMAL)}<a href="f_manager_challenges.php?tour_id={$tour.NUMBER}&season_id={$tour.SEASON_ID}">{$tour.NUMBER}</a>{/if}
+    {/foreach} 
+   {/if}
+    {if isset($all)}
+        {if isset($all.SELECTED)}<b>[{translate fonema=LANG_SEASON_STANDINGS_U}]</b>{/if}
+        {if isset($all.NORMAL)}<a href="f_manager_challenges.php?mseason_id={$all.NORMAL.MSEASON_ID}">[{translate fonema=LANG_SEASON_STANDINGS_U}]</a>{/if}
+    {/if}
+ </div>
+</div>
+
+{if isset($completed_challenges)}
+<div class="portlet">
+<div class="header">{translate fonema=LANG_COMPLETED_CHALLENGES_U}</div>
+<div class="content">
+  <table width="100%">
+    <tr><th></th>
+	<th>{translate fonema=LANG_TOUR_U}</th>
+	<th width="40%"></th>
+        <th></th>
+        <th width="40%"></th>
+	<th>{translate fonema=LANG_STAKE_U}</th>
+    </tr>
+    {foreach $completed_challenges as $completed_challenge}
+    <tr>
+      <td>{$completed_challenge.NUMBER}</td>
+      <td>{$completed_challenge.TOUR_ID}</td>
+      <td align="right" {if isset($completed_challenge.USER_NAME1_WON)}style="font-weight:bold"{/if}>{$completed_challenge.USER_NAME1}</td>
+      <td nowrap>{$completed_challenge.POINTS1} : {$completed_challenge.POINTS2}</td>
+      <td {if isset($completed_challenge.USER_NAME2_WON)}style="font-weight:bold"{/if}>{$completed_challenge.USER_NAME2}</td>
+      <td align="right">{$completed_challenge.STAKE} {translate fonema=LANG_CREDITS_ABBR_U}</td>
+    </tr>
+    {foreachelse}
+	<tr><td colspan=6>{translate fonema=LANG_NO_CHALLENGES_U}</td></tr> 
+    {/foreach}
+  </table>
+</div>
+</div>
+{/if}
+</div>
+</div>
+{/if}

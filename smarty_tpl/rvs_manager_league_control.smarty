@@ -1,0 +1,504 @@
+<div style="clear:both"></div>
+{$manager_filter_box}
+
+{if isset($error)}
+<div class="portlet" id="message">
+    <div class="content">
+	<span class="textred"><b>{$error.MSG}</b></span>
+    </div>
+</div>
+{/if}
+
+{if isset($create_league_offer)}
+<div class="portlet" id="create_league_offer">
+    <div class="content">
+	{translate fonema=LANG_CREATE_RVS_LEAGUE_OFFER_U}
+	<input type="button" class="btn" value=" {translate fonema=LANG_YES_PLEASE_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" onClick="javascript:createFLLeague('create_league', 'create_league_offer')"/>
+    </div>
+</div>
+<div id="create_league">
+</div>
+{/if}
+
+{if isset($logged) && isset($league)}
+
+<div class="portlet">
+  <div class="header">{translate fonema=LANG_FANTASY_LEAGUE_U}: <b>{$league.TITLE}</b></div>
+</div>
+<form action="rvs_manager_league_control.php" method="post">
+<script>
+ $(function() {
+	$( "#rvsrules" ).tabs({
+		cookie: {
+			expires: 1,
+			name: "rvsrules"
+			}
+		}); 
+});
+</script>
+<div id="rvsrules">
+ <ul>
+   <li><a href="#tabs-1" title="{translate fonema=LANG_ADVANCED_EDITOR_U}">{translate fonema=LANG_ADVANCED_EDITOR_U}</a></li>
+   <li><a href="#tabs-2" title="{translate fonema=LANG_SIMPLE_EDITOR_U}">{translate fonema=LANG_SIMPLE_EDITOR_U}</a></li>
+ </ul>
+  <div id="tabs-1">
+   <div class="portlet" style="margin:0px">
+    <div class="content"><b>{translate fonema=LANG_DESCRIPTION_U}</b>
+     <input type="hidden" name="league_id" value="{$league.LEAGUE_ID}">
+     <input type="hidden" name="set_rules" value="Y">
+     <textarea name="rules" id="rules">{$league.RULES}</textarea>        
+     <input class="btn" type="submit" value=" {translate fonema=LANG_SUBMIT_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+     {translate fonema=LANG_ADVANCED_EDITOR_INSTR_U}
+    </div>
+   </div>
+  </div>
+  <div id="tabs-2">
+   <div class="portlet" style="margin:0px">
+    <div class="content">
+     <b>{translate fonema=LANG_DESCRIPTION_U}</b><br>
+     <textarea name="simple_text" id="simple_text" rows=15 cols=65">{$league.RULES}</textarea><br>
+     <input class="btn" type="submit" value=" {translate fonema=LANG_SUBMIT_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/><br>
+    </div> 
+   </div>
+  </div>
+   <script type="text/javascript">
+	//<![CDATA[
+	replaceEditor('rules');
+	//]]>
+   </script>
+</div>
+<div class="portlet">
+  <div class="header">{translate fonema=LANG_SETTINGS_U}</div>
+    {if isset($conf_error)}
+    <div class="content">
+        <span class="textred">
+          {if isset($conf_error.ERROR_RSV_LEAGUE_ENTRY_FEE)}{translate fonema=LANG_ERROR_RSV_LEAGUE_ENTRY_FEE_U}{/if}
+          {if isset($conf_error.ERROR_RSV_LEAGUE_DURATION)}{$conf_error.ERROR_RSV_LEAGUE_DURATION.MSG}{/if}
+          {if isset($conf_error.ERROR_RSV_LEAGUE_DISCARDS)}{translate fonema=LANG_ERROR_RSV_LEAGUE_DISCARDS_U}{/if}
+          {if isset($conf_error.ERROR_RSV_LEAGUE_TEAM_SIZE)}{$conf_error.ERROR_RSV_LEAGUE_TEAM_SIZE.MSG}{/if}
+          {if isset($conf_error.ERROR_RSV_LEAGUE_PARTICIPANTS)}{$conf_error.ERROR_RSV_LEAGUE_PARTICIPANTS.MSG}{/if}
+        </span>
+    </div>
+    {/if}
+  <div class="content">    
+    <span class="textred"><b>{translate fonema=LANG_RVS_MANAGER_CHANGE_SETTINGS_INSTR_U}</b></span>
+    <table class="noborder" width="100%">
+	<tr><td>{translate fonema=LANG_COUNTRY_U}:</td><td> {$league.COUNTRY} <img src='./img/icons/information.png' onmouseover="Tip('{translate fonema=LANG_LEAGUE_COUNTRY_INFO_U}')" onmouseout="UnTip()" /></td><td></td></tr>
+	<tr><td>{translate fonema=LANG_DURATION_U}: <img src='./img/icons/information.png' onmouseover="Tip('{translate fonema=LANG_LEAGUE_DURATION_U}')" onmouseout="UnTip()" /></td>
+          {if isset($league.READONLY)}<td>{$league.DURATION}</td><td></td>
+          {else}
+	  <td>
+  	<script>
+	$(function() {
+		$( "#duration_slider" ).slider({
+			value:{$league.DURATION},
+			range: "min",
+			min: 1,
+			max: {$league.MAX_DURATION},
+			step: 1,
+			slide: function( event, ui ) {
+				$( "#duration_view" ).text( ui.value  + " {translate fonema=LANG_TOURS_U}");
+				$( "#duration" ).val ( ui.value);
+			}
+		});
+		$( "#duration_view" ).text( $( "#duration_slider" ).slider( "value" ) + " {translate fonema=LANG_TOURS_U}");
+		$( "#duration" ).val( $( "#duration_slider" ).slider( "value" ) );
+	});
+	</script>                    
+          <div id="duration_slider"></div>
+ 	  
+         </td><td><div id="duration_view" style="border:0; margin-left:5px;font-weight:bold;"></div>
+                  <input type="hidden" name="duration" id="duration" value="{$league.DURATION}"></td>
+        {/if}
+        </tr>
+	<tr><td>{translate fonema=LANG_ENTRY_FEE_U}:</td><td> {if isset($league.READONLY)}{$league.ENTRY_FEE}{else}<input type="text" name="entry_fee" value="{$league.ENTRY_FEE}" maxlength="3" size="3" class="input">{/if}</td></tr>
+	<tr><td>{translate fonema=LANG_PARTICIPANTS_U}: <img src='./img/icons/information.png' onmouseover="Tip('{translate fonema=LANG_LEAGUE_RVS_PARTICIPANTS_U}')" onmouseout="UnTip()" /></td>
+           {if isset($league.READONLY)}<td>{$league.PARTICIPANTS}</td><td></td>
+           {else}
+	  <td>
+	  	<script>
+		$(function() {
+			$( "#participants_slider" ).slider({
+				value:{$league.PARTICIPANTS},
+				range: "min",
+				min: 3,
+				max: {$league.MAX_PARTICIPANTS},
+				step: 1,
+				slide: function( event, ui ) {
+					$( "#participants_view" ).text( ui.value + "/" + $( "#participants_slider" ).slider( "option", "max" ));
+                      			$( "#participants" ).val( ui.value);
+                   
+                                        var team_size = $( "#team_size_slider" ).slider( "option", "value");
+                                        var team_size_max = $( "#team_size_slider" ).slider( "option", "max");
+                                        if (Math.floor (120/ui.value) != team_size_max) {
+                    			  $( "#team_size_slider" ).slider( "option", "max", Math.floor (120/ui.value) );
+					  team_size_max = $( "#team_size_slider" ).slider( "option", "max");
+					  team_size = $( "#team_size_slider" ).slider( "option", "value");
+                                          if (team_size_max < team_size)
+                      			    $( "#team_size_slider" ).slider( "option", "value", team_size_max );
+                     			  $( "#team_size_slider" ).slider( "option", "value", $( "#team_size_slider" ).slider( "option", "value"));
+                                        }
+					$( "#team_size_view" ).text( $( "#team_size_slider" ).slider( "option", "value" ) + "/" + $( "#team_size_slider" ).slider( "option", "max" ));
+				}
+			});
+			$( "#participants_view" ).text( $( "#participants_slider" ).slider( "value" )   + "/" + $( "#participants_slider" ).slider( "option", "max" ));
+			$( "#participants" ).val( $( "#participants_slider" ).slider( "value" ));
+		});
+		</script>                    
+                <div id="participants_slider"></div>
+	 	  
+               </td><td><div id="participants_view" style="border:0; margin-left:5px;font-weight:bold;"></div>
+                        <input type="hidden" name="participants" id="participants" value="{$league.PARTICIPANTS}"></td>
+           {/if} 
+        </tr>
+	<tr><td>{translate fonema=LANG_TEAM_SIZE_U}: <img src='./img/icons/information.png' onmouseover="Tip('{translate fonema=LANG_RVS_MANAGER_LEAGUE_TEAM_SIZE_U}')" onmouseout="UnTip()" /></td>
+         {if isset($league.READONLY)}<td>{$league.TEAM_SIZE}</td><td></td>
+          {else}
+	  <td>
+	  	<script>
+		$(function() {
+			$( "#team_size_slider" ).slider({
+				value:{$league.TEAM_SIZE},
+				range: "min",
+				min: 1,
+				max: {$league.MAX_TEAM_SIZE},
+				step: 1,
+				slide: function( event, ui ) {
+					$( "#team_size_view" ).text( ui.value+ "/" + $( "#team_size_slider" ).slider( "option", "max" ));
+                      			$( "#team_size" ).val( ui.value);
+                   
+                                        var participants = $( "#participants_slider" ).slider( "option", "value");
+                                        var reserve_size = $( "#reserve_size_slider" ).slider( "option", "value");
+                                        var participants_max = $( "#participants_slider" ).slider( "option", "max");
+                                        var reserve_size_max = $( "#reserve_size_slider" ).slider( "option", "max");
+                                        var reserve_size_value = $( "#reserve_size_slider" ).slider( "option", "value");
+                                        if (Math.floor (120/ui.value) != participants_max) {
+                    			  $( "#participants_slider" ).slider( "option", "max", Math.floor (120/ui.value) );
+					  participants_max = $( "#participants_slider" ).slider( "option", "max");
+					  participants = $( "#participants_slider" ).slider( "option", "value");
+                                          if (participants_max < participants)
+                      			    $( "#participants_slider" ).slider( "option", "value", participants_max );
+                     			  $( "#participants_slider" ).slider( "option", "value", $( "#participants_slider" ).slider( "option", "value"));
+                                        }
+					$( "#participants_view" ).text( $( "#participants_slider" ).slider( "option", "value" ) + "/" + $( "#participants_slider" ).slider( "option", "max" ));
+                                        reserve_size_max = ui.value - 1;
+                                        if (reserve_size_max < reserve_size_value)
+ 					  $( "#reserve_size_slider" ).slider( "option", "value", reserve_size_max );
+					$( "#reserve_size_slider" ).slider( "option", "max", reserve_size_max );
+					$( "#reserve_size_view" ).text( $( "#reserve_size_slider" ).slider( "option", "value" ) + "/" + $( "#reserve_size_slider" ).slider( "option", "max" ));
+				}
+			});
+			$( "#team_size_view" ).text( $( "#team_size_slider" ).slider( "value" ) + "/" + $( "#team_size_slider" ).slider( "option", "max" ));
+			$( "#team_size" ).val( $( "#team_size_slider" ).slider( "value" ));
+		});
+		</script>                    
+                <div id="team_size_slider"></div>
+	 	  
+               </td><td><div id="team_size_view" style="border:0;margin-left:5px; font-weight:bold;"></div>
+                        <input type="hidden" name="team_size" id="team_size" value="{$league.TEAM_SIZE}"></td>
+         {/if}
+        </tr>
+	<tr><td>{translate fonema=LANG_RESERVE_SIZE_U}: <img src='./img/icons/information.png' onmouseover="Tip('{translate fonema=LANG_RVS_MANAGER_LEAGUE_RESERVE_SIZE_U}')" onmouseout="UnTip()" /></td>
+         {if isset($league.READONLY)}<td>{$league.RESERVE_SIZE}</td><td></td>
+          {else}
+	  <td>
+	  	<script>
+		$(function() {
+			$( "#reserve_size_slider" ).slider({
+				value:{$league.RESERVE_SIZE},
+				range: "min",
+				min: 0,
+				max: {$league.MAX_RESERVE_SIZE},
+				step: 1,
+				slide: function( event, ui ) {
+					$( "#reserve_size_view" ).text( ui.value+ "/" + $( "#reserve_size_slider" ).slider( "option", "max" ));
+                      			$( "#reserve_size" ).val( ui.value);                   
+				}
+			});
+			$( "#reserve_size_view" ).text( $( "#reserve_size_slider" ).slider( "value" ) + "/" + $( "#reserve_size_slider" ).slider( "option", "max" ));
+			$( "#reserve_size" ).val( $( "#reserve_size_slider" ).slider( "value" ));
+		});
+		</script>                    
+                <div id="reserve_size_slider"></div>
+	 	  
+               </td><td><div id="reserve_size_view" style="border:0;margin-left:5px; font-weight:bold;"></div>
+                        <input type="hidden" name="reserve_size" id="reserve_size" value="{$league.RESERVE_SIZE}"></td>
+         {/if}
+        </tr>
+	<tr><td>{translate fonema=LANG_BLIND_TRADES_U}:</td><td> {if isset($league.READONLY2)}{$league.DISCARDS}{else}<input type="text" name="discards" value="{$league.DISCARDS}" maxlength="3" size="3" class="input">{/if} <img src='./img/icons/information.png' onmouseover="Tip('{translate fonema=LANG_LEAGUE_DISCARDS_U}')" onmouseout="UnTip()" /></td></tr>
+	<tr><td>{translate fonema=LANG_FREE_TRANSFERS_U}:</td><td> {if isset($league.READONLY2)}{$league.FREE_TRANSFERS}{else}<input type="text" name="free_transfers" value="{$league.FREE_TRANSFERS}" maxlength="3" size="3" class="input">{/if} <img src='./img/icons/information.png' onmouseover="Tip('{translate fonema=LANG_FREE_TRANSFERS_INFO_U}')" onmouseout="UnTip()" /> {translate fonema=LANG_FREE_TRANSFER_FEE_U}: {if isset($league.READONLY2)}{$league.FREE_TRANSFER_FEE}{else}<input type="text" name="free_transfer_fee" value="{$league.FREE_TRANSFER_FEE}" maxlength="5" size="3" class="input">{/if} <img src='./img/icons/information.png' onmouseover="Tip('{translate fonema=LANG_FREE_TRANSFERS_FEE_INFO_U}')" onmouseout="UnTip()" /></td></tr>
+	<tr><td>{translate fonema=LANG_DRAFT_TYPE_U}:</td><td> {$league.DRAFT_TYPE} <img src='./img/icons/information.png' onmouseover="Tip('{translate fonema=LANG_LEAGUE_DRAFT_TYPE_INFO_U}')" onmouseout="UnTip()" /></td></tr>
+        {if !empty($league.DRAFT_INTERVAL)}
+  	  <tr><td>{translate fonema=LANG_DRAFT_INTERVAL_U}:</td><td>{$league.DRAFT_INTERVAL}</td></tr>
+        {/if} 
+        {if !empty($league.DRAFT_PICK_ORDER_TYPE)}
+  	  <tr><td>{translate fonema=LANG_DRAFT_PICK_ORDER_TYPE_U}:</td><td>{$league.DRAFT_PICK_ORDER_TYPE} <img src='./img/icons/information.png' onmouseover="Tip('{translate fonema=LANG_LEAGUE_DRAFT_PICK_ORDER_INFO_U}')" onmouseout="UnTip()" /></td></tr>
+        {/if} 
+	<tr><td>{translate fonema=LANG_FORMAT_U}:</td><td> {$league.FORMAT} <img src='./img/icons/information.png' onmouseover="Tip('{translate fonema=LANG_LEAGUE_FORMAT_INFO_U}')" onmouseout="UnTip()" /></td></tr>
+	<tr><td>{translate fonema=LANG_REAL_PRIZES_U}:</td><td> {if isset($league.READONLY)}{$league.REAL_PRIZES}{else}<input type="checkbox" {if $league.REAL_PRIZES=='Y'}checked{/if} value="Y" class="" name="real_prizes">{/if} <img src='./img/icons/information.png' onmouseover="Tip('{translate fonema=LANG_LEAGUE_REAL_PRIZES_INFO_U}')" onmouseout="UnTip()" /></td></tr>
+	<tr><td>{translate fonema=LANG_INVITE_TYPE_U}:</td><td> {$league.INVITE_TYPE} <img src='./img/icons/information.png' onmouseover="Tip('{translate fonema=LANG_LEAGUE_INVITE_TYPE_INFO_U}')" onmouseout="UnTip()" /></td></tr>
+        {if !empty($league.INVITE_CODE)}
+  	  <tr><td>{translate fonema=LANG_INVITE_CODE_U}:</td><td><b>{$league.INVITE_CODE}</b></td></tr>
+        {/if}
+	<tr><td>{translate fonema=LANG_MODERATE_TRANSFERS_U}:</td><td> <input type="checkbox" {if $league.MODERATE_TRANSFERS=='Y'}checked{/if} value="Y" class="" name="moderate_transfers"> <img src='./img/icons/information.png' onmouseover="Tip('{translate fonema=LANG_LEAGUE_MODERATE_TRANSFERS_INFO_U}')" onmouseout="UnTip()" /></td></tr>
+        <tr><td colspan=2><input class="btn" type="submit" value=" {translate fonema=LANG_SUBMIT_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/></td></tr>
+    </table>
+  </div>
+ </div>
+</form>
+<div class="portlet">
+  <div class="header">{translate fonema=LANG_PARTICIPANTS_U}</div>
+  <div class="content">
+       {if isset($league_members)}
+        <table width="100%">
+          <tr valign="top">
+            <th>{translate fonema=LANG_PARTICIPANT_U}</th>
+            <th>{translate fonema=LANG_POINTS_U}</th>
+            <th>{translate fonema=LANG_PLACE_U}</th>
+            <th>{translate fonema=LANG_STATUS_U}</th>
+            <th>{translate fonema=LANG_TAG_U}</th>
+            {if $league.DRAFT_PICK_ORDER_TYPE == 3}
+              <th>{translate fonema=LANG_DRAFT_PICK_ORDER_U}</th>
+            {/if}
+            <th></th>
+          </tr>
+          {if isset($league_members.OWNER)}
+          <tr valign="top">
+            <td><b>{$league_members.OWNER.USER_NAME}</b></td>
+            <td>{$league_members.OWNER.POINTS}</td>
+            <td>{$league_members.OWNER.PLACE}</td>
+            <td>{translate fonema=LANG_OWNER_U}</td>
+              <form action="" method="post">
+		  <td>
+		    <input type="text" name="tag" value="{$league_members.OWNER.TAG}" maxlength="20" size="12" class="input">
+                    <input class="btn" type="submit" value=" {translate fonema=LANG_OK_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+		    <input type="hidden" name="league_id" value="{$league_members.OWNER.LEAGUE_ID}">
+                    <input type="hidden" name="user_id" value="{$league_members.OWNER.USER_ID}">
+                    <input type="hidden" name="tag_user" value="Y">
+                  </td>
+              </form>
+            {if isset($league.DRAFT_PICK_ORDER_TYPE_VALUE) && $league.DRAFT_PICK_ORDER_TYPE_VALUE == 3}
+              <form action="" method="post">
+		  <td>
+		    <input type="text" name="draft_pick_order" value="{$league_members.OWNER.DRAFT_ORDER}" maxlength="2" size="2" class="input">
+                    <input class="btn" type="submit" value=" {translate fonema=LANG_OK_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+		    <input type="hidden" name="league_id" value="{$league_members.OWNER.LEAGUE_ID}">
+                    <input type="hidden" name="user_id" value="{$league_members.OWNER.USER_ID}">
+                    <input type="hidden" name="draft_pick_order_user" value="Y">
+                  </td>
+              </form>
+            {/if}
+            <td></td>
+          </tr>
+          {/if}
+          <tr valign="top">
+           <th colspan=6 align="center">{translate fonema=LANG_CURRENT_MEMBERS_U}</th>
+          </tr>
+          {if isset($league_members.CURRENT_MEMBERS)}
+          {foreach $league_members.CURRENT_MEMBERS as $member}
+            <tr valign="top">
+              <td><b>{$member.USER_NAME}</b></td>
+              <td>{$member.POINTS}</td>
+              <td>{$member.PLACE}</td>
+              <td>{translate fonema=LANG_PARTICIPANT_U}</td>
+              <form action="" method="post" style="margin:0">
+	      <td>
+		    <input type="text" name="tag" value="{$member.TAG}" maxlength="20" size="12" class="input">
+                    <input class="btn" type="submit" value=" {translate fonema=LANG_OK_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+		    <input type="hidden" name="league_id" value="{$member.LEAGUE_ID}">
+                    <input type="hidden" name="user_id" value="{$member.USER_ID}">
+                    <input type="hidden" name="tag_user" value="Y">
+              </td>
+              </form>
+            {if $league.DRAFT_PICK_ORDER_TYPE_VALUE == 3}
+              <form action="" method="post">
+		  <td>
+		    <input type="text" name="draft_pick_order" value="{$member.DRAFT_ORDER}" maxlength="2" size="2" class="input">
+                    <input class="btn" type="submit" value=" {translate fonema=LANG_OK_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+		    <input type="hidden" name="league_id" value="{$member.OWNER.LEAGUE_ID}">
+                    <input type="hidden" name="user_id" value="{$member.USER_ID}">
+                    <input type="hidden" name="draft_pick_order_user" value="Y">
+                  </td>
+              </form>
+            {/if}
+	      <td>
+              {if isset($member.CAN_REMOVE)}
+              <form action="" method="post">
+		<input class="btn" type="submit" value=" {translate fonema=LANG_DELETE_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"  onClick="return confirm('{translate fonema=LANG_REALLY_U}?');"/>
+	        <input type="hidden" name="league_id" value="{$member.LEAGUE_ID}">
+                <input type="hidden" name="user_id" value="{$member.USER_ID}">
+                <input type="hidden" name="remove_user" value="Y">
+              </form>
+              {/if}
+              </td>
+            </tr>
+           {/foreach}
+          {/if}
+          <tr valign="top">
+           <th colspan=6 align="center">{translate fonema=LANG_INVITED_MEMBERS_U}</th>
+          </tr>
+          {if isset($league_members.INVITED_MEMBERS)}
+          {foreach $league_members.INVITED_MEMBERS as $member}
+          <tr valign="top">
+            <td><b>{$member.USER_NAME}</b></td>
+            <td>{$member.POINTS}</td>
+            <td>{$member.PLACE}</td>
+            <td>{translate fonema=LANG_INVITED_U}</td>
+            <td></td>
+            <form action="" method="post">
+            <td>
+                <input class="btn" type="submit" value=" {translate fonema=LANG_DELETE_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" onClick="return confirm('{translate fonema=LANG_REALLY_U}?');"/>
+		<input type="hidden" name="league_id" value="{$member.LEAGUE_ID}">
+                <input type="hidden" name="user_id" value="{$member.USER_ID}">
+                <input type="hidden" name="remove_user2" value="Y">
+            </td>
+            </form>
+          </tr>
+           {/foreach}
+          {/if}
+          <tr valign="top">
+           <th colspan=6 align="center">{translate fonema=LANG_PAST_MEMBERS_U}</th>
+          </tr>
+          {if isset($league_members.FORMER_MEMBERS)}
+          {foreach $league_members.FORMER_MEMBERS as $member}
+          <tr valign="top">
+            <td><b>{$member.USER_NAME}</b></td>
+            <td>{$member.POINTS}</td>
+            <td>{$member.PLACE}</td>
+            <td>{translate fonema=LANG_PAST_MEMBER_U}</td>
+            <td></td>
+          </tr>
+           {/foreach}
+          {/if}
+          <tr valign="top">
+           <th colspan=6 align="center">{translate fonema=LANG_REJECTERS_U}</th>
+          </tr>
+          {if isset($league_members.DECLINE_MEMBERS)}
+          {foreach $league_members.DECLINE_MEMBERS as $member}
+          <tr valign="top">
+            <td><b>{$member.USER_NAME}</b></td>
+            <td>{$member.POINTS}</td>
+            <td>{$member.PLACE}</td>
+            <td>{translate fonema=LANG_REJECTERS_U}</td>
+            <td></td>
+          </tr>
+           {/foreach}
+          {/if}
+        </table>
+        {/if}
+  </div>
+{if isset($invite_form)}
+  <div class="header">{translate fonema=LANG_INVITATIONS_U}</div>
+    {if isset($invite_form.INVITE_ERROR)}
+    <div class="content">
+        <span class="textred">
+	  {if isset($invite_form.INVITE_ERROR.NOTEAM)}{translate fonema=LANG_RVS_MANAGER_LEAGUE_NO_TEAM_U}{/if}
+          {if isset($invite_form.INVITE_ERROR.NOUSER)}{translate fonema=LANG_MANAGER_LEAGUE_NO_USER_U}{/if} 
+          {if isset($invite_form.INVITE_ERROR.USERDOUBLE)}{translate fonema=LANG_MANAGER_LEAGUE_USER_DOUBLE_U}{/if} 
+	  {if isset($invite_form.INVITE_ERROR.USERIGNORE)}{translate fonema=LANG_MANAGER_LEAGUE_USER_IGNORE_U}{/if} 
+        </span>
+    </div>
+    {/if}
+  <div class="content">
+     <form action="" method="post" style="margin:0">			  
+        {translate fonema=LANG_INVITE_USER_U}
+        <input type="text" name="user_name" maxlength="12" size="10" class="input">
+        <input type="hidden" name="invite" value="y">
+        <input type="hidden" name="league_id" value="{$league.LEAGUE_ID}">
+        <input type="hidden" name="mseason_id" value="{$league.SEASON_ID}">
+	<input class="btn" type="submit" value=" {translate fonema=LANG_INVITE_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+     </form>
+  </div>
+{/if}
+  <div class="content">
+     <form action="" method="post" style="margin:0">			  
+        <input type="hidden" name="cancel_all_invites" value="y">
+        <input type="hidden" name="league_id" value="{$league.LEAGUE_ID}">
+        <input type="hidden" name="mseason_id" value="{$league.SEASON_ID}">
+	<input class="btn" type="submit" value=" {translate fonema=LANG_CANCEL_ALL_INVITES_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" onClick="return confirm('{translate fonema=LANG_REALLY_U}?');"/>
+     </form>
+  </div>
+</div>
+ <div class="portlet">
+  <div class="header">{translate fonema=LANG_DRAFT_U}</div>
+  <div class="content">
+   {if isset($can_draft) && $league.DRAFT_TYPE_VALUE == 0}
+     <form action="" method="post" style="margin:0">			  
+        <input type="hidden" name="run_draft" value="y">
+        <input type="hidden" name="league_id" value="{$league.LEAGUE_ID}">
+	<input class="btn" type="submit" value=" {translate fonema=LANG_COMMENCE_DRAFT_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" onClick="return confirm('{translate fonema=LANG_REALLY_U}?');"/>
+     </form>
+   {elseif isset($can_draft) && $league.DRAFT_TYPE_VALUE == 1 && $league.DRAFT_START_DATE == ""}
+   <script>
+     $(function() {
+	$( "#draft_start_date" ).datetimepicker();
+        $( "#draft_start_date" ).datetimepicker('setDate', (new Date({$league.DATE.YEAR}, {$league.DATE.MONTH}, {$league.DATE.DAY}, {$league.DATE.HOUR}, {$league.DATE.MINUTE})) );
+     });
+   </script>
+     {translate fonema=LANG_RVS_LEAGUE_DRAFT_START_SET_INSTR_U}<br>
+     <form action="" method="post" style="margin:0">			  
+        <input type="hidden" name="set_draft_time" value="y">
+        <input type="text" id="draft_start_date" name="draft_start_date" style="width: 100px; font-size:10px;" readonly="true"> {$league.DATE.UTC}
+        <input type="hidden" name="league_id" value="{$league.LEAGUE_ID}">
+	<input class="btn" type="submit" value=" {translate fonema=LANG_SET_DRAFT_TIME_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" onClick="return confirm('{translate fonema=LANG_REALLY_U}?');"/>
+     </form>
+   {/if}
+   {if isset($draft_set_wait) && $league.DRAFT_TYPE_VALUE == 1}
+     {translate fonema=LANG_RVS_LEAGUE_DRAFT_START_SET_U} <b>{$league.DRAFT_START_DATE_UTC}</b> {$league.DATE.UTC}<br>
+     <b><a href="rvs_manager_drafts_list.php?league_id={$member.LEAGUE_ID}" target="rvs_manager_draft_list" onClick="window.open('','rvs_manager_draft_list','width=600,height=600,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');">
+          {translate fonema=LANG_RVS_MANAGER_DRAFTS_PREPARE_U}</a></b><br>
+     <b><a href="rvs_manager_drafts.php?league_id={$member.LEAGUE_ID}" target="rvs_manager_draft_{$member.LEAGUE_ID}" onClick="window.open('','rvs_manager_draft_{$member.LEAGUE_ID}','width=1200,height=600,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');">
+          {translate fonema=LANG_RVS_MANAGER_DRAFTS_WINDOW_U}</a></b>
+
+   {/if}
+   {if isset($drafted)}
+     <b>{translate fonema=LANG_DRAFT_COMMENCED_U}</b>: {$drafted}
+   {/if}
+   {if isset($draft_wait)}
+     <b>{translate fonema=LANG_RVS_MANAGER_DRAFT_WAIT_U}</b>
+   {/if}
+   {if isset($draft_wait_manual)}
+     <b>{translate fonema=LANG_RVS_MANAGER_DRAFT_WAIT_MANUAL_U}</b>
+   {/if}
+   {if isset($drafting)}
+     <b><a href="rvs_manager_drafts.php?league_id={$member.LEAGUE_ID}" target="rvs_manager_draft_{$member.LEAGUE_ID}" onClick="window.open('','rvs_manager_draft_{$member.LEAGUE_ID}','width=1200,height=600,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');">
+             {translate fonema=LANG_RVS_MANAGER_DRAFTS_ONGOING_U}</a></b>
+   {/if}
+  </div>
+</div>
+{if isset($delete_form) || isset($force_form)}
+ <div class="portlet">
+  <div class="header">{translate fonema=LANG_ADVANCED_MANAGEMENT_U}</div>
+  <div class="content">
+      {if isset($delete_form)}
+       <form action="" method="post" style="margin:0">			  
+        <input type="hidden" name="delete_league" value="y">
+	<input class="btn" type="submit" value=" {translate fonema=LANG_DELETE_LEAGUE_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" onClick="return confirm('{translate fonema=LANG_REALLY_U}?');"/>
+       </form>      
+      {/if}
+      {if isset($force_form)}
+       <form action="" method="post" style="margin:0">			  
+        <input type="hidden" name="force_start" value="y">
+	<input class="btn" type="submit" value=" {translate fonema=LANG_FORCE_LEAGUE_START_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" onClick="return confirm('{translate fonema=LANG_REALLY_U}?');"/>
+       </form>      
+      {/if}
+  </div>
+</div>
+{/if}
+{/if}
+
+{if isset($past_leagues)}
+ <div class="portlet">
+  <div class="header">{translate fonema=LANG_PAST_LEAGUES_U}</div>
+  <div class="content">
+  <table width="100%">
+    <tr><th>{translate fonema=LANG_TITLE_U}</th></tr>
+    {foreach $past_leagues as $league}
+    <tr>
+      <td><a href="rvs_manager_league.php?league_id={$league.LEAGUE_ID}"><b>{$league.TITLE}</b></a></td>
+    </tr>
+    {/foreach}
+  </table>
+  </div>
+ </div>
+{/if}

@@ -1,0 +1,91 @@
+<div style="clear:both"></div>
+{$manager_filter_box}
+
+{if isset($error)}
+<div class="portlet" id="message">
+    <div class="content">
+	<span class="textred"><b>{$error.MSG}</b></span>
+    </div>
+</div>
+{/if}
+
+{if isset($create_team_offer)}
+<div class="portlet" id="create_team_offer">
+    <div class="content">
+{translate fonema=LANG_CREATE_TEAM_OFFER_U}
+<input type="button"  class="btn" value=" {translate fonema=LANG_YES_PLEASE_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" onClick="javascript:createFMTeam('create_team', 'create_team_offer')"/>
+    </div>
+</div>
+<div id="create_team"></div>
+{/if}
+
+{if isset($team)}{$team}{/if}
+
+<div class="portlet">
+  <div class="header">{translate fonema=LANG_MARKET_U}</div>
+  <div class="content">
+     {if isset($market_status.SEASON_OVER)}<div class="textred">{translate fonema=LANG_SEASON_OVER_U}</div>
+     {elseif isset($market_status.NOMARKET)}
+     <div class="textred">{translate fonema=LANG_MARKET_CLOSED_3_U} <b>{$market_status.NOMARKET.START_DATE} {$market_status.NOMARKET.UTC}</b></div> 
+     {elseif isset($market_status.NOMARKET_DELAY)}
+     <div class="textred">{translate fonema=LANG_MARKET_CLOSED_2_U}</b></div> 
+     {elseif isset($market_status.MARKET_OPEN)}
+     <div class="textgreen">{translate fonema=LANG_MARKET_OPENED_2_U} <b>{$market_status.MARKET_OPEN.START_DATE} {$market_status.MARKET_OPEN.UTC}</b></div> 
+     {/if}
+</div>
+</div>
+<div class="portlet">
+  <div class="header">{translate fonema=LANG_SEARCH_U}</div>
+  <div class="content">
+    <form action="" method="post" style="margin:0px">
+      <table class="noborder">
+           <tr>
+             <td><input type="hidden" name="order" value="{$filtering.ORDER}">
+               {translate fonema=LANG_SURNAME_U} {$filtering.QUERY}          
+             </td>
+	     <td rowspan=3 valign="top">
+		{if $sport_id !=4}<b>{translate fonema=LANG_POSITION_U}</b><br>{$filtering.WHERE_POS}{/if}
+	     </td>
+	     <td rowspan=3  valign="top">
+		{translate fonema=LANG_HIDE_INACTIVE_PLAYERS_U} {$filtering.WHERE_ACTIVE} <br>
+		{translate fonema=LANG_SHOW_MARKED_PLAYERS_U} {$filtering.WHERE_MARKED} <br>
+		{translate fonema=LANG_SHOW_PLAYERS_ACTIVE_LAST_TOUR_U} {$filtering.WHERE_ACTIVE_LAST_TOUR} <br>
+             </td>
+           </tr>
+         {if $sport_id !=4}
+           <tr>
+             <td rowspan=1>
+	       {translate fonema=LANG_TEAM_NAME_U} {$filtering.WHERE_TEAM}
+             </td>            
+           </tr>
+         {/if}
+           <tr>
+             <td rowspan=1>{$filtering.QUERY_LESS} &lt;= {$filtering.WHERE_INT} &lt;= {$filtering.QUERY_MORE}
+             </td>
+           </tr>
+           <tr><td>
+  	     </td>
+           </tr>
+       </table>
+      <div style="float:left">
+       <input type="hidden" name="filter" value="y">
+       <input class="btn" type="submit" value=" {translate fonema=LANG_OK_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+      </div>
+     </form>
+      {if isset($filtering.FILTERED)}
+      <div style="float:left;">
+         <form action="" method="post" style="margin:0px">
+     	       <input type="hidden" name="filter" value="n">
+               <input class="btn" type="submit" value=" {translate fonema=LANG_SHOW_ALL_RECORDS} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+         </form>
+      </div>
+      {/if}
+      <div style="clear:both;"></div>
+</div>
+</div>
+
+{if isset($market)}
+{$market.PAGING}
+{$market.MARKET}
+{$market.PAGING}
+{/if}

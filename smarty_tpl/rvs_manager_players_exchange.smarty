@@ -1,0 +1,398 @@
+<div class="portlet"  style="margin:0px; padding:5px">
+<div id="pex">
+{if $notify==1}{translate fonema=LANG_RVS_LEAGUE_PEX_NOTIFICATION_ON_U}<input type="image" src="./img/icons/notify.png" onmouseover="Tip('{translate fonema=LANG_PEX_NOTIFICATION_ON_U}')" onmouseout="UnTip()" onClick="javascript:pexNotification({$league_id}, 0, 'pex')">
+{else}{translate fonema=LANG_RVS_LEAGUE_PEX_NOTIFICATION_OFF_U}<input type="image" src="./img/icons/notnotify.png" onmouseover="Tip('{translate fonema=LANG_PEX_NOTIFICATION_OFF_U}')" onmouseout="UnTip()" onClick="javascript:pexNotification({$league_id}, 1, 'pex')">{/if}
+</div>
+
+<script>
+ $(function() {
+	$( "#players_exchange" ).tabs({
+		cookie: {
+			expires: 1,
+			name: "players_exchange"
+			}
+		}); 
+});
+</script>
+<div id="players_exchange">
+ <ul>
+   <li><a href="#ptabs-1" title="{translate fonema=LANG_ALL_MY_TRANSFERS_U}">{translate fonema=LANG_ALL_MY_TRANSFERS_U}</a></li>
+   {foreach $players.NOT_MINE as $pool}
+    <li><a href="#ptabs-o{$pool.USER_ID}" title="{$pool.USER_NAME}">{$pool.USER_NAME}</a></li>
+   {/foreach}
+   {if isset($players.PENDING)}
+    <li><a href="#tabs-p" title="{translate fonema=LANG_PENDING_TRANSFERS_U}">{translate fonema=LANG_PENDING_TRANSFERS_U}</a></li>
+   {/if}
+  </ul>
+
+  <div id="ptabs-1">
+  <div class="portlet"  style="margin:0px">
+    <div class="header">{translate fonema=LANG_SUGGESTED_TRANSFERS_U}</div>
+   {foreach $players.NOT_MINE as $pool}
+    {if isset($players.TRANSFERS[$pool.USER_ID])}
+     {foreach $players.TRANSFERS[$pool.USER_ID] as $transfer}
+      <div class="content_header">{translate fonema=LANG_SUGGESTED_TRANSFER_U}: {$transfer.ROW.ENTRY_ID}</div>
+      <div class="content">       
+       <table>
+        <tr>
+         <th>{translate fonema=LANG_OWNER_U}</th>
+         <th colspan=2>{translate fonema=LANG_PLAYER_U} ({translate fonema=LANG_POSITION_U}) /<br> {translate fonema=LANG_CURRENT_PRICE_U}</th>
+         <th width="100%"></th>
+         <th colspan=2>{translate fonema=LANG_PLAYER_U} ({translate fonema=LANG_POSITION_U}) /<br> {translate fonema=LANG_CURRENT_PRICE_U}</th>
+        </tr>          
+        <tr>
+         <td>{$transfer.ROW.OWNER_USER_NAME}</td>
+         <td nowrap>
+          {foreach $transfer[$pool.USER_ID] as $not_mine_player}
+            <b>{$not_mine_player.LAST_NAME}, {$not_mine_player.FIRST_NAME}</b><br> {$not_mine_player.TYPE_NAME} ({$not_mine_player.TEAM_NAME2})<br>
+          {/foreach}
+         </td>
+         <td nowrap>
+          {foreach $transfer[$pool.USER_ID] as $not_mine_player}
+           {$not_mine_player.CURRENT_VALUE_MONEY}<br>
+          {/foreach}
+         </td>
+         <td align="center">
+             <b>{translate fonema=LANG_TRANSFER_FEE_U}: <span class="textred">{abs($transfer.ROW.FEE)}</span></b><br>
+             {if $transfer.ROW.FEE != 0}
+		<b>{translate fonema=LANG_PAYS_U}: <span class="textred">{$transfer.ROW.PAYER}</span></b><br>
+             {/if}
+	     {if isset($transfer.ROW.CAN_ACCEPT)}
+	      <form action="" method="post" style="margin:0">
+        	 <input type="hidden" name="entry_id" value="{$transfer.ROW.ENTRY_ID}">
+        	 <input type="hidden" name="user_id" value="{$pool.USER_ID}">
+                 <input type="hidden" name="accept_transfer" value="y">
+		 <input type="submit" class="btn" type="submit" value=" {translate fonema=LANG_ACCEPT_TRANSFER_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+	      </form>
+             {else if isset($transfer.ROW.CANT_ACCEPT_MONEY)}
+              <span class="textred"><b>{translate fonema=LANG_RVS_NOT_ENOUGH_CREDITS_ACCEPT_TRANSFER_U}</b></span>
+             {else if isset($transfer.ROW.CANT_BE_ACCEPTED)}
+              <span class="textred"><b>{translate fonema=LANG_RVS_NOT_ENOUGH_CREDITS_ACCEPT_TRANSFER2_U}</b></span>
+             {else if isset($transfer.ROW.CANT_ACCEPT_DAY)}
+              <span class="textred"><b>{translate fonema=LANG_MARKET_CLOSED_U}</b></span>
+             {/if} 
+             {if isset($transfer.ROW.CAN_REJECT)}
+              <form action="" method="post" style="margin:0;">
+        	 <input type="hidden" name="entry_id" value="{$transfer.ROW.ENTRY_ID}">
+        	 <input type="hidden" name="user_id" value="{$pool.USER_ID}">
+                 <input type="hidden" name="reject_transfer" value="y">
+  	         <input type="submit" class="btn" type="submit" value=" {translate fonema=LANG_REJECT_TRANSFER_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+              </form>
+             {/if}
+
+             {if isset($transfer.ROW.CANCEL)}
+                <form action="" method="post" style="margin:0">
+        	 <input type="hidden" name="entry_id" value="{$transfer.ROW.ENTRY_ID}">
+        	 <input type="hidden" name="user_id" value="{$pool.USER_ID}">
+                 <input type="hidden" name="retreat_transfer" value="y">
+                 <input type="submit" class="btn" type="submit" value=" {translate fonema=LANG_RETREAT_TRANSFER_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+	        </form>
+             {/if}
+         </td>
+         <td nowrap>
+          {foreach $transfer[$players.ME_ID] as $mine_player}
+           {$mine_player.CURRENT_VALUE_MONEY}<br>
+          {/foreach}
+         </td>
+         <td nowrap>
+          {foreach $transfer[$players.ME_ID] as $mine_player}
+            <b>{$mine_player.LAST_NAME}, {$mine_player.FIRST_NAME}</b><br> {$mine_player.TYPE_NAME} ({$mine_player.TEAM_NAME2})<br>
+          {/foreach}
+         </td>
+        </tr>
+       </table>
+      </div>
+     {/foreach}
+    {/if}
+   {/foreach}
+   {if !isset($players.TRANSFERS)}
+    <div class="content">       
+       {translate fonema=LANG_NO_TRANSFERS_U}
+    </div>
+   {/if}
+  </div>
+ </div>
+ {foreach $players.NOT_MINE as $pool}
+  <div id="ptabs-o{$pool.USER_ID}">
+   <div class="portlet"  style="margin:0px">
+    <div class="content" align="center">       
+    <script>
+	$(function() {
+		$( "#suggest_transfer_{$pool.USER_ID}").button({ disabled: true });
+	});
+   $(document).ready(function(){
+
+       $(".not_mine_{$pool.USER_ID}").click(function() {
+         // count number of checked entries;
+         var not_mine = $(".not_mine_{$pool.USER_ID}:checked").map(function () {
+		  return this.value;
+	 }).length;
+         var mine = $(".mine_{$pool.USER_ID}:checked").map(function () {
+		  return this.value;
+	 }).length;
+
+	  if (mine == not_mine && mine > 0) {
+           var nmprice = calculatePrice(".not_mine_{$pool.USER_ID}");
+           var mprice = calculatePrice(".mine_{$pool.USER_ID}");
+           var credits = Math.round((nmprice - mprice) / 1000, 0);
+           $("#suggest_transfer_{$pool.USER_ID}").button( "option", "disabled", false );
+           var text = Math.round(Math.abs(credits), 0)  + " {translate fonema=LANG_CREDITS_U}";           
+           var text2 = "";
+           if (credits > 0)
+	     text2 += "{$players.ME}";
+           else if (credits < 0)
+	     text2 += "{$pool.USER_NAME}";
+           $("#transfer_descr_{$pool.USER_ID}_2").text(text);
+           $("#transfer_descr_{$pool.USER_ID}").show();
+           $("#transfer_descr_{$pool.USER_ID}_2").show();
+           if (credits != 0) {
+             $("#transfer_descr_{$pool.USER_ID}_4").text(text2);
+             $("#transfer_descr_{$pool.USER_ID}_3").show();
+             $("#transfer_descr_{$pool.USER_ID}_4").show();
+           }
+	 }
+         else {
+           $("#suggest_transfer_{$pool.USER_ID}").button( "option", "disabled", true );
+           $("#transfer_descr_{$pool.USER_ID}").hide();
+           $("#transfer_descr_{$pool.USER_ID}_2").hide();
+           $("#transfer_descr_{$pool.USER_ID}_3").hide();
+           $("#transfer_descr_{$pool.USER_ID}_4").hide();
+         }
+       });
+
+       $(".mine_{$pool.USER_ID}").click(function() {
+         // count number of checked entries;
+         var not_mine = $(".not_mine_{$pool.USER_ID}:checked").map(function () {
+		  return this.value;
+	 }).length;
+         var mine = $(".mine_{$pool.USER_ID}:checked").map(function () {
+		  return this.value;
+	 }).length;
+
+	 if (mine == not_mine && mine > 0) {
+           var nmprice = calculatePrice(".not_mine_{$pool.USER_ID}");
+           var mprice = calculatePrice(".mine_{$pool.USER_ID}");
+           var credits = Math.round((nmprice - mprice) / 1000, 0);
+           $("#suggest_transfer_{$pool.USER_ID}").button( "option", "disabled", false );
+           var text = Math.round(Math.abs(credits), 0)  + " {translate fonema=LANG_CREDITS_U}";           
+           var text2 = "";
+           if (credits > 0)
+	     text2 += "{$players.ME}";
+           else if (credits < 0)
+	     text2 += "{$pool.USER_NAME}";
+           $("#transfer_descr_{$pool.USER_ID}_2").text(text);
+           $("#transfer_descr_{$pool.USER_ID}").show();
+           $("#transfer_descr_{$pool.USER_ID}_2").show();
+           if (credits != 0) {
+             $("#transfer_descr_{$pool.USER_ID}_4").text(text2);
+             $("#transfer_descr_{$pool.USER_ID}_3").show();
+             $("#transfer_descr_{$pool.USER_ID}_4").show();
+           }
+	 }
+         else {
+           $("#suggest_transfer_{$pool.USER_ID}").button( "option", "disabled", true );
+           $("#transfer_descr_{$pool.USER_ID}").hide();
+           $("#transfer_descr_{$pool.USER_ID}_2").hide();
+           $("#transfer_descr_{$pool.USER_ID}_3").hide();
+           $("#transfer_descr_{$pool.USER_ID}_4").hide();
+         }
+       });
+
+       function calculatePrice(id) {         
+         var price = 0;
+         $(id+':checked').each(function() {
+            var myArray = $(this).val().split('_'); 
+            price += parseInt(myArray[1]);
+         });
+         return price;
+       }
+
+
+   });
+ </script>
+   <form method="post">
+    <input type="hidden" name="suggest_transfer" value="true">
+    <input type="hidden" name="user_id" value="{$pool.USER_ID}">
+     <table style="border:none"> 
+       <tr><td style="border:none"  valign="top">
+
+     <table style="float:left"> 
+       <tr>
+        <th colspan="3">{translate fonema=LANG_PLAYER_U} ({translate fonema=LANG_POSITION_U}) /<br> {translate fonema=LANG_CURRENT_PRICE_U}</th>
+       </tr>
+       {foreach $pool.PLAYERS as $player}
+        <tr>
+                <td><a href="f_manager_player_seasonstats.php?user_id={$player.PLAYER_ID}&seasons={$player.PLAYER_SEASON_STATS.SUBSEASONS}" target="f_manager_player_season_stats" onClick="window.open('','f_manager_player_season_stats','width=800,height=700,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');">{$player.LAST_NAME}, {$player.FIRST_NAME}</a><br>
+		      {$player.TYPE_NAME} ({$player.TEAM_NAME2})</td>
+	        <td><b>{$player.CURRENT_VALUE_MONEY}</b></td>
+                <td><input type="checkbox" class="not_mine_{$pool.USER_ID}" name="not_mine_{$pool.USER_ID}[]" id="not_mine_{$pool.USER_ID}" value="{$player.PLAYER_ID}_{$player.CURRENT_VALUE_MONEY}"></td>
+        </tr>
+       {/foreach}
+     </table>
+     </td><td style="border:none;width:45%" valign="top" align="center">
+      <input id="suggest_transfer_{$pool.USER_ID}" type="submit" value=" {translate fonema=LANG_SUGGEST_TRANSFER_U} "/><br>
+      <span id="transfer_descr_{$pool.USER_ID}" style="font-weight:bold;display:none">{translate fonema=LANG_TRANSFER_FEE_U}: </span> 
+      <span id="transfer_descr_{$pool.USER_ID}_2" class="textred" style="font-weight:bold"></span><br>
+      <span id="transfer_descr_{$pool.USER_ID}_3" style="font-weight:bold;display:none">{translate fonema=LANG_PAYS_U}: </span> 
+      <span id="transfer_descr_{$pool.USER_ID}_4" class="textred" style="font-weight:bold"></span> 
+     </td><td style="border:none"  valign="top">
+     <table style="float:right;"> 
+       <tr>
+        <th colspan="3">{translate fonema=LANG_PLAYER_U} ({translate fonema=LANG_POSITION_U}) /<br> {translate fonema=LANG_CURRENT_PRICE_U}</th>
+       </tr>
+       {foreach $players.TEAM as $player}
+        {if $player.PROTECTED==0 && $player.MODERATED==0}
+         <tr>
+                <td><a href="f_manager_player_seasonstats.php?user_id={$player.PLAYER_ID}&seasons={$player.PLAYER_SEASON_STATS.SUBSEASONS}" target="f_manager_player_season_stats" onClick="window.open('','f_manager_player_season_stats','width=800,height=700,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');">{$player.LAST_NAME}, {$player.FIRST_NAME}</a><br>
+		      {$player.TYPE_NAME} ({$player.TEAM_NAME2})</td>
+	        <td><b>{$player.CURRENT_VALUE_MONEY}</b></td>
+                <td><input type="checkbox" class="mine_{$pool.USER_ID}" name="mine_{$pool.USER_ID}[]" id="mine_{$pool.USER_ID}" value="{$player.PLAYER_ID}_{$player.CURRENT_VALUE_MONEY}"></td>
+         </tr>
+        {/if}
+       {/foreach}
+      </table>
+     </td>
+     </tr>
+    </table>
+   </form>    
+    </div>  
+    <div class="header">{translate fonema=LANG_SUGGESTED_TRANSFERS_U}</div>
+    {if isset($players.TRANSFERS[$pool.USER_ID])}
+     {foreach $players.TRANSFERS[$pool.USER_ID] as $transfer}
+      <div class="content_header">{translate fonema=LANG_SUGGESTED_TRANSFER_U}: {$transfer.ROW.ENTRY_ID}</div>
+      <div class="content">       
+       <table>
+        <tr>
+         <th colspan=2>{translate fonema=LANG_PLAYER_U} ({translate fonema=LANG_POSITION_U}) /<br> {translate fonema=LANG_CURRENT_PRICE_U}</th>
+         <th width="100%"></th>
+         <th colspan=2>{translate fonema=LANG_PLAYER_U} ({translate fonema=LANG_POSITION_U}) /<br> {translate fonema=LANG_CURRENT_PRICE_U}</th>
+        </tr>          
+        <tr>
+         <td nowrap>
+          {foreach $transfer[$pool.USER_ID] as $not_mine_player}
+            <b>{$not_mine_player.LAST_NAME}, {$not_mine_player.FIRST_NAME}</b> {$not_mine_player.TYPE_NAME} ({$not_mine_player.TEAM_NAME2})<br>
+          {/foreach}
+         </td>
+         <td nowrap>
+          {foreach $transfer[$pool.USER_ID] as $not_mine_player}
+           {$not_mine_player.CURRENT_VALUE_MONEY}<br>
+          {/foreach}
+         </td>
+         <td align="center">
+             <b>{translate fonema=LANG_TRANSFER_FEE_U}: <span class="textred">{abs($transfer.ROW.FEE)}</span></b><br>
+             {if $transfer.ROW.FEE != 0}
+		<b>{translate fonema=LANG_PAYS_U}: <span class="textred">{$transfer.ROW.PAYER}</span></b><br>
+             {/if}
+             {if isset($transfer.ROW.CAN_ACCEPT)}
+	      <form action="" method="post" style="margin:0">
+        	 <input type="hidden" name="entry_id" value="{$transfer.ROW.ENTRY_ID}">
+        	 <input type="hidden" name="user_id" value="{$pool.USER_ID}">
+                 <input type="hidden" name="accept_transfer" value="y">
+		 <input type="submit" class="btn" type="submit" value=" {translate fonema=LANG_ACCEPT_TRANSFER_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+	      </form>
+             {else if isset($transfer.ROW.CANT_ACCEPT_MONEY)}
+              <span class="textred"><b>{translate fonema=LANG_RVS_NOT_ENOUGH_CREDITS_ACCEPT_TRANSFER_U}</b></span>
+             {else if isset($transfer.ROW.CANT_BE_ACCEPTED)}
+              <span class="textred"><b>{translate fonema=LANG_RVS_NOT_ENOUGH_CREDITS_ACCEPT_TRANSFER2_U}</b></span>
+             {else if isset($transfer.ROW.CANT_ACCEPT_DAY)}
+              <span class="textred"><b>{translate fonema=LANG_MARKET_CLOSED_U}</b></span>
+             {/if} 
+             {if isset($transfer.ROW.CAN_REJECT)}
+              <form action="" method="post" style="margin:0;">
+        	 <input type="hidden" name="entry_id" value="{$transfer.ROW.ENTRY_ID}">
+        	 <input type="hidden" name="user_id" value="{$pool.USER_ID}">
+                 <input type="hidden" name="reject_transfer" value="y">
+  	         <input type="submit" class="btn" type="submit" value=" {translate fonema=LANG_REJECT_TRANSFER_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+              </form>
+             {/if}
+             {if isset($transfer.ROW.CANCEL)}
+                <form action="" method="post" style="margin:0">
+        	 <input type="hidden" name="entry_id" value="{$transfer.ROW.ENTRY_ID}">
+        	 <input type="hidden" name="user_id" value="{$pool.USER_ID}">
+                 <input type="hidden" name="retreat_transfer" value="y">
+                 <input type="submit" class="btn" type="submit" value=" {translate fonema=LANG_RETREAT_TRANSFER_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+	        </form>
+             {/if}
+         </td>
+         <td nowrap>
+          {foreach $transfer[$players.ME_ID] as $mine_player}
+           {$mine_player.CURRENT_VALUE_MONEY}<br>
+          {/foreach}
+         </td>
+         <td nowrap>
+          {foreach $transfer[$players.ME_ID] as $mine_player}
+            <b>{$mine_player.LAST_NAME}, {$mine_player.FIRST_NAME}</b> {$mine_player.TYPE_NAME} ({$mine_player.TEAM_NAME2})<br>
+          {/foreach}
+         </td>
+        </tr>
+       </table>
+      </div>
+     {/foreach}
+    {else}
+    <div class="content">       
+       {translate fonema=LANG_NO_TRANSFERS_U}
+    </div>
+    {/if}
+   </div>
+  </div>
+ {/foreach}
+
+ {if isset($players.PENDING)}
+  <div id="tabs-p">
+   <div class="portlet"  style="margin:0px">
+   {foreach $players.NOT_MINE as $pool}
+    {if isset($players.PENDING[$pool.USER_ID])}
+     {foreach $players.PENDING[$pool.USER_ID] as $transfer}
+      <div class="header">{translate fonema=LANG_PENDING_TRANSFER_U}: {$transfer.ROW.ENTRY_ID}</div>
+      <div class="content">       
+       <table>
+        <tr>
+         <th>{translate fonema=LANG_OWNER_U}</th>
+         <th colspan=2>{translate fonema=LANG_PLAYER_U} ({translate fonema=LANG_POSITION_U}) /<br> {translate fonema=LANG_CURRENT_PRICE_U}</th>
+         <th width="100%"></th>
+         <th colspan=2>{translate fonema=LANG_PLAYER_U} ({translate fonema=LANG_POSITION_U}) /<br> {translate fonema=LANG_CURRENT_PRICE_U}</th>
+        </tr>          
+        <tr>
+         <td>{$transfer.ROW.OWNER_USER_NAME}</td>
+         <td nowrap>
+          {foreach $transfer[$pool.USER_ID] as $not_mine_player}
+            <b>{$not_mine_player.LAST_NAME}, {$not_mine_player.FIRST_NAME}</b><br>{$not_mine_player.TYPE_NAME} ({$not_mine_player.TEAM_NAME2})<br>
+          {/foreach}
+         </td>
+         <td nowrap>
+          {foreach $transfer[$pool.USER_ID] as $not_mine_player}
+           {$not_mine_player.CURRENT_VALUE_MONEY}<br>
+          {/foreach}
+         </td>
+         <td align="center">
+             <b>{translate fonema=LANG_TRANSFER_FEE_U}: <span class="textred">{abs($transfer.ROW.FEE)}</span></b><br>
+             {if $transfer.ROW.FEE != 0}
+		<b>{translate fonema=LANG_PAYS_U}: <span class="textred">{$transfer.ROW.PAYER}</span></b><br>
+             {/if}
+         </td>
+         <td nowrap>
+          {foreach $transfer[$players.ME_ID] as $mine_player}
+           {$mine_player.CURRENT_VALUE_MONEY}<br>
+          {/foreach}
+         </td>
+         <td nowrap>
+          {foreach $transfer[$players.ME_ID] as $mine_player}
+            <b>{$mine_player.LAST_NAME}, {$mine_player.FIRST_NAME}</b><br>{$mine_player.TYPE_NAME} ({$mine_player.TEAM_NAME2})<br>
+          {/foreach}
+         </td>
+        </tr>
+       </table>
+      </div>
+     {/foreach}
+    {/if}
+   {/foreach}
+   {if !isset($players.PENDING)}
+    <div class="content">       
+       {translate fonema=LANG_NO_TRANSFERS_U}
+    </div>
+   {/if}
+   </div>
+  </div>
+  {/if}
+</div>
+</div>

@@ -1,0 +1,33 @@
+<div class="portlet">
+  <div class="header">{translate fonema=LANG_STANDINGS_U}</div>
+  <div class="content_header">{translate fonema=LANG_LEAGUE_U} {$league.TITLE}, {translate fonema=LANG_TOUR_U} {$league.TOUR}</div>
+  <div class="content">
+     <table style="width:100%">
+     <tr >
+      <th>{translate fonema=LANG_PARTICIPANT_U}</th>
+      <th>{translate fonema=LANG_TAG_U}</th>
+      {foreach $cats as $cat}
+       <th colspan="2">{$cat}</th>
+      {/foreach}
+      <th>{translate fonema=LANG_POINTS_U}</th>
+      <th>{translate fonema=LANG_PLACE_U}</th>
+      <th></th>
+     </tr>   
+     {foreach $league.MEMBERS as $member}
+     <tr >
+      <td {if isset($member.OWNER)}class="owner"{/if}>
+	  {if isset($member.COUNTRY_DB)}<img border=1 src="./img/flags/{$member.COUNTRY_DB.CCTLD}.gif" onmouseover="Tip('{$member.COUNTRY_DB.COUNTRY_NAME}')" onmouseout="UnTip()">{/if}
+	  <a href="rvs_manager_user_team.php?user_id={$member.USER_ID}&league_id={$member.LEAGUE_ID}" target="rvs_manager_user_team" onClick="window.open('','rvs_manager_user_team','width=300,height=400,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');">{$member.USER_NAME}</a>
+	</td> 
+      <td nowrap {if isset($member.OWNER)}class="owner"{/if}>{$member.TAG}</td>
+      {foreach $member.CATS as $cat}
+       <td>{$cat.FP}</td><td>{$cat.PP}</td>
+      {/foreach}
+      <td {if isset($member.OWNER)}class="owner"{/if}>{$member.TOUR_POINTS}</td>
+      <td {if isset($member.OWNER)}class="owner"{/if}>{$member.PLACE}</td>
+      <td {if isset($member.OWNER)}class="owner"{/if} align="right"><a href="rvs_manager_user_tours.php?user_id={$member.USER_ID}&league_id={$member.LEAGUE_ID}" target="manager_user_tours" onClick="window.open('','manager_user_tours','width=150,height=300,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');">{translate fonema=LANG_TOURS_U}</a></td>
+     </tr>
+     {/foreach}
+    </table>    
+  </div>
+</div>

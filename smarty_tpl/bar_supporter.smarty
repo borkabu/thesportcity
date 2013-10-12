@@ -1,0 +1,11 @@
+<div class="portlet">
+<div class="header">{translate fonema=LANG_GC_PACKAGE_U}</div>
+{if isset($supporter.SUPPORTER)}
+<div class="content">
+    {$supporter.SUPPORTER.MSG}
+</div>
+{/if}
+<div class="content">
+{translate fonema=LANG_GC_OFFER_U} <a href="good_citizen.php">{translate fonema=LANG_LEARN_ABOUT_GC_PACKAGE_U}</a>.
+</div>
+</div>

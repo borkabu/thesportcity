@@ -1,0 +1,76 @@
+<div style="clear:both"></div>
+
+{$manager_filter_box}
+
+<div class="portlet">
+  <div class="header">{translate fonema=LANG_SEARCH_U}</div>
+  <div class="content">
+      <form action="{$search.FORM_URL}" method="get" style="margin:0px">
+        <input type="hidden" name="mseason_id" value="{$season_id}">
+        <input type="hidden" name="tour_id" value="{$tour_id}">
+         {$search.WHERE} {$search.QUERY} 
+         <input class="btn" type="submit" value=" {translate fonema=LANG_OK_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+         {if isset($search.FILTERED)}<a href="{$search.FORM_URL}">[ {translate fonema=LANG_SHOW_ALL_RECORDS} ]</a>{/if}
+         {if isset($search.FORM_TOURS)}<input type="hidden" name="tour_id" value="{$tour_id}">{/if}
+      </form>
+ </div>
+</div>
+
+<div class="portlet">
+  <div class="header">{translate fonema=LANG_FILTER_U}</div>
+  <div class="content">
+   {if isset($tours)}
+    {translate fonema=LANG_TOURS_U}: 
+    {foreach $tours as $tour}
+        {if isset($tour.SELECTED)}<b>[{$tour.NUMBER}]</b>{/if}
+        {if isset($tour.NORMAL)}<a href="f_manager_standings_clans.php?tour_id={$tour.NUMBER}&mseason_id={$tour.MSEASON_ID}">{$tour.NUMBER}</a>{/if}
+    {/foreach} 
+   {/if}
+    {if isset($all)}
+        {if isset($all.SELECTED)}<b>[{translate fonema=LANG_SEASON_STANDINGS_U}]</b>{/if}
+        {if isset($all.NORMAL)}<a href="f_manager_standings_clans.php?mseason_id={$all.NORMAL.MSEASON_ID}">[{translate fonema=LANG_SEASON_STANDINGS_U}]</a>{/if}
+    {/if}
+ </div>
+</div>
+
+<div class="portlet">
+  <div class="header">{translate fonema=LANG_STANDINGS_U}</div>
+  <div class="content">
+     {if isset($teams)}
+       <table>
+        <tr>
+         <th nowrap><span class="sort_arrows"> 
+	  {if isset($sort.PLACE_DESC_A)}&dArr;{/if}
+          {if isset($sort.PLACE_DESC)}<a href="{$sort.PLACE_DESC.URL}">&dArr;</a>{/if}
+          {if isset($sort.PLACE_ASC_A)}&uArr;{/if} 
+	  {if isset($sort.PLACE_ASC)}<a href="{$sort.PLACE_ASC.URL}">&uArr;</a>{/if}</span>
+         </th>
+         <th width="100%">{translate fonema=LANG_CLAN_NAME_U} <span class="sort_arrows"> 
+          {if isset($sort.CLAN_NAME_DESC_A)}&dArr;{/if}
+	  {if isset($sort.CLAN_NAME_DESC)}<a href="{$sort.CLAN_NAME_DESC.URL}">&dArr;</a>{/if} 
+	  {if isset($sort.CLAN_NAME_ASC_A)}&uArr;{/if}
+	  {if isset($sort.CLAN_NAME_ASC)}<a href="{$sort.CLAN_NAME_ASC.URL}">&uArr;</a>{/if}</span>
+         </th>
+         <th>{translate fonema=LANG_POINTS_U} <span class="sort_arrows"> 
+          {if isset($sort.POINTS_DESC_A)}&dArr;{/if}
+          {if isset($sort.POINTS_DESC)}<a href="{$sort.POINTS_DESC.URL}">&dArr;</a>{/if}
+          {if isset($sort.POINTS_ASC_A)}&uArr;{/if}
+	  {if isset($sort.POINTS_ASC)}<a href="{$sort.POINTS_ASC.URL}">&uArr;</a>{/if}</span>
+         </th>
+         {if isset($rating_header)}<th>{translate fonema=LANG_RATING_U} </th>{/if}
+         <th></th>
+        </tr>
+       {foreach $teams as $team}
+        <tr {if isset($team.CURRENT)}style="background-color:yellow"{/if}>
+         <td align="left" nowrap>{$team.PLACE} {if isset($team.UP)}<img src="../img/icons/small_up_green.png" border=0>{/if}{if isset($team.DOWN)}<img src="../img/icons/small_down_red.png" border=0>{/if} {if isset($team.PLACE_PREV)}({$team.PLACE_PREV}){/if}</td>
+         <td align="left">{if isset($team.COUNTRY_DB)}<img border=1 src="./img/flags/{$team.COUNTRY_DB.CCTLD}.gif" onmouseover="Tip('{$team.COUNTRY_DB.COUNTRY_NAME}')" onmouseout="UnTip()">{/if}  <a href="clans.php?clan_id={$team.CLAN_ID}" onmouseover="Tip('{translate fonema=LANG_PUBLIC_PROFILE_U}')" onmouseout="UnTip()" ><img src="./img/icons/user_profile.png" border=0></a> {if isset($team.ALLOW)}<a href="f_manager_clan_team.php?team_id={$team.TEAM_ID}&clan_id={$team.CLAN_ID}" target="f_manager_user_team" onClick="window.open('','f_manager_user_team','width=300,height=400,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');">{$team.CLAN_NAME}</a>{else}{$team.CLAN_NAME}{/if} "{$team.TEAM_NAME}" </td>
+         <td align="right">{$team.KOEFF}</td>
+         {if isset($team.RATING)}<td align="right">{$team.RATING}</td>{/if}
+         <td align="right" nowrap><a href="f_manager_clan_team_summary.php?clan_id={$team.CLAN_ID}&team_id={$team.TEAM_ID}" target="clan_team_summary" onClick="window.open('','clan_team_summary','width=600,height=300,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');">{translate fonema=LANG_TEAM_STATEMENT_U}</a></td>
+        </tr>
+       {/foreach}
+       </table>
+     {/if}
+   </div>
+</div>
+{$paging}

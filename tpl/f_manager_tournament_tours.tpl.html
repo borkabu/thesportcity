@@ -1,0 +1,27 @@
+<div style="clear:both"></div>
+
+<TPL:MANAGER_TOURNAMENT_FILTER_BOX>
+<TPL_SUB:TOURS>
+<div class="portlet">
+  <div class="header"><_TPL:LANG_TOUR_U> <TPL:NUMBER></div>
+        <TPL_SUB:ROUNDS>
+  <div class="content">
+	<_TPL:LANG_ROUND_U> <TPL:ROUND>. <TPL:TOUR_START_DATE> <TPL:UTC> - <TPL:TOUR_END_DATE> <TPL:UTC> .<br><br>
+         <table  width="100%">
+           <tr>
+             <th><_TPL:LANG_MATCHES_U></th>
+             <th><_TPL:LANG_START_DATE_U></td>
+           </tr>
+           <TPL_SUB:GAMES>
+           <tr>
+             <td align="left"><TPL:TEAM_NAME1> - <TPL:TEAM_NAME2>
+                 <TPL_SUB:RESULT>(<a href="f_manager_game_protocol.php?game_id=<TPL:GAME_ID>" target="game_protocol" onClick="window.open('','game_protocol','width=740,height=700,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');"><TPL:SCORE1> : <TPL:SCORE2></a>)</TPL_SUB:RESULT>
+		</td>
+             <td align="right" nowrap><TPL:START_DATE> <TPL:UTC></td>
+           </tr>
+           </TPL_SUB:GAMES>
+         </table>
+	</div>
+        </TPL_SUB:ROUNDS> 
+</div>
+</TPL_SUB:TOURS> 

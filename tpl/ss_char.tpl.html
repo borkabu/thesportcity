@@ -1,0 +1,134 @@
+<TPL_SUB:SS>
+<div class="portlet">
+    <div class="content">
+<_TPL:LANG_USER_U>: <TPL:USER_NAME>
+   </div>
+</div>
+
+     <TPL_SUB:INVENTORY>
+<div class="portlet" style="float:left;width:200">
+    <div class="header"><b><_TPL:LANG_INVENTORY_U></b></div>
+    <div class="content">
+
+     <table width="100%" border="1" cellspacing="0" cellpadding="2">
+      <tr height=60>
+        <td width="60"><TPL_SUB:SLOT71><TPL:ITEM_NAME></TPL_SUB:SLOT71></td>
+        <td width="60" align="center"><TPL_SUB:SLOT1><TPL:ITEM_NAME></TPL_SUB:SLOT1></td>
+        <td width="60"><TPL_SUB:SLOT72><TPL:ITEM_NAME></TPL_SUB:SLOT72></td>
+      </tr>
+      <tr height=60>
+        <td align="left"><TPL_SUB:SLOT21><TPL:ITEM_NAME></TPL_SUB:SLOT21>left hand</td>
+        <td align="center"><TPL_SUB:SLOT3><TPL:ITEM_NAME></TPL_SUB:SLOT3>torso</td>
+        <td align="right"><TPL_SUB:SLOT22><TPL:ITEM_NAME></TPL_SUB:SLOT22>right hand </td>
+      </tr>
+      <tr height=60>
+        <td><TPL_SUB:SLOT81><TPL:ITEM_NAME></TPL_SUB:SLOT81></td>
+        <td align="center"><TPL_SUB:SLOT4><TPL:ITEM_NAME></TPL_SUB:SLOT4>waist</td>
+        <td><TPL_SUB:SLOT91><TPL:ITEM_NAME></TPL_SUB:SLOT91></td>
+      </tr>
+      <tr height=60>
+        <td><TPL_SUB:SLOT82><TPL:ITEM_NAME></TPL_SUB:SLOT82>
+        </td>
+        <td align="center"><TPL_SUB:SLOT5><TPL:ITEM_NAME></TPL_SUB:SLOT5>ankles</td>
+        <td><TPL_SUB:SLOT92><TPL:ITEM_NAME></TPL_SUB:SLOT92></td>
+      </tr>
+      <tr height=60>
+        <td><TPL_SUB:SLOT83><TPL:ITEM_NAME></TPL_SUB:SLOT83></td>
+        <td align="center"><TPL_SUB:SLOT6><TPL:ITEM_NAME></TPL_SUB:SLOT6>feet</td>
+        <td><TPL_SUB:SLOT93><TPL:ITEM_NAME></TPL_SUB:SLOT93></td>
+      </tr>
+    </table>
+   </div>
+</div>
+    </TPL_SUB:INVENTORY>
+
+<div class="portlet" style="float:left;width:200">
+    <div class="header"><b><_TPL:LANG_ATTRIBUTES_U></b></div>
+    <div class="content">
+     <table width="100%" border="0" cellspacing="0" cellpadding="5">
+      <tr>
+        <td><_TPL:LANG_STRENGTH_U></td>
+        <td><TPL:STRENGTH></td>
+      </tr>
+      <tr>
+        <td><_TPL:LANG_SPEED_U></td>
+        <td><TPL:SPEED></td>
+      </tr>
+      <tr>
+        <td><_TPL:LANG_COORDINATION_U></td>
+        <td><TPL:COORDINATION></td>
+      </tr>
+      <tr>
+        <td><_TPL:LANG_ENDURANCE_U></td>
+        <td><TPL:ENDURANCE></td>
+      </tr>
+      <tr>
+        <td><_TPL:LANG_LUCK_U></td>
+        <td><TPL:LUCK></td>
+      </tr>
+     </table>
+   </div>
+</div>
+<div class="portlet" style="float:left;width:200">
+    <div class="header"><b><_TPL:LANG_PROPERTIES_U></b></div>
+    <div class="content">
+     <table width="100%" border="0" cellspacing="0" cellpadding="5">
+      <tr>
+        <td><_TPL:LANG_STAMINA_U></td>
+        <td><TPL:STAMINA></td>
+      </tr>
+      <tr>
+        <td><_TPL:LANG_INJURY_U></td>
+        <td><TPL:INJURY></td>
+      </tr>
+      <tr>
+        <td>Height</td>
+        <td><TPL:HEIGHT></td>
+      </tr>
+      <tr>
+        <td>Weight</td>
+        <td><TPL:WEIGHT></td>
+      </tr>
+     </table>
+   </div>
+</div>
+
+ <TPL_SUB:OWNED_SKILLS>
+<div class="portlet" style="float:left;width:200">
+    <div class="header"><b><_TPL:LANG_SKILLS_U></b></div>
+    <div class="content">
+     <table width="100%" border="0" cellspacing="0" cellpadding="5">
+   <tr>
+     <th>Sport</th>
+     <th>Name</th>
+     <th>Level</th>
+   </tr>
+   <TPL_SUB:ITEMS>
+   <tr>
+     <td><TPL:SPORT></td>
+     <td><TPL:ATTR_NAME></td>
+     <td><TPL:LEVEL></td>
+   </tr>
+   </TPL_SUB:ITEMS>
+   <TPL_SUB:NO_SKILLS>
+   <tr>
+     <td colspan=3>No skills yet</td>
+   </tr>
+   </TPL_SUB:NO_SKILLS>
+     </table>
+   </div>
+</div>
+ </TPL_SUB:OWNED_SKILLS>
+
+  <div class="portlet" style="float:left;width:200">
+    <div class="header"><b><_TPL:LANG_RESULTS_U></b></div>
+    <div class="content">   
+	<table width="100%" border="1" cellspacing="0" cellpadding="5">
+         <tr><td><b><_TPL:LANG_WINS_U></b></td><td><TPL:WON></td></tr>
+         <tr><td><b><_TPL:LANG_LOSES_U></b></td><td><TPL:LOST></td></tr>
+         <tr><td><b><_TPL:LANG_DRAWS_U></b></td><td><TPL:DRAW></td></tr>      
+	</table>
+   </div>
+  </div>
+
+</TPL_SUB:SS>

@@ -1,0 +1,30 @@
+<div class="portlet">
+<div class="header">{translate fonema=LANG_SUMMARY_U}</div>
+<div class="content">
+<b>{translate fonema=LANG_TRANSACTIONS_U}</b>: <b><span id="transactions" class="textgreenhuge" onmouseover="Tip('{translate fonema=LANG_TRANSACTIONS_U}')" onmouseout="UnTip()">{$manager.TRANSACTIONS}</span></b>
+</div>
+<div id="get_transactions">
+{$manager.GET_TRANSACTIONS}
+</div>
+<div class="content">
+<b>{translate fonema=LANG_MONEY_U}</b>: <b><span id="money" class="textgreenhuge" onmouseover="Tip('{translate fonema=LANG_MONEY_U}')" onmouseout="UnTip()">{$manager.MONEY}</span></b><br>
+<b>{translate fonema=LANG_TEAM_PRICE_U}</b>: <span class="textgreenhuge" onmouseover="Tip('{translate fonema=LANG_MONEY_U}')" onmouseout="UnTip()"><b>{$manager.TEAM_PRICE}</b></span><br>
+<b>{translate fonema=LANG_WEALTH_U}</b>: <b><span id="wealth" class="textgreenhuge" onmouseover="Tip('{translate fonema=LANG_WEALTH_U}')" onmouseout="UnTip()">{$manager.WEALTH}</span></b><br>
+<b>{translate fonema=LANG_POINTS_U}</b>: <span class="textgreenhuge" onmouseover="Tip('{translate fonema=LANG_POINTS_U}')" onmouseout="UnTip()"><b>{$manager.POINTS}</b></span><br>
+{if isset($manager.EXTERNAL_PLACE)}
+<b>{translate fonema=LANG_PLACE_U}</b>: <span class="textgreenhuge" onmouseover="Tip('{translate fonema=LANG_PLACE_U}')" onmouseout="UnTip()"><b>{$manager.PLACE}</b></span><br>
+<b>{translate fonema=LANG_LOCAL_PLACE_U}</b>: <span class="textgreenhuge" onmouseover="Tip('{translate fonema=LANG_PLACE_U}')" onmouseout="UnTip()"><b>{$manager.EXTERNAL_PLACE}</b></span><br>
+{else}
+<b>{translate fonema=LANG_PLACE_U}</b>: <span class="textgreenhuge" onmouseover="Tip('{translate fonema=LANG_PLACE_U}')" onmouseout="UnTip()"><b>{$manager.PLACE}</b></span><br>
+{/if}
+</div>
+<div class="header">{translate fonema=LANG_SETTINGS_U}</div>
+<div class="content">
+   {if isset($manager.TEAM_STATUS)}
+     <div id="team_status">{$manager.TEAM_STATUS}</div>
+   {/if}
+</div>
+{$manager.LEAGUE}
+{$manager.CHALLENGE}
+{$manager.TOURNAMENT}
+</div>

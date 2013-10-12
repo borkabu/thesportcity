@@ -1,0 +1,30 @@
+<html><head>
+{include file='smarty_tpl/email_css.smarty'}
+</head><body style="font-family: Arial, sans-serif;">
+<div style="text-align:center">
+<img src="http://www.thesportcity.net/img/herbas.jpg" alt="TheSportCity.Net Logo">
+</div>
+<div class="portlet">
+  <div class="content">
+<h3>{translate fonema=LANG_HI_U}, {$data.USER_NAME}</h3>
+
+{translate fonema=LANG_EMAIL_SHOP_ORDER_LINE_1}<br> 
+
+{translate fonema=LANG_EMAIL_SHOP_ORDER_LINE_2} <br>
+</div>
+  <div class="content">{$data.ORDER}
+   <div class="portlet">
+    <div class="header">{translate fonema=LANG_DELIVERY_ADDRESS_U}</div>
+    <div class="content">{$data.ADDRESS1}<br>
+	                 {$data.ADDRESS2}<br>
+			 {$data.TOWN}<br>
+			 {$data.COUNTRY}, {$data.POSTCODE}
+	</div>
+   </div>
+ </div>
+<div class="content">
+{translate fonema=LANG_EMAIL_SHOP_ORDER_LINE_3}<br>
+
+{translate fonema=LANG_EMAIL_LAST_LINE}
+</div>
+</body></html>

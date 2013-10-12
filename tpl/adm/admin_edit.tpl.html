@@ -1,0 +1,42 @@
+<TPL_INCLUDE:../tpl/adm/head.tpl.html>
+<TPL_INCLUDE:../tpl/adm/menu.tpl.html>
+
+<form action="" method="post" name="editform">
+<input type="hidden" name="form_save" value="Y">
+<input type="hidden" name="referer" value="<TPL:REFERER>">
+
+<TPL_SUB:ERROR><span class="error"><TPL:MSG></span></TPL_SUB:ERROR>
+
+<div class="portlet">
+  <div class="content">
+
+  <table>
+    <tr><th>Security</th>
+	<th width="75">Full Access</th>
+	<th width="75">Publish</th>
+	<th width="75">Read Only</th>
+	<th>Access denied</th></tr>
+    
+    <TPL_SUB:SECURITY>
+     <tr><td><TPL:LEGEND> (<TPL:ITEM>)</td>
+	 <td align="center"><input type="radio" name="item_<TPL:ITEM>" value="FA" <TPL:FA>></td>
+	 <td align="center"><input type="radio" name="item_<TPL:ITEM>" value="PO" <TPL:PO>></td>
+ 	 <td align="center"><input type="radio" name="item_<TPL:ITEM>" value="RO" <TPL:RO>></td>
+ 	 <td align="center"><input type="radio" name="item_<TPL:ITEM>" value="NA" <TPL:NA>></td>
+	 </tr>
+    </TPL_SUB:SECURITY>
+  </table>
+</div>
+</div>
+<br>
+
+<div class="portlet">
+  <div class="content">
+        <input type="submit" class="btn" value="<_TPL:LANG_SAVE_U>" onclick="resettarget();"  onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" >
+        <input type="reset" class="btn" value="<_TPL:LANG_RESET_U>" onclick="return confirm('<_TPL:LANG_REALLY_U>');"  onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'">
+</div>
+</div>
+
+</form>
+
+<TPL_INCLUDE:../tpl/adm_foot.tpl.html>

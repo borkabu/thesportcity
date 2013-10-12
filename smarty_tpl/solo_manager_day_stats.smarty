@@ -1,0 +1,29 @@
+{if isset($market) && !isset($noaccess)}
+<div class="portlet">
+  <div class="content">
+      <table>
+        <tr>
+          <th>{translate fonema=LANG_PLAYER_U}</th>
+          <th>{translate fonema=LANG_TEAMS_U}</th>
+          <th>{translate fonema=LANG_POINTS_U}</th>
+        </tr>
+        {if isset($market)}
+         {foreach $market as $player}
+         <tr valign="top">
+          <td><a href="f_manager_player_info.php?user_id={$player.PLAYER_ID}"  target="f_manager_player_info" onClick="window.open('','f_manager_player_info','width=400,height=400,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');"><b>{$player.LAST_NAME}, {$player.FIRST_NAME}</b></a> <br>
+            {$player.TYPE_NAME} ({$player.TEAM_NAME})</td>
+          <td align="right">{$player.CNT}</td>
+          <td align="right">{$player.KOEFF}</td>
+         </tr>
+         {/foreach}
+        {else}
+         <tr>
+           <td colspan="6">{translate fonema=LANG_NO_ENTRIES_U}</td>
+         </tr>
+        {/if}
+      </table>
+	</div>
+</div>
+{else}
+  {translate fonema=LANG_NO_MARKET_STATS_AVAILABLE_U}
+{/if}

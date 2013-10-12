@@ -1,0 +1,9 @@
+<div style="clear:both"></div>
+{$wager_filter_box}
+
+<div class="portlet">
+<div class="header">{$season_title} - {translate fonema=LANG_PRIZES_U}</div>
+  <div class="content">
+    {$prizes}
+  </div>
+</div>

@@ -1,0 +1,7 @@
+<div  style="clear:both"></div>
+<div style="width:400px;float:left;">
+ {$groups}
+</div>
+<div style="width:400px;float:left;">
+ {$group_members}
+</div>

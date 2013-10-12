@@ -1,0 +1,59 @@
+<div style="clear:both">
+<div class="portlet">
+<div class="header">{translate fonema=LANG_CLAN_U}</div>
+  {if isset($data.NOT_CLAN_MEMBER)}
+  <div class="content">
+    {translate fonema=LANG_NOT_CLAN_MEMBER_U}
+  </div>
+    <div id="clans">
+     <div class="content_header">{translate fonema=LANG_INVITATIONS_U}</div>
+     {foreach $clan_invites as $invite}
+     <a name="clan_invites" />
+     <div class="content">
+       <a href="clans.php?clan_id={$invite.CLAN_ID}"><b>{$invite.CLAN_NAME}</b></a><br>
+       {translate fonema=LANG_ENTRY_FEE_U}: <b>10</b> {translate fonema=LANG_CREDITS_ABBR_U}<br>
+       {if isset($invite.ENOUGH_CREDITS)}{translate fonema=LANG_CLAN_ENTRY_FEE_INSTR_U}<br>{/if}
+       {if isset($invite.NOT_ENOUGH_CREDITS)}
+         {translate fonema=LANG_ERROR_NOT_ENOUGH_CREDITS_U}<br>
+       {/if}
+       {if isset($invite.BUTTONS)}
+        <input class="btn" type="submit" value=" {translate fonema=LANG_ACCEPT_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" onClick="javascript:handleClanInvitation({$invite.CLAN_ID}, 'accept_invite', 'clans')"/>
+        <input class="btn" type="submit" value=" {translate fonema=LANG_REJECT_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" onClick="javascript:handleClanInvitation({$invite.CLAN_ID}, 'decline_invite', 'clans')"/><br>
+       {/if}
+     </div>
+     {foreachelse}
+       <div class="content">{translate fonema=LANG_NO_INVITATIONS_U}</div>
+     {/foreach}
+    </div>
+  {else}
+  <div class="content">
+    <a href="clans.php?clan_id={$data.CLAN.CLAN_ID}">{$data.CLAN.CLAN_NAME}</a>
+  </div>
+  <div class="content_header">{translate fonema=LANG_TEAMS_U}</div>
+  <div class="content">
+  {if isset($data.CLAN.TEAMS)}
+   {foreach $data.CLAN.TEAMS as $team}
+     <a onclick="window.open('','clan_team_summary','width=600,height=300,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');" target="clan_team_summary" href="f_manager_clan_team_summary.php?clan_id={$team.CLAN_ID}&team_id={$team.TEAM_ID}" class="date_font"><b>{$team.SEASON_TITLE}</b></a>
+      <br>
+   {foreachelse}
+     {translate fonema=LANG_NO_TEAMS_U}    
+   {/foreach}
+  {else}
+     {translate fonema=LANG_NO_TEAMS_U}    
+  {/if}
+  </div>
+  <div class="content_header"><a href="forum.php?forum_id={$data.CLAN.FORUM_ID}">{translate fonema=LANG_PRIVATE_FORUM_U}</a></div>
+  <div class="content">
+  {if isset($data.CLAN.FORUM.TOPICS)}
+   {foreach $data.CLAN.FORUM.TOPICS as $topic}
+     {if isset($topic.TRACK)}<a href="forum.php?topic_id={$topic.TOPIC_ID}&tstmp={$topic.TSTMP}"><img src="./img/icons/flag_red.gif" border="0"  onmouseover="Tip('{translate fonema=LANG_UNREAD_MESSAGES_U}')" onmouseout="UnTip()"></a>{/if} <a href="forum.php?topic_id={$topic.TOPIC_ID}" class="date_font"><b>{$topic.TOPIC_NAME}</b></a><br>
+   {foreachelse}
+     {translate fonema=LANG_NO_TOPICS_U}    
+   {/foreach}
+  {else}
+     {translate fonema=LANG_NO_TOPICS_U}    
+  {/if}
+  </div>
+  {/if}
+</div>
+</div>

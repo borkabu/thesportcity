@@ -1,0 +1,149 @@
+<TPL_SUB:HTML>
+<html><head><style type="text/css">
+<!-- 
+body, p, span, table, tr, td { color: #000; font-family: Verdana, Arial, Helvetica, MS Sans Serif; font-size: 10pt; }
+table {background: #fafbfb;}
+a { color: #336699; text-decoration: underline }
+a:visited { color: #336699; text-decoration: underline }
+a:hover { color: #336699; text-decoration: none }
+
+.portlet
+{
+	-moz-border-radius:7px;
+	font-size:0.9em;
+	padding: 3px 3px 3px 3px;
+	margin:7px;
+	background-color:#AAA;
+}
+
+.portlet .header
+{
+	color:#FFF;
+	font-size:1.2em;
+	font-weight:bold;
+	line-height:1;
+	padding:4px 9px 5px;
+	margin: 0;
+	text-align:center;
+}
+
+.portlet .header a { color: #FFFFFF; text-decoration: underline }
+.portlet .header a:visited { color: #FFFFFF; text-decoration: underline }
+.portlet .header a:hover { color: #FFFFFF; text-decoration: none }
+
+.portlet .content
+{
+	-moz-border-radius-bottomleft:5px;
+	-moz-border-radius-bottomright:5px;
+	-moz-border-radius-topleft:5px;
+	-moz-border-radius-topright:5px;
+
+	background:#F5F5F5;
+	padding:5px 5px 5px 5px;
+	display: block;
+	margin: 1px;
+}
+
+
+table {
+	border-top:1px solid #4c014c;
+	border-right:1px solid #4c014c;
+	border-collapse:collapse;
+}
+
+th {
+        font-size: 8pt; 
+        font-weight: bold; 
+        color: #333333; 
+        text-decoration: none; 
+        background-color: #cccccc;
+	border-bottom:1px solid #4c014c;                               
+	border-left:1px solid #4c014c;
+	padding: 5px;
+	text-align:center;
+	cursor: pointer;
+}
+
+td {
+	color:#000000;
+	border-bottom:1px solid #4c014c;
+	border-left:1px solid #4c014c;
+	padding: 5px;
+}
+
+.even {
+          background-color: #eeeeee;
+}
+.odd {
+          background-color: #ffffff;
+}
+
+table.noborder{
+	border-style: none none none none;
+	border-collapse:collapse;
+}
+
+table.noborder th {
+        font-size: 8pt; 
+        font-weight: bold; 
+        color: #333333; 
+        text-decoration: none; 
+        background-color: #cccccc;
+	padding: 5px;
+	text-align:center;
+	cursor: pointer;
+}
+
+table.noborder td {
+	color:#000000;
+	padding: 5px;
+	border-style: none none none none;
+} -->
+</style></head><body style="font-family: Arial, sans-serif;">
+<div style="text-align:center">
+<img src="http://www.thesportcity.net/img/herbas.jpg" alt="TheSportCity.Net Logo">
+</div>
+<div class="portlet">
+  <div class="content">
+<h1><TPL:TITLE></h1>
+<span style="color: #999; font-size: 11px;"><TPL:DESCR></span>
+<h3><_TPL:LANG_HI_U>, <TPL:USER_NAME></h3>
+
+<TPL:HEADER>
+</div>
+  <div class="content">
+<div style="float:left;">
+<div class="portlet">
+<div class="header"><_TPL:LANG_SUMMARY_U></div>
+  <div class="content">
+<table>
+<tr><td><_TPL:LANG_PLACE_U></td><td><b><TPL:PLACE></b></td></tr>
+<tr><td><_TPL:LANG_WEALTH_U></td><td><b><TPL:WEALTH></b></td></tr>
+</table>
+</div>
+</div>
+</div>
+<div  style="clear:both"></div>
+
+<TPL_SUB:WAGER_NEWS>
+<div class="portlet">
+<div class="header"><_TPL:LANG_NEWS_U></div>
+  <div class="content">
+     <TPL_SUB:ITEMS>
+      <li><TPL:DATE_PUBLISHED> - <a href="http://www.thesportcity.net/news.php?news_id=<TPL:NEWS_ID>&lang_id=<TPL:SHORT_CODE>"><TPL:TITLE></a></li>
+     </TPL_SUB:ITEMS>
+  </div>
+</div>
+ </TPL_SUB:WAGER_NEWS>
+
+<div  style="clear:both"></div>
+</div>
+  <div class="content">
+<span style="color: #999; font-size: 11px; font-family: Arial, sans-serif;"><_TPL:LANG_NEWSLETTER_UNSUBSCRIBE_INSTR_U>
+<br><a href="<TPL:URL>"><_TPL:LANG_NEWSLETTER_UNSUBSCRIBE_U></a></span><br>
+<br>
+<_TPL:LANG_EMAIL_LAST_LINE>
+</div>
+</div>
+</body></html>
+</TPL_SUB:HTML>

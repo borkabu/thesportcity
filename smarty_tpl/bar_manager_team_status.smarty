@@ -1,0 +1,24 @@
+{if isset($team_squad)}
+<div id="team_squad">{translate fonema=LANG_TEAM_DETAILS_U} 
+	<img align="right" src="{if isset($team_squad.HIDE)}./img/icons/active.png{else}./img/icons/inactive.png{/if}" onmouseover="this.className='btn btnhov';Tip('{if isset($team_squad.HIDE)}{translate fonema=LANG_REVEALED_U} - {translate fonema=LANG_HIDE_U}{else}{translate fonema=LANG_HIDDEN_U} - {translate fonema=LANG_SHOW_U}{/if}')" onmouseout="this.className='btn';UnTip()" onClick="javascript:flipTeamStatus({$season_id}, 'allow_view', 'team_status')"/>
+</div>
+<div style="clear:both"></div>
+{/if}
+{if isset($ignore_leagues)}
+<div id="ignore_leagues">{translate fonema=LANG_INVITATIONS_U} 
+	<img align="right" src="{if isset($ignore_leagues.IGNORE_LEAGUES)}./img/icons/active.png{else}./img/icons/inactive.png{/if}" onmouseover="this.className='btn btnhov';Tip('{if isset($ignore_leagues.IGNORE_LEAGUES)}{translate fonema=LANG_ALLOWED_U} - {translate fonema=LANG_IGNORE_U}{else}{translate fonema=LANG_FORBIDDEN_U} - {translate fonema=LANG_ALLOW_U}{/if}')" onmouseout="this.className='btn';UnTip()" onClick="javascript:flipTeamStatus({$season_id}, 'ignore_leagues', 'team_status')"/>
+</div>            
+<div style="clear:both"></div>
+{/if}
+{if isset($ignore_challenges)}
+<div id="ignore_challenges">{translate fonema=LANG_CHALLENGES_U} 
+	<img align="right" src="{if isset($ignore_challenges.IGNORE_CHALLENGES)}./img/icons/active.png{else}./img/icons/inactive.png{/if}" onmouseover="this.className='btn btnhov';Tip('{if isset($ignore_challenges.IGNORE_CHALLENGES)}{translate fonema=LANG_ALLOWED_U} - {translate fonema=LANG_IGNORE_U}{else}{translate fonema=LANG_FORBIDDEN_U} - {translate fonema=LANG_ALLOW_U}{/if}')" onmouseout="this.className='btn';UnTip()" onClick="javascript:flipTeamStatus({$season_id}, 'ignore_challenges', 'team_status')"/>
+</div>            
+<div style="clear:both"></div>
+{/if}
+{if isset($reminder)}
+<div id="reminder">{translate fonema=LANG_REMINDER_U} 
+	<img align="right" src="{if isset($reminder.REMINDER_OFF)}./img/icons/active.png{else}./img/icons/inactive.png{/if}" onmouseover="this.className='btn btnhov';Tip('{if isset($reminder.REMINDER_OFF)}{translate fonema=LANG_ON_U} - {translate fonema=LANG_SWITCH_OFF_U}{else}{translate fonema=LANG_OFF_U} - {translate fonema=LANG_SWITCH_ON_U}{/if}')" onmouseout="this.className='btn';UnTip()" onClick="javascript:flipTeamStatus({$season_id}, 'reminder', 'team_status')"/>
+</div>            
+<div style="clear:both"></div>
+{/if}

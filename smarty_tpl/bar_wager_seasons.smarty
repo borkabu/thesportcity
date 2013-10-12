@@ -1,0 +1,61 @@
+<div class="portlet">
+<div class="header">{translate fonema=LANG_WAGER_U}</div>
+{foreach $wager_seasons as $wager_season}
+<div class="content_header">
+  {if isset($wager_season.WAGER_INFO)}
+     <a href="wager_control.php?season_id={$wager_season.WAGER_INFO.SEASON_ID}">{$wager_season.WAGER_INFO.TSEASON_TITLE}</a>
+     <div style="float:right"><img id="toggle_image_wager_season_{$wager_season.WAGER_INFO.SEASON_ID}" style="vertical-align: middle; margin:2px" src="{if isset($wager_season.WAGER_INFO.VISIBLE)}./img/icons/plus.png{/if}{if isset($wager_season.WAGER_INFO.INVISIBLE)}./img/icons/minus.png{/if}./img/icons/small_minus.png" onclick="toggleSmall('wager_season_{$wager_season.WAGER_INFO.SEASON_ID}', 'toggle_image_wager_season_{$wager_season.WAGER_INFO.SEASON_ID}'); return false;"></div>
+  {/if}
+</div>
+<div class="collapsable" id="wager_season_{$wager_season.SEASON_ID}">
+<div class="content">
+<a href="wager.php?season_id={$wager_season.WAGER_INFO.SEASON_ID}">{translate fonema=LANG_RULES_U}</a>	| <a href="wager_prizes.php?season_id={$wager_season.WAGER_INFO.SEASON_ID}">{translate fonema=LANG_PRIZES_U}</a> | <a href="wager_league.php?season_id={$wager_season.WAGER_INFO.SEASON_ID}&all=y">{translate fonema=LANG_LEAGUES_U}</a>	
+</div>
+{if isset($wager_season.WAGER_STAND)}
+<div class="content">
+  <table>
+    <tr>
+	<th></th>
+	<th align="left">{translate fonema=LANG_PARTICIPANT_U}</th>
+	<th>{translate fonema=LANG_POINTS_U}</th>
+    </tr>
+    {foreach $wager_season.WAGER_STAND.USERS as $user}          
+      {if isset($user.GAP)}
+       <tr><td colspan="3">...</td></tr>
+      {/if}
+       <tr>
+  	<td>{$user.PLACE}</td>
+	<td align="left"  width="100%">{$user.USER_NAME}</td>
+	<td>{$user.KOEFF}</td>
+       </tr>
+    {/foreach}
+  </table>
+</div>
+{/if}
+<div class="content">	
+ <a href="wager_standings.php?season_id={$wager_season.SEASON_ID}">{translate fonema=LANG_STANDINGS_U}</a>
+</div>
+{if isset($wager_season.WAGER_LOG)}
+{foreach $wager_season.WAGER_LOG.LOG as $log_item}
+<div class="content">
+    <b><span class="date_font2">{$log_item.EVENT_DATE} {$log_item.UTC}</span></b><br>{$log_item.LOG_ENTRY}
+    <a href="wager_log.php?season_id={$log_item.TSEASON_ID}">{translate fonema=LANG_FULL_LOG_U}</a>
+</div>
+{/foreach}
+{/if}
+{if isset($wager_season.WAGER_USER_LOG)}
+{foreach $wager_season.WAGER_USER_LOG.LOG as $log_item}
+  <div class="content">
+    <b><span class="date_font2">{$log_item.EVENT_DATE} {$log_item.UTC}</span></b><br>{$log_item.LOG_ENTRY}
+    <a href="wager_user_log.php?season_id={$log_item.SEASON_ID}">{translate fonema=LANG_FULL_LOG_U}</a>
+  </div>
+{/foreach}
+{/if}
+</div>
+{/foreach}
+{if isset($wager_season.SEASON_OVER)}
+<div class="content">
+    <div class="textred">{translate fonema=LANG_SEASON_OVER_U}</div>
+</div>
+{/if}
+</div>

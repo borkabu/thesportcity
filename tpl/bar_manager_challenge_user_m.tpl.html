@@ -1,0 +1,7 @@
+credit_challenge_<TPL:USER_ID>@@@<TPL_SUB:ERROR><span class="textred"><TPL:MSG></span><br></TPL_SUB:ERROR>
+<TPL_SUB:CREDIT>
+<TPL_SUB:CHALLENGE><_TPL:LANG_STAKE_U>: <input type="text" name="credit_stake_<TPL:USER_ID>" id="credit_stake_<TPL:USER_ID>" size="2" maxlength="4" class="input" value="<TPL:STAKE>" /> <_TPL:LANG_CREDITS_U>
+<input type="button" class="btn" value=" <_TPL:LANG_CHALLENGE_USER_U> " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" onClick="javascript:challengeUser(<TPL:USER_ID>, <TPL:SEASON_ID>, 'credit_challenge_<TPL:USER_ID>', 2, document.getElementById('credit_stake_<TPL:USER_ID>').value)"/></TPL_SUB:CHALLENGE>
+<TPL_SUB:CHALLENGE_THROWN><_TPL:LANG_CHALLENGE_THROWN_U><br><_TPL:LANG_STAKE_U>: <b><TPL:STAKE></b> <_TPL:LANG_CREDITS_U> <input type="button" class="btn" value=" <_TPL:LANG_CHALLENGE_WITHDRAW_U> " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" onClick="javascript:unchallengeUser(<TPL:USER_ID>, <TPL:SEASON_ID>, 2, 'credit_challenge_<TPL:USER_ID>')"/></TPL_SUB:CHALLENGE_THROWN>
+</TPL_SUB:CREDIT>
+###credits@@@<TPL:USER_CREDITS>###frozen_credits@@@<TPL:FROZEN_CREDITS>

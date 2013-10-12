@@ -1,0 +1,40 @@
+<div id="leagues">
+<div class="header">{translate fonema=LANG_LEAGUE_INVITATIONS_U}</div>
+{foreach $league_invites as $invite}
+<a name="league_invites" />
+<div class="content">
+      <a href="bracket_league.php?league_id={$invite.LEAGUE_ID}"><b>{$invite.TITLE}</b></a><br>
+      {if isset($invite.ENTRY)}{translate fonema=LANG_ENTRY_FEE_U}: <b>{$invite.ENTRY.ENTRY_FEE}</b> {translate fonema=LANG_CREDITS_ABBR_U}<br>{/if}
+      {if isset($invite.ENOUGH_CREDITS)}{translate fonema=LANG_ARRANGER_LEAGUE_ENTRY_FEE_INSTR_U}<br>{/if}
+      {if isset($invite.NOT_ENOUGH_CREDITS)}
+        {translate fonema=LANG_ERROR_NOT_ENOUGH_CREDITS_U}<br>
+        <input class="btn" type="submit" value=" {translate fonema=LANG_REJECT_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" onClick="javascript:handleArrangerLeagueInvitation({$invite.LEAGUE_ID}, 'decline_invite', 'leagues')"/><br>
+      {/if}
+      {if isset($invite.BUTTONS)}
+      <input class="btn" type="submit" value=" {translate fonema=LANG_ACCEPT_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" onClick="javascript:handleArrangerLeagueInvitation({$invite.LEAGUE_ID}, 'accept_invite', 'leagues')"/>
+      <input class="btn" type="submit" value=" {translate fonema=LANG_REJECT_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" onClick="javascript:handleArrangerLeagueInvitation({$invite.LEAGUE_ID}, 'decline_invite', 'leagues')"/><br>
+      {/if}
+</div>
+{foreachelse}
+<div class="content">{translate fonema=LANG_NO_INVITATIONS_U}</div>
+{/foreach}
+<div class="header">{translate fonema=LANG_LEAGUES_U}</div>
+{foreach $leagues as $league}
+ <div class="content">
+    {if isset($league.OWN_LEAGUE)}
+    {if isset($league.TRACK)}<a href="bracket_league.php?league_id={$league.LEAGUE_ID}&topic_id={$league.TOPIC_ID}&tstmp={$league.TSTMP}"><img src="./img/icons/flag_red.gif" border="0"  onmouseover="Tip('{translate fonema=LANG_UNREAD_MESSAGES_U}')" onmouseout="UnTip()"></a>{/if} <a href="bracket_league.php?league_id={$league.LEAGUE_ID}" class="date_font"><b>{$league.TITLE}</b></a> 
+      {if isset($league.CHAT.CHAT_CHANNEL)}<a href="chat2.php?title={$league.CHAT.CHAT_CHANNEL}" target="tsc_chat" onClick="window.open('','tsc_chat','width=821,height=820,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');"  onmouseover="Tip('{translate fonema=LANG_CHAT_U}')" onmouseout="UnTip()"><img src="./img/icons/chat.png" border=0></a>{/if}
+      <img valign="middle" align="left" src="./img/icons/owner.png" onmouseover="Tip('{translate fonema=LANG_OWNER_U}')" onmouseout="UnTip()"><br>
+    {/if}
+    {if isset($league.LEAGUE)}
+      <img align="left" src="./img/icons/participant.png" onmouseover="Tip('{translate fonema=LANG_PARTICIPANT_U}')" onmouseout="UnTip()">
+      <span class="date_font" >{if isset($league.TRACK)}<a href="bracket_league.php?league_id={$league.LEAGUE_ID}&topic_id={$league.TOPIC_ID}&tstmp={$league.TSTMP}"><img src="./img/icons/flag_red.gif" border="0"  onmouseover="Tip('{translate fonema=LANG_UNREAD_MESSAGES_U}')" onmouseout="UnTip()"></a>{/if} <a href="bracket_league.php?league_id={$league.LEAGUE_ID}"  class="date_font"><b>{$league.TITLE}</b></a> 
+       {if isset($league.CHAT.CHAT_CHANNEL)}<a href="chat2.php?title={$league.CHAT.CHAT_CHANNEL}" target="tsc_chat" onClick="window.open('','tsc_chat','width=821,height=820,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');" onmouseover="Tip('{translate fonema=LANG_CHAT_U}')" onmouseout="UnTip()"><img src="./img/icons/chat.png" border=0></a>{/if}
+	<br>{$league.USER_NAME}
+      </span>
+    {/if}
+ </div>
+  {foreachelse}
+    <div class="content">{translate fonema=LANG_NO_LEAGUES_U}</div>
+   {/foreach}
+</div>

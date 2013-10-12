@@ -1,0 +1,111 @@
+<div style="clear:both"></div>
+
+{$manager_filter_box}
+
+<div class="portlet">
+  <div class="header">{translate fonema=LANG_SEARCH_U}</div>
+  <div class="content">
+      <form action="{$search.FORM_URL}" method="get" style="margin:0px">
+        <input type="hidden" name="mseason_id" value="{$season_id}">
+        <input type="hidden" name="tour_id" value="{$tour_id}">
+         {$search.WHERE} {$search.QUERY} 
+         <input class="btn" type="submit" value=" {translate fonema=LANG_OK_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/><br>
+         {translate fonema=LANG_COUNTRY_U} {$search.COUNTRY}    
+         {if isset($search.FILTERED)}<a href="{$search.FORM_URL}">[ {translate fonema=LANG_SHOW_ALL_RECORDS} ]</a>{/if}
+         {if isset($search.FORM_TOURS)}<input type="hidden" name="tour_id" value="{$tour_id}">{/if}
+      </form>
+ </div>
+</div>
+
+<div class="portlet">
+  <div class="header">{translate fonema=LANG_FILTER_U}</div>
+  <div class="content">
+   {if isset($tours)}
+    {translate fonema=LANG_TOURS_U}: 
+    {foreach $tours as $tour}
+        {if isset($tour.SELECTED)}<b>[{$tour.NUMBER}]</b>{/if}
+        {if isset($tour.NORMAL)}<a href="f_manager_standings.php?tour_id={$tour.NUMBER}&mseason_id={$tour.MSEASON_ID}">{$tour.NUMBER}</a>{/if}
+    {/foreach} 
+   {/if}
+    {if isset($all)}
+        {if isset($all.SELECTED)}<b>[{translate fonema=LANG_SEASON_STANDINGS_U}]</b>{/if}
+        {if isset($all.NORMAL)}<a href="f_manager_standings.php?mseason_id={$all.NORMAL.MSEASON_ID}">[{translate fonema=LANG_SEASON_STANDINGS_U}]</a>{/if}
+    {/if}
+   {if isset($external_site)}<br>
+     {translate fonema=LANG_SWITCH_STANDINGS_U}: <a href="f_manager_standings.php?all=y&mseason_id={$season_id}"><b>TheSportCity.net</b></a>
+   {/if}
+   {if isset($local_site)}<br>
+     {translate fonema=LANG_SWITCH_STANDINGS_U}: <a href="f_manager_standings.php?mseason_id={$season_id}"><b>{$local_site}</b></a>
+   {/if}
+ </div>
+</div>
+
+<div class="portlet">
+  <div class="header">{translate fonema=LANG_STANDINGS_U}</div>
+  <div class="content">
+     {if isset($users)}
+            <table>
+              <tr>
+                <th rowspan="2" nowrap><span class="sort_arrows"> 
+		  {if isset($sort.PLACE_DESC_A)}&dArr;{/if}
+                  {if isset($sort.PLACE_DESC)}<a href="{$sort.PLACE_DESC.URL}">&dArr;</a>{/if}
+                  {if isset($sort.PLACE_ASC_A)}&uArr;{/if} 
+		  {if isset($sort.PLACE_ASC)}<a href="{$sort.PLACE_ASC.URL}">&uArr;</a>{/if}</span>
+                </th>
+                <th rowspan="2" width="100%">{translate fonema=LANG_PLAYER_U} <span class="sort_arrows"> 
+                  {if isset($sort.USER_NAME_DESC_A)}&dArr;{/if}
+		  {if isset($sort.USER_NAME_DESC)}<a href="{$sort.USER_NAME_DESC.URL}">&dArr;</a>{/if} 
+		  {if isset($sort.USER_NAME_ASC_A)}&uArr;{/if}
+		  {if isset($sort.USER_NAME_ASC)}<a href="{$sort.USER_NAME_ASC.URL}">&uArr;</a>{/if}</span>
+                </th>
+                <th rowspan="2">{translate fonema=LANG_POINTS_U} <span class="sort_arrows"> 
+                  {if isset($sort.POINTS_DESC_A)}&dArr;{/if}
+                  {if isset($sort.POINTS_DESC)}<a href="{$sort.POINTS_DESC.URL}">&dArr;</a>{/if}
+                  {if isset($sort.POINTS_ASC_A)}&uArr;{/if}
+		  {if isset($sort.POINTS_ASC)}<a href="{$sort.POINTS_ASC.URL}">&uArr;</a>{/if}</span>
+                </th>
+                {if isset($rating_header)}<th rowspan="2">{translate fonema=LANG_RATING_U} </th>{/if}
+                <th rowspan="2">{translate fonema=LANG_WEALTH_U} <span class="sort_arrows"> 
+                  {if isset($sort.WEALTH_DESC_A)}&dArr;{/if}
+                  {if isset($sort.WEALTH_DESC)}<a href="{$sort.WEALTH_DESC.URL}">&dArr;</a>{/if}
+                  {if isset($sort.WEALTH_ASC_A)}&uArr;{/if}
+		  {if isset($sort.WEALTH_ASC)}<a href="{$sort.WEALTH_ASC.URL}">&uArr;</a>{/if}</span>
+                </th>
+                <th colspan="3">{translate fonema=LANG_CHALLENGES_U} </th>
+                <th colspan="3">{translate fonema=LANG_BATTLES_U} </th>
+              </tr>
+              <tr>
+                <th>{translate fonema=LANG_WINS_ABBR_U}</th>
+                <th>{translate fonema=LANG_LOSES_ABBR_U} </th>
+		      <th>&Sigma;</th>
+                <th>{translate fonema=LANG_WINS_ABBR_U}</th>
+                <th>{translate fonema=LANG_LOSES_ABBR_U} </th>
+		      <th>&Sigma;</th>
+              </tr>
+	  {foreach $users as $user}
+                <tr {if isset($user.CURRENT)}style="background-color:yellow"{/if}>
+                  <td align="left" nowrap>{$user.PLACE} {if isset($user.UP)}<img src="../img/icons/small_up_green.png" border=0>{/if}{if isset($user.DOWN)}<img src="../img/icons/small_down_red.png" border=0>{/if} {if isset($user.PLACE_PREV)}({$user.PLACE_PREV}){/if}</td>
+                  <td align="left">{if isset($user.COUNTRY_DB)}<img border=1 src="./img/flags/{$user.COUNTRY_DB.CCTLD}.gif" onmouseover="Tip('{$user.COUNTRY_DB.COUNTRY_NAME}')" onmouseout="UnTip()">{/if}  <a href="user_public_profile.php?user_id={$user.USER_ID}" onmouseover="Tip('{translate fonema=LANG_PUBLIC_PROFILE_U}')" onmouseout="UnTip()" target="user_profile" onClick="window.open('','user_profile','width=450,height=620,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');"><img src="./img/icons/user_profile.png" border=0></a> {if isset($user.ALLOW)}<a href="f_manager_user_team_compare.php?username={$user.USER_NAME}" target="f_manager_user_team_compare" onClick="window.open('','f_manager_user_team_compare','width=400,height=600,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');"><img src="img/icons/weight.png" ></a> 
+					<a href="f_manager_user_team.php?user_id={$user.USER_ID}" target="f_manager_user_team" onClick="window.open('','f_manager_user_team','width=300,height=400,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');">{$user.USER_NAME}</a>{else}{$user.USER_NAME}{/if} "{$user.TEAM_NAME}" 
+                   {if isset($user.SOURCE_LOGO)}
+                      <img align="right" src="{$user.SOURCE_LOGO}" onmouseover="Tip('{$user.SOURCE}')" onmouseout="UnTip()"></img>
+                   {/if}
+		  </td>
+                  <td align="right">{$user.KOEFF}</td>
+                  {if isset($user.RATING)}<td align="right">{$user.RATING}</td>{/if}
+                  <td align="right">{$user.WEALTH}</td>
+                  <td align="right">{$user.CHALLENGES_WON}</td>
+                  <td align="right">{$user.CHALLENGES_LOST}</td>
+                  <td align="right">{if isset($user.NOT_VIEW_CHALLENGES)}{$user.NOT_VIEW_CHALLENGES.CHALLENGES_SUM}{/if}
+	                            {if isset($user.VIEW_CHALLENGES)}<a href="f_manager_view_challenges.php?user_id={$user.VIEW_CHALLENGES.USER_ID}&season_id={$user.VIEW_CHALLENGES.SEASON_ID}" target="f_manager_user_challenges" onClick="window.open('','f_manager_user_challenges','width=500,height=400,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');">{$user.VIEW_CHALLENGES.CHALLENGES_SUM}{/if}</a></td>
+                  <td align="right">{$user.BATTLES_WON}</td>
+                  <td align="right">{$user.BATTLES_LOST}</td>
+                  <td align="right">{if isset($user.NOT_VIEW_BATTLES)}{$user.NOT_VIEW_BATTLES.BATTLES_SUM}{/if}
+	                            {if isset($user.VIEW_BATTLES)}<a href="f_manager_view_battles.php?user_id={$user.VIEW_BATTLES.USER_ID}&season_id={$user.VIEW_BATTLES.SEASON_ID}" target="f_manager_user_battles" onClick="window.open('','f_manager_user_battles','width=600,height=500,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');">{$user.VIEW_BATTLES.BATTLES_SUM}{/if}</a></td>
+                </tr>
+	  {/foreach}
+         </table>
+	{/if}
+   </div>
+</div>
+{$paging}

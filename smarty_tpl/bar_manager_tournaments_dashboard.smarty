@@ -1,0 +1,66 @@
+<div class="portlet">
+<div class="header">{translate fonema=LANG_SUMMARY_U}</div>
+<div class="content">
+  <table>
+   <tr><th>{translate fonema=LANG_SEASON_U}</th>
+       <th>{translate fonema=LANG_TOURNAMENT_U}</th>
+       <th>{translate fonema=LANG_TYPE_U}</th>
+       <th></th>
+       <th>{translate fonema=LANG_PARTICIPANTS_U}</th>
+       <th>{translate fonema=LANG_TOUR_U}</th>
+     {if $user_on==1}
+       <th></th>
+     {/if}
+   </tr>
+   {foreach $manager_seasons as $manager_season}
+   <tr>
+     <td><a href="f_manager_tournament_dashboard.php?mseason_id={$manager_season.MANAGER_INFO.SEASON_ID}"><b>{$manager_season.MANAGER_INFO.SEASON_TITLE}</b></a></td>
+     <td><a href="f_manager_tournaments.php?mt_id={$manager_season.MT_ID}">{$manager_season.TITLE}</a></td>
+     <td align="center">
+       {if $manager_season.TOURNAMENT_TYPE==0}
+           <img src="./img/leagues/olympics.gif" onmouseover="Tip('{translate fonema=LANG_OLYMPIC_SYSTEM_U}')" onmouseout="UnTip()">
+       {elseif $manager_season.TOURNAMENT_TYPE==1}
+           <img src="./img/flags/ch.gif" onmouseover="Tip('{translate fonema=LANG_SWISS_SYSTEM_U}')" onmouseout="UnTip()">
+       {/if}
+     </td>
+     <td>
+       {if $manager_season.STATUS==1}
+         <div style="float:right;position:relative;top:50%"><img style="margin-left:3px;vertical-align:top" align="right" src="./img/icons/not_ready.png" onmouseover="Tip('{translate fonema=LANG_NOT_STARTED_U}')" onmouseout="UnTip()"></div>
+       {else if $manager_season.STATUS==2}
+         <div style="float:right;position:relative;top:50%"><img style="margin-left:3px;vertical-align:top" align="right" src="./img/icons/ongoing.png" onmouseover="Tip('{translate fonema=LANG_ONGOING_U}')" onmouseout="UnTip()"></div>
+       {else}
+         <div style="float:right;position:relative;top:50%"><img style="margin-left:3px" align="right" src="./img/icons/finished.png" onmouseover="Tip('{translate fonema=LANG_FINISHED_U}')" onmouseout="UnTip()"></div>
+       {/if}
+     </td>      
+     <td>{$manager_season.JOINED}</td>
+     <td>
+       {if isset($manager_season.USER_ID) && $manager_season.USER_ID>0
+            && ($manager_season.STATUS==2 || $manager_season.STATUS==3)}
+        {$manager_season.TOUR_REACHED} /
+       {/if}
+       {if $manager_season.STATUS==2  || $manager_season.STATUS==3} 
+        {$manager_season.CURRENT_TOUR}
+       {/if}
+     </td>
+     {if $user_on==1}
+     <td>{if isset($manager_season.USER_ID) && $manager_season.USER_ID>0}
+            <img src="./img/icons/green_flag.png" onmouseover="Tip('{translate fonema=LANG_PARTICIPATING_U}')" onmouseout="UnTip()" />
+         {else if isset($manager_season.USER_ID)}
+            <img src="./img/icons/black_flag.png" onmouseover="Tip('{translate fonema=LANG_NOT_PARTICIPATING_U}')" onmouseout="UnTip()" />
+         {/if}
+       {if $manager_season.STATUS==2  || $manager_season.STATUS==3} 
+        {if isset($manager_season.TOUR_REACHED) && $manager_season.TOUR_REACHED < $manager_season.CURRENT_TOUR && $manager_season.TOUR_REACHED > 0} 
+  	  <img align="right" src="./img/icons/sad.png" onmouseover="Tip('{translate fonema=LANG_PLAYER_LEFT_TOURNAMENT_U}')" onmouseout="UnTip()">
+        {else if isset($manager_season.TOUR_REACHED) && $manager_season.TOUR_REACHED == $manager_season.CURRENT_TOUR && $manager_season.WINNER==1} 
+  	  <img align="right" src="./img/icons/cup.png" onmouseover="Tip('{translate fonema=LANG_WINNER_U}')" onmouseout="UnTip()">
+        {else if isset($manager_season.TOUR_REACHED) && $manager_season.TOUR_REACHED == $manager_season.CURRENT_TOUR} 
+  	  <img align="right" src="./img/icons/smile.png" onmouseover="Tip('{translate fonema=LANG_PLAYER_IN_TOURNAMENT_U}')" onmouseout="UnTip()">
+        {/if}
+       {/if}
+     </td>
+     {/if}
+   </tr>
+   {/foreach}
+  </table> 
+</div>
+</div>

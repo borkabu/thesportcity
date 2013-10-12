@@ -1,0 +1,10 @@
+<div class="portlet">
+<div class="header">{$title}</div>
+{foreach $games.GAMES as $challenge}          
+<div class="content">
+   {$challenge.CHALLENGE} {if $challenge.STATUS == 2}/ <span class="textred"><b>{$challenge.USER_NAME2}</b></span> {translate fonema=LANG_DISAGREES_L}{/if}
+</div>
+{foreachelse}
+<div class="content">{translate fonema=LANG_NO_CHALLENGES_U}</div>
+{/foreach}
+</div>

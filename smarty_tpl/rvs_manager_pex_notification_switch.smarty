@@ -1,0 +1,2 @@
+{if $notify==1}{translate fonema=LANG_RVS_LEAGUE_PEX_NOTIFICATION_ON_U}<input type="image" src="./img/icons/notify.png" onmouseover="Tip('{translate fonema=LANG_PEX_NOTIFICATION_ON_U}')" onmouseout="UnTip()" onClick="javascript:pexNotification({$league_id}, 0, 'pex')">
+{else}{translate fonema=LANG_RVS_LEAGUE_PEX_NOTIFICATION_OFF_U}<input type="image" src="./img/icons/notnotify.png" onmouseover="Tip('{translate fonema=LANG_PEX_NOTIFICATION_OFF_U}')" onmouseout="UnTip()" onClick="javascript:pexNotification({$league_id}, 1, 'pex')">{/if}

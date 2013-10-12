@@ -1,0 +1,23 @@
+{if isset($pairs)}
+<div class="portlet">
+  <div class="header">{translate fonema=LANG_LATEST_FIXTURES_U}</div>
+  {foreach $pairs as $pair}
+  <div class="content_header">{$pair.TITLE}</div>
+  <div class="content">
+       {translate fonema=LANG_TOUR_U}: {$pair.TOUR}, 
+	{if isset($pair.NOT_FINALE)}{translate fonema=LANG_RESULTS_NOT_FINAL_U}
+	{else}{translate fonema=LANG_RESULTS_FINAL_U}
+        {/if}
+       <table width="100%">
+           <tr>
+             <td align="left"><span {if isset($pair.USER_NAME1_WON)}style="font-weight:bold"{/if}>{$pair.USER_NAME1}</span></td>
+             <td align="center">
+		<span {if isset($pair.SCORE1_WON)}style="font-weight:bold"{/if}>{$pair.SCORE1}</span>:<span {if isset($pair.SCORE2_WON)}style="font-weight:bold"{/if}>{$pair.SCORE2}</span><br>
+            </td>
+    	    <td align="left"><span {if isset($pair.USER_NAME2_WON)}style="font-weight:bold"{/if}>{$pair.USER_NAME2}</span></td>
+           </tr>
+       </table>   
+   </div>
+   {/foreach}
+</div>
+{/if}

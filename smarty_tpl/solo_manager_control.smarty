@@ -1,0 +1,22 @@
+<div style="clear:both"></div>
+{$manager_filter_box}
+
+{if isset($error)}
+<div class="portlet" id="message">
+    <div class="content">
+	<span class="textred"><b>{$error.MSG}</b></span>
+    </div>
+</div>
+{/if}
+
+{if isset($create_team_offer)}
+<div class="portlet" id="create_team_offer">
+    <div class="content">
+{translate fonema=LANG_CREATE_TEAM_OFFER_U}
+<input type="button"  class="btn" value=" {translate fonema=LANG_YES_PLEASE_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" onClick="javascript:createSoloTeam('create_team', 'create_team_offer')"/>
+    </div>
+</div>
+<div id="create_team"></div>
+{/if}
+
+{if isset($solo.TOURS)}{$solo.TOURS}{/if}

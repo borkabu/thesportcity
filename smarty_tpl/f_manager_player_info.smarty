@@ -1,0 +1,31 @@
+<div class="portlet">
+<div class="header">{$info.FIRST_NAME} {$info.LAST_NAME} - {$info.SEASON_TITLE}</div>
+<div class="content">
+  {if isset($tours)}
+  <table>
+    <tr>
+      <th>{translate fonema=LANG_TOUR_U}</th>
+      <th>{translate fonema=LANG_PRICE_U}</th>
+      <th>{translate fonema=LANG_TOUR_POINTS_U}</th>
+      <th>{translate fonema=LANG_TOTAL_POINTS_U}</th>
+     {if $sport_id != 4}
+      <th>{translate fonema=LANG_TOUR_PLAYED_U}</th>
+      <th>{translate fonema=LANG_TOTAL_PLAYED_U}</th>
+     {/if}
+    </tr>
+   {foreach $tours as $tour}
+    <tr>
+      <td align="left">{$tour.TOUR_ID}</td>
+      <td align="left">{$tour.CURRENT_VALUE_MONEY}</td>
+      <td align="right">{$tour.TOTAL_POINTS}</td>
+      <td align="right">{$tour.POINTS}</td>
+     {if $sport_id != 4}
+      <td align="right">{$tour.PLAYED}</td>
+      <td align="right">{$tour.PLAYED_TOTAL}</td>
+     {/if}
+    </tr>
+   {/foreach}
+  </table>
+ {/if}
+</div>
+</div>

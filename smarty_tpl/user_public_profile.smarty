@@ -1,0 +1,77 @@
+<div class="portlet">
+<div class="header">{translate fonema=LANG_SEARCH_U}</div>
+<div class="content">
+<form action="user_public_profile.php" method="post">
+{translate fonema=LANG_USER_NAME_U}: <input type="text" name="user_name" size="12" maxlength="12" class="input">
+<input class="btn" type="submit" value=" {translate fonema=LANG_SUBMIT_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+</form>
+</div>
+</div>
+
+{if isset($error)}
+<div class="portlet" id="message">
+    <div class="content">
+	<span class="textred"><b>{$error.MSG}</b></span>
+    </div>
+</div>
+{/if}
+
+{if isset($profile)}
+ {if isset($profile.USER_DATA)}
+ <div class="portlet">
+  <div class="header">{if isset($profile.USER_DATA.COUNTRY_DB)}<img border=1 src="./img/flags/{$profile.USER_DATA.COUNTRY_DB.CCTLD}.gif" onmouseover="Tip('{$profile.USER_DATA.COUNTRY_DB.COUNTRY_NAME}')" onmouseout="UnTip()">{/if} {$profile.USER_DATA.USER_NAME}</div>
+  <div class="content">
+   {translate fonema=LANG_REGISTRATION_DATE_U}: {$profile.USER_DATA.REG_DATE}<br>
+   {translate fonema=LANG_LAST_VISIT_DATE_U}: {$profile.USER_DATA.LAST_LOGIN}<br>
+   {translate fonema=LANG_COMMENT_TRUST_U}: {$profile.USER_DATA.COMMENT_TRUST}<br>
+   {translate fonema=LANG_CONTENT_TRUST_U}: {$profile.USER_DATA.CONTENT_TRUST}<br>
+   {translate fonema=LANG_OWNER_RATING_U}: {$profile.USER_DATA.LEAGUE_OWNER_RATING}<br>
+   {if !empty($profile.USER_DATA.TOWN)}
+    {translate fonema=LANG_TOWN_U}: {$profile.USER_DATA.TOWN}<br>
+   {/if}
+   {if !empty($profile.USER_DATA.CLAN)}
+     {translate fonema=LANG_CLAN_U}: <b>{$profile.USER_DATA.CLAN.CLAN_NAME}</b>
+   {/if}
+  </div>
+ </div>
+ {/if}
+
+<script>
+ $(function() {
+	$( "#user_profile" ).tabs({
+		cookie: {
+			expires: 1,
+			name: "user_profile"
+			}
+		}); 
+});
+</script>
+<div id="user_profile">
+ <ul>
+  <li><a href="#tabs-1" title="{translate fonema=LANG_MANAGER_U}">{translate fonema=LANG_MANAGER_U}</a></li>
+  <li><a href="#tabs-2" title="{translate fonema=LANG_WAGER_U}">{translate fonema=LANG_WAGER_U}</a></li>
+  <li><a href="#tabs-3" title="{translate fonema=LANG_ARRANGER_U}">{translate fonema=LANG_ARRANGER_U}</a></li>
+ </ul>
+ <div id="tabs-1">
+  <div class="portlet" style="margin:0">
+  <div class="content">
+    {$profile.MANAGER_DATA}
+  </div>
+  </div>
+ </div>
+ <div id="tabs-2">
+  <div class="portlet" style="margin:0">
+  <div class="content">
+  {$profile.WAGER_DATA}
+  </div>
+  </div>
+ </div>
+ <div id="tabs-3">
+  <div class="portlet" style="margin:0">
+  <div class="content">
+  {$profile.ARRANGER_DATA}
+  </div>
+  </div>
+ </div>
+</div>
+{/if}

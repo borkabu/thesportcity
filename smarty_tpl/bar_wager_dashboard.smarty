@@ -1,0 +1,4 @@
+{if isset($wager_summary)}
+<div class="portlet">
+{$wager_summary.CHALLENGE}
+{/if}

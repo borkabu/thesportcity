@@ -1,0 +1,96 @@
+<div style="clear:both"></div>
+<TPL:MANAGER_TOURNAMENT_FILTER_BOX>
+
+<TPL_SUB:ERROR>
+<div class="portlet" id="message">
+    <div class="content">
+	<span class="textred"><b><TPL:MSG></b></span>
+    </div>
+</div>
+</TPL_SUB:ERROR>
+
+<TPL_SUB:REGISTRATION>
+<div class="portlet">
+  <div class="header"><_TPL:LANG_REGISTRATION_U></div>
+  <div class="content">
+     <TPL_SUB:REGISTRATION_CLOSED><div class="textred"><_TPL:LANG_REGISTRATION_CLOSED_U></b></div> </TPL_SUB:REGISTRATION_CLOSED> 
+     <TPL_SUB:REGISTRATION_OPEN><div class="textgreen"><_TPL:LANG_REGISTRATION_OPENED_TILL_U> <b><TPL:REGISTRATION_END_DATE></b> </div> </TPL_SUB:REGISTRATION_OPEN> 
+  </div>
+<TPL_SUB:ENTER_TOURNAMENT_OFFER>
+  <div class="content">
+   <form action="" method="post">
+     <TPL:MSG>
+     <input type="hidden" name="enter_tournament" value="Y" />
+     <input type="submit" class="btn" value=" <_TPL:LANG_YES_PLEASE_U> " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" />
+   </form>
+  </div>
+ </TPL_SUB:ENTER_TOURNAMENT_OFFER>
+ <TPL_SUB:REGISTERED>
+  <div class="content">
+    <_TPL:LANG_TOURNAMENT_REGISTERED_U>
+  </div>
+ </TPL_SUB:REGISTERED>
+</div>
+</TPL_SUB:REGISTRATION>
+
+<TPL_SUB:TOURS>
+<div class="portlet">
+  <div class="header"><_TPL:LANG_FILTER_U></div>
+  <div class="content">
+    <_TPL:LANG_TOURS_U>: 
+    <TPL_SUB:TOURS>
+        <TPL_SUB:SELECTED><b>[<TPL:NUMBER>]</b></TPL_SUB:SELECTED>
+        <TPL_SUB:NORMAL><a href="f_manager_tournament_control.php?tour=<TPL:NUMBER>&mt_id=<TPL:MT_ID>"><TPL:NUMBER></a></TPL_SUB:NORMAL>
+    </TPL_SUB:TOURS> 
+    <TPL_SUB:ALL>
+        <TPL_SUB:SELECTED><b>[<_TPL:LANG_TOURNAMENT_START_LIST_U>]</b></TPL_SUB:SELECTED>
+        <TPL_SUB:NORMAL><a href="f_manager_tournament_control.php?tour=0&mt_id=<TPL:MT_ID>">[<_TPL:LANG_TOURNAMENT_START_LIST_U>]</a></TPL_SUB:NORMAL>
+    </TPL_SUB:ALL>
+ </div>
+</div>
+</TPL_SUB:TOURS>
+
+<TPL_SUB:HALF><div style="width:45%;float:left"></TPL_SUB:HALF>
+<div class="portlet">
+  <div class="header"><_TPL:LANG_PARTICIPANTS_U></div>
+  <div class="content">
+        <TPL_SUB:USERS>
+                  <table width="100%">
+                    <TPL_SUB:ITEM>
+                      <tr>
+		        <td align="left"><TPL:NUMBER></td>
+                        <td align="left" width="100%"><TPL_SUB:COUNTRY_DB><img border=1 src="./img/flags/<TPL:CCTLD>.gif" onmouseover="Tip('<TPL:COUNTRY_NAME>')" onmouseout="UnTip()"></TPL_SUB:COUNTRY_DB> <TPL_SUB:SEEDED><b>(+)</b></TPL_SUB:SEEDED> <a href="user_public_profile.php?user_id=<TPL:USER_ID>" target="user_profile" onClick="window.open('','user_profile','width=450,height=620,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');"><TPL:USER_NAME></a></td>
+                      </tr>
+                    </TPL_SUB:ITEM>
+                  </table>
+        </TPL_SUB:USERS> 
+	</div>
+</div>
+<TPL_SUB:HALF2></div></TPL_SUB:HALF2>
+
+<TPL_SUB:MATCHES>
+<div style="width:55%;float:left">
+<div class="portlet">
+  <div class="header"><_TPL:LANG_TOUR_DRAW_RESULTS_U></div>
+  <div class="content">
+                  <table width="100%">
+                    <TPL_SUB:ITEM>
+                      <tr>
+                        <td align="left"><TPL:PAIR></td>
+                        <td align="left"><span <TPL_SUB:USER_NAME1_WON>style="font-weight:bold"</TPL_SUB:USER_NAME1_WON>><TPL:USER_NAME1></span></td>
+                        <td align="center">
+                        <TPL_SUB:ROUNDS> 
+				<_TPL:LANG_ROUND_U> <TPL:ROUND><br>
+				<span <TPL_SUB:SCORE1_WON>style="font-weight:bold"</TPL_SUB:SCORE1_WON>><TPL:SCORE1></span>:<span <TPL_SUB:SCORE2_WON>style="font-weight:bold"</TPL_SUB:SCORE2_WON>><TPL:SCORE2></span><br>
+                        </TPL_SUB:ROUNDS> 
+		        </td>
+			<td align="left"><span <TPL_SUB:USER_NAME2_WON>style="font-weight:bold"</TPL_SUB:USER_NAME2_WON>><TPL:USER_NAME2></span></td>
+                      </tr>
+                    </TPL_SUB:ITEM>
+                  </table>
+	<TPL_SUB:RESULTS_NOT_FINAL><_TPL:LANG_RESULTS_NOT_FINAL_U></TPL_SUB:RESULTS_NOT_FINAL>
+   </div>
+</div>
+</div>
+</TPL_SUB:MATCHES> 
+<div style="clear:both"></div>

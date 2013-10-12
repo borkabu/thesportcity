@@ -1,0 +1,55 @@
+<TPL_INCLUDE:../tpl/adm/head.tpl.html>
+<TPL_INCLUDE:../tpl/adm/menu.tpl.html>
+
+<div class="portlet">
+  <div class="header"><_TPL:LANG_PROFIT_U></div>
+  <div class="content">
+            <table style="width:100%">
+              <tr valign="top">
+                <th><_TPL:LANG_USER_NAME_U></th>
+                <th><_TPL:LANG_PLAYER_U></th>
+                <th><_TPL:LANG_PROFIT_U></th>
+              </tr>
+              <TPL_SUB:PROFITS>
+                <tr valign="top">
+                  <td class="list_item" align="right"><TPL:USER_NAME></td>
+                  <td class="list_item"><TPL:LAST_NAME>, <TPL:FIRST_NAME></td>
+                  <td class="list_item" align="right"><TPL:PROFIT></td>
+                </tr>
+	      </TPL_SUB:PROFITS>
+            </table>
+  </div>
+</div>
+
+<div class="portlet">
+  <div class="header"><_TPL:LANG_PORTFOLIO_U></div>
+  <div class="content">
+            <table style="width:100%">
+              <tr valign="top">
+                <th><_TPL:LANG_USER_NAME_U></th>
+                <th><_TPL:LANG_PLAYER_U></th>
+                <th><_TPL:LANG_QUANTITY_U></th>
+                <th><_TPL:LANG_BUYING_PRICE_U></th>
+                <th><_TPL:LANG_SELLING_PRICE_U></th>
+                <th><_TPL:LANG_PROFIT_U></th>
+                <th><_TPL:LANG_PENALTY_U></th>
+                <th><_TPL:LANG_FINE_U></th>
+              </tr>
+              <TPL_SUB:ITEM>
+                <tr valign="top">
+                  <td class="list_item" align="right"><TPL:USER_NAME></td>
+                  <td class="list_item">
+                    <a href="f_manager_player_info.php?user_id=<TPL:USER_ID>"  target="f_manager_player_info" onClick="window.open('','f_manager_player_info','width=400,height=400,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');"><b><TPL:LAST_NAME>, <TPL:FIRST_NAME></b></a> <br>
+                    <span class="date_font2"><TPL:TYPE_NAME> (<TPL:TEAM_NAME2>)</span></td>
+                  <td class="list_item" align="right"><TPL:SIZE></td>
+                  <td class="list_item" align="right"><TPL:BUYING_PRICE></td>
+                  <td class="list_item" align="right"><b><TPL:SELLING_PRICE></b> <TPL_SUB:UP><img src="../img/icons/chart_up.png" border=0></TPL_SUB:UP> <TPL_SUB:DOWN><img src="../img/icons/chart_down.png" border=0></TPL_SUB:DOWN> </td>
+                  <td class="list_item" align="right"><TPL:PROFIT></td>
+                  <td class="list_item" align="right"><TPL:PENALTY></td>
+                  <td class="list_item" align="right"><TPL:FINE></td>
+                </tr>
+	      </TPL_SUB:ITEM>
+            </table>
+  </div>
+</div>
+<TPL_INCLUDE:../tpl/adm/foot.tpl.html>

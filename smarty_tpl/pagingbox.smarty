@@ -1,0 +1,14 @@
+<div class="portlet">
+  <div class="content">
+      {translate fonema=LANG_TOTAL_RECORDS_U}: <b>{$paging}</b> | 
+      {translate fonema=LANG_PAGES_U}:
+      {foreach $pages as $page}
+        {if isset($page.SELECTED)}
+         <b>[{$page.SELECTED.PAGENUM}]</b>
+        {/if}
+        {if isset($page.NORMAL)}
+        <a href="{$page.NORMAL.URL}">[{$page.NORMAL.PAGENUM}]</a>
+        {/if}        
+      {/foreach}
+  </div>
+</div>

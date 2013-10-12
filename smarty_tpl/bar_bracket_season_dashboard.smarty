@@ -1,0 +1,33 @@
+<div style="float:left">
+<div class="portlet">
+<div class="header">{translate fonema=LANG_SUMMARY_U}</div>
+{if isset($bracket_season.LEAGUES_INVITE)}
+<div class="content"><a href="bracket_control.php?season_id={$bracket_season.LEAGUES_INVITE.SEASON_ID}#league_invites">{translate fonema=LANG_LEAGUE_INVITATIONS_U}:</a> <span class="textred"><b>{$bracket_season.LEAGUES_INVITE.LEAGUES}</b></span></div>
+{/if}
+{if isset($bracket_season.LEAGUES)}
+<div class="content">{translate fonema=LANG_LEAGUES_U}: <a href="bracket_league.php?season_id={$bracket_season.BRACKET_INFO.SEASON_ID}&all=y"><b>{$bracket_season.LEAGUES.LEAGUES}</b></a> {if isset($bracket_season.LEAGUES.MY_LEAGUES)}/ <a href="bracket_league.php?season_id={$bracket_season.BRACKET_INFO.SEASON_ID}&all=n"><b>{$bracket_season.LEAGUES.MY_LEAGUES}</b></a>{/if}</div>
+{/if}
+{if isset($bracket_season.MARKET)}
+<div class="content">
+     {if isset($bracket_season.MARKET.SEASON_OVER)}<div class="textred">{translate fonema=LANG_SEASON_OVER_U}</div>
+     {elseif isset($bracket_season.MARKET.NOMARKET)}
+     <div>{translate fonema=LANG_MARKET_CLOSED_3_U} <span class="date_font2"><b>{$bracket_season.MARKET.NOMARKET.START_DATE} {$bracket_season.MARKET.NOMARKET.UTC}</b></span></div> 
+     {elseif isset($bracket_season.MARKET.NOMARKET_DELAY)}
+     <div>{translate fonema=LANG_MARKET_CLOSED_2_U}</b></div> 
+     {elseif isset($bracket_season.MARKET.MARKET_OPEN)}
+     <div>{translate fonema=LANG_MARKET_OPENED_2_U} <span class="date_font2"><b>{$bracket_season.MARKET.MARKET_OPEN.START_DATE} {$bracket_season.MARKET.MARKET_OPEN.UTC}</b></span></div> 
+     {/if}
+</div>
+{/if}
+</div>
+
+{if isset($bracket_season.BRACKET_LOG)}
+{$bracket_season.BRACKET_LOG}
+{/if}
+
+{if isset($bracket_season.BRACKET_USER_LOG)}
+{$bracket_season.BRACKET_USER_LOG}
+{/if}
+
+</div>
+

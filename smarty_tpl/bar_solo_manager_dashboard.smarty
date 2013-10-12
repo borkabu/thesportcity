@@ -1,0 +1,9 @@
+<div style="clear:both"></div>
+<div class="portlet">
+<div class="header">{translate fonema=LANG_SUMMARY_U}</div>
+<div class="content">
+<b>{translate fonema=LANG_POINTS_U}</b>: <span class="textgreenhuge" onmouseover="Tip('{translate fonema=LANG_POINTS_U}')" onmouseout="UnTip()"><b>{$solo_manager.POINTS}</b></span><br>
+<b>{translate fonema=LANG_PLACE_U}</b>: <span class="textgreenhuge" onmouseover="Tip('{translate fonema=LANG_PLACE_U}')" onmouseout="UnTip()"><b>{$solo_manager.PLACE}</b></span><br>
+</div>
+{$solo_manager.LEAGUE}
+</div>

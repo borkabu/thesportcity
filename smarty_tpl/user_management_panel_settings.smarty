@@ -1,0 +1,16 @@
+<div  style="clear:both"></div>
+<form action="" method="post" style="margin:0">
+ <input type="hidden" name="form_save" value="y">    
+ <div class="portlet">
+  <div class="header">{translate fonema=LANG_GENERAL_U}</div>
+  <div class="content">
+   {translate fonema=LANG_USER_SETTINGS_PM_EMAIL_NOTIFICATION_U}: 
+    <input type="checkbox" name="pm_email" class="input" value="Y" {if $pm_email=='Y'}checked{/if}/>
+  </div>
+ </div>
+ <div class="portlet">
+  <div class="content">
+   <input class="btn" type="submit" value=" {translate fonema=LANG_SUBMIT_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+  </div>
+ </div>
+</form>

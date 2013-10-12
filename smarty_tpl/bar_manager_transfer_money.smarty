@@ -1,0 +1,5 @@
+{$transfer.MSG}
+{if isset($transfer.ALLOW_TRANSFER)}
+    <input type="text" name="transfer" id="transfer" size="4" maxlength="5" class="input">
+    <input class="btn" type="submit" value=" {translate fonema=LANG_TRANSFER_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" onClick="javascript:transferStockMoney({$transfer.ALLOW_TRANSFER.SEASON_ID}, document.getElementById('transfer').value, 'transfer_money')"/>
+{/if}

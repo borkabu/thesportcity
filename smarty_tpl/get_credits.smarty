@@ -1,0 +1,7 @@
+<div style="clear:both"></div>
+{$page}
+
+ <script src="http://fortumo.com/javascripts/fortumopay.js" type="text/javascript"></script>
+  <div class="content" style="text-align:center">
+   <a id="fmp-button" href="#" rel="101d5bf0d91428b0a1ada66c896af1df{if isset($user_id)}/{$user_id}{/if}?&price=1.00&currency=LTL&amount=10&sig=123"><img src="http://fortumo.com/images/fmp/fortumopay_96x47.png" width="96" height="47" alt="Mobile Payments by Fortumo" border="0" /></a>
+ </div>

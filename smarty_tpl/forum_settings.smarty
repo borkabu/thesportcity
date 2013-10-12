@@ -1,0 +1,21 @@
+<div  style="clear:both"></div>
+<form action="" method="post" style="margin:0">
+ <input type="hidden" name="form_save" value="y">    
+ <div class="portlet">
+  <div class="header">{translate fonema=LANG_GENERAL_U}</div>
+  <div class="content">
+   <table class="noborder">
+    <tr><td>
+      {translate fonema=LANG_FORUM_SETTINGS_POST_SORT_ORDER_U}:</td>
+      <td>{$topic_sorting}</td></tr>
+    <tr><td>{translate fonema=LANG_FORUM_SETTINGS_EDITOR_WINDOW_POSITION_U}:</td>
+      <td>{$editor_window_position}</td></tr>
+   </table>
+  </div>
+ </div>
+ <div class="portlet">
+  <div class="content">
+   <input class="btn" type="submit" value=" {translate fonema=LANG_SUBMIT_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+  </div>
+ </div>
+</form>

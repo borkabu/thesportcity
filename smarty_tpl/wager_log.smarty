@@ -1,0 +1,8 @@
+<div style="clear:both"></div>
+{if isset($wager)}
+{$wager.WAGER_FILTER_BOX}
+
+{$wager.WAGER_LOG}
+
+{$wager.WAGER_LOG_PAGING}
+{/if}

@@ -1,0 +1,18 @@
+<html><head>
+{include file='smarty_tpl/email_css.smarty'}
+</head><body style="font-family: Arial, sans-serif;">
+<div style="text-align:center">
+<img src="http://www.thesportcity.net/img/herbas.jpg" alt="TheSportCity.Net Logo">
+</div>
+<div class="portlet">
+  <div class="content">
+<h3>{translate fonema=LANG_HI_U}, {$data.USER_NAME}</h3>
+
+{translate fonema=LANG_EMAIL_SHOP_ORDER_DISPATCHED_LINE_1}
+
+</div>
+  <div class="content">{$data.ORDER}</div>
+<div class="content">
+{translate fonema=LANG_EMAIL_LAST_LINE}
+</div>
+</body></html>

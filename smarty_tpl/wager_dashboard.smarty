@@ -1,0 +1,10 @@
+<div style="clear:both"></div>
+<div class="background" style="float:left">
+<div class="portlet">
+<div class="content">
+{translate fonema=LANG_WAGER_RULES_SHORT_U}
+</div>
+</div>
+{$timeline}
+{$seasons}
+</div>

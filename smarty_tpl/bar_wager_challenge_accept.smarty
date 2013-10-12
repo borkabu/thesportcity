@@ -1,0 +1,3 @@
+credits@@@{$idata.USER_CREDITS}###frozen_credits@@@{$idata.FROZEN_CREDITS}
+###credit_challenge_{$idata.CHALLENGE_ID}@@@{if isset($error)}<span class="textred"><b>{$error.MSG}</b></span>
+{else}{$idata.USER_NAME} {translate fonema=LANG_DISAGREES_L}<br><span class="textgreen"><b>{translate fonema=LANG_CHALLENGE_ACCEPTED_U}</b></span>{/if}

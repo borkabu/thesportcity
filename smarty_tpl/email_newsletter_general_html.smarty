@@ -1,0 +1,155 @@
+<html><head>
+{literal} 
+<style type="text/css">
+<!-- 
+.nomargin { margin-top: 0}
+.portlet
+{
+    margin:3px;
+    border: 1px solid #D8BC8A;
+    border-top-right-radius: 4px;
+    border-top-left-radius: 4px;
+}
+
+.portlet .header
+{
+    color:#FFF;
+    font-size:1.2em;
+    font-weight:bold;
+    padding:5px 5px 5px;
+    margin: 0;
+    text-align:center;
+    background: url("http://www.thesportcity.net/img/design/header.png") repeat-x scroll 50% 50% #091DC3;
+    border-top-right-radius: 4px;
+    border-top-left-radius: 4px;
+
+}
+
+.portlet .header a { color: #FFFFFF; text-decoration: underline }
+.portlet .header a:visited { color: #FFFFFF; text-decoration: underline }
+.portlet .header a:hover { color: #FFFFFF; text-decoration: none }
+
+.portlet .header a { color: #FFFFFF; text-decoration: underline }
+.portlet .header a:visited { color: #FFFFFF; text-decoration: underline }
+.portlet .header a:hover { color: #FFFFFF; text-decoration: none }
+
+.portlet .content
+{
+	background:#FFF;
+	font-size:1em;
+	padding:3px 6px 6px 6px;
+	display: block;
+	margin: 0;
+        border-bottom: 1px solid #D8BC8A;
+}
+
+.portlet .content_header
+{
+	color:#FFF;
+	font-size:1em;
+	font-weight:bold;
+	padding:3px 3px 3px 3px;
+	display: block;
+	margin: 0px 2px 2px 2px;
+        background: url("http://www.thesportcity.net/img/design/content_header.png") repeat-x scroll 50% 50% #E14F14;
+}
+
+.portlet .content_header a { color: #FFFFFF; text-decoration: underline }
+.portlet .content_header a:visited { color: #FFFFFF; text-decoration: underline }
+.portlet .content_header a:hover { color: #FFFFFF; text-decoration: none }
+
+
+.portlet table {background: #fafbfb;}
+.portlet a { color: #336699; text-decoration: underline }
+.portlet a:visited { color: #336699; text-decoration: underline }
+.portlet a:hover { color: #336699; text-decoration: none }
+
+.portlet .date_font2 {font-size:6.5pt;font-family: Verdana, Arial, Helvetica, MS Sans Serif;}
+
+
+.portlet table {
+	border-top:1px solid #4c014c;
+	border-right:1px solid #4c014c;
+	border-collapse:collapse;
+}
+
+.portlet th {
+        font-size: 7.5pt; 
+        font-weight: bold; 
+        color: #333333; 
+        text-decoration: none; 
+        background-color: #F2E38F;
+	border-bottom:1px solid #4c014c;                               
+	border-left:1px solid #4c014c;
+	padding: 2px;
+	text-align:center;
+}
+
+.portlet td {
+	color:#000000;
+	border-bottom:1px solid #4c014c;
+	border-left:1px solid #4c014c;
+	padding: 3px;
+}
+
+.textred { color: #FF0000; font-family: Verdana, Arial, Helvetica, MS Sans Serif; font-size: 8pt}
+ -->
+</style>
+{/literal} 
+</head><body style="font-family: Arial, sans-serif;">
+<div class="portlet">
+  <div class="content">
+<img src="http://www.thesportcity.net/img/herbas.jpg" align="left" margin=5> <h1>{$data.TITLE}</h1>
+<span style="color: #999; font-size: 11px;">{$data.DESCR}</span>
+<h3>{translate fonema=LANG_HI_U}, {$data.USER_NAME}</h3>
+
+{$data.HEADER}
+</div>
+
+{$data.SITE_NEWS}
+<div style="clear:both;"></div>
+{if isset($data.SITE_GAMES)}
+<div class="portlet">
+ <div class="header">{translate fonema=LANG_SITE_GAMES_U}</div>
+ {if isset($data.SITE_GAMES.MANAGER)}
+  {foreach $data.SITE_GAMES.MANAGER as $manager}
+  <div class="content">
+   <b>{translate fonema=LANG_MANAGER_U}:</b> <a href="http://www.thesportcity.net/f_manager_control.php?season_id={$manager.SEASON_ID}"><b>{$manager.SEASON_TITLE}</b></a>
+  </div>
+  {/foreach}
+ {/if}
+ {if isset($data.SITE_GAMES.RVS_MANAGER)}
+  {foreach $data.SITE_GAMES.RVS_MANAGER as $manager}
+  <div class="content">
+   <b>{translate fonema=LANG_FANTASY_LEAGUE_U}:</b> <a href="http://www.thesportcity.net/rvs_manager_league.php?mseason_id={$manager.SEASON_ID}"><b>{$manager.SEASON_TITLE}</b></a>
+  </div>
+  {/foreach}
+ {/if}
+ {if isset($data.SITE_GAMES.WAGER)}
+  {foreach $data.SITE_GAMES.WAGER as $wager}
+  <div class="content">
+  <b>{translate fonema=LANG_WAGER_U}:</b> <a href="http://www.thesportcity.net/wager_control.php?season_id={$wager.SEASON_ID}"><b>{$wager.SEASON_TITLE}</b></a>
+  </div>
+  {/foreach}
+ {/if}
+ {if isset($data.SITE_GAMES.ARRANGER)}
+  {foreach $data.SITE_GAMES.ARRANGER as $arranger}
+  <div class="content">
+  <b>{translate fonema=LANG_ARRANGER_U}:</b> <a href="http://www.thesportcity.net/bracket_control.php?season_id={$wager.SEASON_ID}"><b>{$wager.SEASON_TITLE}</b></a>
+  </div>
+  {/foreach}
+ {/if}
+{/if}
+</div>
+<div  style="clear:both"></div>
+</div>
+<div class="portlet">
+  <div class="content">
+<span style="color: #999; font-size: 11px; font-family: Arial, sans-serif;">{translate fonema=LANG_NEWSLETTER_UNSUBSCRIBE_INSTR_U}<br>
+<a href="{$data.URL}">{translate fonema=LANG_NEWSLETTER_UNSUBSCRIBE_U}</a></span><br>
+<br>
+{translate fonema=LANG_EMAIL_LAST_LINE}
+</div>
+</div>
+</div>
+</body></html>

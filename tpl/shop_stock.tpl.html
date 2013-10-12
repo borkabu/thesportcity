@@ -1,0 +1,23 @@
+<div style="clear:both"></div>
+<TPL_SUB:SHOP>
+<div class="portlet">
+<div class="header"><_TPL:LANG_STOCK_U></div>
+	<TPL_SUB:ITEM>
+	<div class="content">
+		<img src="./img/<TPL:PIC_LOCATION>" height="80" vspace="5" hspace="5" align="left">
+                <a href="shop.php?item_id=<TPL:ITEM_ID>"><b><TPL:ITEM_NAME></b></a>
+				<br><TPL:DESCR>
+                        <b><_TPL:LANG_PRICE_U></b><br>
+			<_TPL:LANG_CREDITS_U>: <TPL:PRICE_CREDITS><br>
+			<_TPL:LANG_MONEY_U>: <TPL:PRICE_EURO>&euro;
+		<div style="clear:both;"></div>
+	</div>
+	</TPL_SUB:ITEM>
+    <TPL_SUB:NORECORDS>
+	<div class="content">
+		<div style="float:left;"><_TPL:LANG_NO_ENTRIES_U></div>
+		<div style="clear:both;"></div>
+	</div>
+    </TPL_SUB:NORECORDS>
+</div>
+</TPL_SUB:SHOP>

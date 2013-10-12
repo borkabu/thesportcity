@@ -1,0 +1,61 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>sport city admin</title>
+  <link href="../lib/admin.css" rel="stylesheet" type="text/css" />
+  <script type="text/javascript" src="../ckeditor/ckeditor.js"></script>
+  <script language="javascript" type="text/javascript" src="../javascripts/ajax_common.js"></script>
+  <script language="javascript" type="text/javascript" src="../javascripts/ajax_admin_ss.js?s"></script>
+  <script type="text/javascript" src="../ckfinder/ckfinder.js"></script>
+<script type="text/javascript">
+function BrowseServer(field)
+{
+	// You can use the "CKFinder" class to render CKFinder in a page:
+
+        CKFinder.popup( '../', null, null, function(url) {SetFileField(field, url)} ) ;
+	// It can also be done in a single line, calling the "static"
+	// popup( basePath, width, height, selectFunction ) function:
+	// CKFinder.popup( '../', null, null, SetFileField ) ;
+	//
+	// The "popup" function can also accept an object as the only argument.
+	// CKFinder.popup( { basePath : '../', selectActionFunction : SetFileField } ) ;
+}
+
+// This is a sample function which is called when a file is selected in CKFinder.
+function SetFileField( field, fileUrl )
+{
+document.getElementById( field ).value = fileUrl ;
+}
+</script>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-12618179-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</head>
+<body bgcolor="#FFFFFF" leftmargin="0" topmargin="0">
+<div style="float:left;margin-right:10px">
+<form method="post">
+<_TPL:LANG_LANGUAGE_U> <TPL:LANGUAGE> <input class="btn" type="submit" value=" <_TPL:LANG_CHANGE_LANGUAGE_U> " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+</form>
+</div>
+<div style="float:left">
+<form method="post" action="index.php">
+<input type="hidden" name="logout" value="out">
+<input class="btn" type="submit" value=" <_TPL:LANG_EXIT_U> " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+<a href="dashboard.php">Dashboard</a>
+</form>
+</div>
+
+<span style="font-size:15px;color:red"><b>DO NOT HURRY!</b></span>
+<div id="main_container">

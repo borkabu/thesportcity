@@ -1,0 +1,19 @@
+<div style="clear:both"></div>
+<div class="portlet">
+<div class="header">{translate fonema=LANG_ORDERS_U}</div>
+  {foreach $orders as $order}
+	<div class="content">
+            {translate fonema=LANG_ORDER_NUMBER_U}: <a href="shop_user_orders.php?order_id={$order.ORDER_ID}"><b>TSC000{$order.ORDER_ID}</b></a><br>
+            {translate fonema=LANG_PRICE_CREDITS_U}: <b>{$order.TOTAL_CREDITS+$order.DELIVERY_CREDITS}</b><br>
+            {translate fonema=LANG_PRICE_MONEY_U}: <b>{$order.TOTAL_EURO+$order.DELIVERY_EURO}</b>&euro;</b><br>
+            {translate fonema=LANG_ORDER_DATE_U}: <b>{$order.ORDER_DATE}</b><br>
+            {translate fonema=LANG_ITEMS_U}: <b>{$order.ITEMS}</b><br>
+	    {translate fonema=LANG_STATUS_U}: {if $order.STATUS==0}<b class="textred">{translate fonema=LANG_UNPAID_U}</b> {else}<b class="textgreen">{translate fonema=LANG_PAID_U}</b>{/if}
+	</div>
+  {foreachelse}
+	<div class="content">
+		<div style="float:left;">{translate fonema=LANG_NO_ENTRIES_U}</div>
+		<div style="clear:both;"></div>
+	</div>
+  {/foreach}
+</div>

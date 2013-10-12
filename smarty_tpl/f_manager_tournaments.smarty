@@ -1,0 +1,321 @@
+<div style="clear:both"></div>
+{$manager_filter_box}
+
+{if isset($error)}
+<div class="portlet" id="message">
+    <div class="content">
+	<span class="textred"><b>{$error.MSG}</b></span>
+    </div>
+</div>
+{/if}
+
+{if isset($create_tournament_offer)}
+<div class="portlet" id="message">
+    <div class="content">
+	<span class="textgreen"><b>{translate fonema=LANG_CREATE_MANAGER_TOURNAMENT_OFFER_INSTR_U}</b></span>
+    </div>
+</div>
+{/if}
+
+{if isset($tournaments)}
+<script>
+ $(function() {
+	$( "#tournaments" ).tabs({
+		cookie: {
+			expires: 1,
+			name: "tournaments"
+			}
+		}); 
+});
+</script>
+<div id="tournaments">
+ <ul>
+ {if isset($tournaments.TOURNAMENTS)}
+  <li><a href="#tabs-1" title="{translate fonema=LANG_ALL_TOURNAMENTS_U}">{translate fonema=LANG_ALL_TOURNAMENTS_U}</a></li>
+ {/if}
+ {if isset($open_tournaments.TOURNAMENTS)}
+  <li><a href="#tabs-2" title="{translate fonema=LANG_OPEN_TOURNAMENTS_U}">{translate fonema=LANG_OPEN_TOURNAMENTS_U}</a></li>
+ {/if}
+ {if isset($past_tournaments.TOURNAMENTS)}
+  <li><a href="#tabs-3" title="{translate fonema=LANG_PAST_TOURNAMENTS_U}">{translate fonema=LANG_PAST_TOURNAMENTS_U}</a></li>
+ {/if}
+ </ul>
+{if isset($tournaments.TOURNAMENTS)}
+ <div id="tabs-1">
+<div class="portlet" style="margin:0px">
+<div class="content">
+  <table width="100%">
+    <tr><th>{translate fonema=LANG_TITLE_U} ({translate fonema=LANG_COMMENTS_U})</th>
+      <th>{translate fonema=LANG_PARTICIPANTS_U} ({translate fonema=LANG_MAXIMUM_ABBR_U})</th>
+      <th></th>
+      <th>{translate fonema=LANG_TYPE_U}</th>
+      <th></th>
+    <tr>
+    {foreach $tournaments.TOURNAMENTS as $tournament}
+    {if isset($tournament.OWN_TOURNAMENT)}
+    <tr>
+      <td>{if isset($tournament.COUNTRY_DB)}<img border=1 src="./img/flags/{$tournament.COUNTRY_DB.CCTLD}.gif" onmouseover="Tip('{$tournament.COUNTRY_DB.COUNTRY_NAME}')" onmouseout="UnTip()">{/if} 
+	<a href="f_manager_tournaments.php?mt_id={$tournament.MT_ID}"><b>{$tournament.TITLE}</b></a> ({$tournament.POSTS})<br>
+		{$tournament.USER_NAME}</td>
+      <td>{$tournament.USERS} ({$tournament.PARTICIPANTS})<br>
+	{if isset($tournament.PROGRESS)}<span class="progress_bar" ><span style="width: {$tournament.PROGRESS.PERCENTS}%;" class="has_progress"></span>{/if}
+      </td>
+      <td><table class="noborder">
+           <tr><td>{translate fonema=LANG_ENTRY_FEE_U}:</td><td><b>{$tournament.ENTRY_FEE}</b></td></tr>
+           <tr><td>{translate fonema=LANG_PRIZE_FUND_U}:</td><td><b>{$tournament.PRIZE_FUND}</b></td></tr>
+           {if $tournament.TOURNAMENT_TYPE==1}
+            <tr><td>{translate fonema=LANG_DURATION_U}:</td><td><b>{$tournament.DURATION}</b></td></tr>
+           {/if}
+	  </table>
+      </td>
+     <td align="center">
+       {if $tournament.TOURNAMENT_TYPE==0}
+           <img src="./img/leagues/olympics.gif" onmouseover="Tip('{translate fonema=LANG_OLYMPIC_SYSTEM_U}')" onmouseout="UnTip()">
+       {elseif $tournament.TOURNAMENT_TYPE==1}
+           <img src="./img/flags/ch.gif" onmouseover="Tip('{translate fonema=LANG_SWISS_SYSTEM_U}')" onmouseout="UnTip()">
+       {elseif $tournament.TOURNAMENT_TYPE==2}
+           <img src="./img/icons/wheel.png" onmouseover="Tip('{translate fonema=LANG_ROUND_SYSTEM_U}')" onmouseout="UnTip()">
+       {/if}
+     </td>
+      <td nowrap>
+         {if $tournament.TOURNAMENT_STATUS == 2 || $tournament.TOURNAMENT_STATUS == 3}
+           <img src='./img/icons/locked.png' onmouseover="Tip('{translate fonema=LANG_LEAGUE_RECRUITMENT_OFF_U}')" onmouseout="UnTip()" />
+         {else}
+           <img src='./img/icons/unlocked.png' onmouseover="Tip('{translate fonema=LANG_LEAGUE_RECRUITMENT_ON_U}')" onmouseout="UnTip()" />
+         {/if} 
+  	 {if $tournament.INVITE_TYPE==0 || $tournament.INVITE_TYPE ==""}<img src='./img/icons/invite.png' onmouseover="Tip('{translate fonema=LANG_INVITE_ONLY_U}')" onmouseout="UnTip()" />
+         {else if $tournament.INVITE_TYPE==1}<img src='./img/icons/invite_code.png' onmouseover="Tip('{translate fonema=LANG_INVITE_AND_CODE_U}')" onmouseout="UnTip()" />
+         {/if}
+  	 {if isset($tournament.PRIZES)}<img src='./img/icons/cow.png' onmouseover="Tip('{translate fonema=LANG_REAL_PRIZES_U}')" onmouseout="UnTip()" />{/if}
+      </td>
+    </tr>
+    {/if}
+    {if isset($tournament.TOURNAMENT)}
+    <tr>
+      <td>{if isset($tournament.COUNTRY_DB)}<img src="./img/flags/{$tournament.COUNTRY_DB.CCTLD}.gif" onmouseover="Tip('{$tournament.COUNTRY_DB.COUNTRY_NAME}')" onmouseout="UnTip()">{/if} 
+	<a href="f_manager_tournaments.php?mt_id={$tournament.MT_ID}"><b>{$tournament.TITLE}</b></a> ({$tournament.POSTS})
+		<br>{$tournament.USER_NAME}</td>
+      <td>{$tournament.USERS} ({$tournament.PARTICIPANTS})<br>
+	{if isset($tournament.PROGRESS)}<span class="progress_bar" ><span style="width: {$tournament.PROGRESS.PERCENTS}%;" class="has_progress"></span>{/if}
+      </td>
+      <td><table class="noborder">
+           <tr><td>{translate fonema=LANG_ENTRY_FEE_U}:</td><td><b>{$tournament.ENTRY_FEE}</b></td></tr>
+           <tr><td>{translate fonema=LANG_PRIZE_FUND_U}:</td><td><b>{$tournament.PRIZE_FUND}</b></td></tr>
+           {if $tournament.TOURNAMENT_TYPE==1}
+            <tr><td>{translate fonema=LANG_DURATION_U}:</td><td><b>{$tournament.DURATION}</b></td></tr>
+           {/if}
+	  </table>
+      </td>
+     <td align="center">
+       {if $tournament.TOURNAMENT_TYPE==0}
+           <img src="./img/leagues/olympics.gif" onmouseover="Tip('{translate fonema=LANG_OLYMPIC_SYSTEM_U}')" onmouseout="UnTip()">
+       {elseif $tournament.TOURNAMENT_TYPE==1}
+           <img src="./img/flags/ch.gif" onmouseover="Tip('{translate fonema=LANG_SWISS_SYSTEM_U}')" onmouseout="UnTip()">
+       {elseif $tournament.TOURNAMENT_TYPE==2}
+           <img src="./img/icons/wheel.png" onmouseover="Tip('{translate fonema=LANG_ROUND_SYSTEM_U}')" onmouseout="UnTip()">
+       {/if}
+     </td>
+      <td nowrap>
+         {if $tournament.TOURNAMENT_STATUS == 2 || $tournament.TOURNAMENT_STATUS == 3}
+           <img src='./img/icons/locked.png' onmouseover="Tip('{translate fonema=LANG_LEAGUE_RECRUITMENT_OFF_U}')" onmouseout="UnTip()" />
+         {else}
+           <img src='./img/icons/unlocked.png' onmouseover="Tip('{translate fonema=LANG_LEAGUE_RECRUITMENT_ON_U}')" onmouseout="UnTip()" />
+         {/if} 
+       	 {if $tournament.INVITE_TYPE==0 || $tournament.INVITE_TYPE ==""}<img src='./img/icons/invite.png' onmouseover="Tip('{translate fonema=LANG_INVITE_ONLY_U}')" onmouseout="UnTip()" />
+         {else if $tournament.INVITE_TYPE==1}<img src='./img/icons/invite_code.png' onmouseover="Tip('{translate fonema=LANG_INVITE_AND_CODE_U}')" onmouseout="UnTip()" />
+         {/if}
+  	 {if isset($tournament.PRIZES)}<img src='./img/icons/cow.png' onmouseover="Tip('{translate fonema=LANG_REAL_PRIZES_U}')" onmouseout="UnTip()" />{/if}
+      </td>
+    </tr>
+    {/if}
+    {/foreach}
+  </table>
+</div>
+</div>
+{$tournaments.TOURNAMENTS_PAGING}
+</div>
+{/if}
+{if isset($open_tournaments.TOURNAMENTS)}
+ <div id="tabs-2">
+<div class="portlet"  style="margin:0px">
+<div class="content">
+  <table width="100%">
+    <tr><th>{translate fonema=LANG_TITLE_U} ({translate fonema=LANG_COMMENTS_U})</th>
+      <th>{translate fonema=LANG_PARTICIPANTS_U} ({translate fonema=LANG_MAXIMUM_ABBR_U})</th>
+      <th></th>
+      <th>{translate fonema=LANG_TYPE_U}</th>
+      <th></th>
+    <tr>
+    {foreach $open_tournaments.TOURNAMENTS as $tournament}
+    {if isset($tournament.OWN_TOURNAMENT)}
+    <tr>
+      <td>{if isset($tournament.COUNTRY_DB)}<img src="./img/flags/{$tournament.COUNTRY_DB.CCTLD}.gif" onmouseover="Tip('{$tournament.COUNTRY_DB.COUNTRY_NAME}')" onmouseout="UnTip()">{/if} 
+        <a href="f_manager_tournaments.php?mt_id={$tournament.MT_ID}"><b>{$tournament.TITLE}</b></a> ({$tournament.POSTS})
+              <br>{$tournament.USER_NAME}</td>
+	</td>
+      <td>{$tournament.USERS} ({$tournament.PARTICIPANTS})<br>
+	{if isset($tournament.PROGRESS)}<span class="progress_bar" ><span style="width: {$tournament.PROGRESS.PERCENTS}%;" class="has_progress"></span>{/if}
+      </td>
+      <td><table class="noborder">
+           <tr><td>{translate fonema=LANG_ENTRY_FEE_U}:</td><td><b>{$tournament.ENTRY_FEE}</b></td></tr>
+           <tr><td>{translate fonema=LANG_PRIZE_FUND_U}:</td><td><b>{$tournament.PRIZE_FUND}</b></td></tr>
+           {if $tournament.TOURNAMENT_TYPE==1}
+            <tr><td>{translate fonema=LANG_DURATION_U}:</td><td><b>{$tournament.DURATION}</b></td></tr>
+           {/if}
+	  </table>
+      </td>
+     <td align="center">
+       {if $tournament.TOURNAMENT_TYPE==0}
+           <img src="./img/leagues/olympics.gif" onmouseover="Tip('{translate fonema=LANG_OLYMPIC_SYSTEM_U}')" onmouseout="UnTip()">
+       {elseif $tournament.TOURNAMENT_TYPE==1}
+           <img src="./img/flags/ch.gif" onmouseover="Tip('{translate fonema=LANG_SWISS_SYSTEM_U}')" onmouseout="UnTip()">
+       {elseif $tournament.TOURNAMENT_TYPE==2}
+           <img src="./img/icons/wheel.png" onmouseover="Tip('{translate fonema=LANG_ROUND_SYSTEM_U}')" onmouseout="UnTip()">
+       {/if}
+     </td>
+      <td nowrap>
+         <img src='./img/icons/unlocked.png' onmouseover="Tip('{translate fonema=LANG_LEAGUE_RECRUITMENT_ON_U}')" onmouseout="UnTip()" />
+  	 {if $tournament.INVITE_TYPE==0 || $tournament.INVITE_TYPE ==""}<img src='./img/icons/invite.png' onmouseover="Tip('{translate fonema=LANG_INVITE_ONLY_U}')" onmouseout="UnTip()" />
+         {else if $tournament.INVITE_TYPE==1}<img src='./img/icons/invite_code.png' onmouseover="Tip('{translate fonema=LANG_INVITE_AND_CODE_U}')" onmouseout="UnTip()" />
+         {/if}
+      </td>
+    </tr>
+    {/if}
+    {if isset($tournament.TOURNAMENT)}
+    <tr>
+      <td>{if isset($tournament.COUNTRY_DB)}<img src="./img/flags/{$tournament.COUNTRY_DB.CCTLD}.gif" onmouseover="Tip('{$tournament.COUNTRY_DB.COUNTRY_NAME}')" onmouseout="UnTip()">{/if} 
+        <a href="f_manager_tournaments.php?mt_id={$tournament.MT_ID}"><b>{$tournament.TITLE}</b></a> ({$tournament.POSTS})
+              <br>{$tournament.USER_NAME}</td>
+      <td>{$tournament.USERS} ({$tournament.PARTICIPANTS})<br>
+	{if isset($tournament.PROGRESS)}<span class="progress_bar" ><span style="width: {$tournament.PROGRESS.PERCENTS}%;" class="has_progress"></span>{/if}
+      </td>
+      <td><table class="noborder">
+           <tr><td>{translate fonema=LANG_ENTRY_FEE_U}:</td><td><b>{$tournament.ENTRY_FEE}</b></td></tr>
+           <tr><td>{translate fonema=LANG_PRIZE_FUND_U}:</td><td><b>{$tournament.PRIZE_FUND}</b></td></tr>
+           {if $tournament.TOURNAMENT_TYPE==1}
+            <tr><td>{translate fonema=LANG_DURATION_U}:</td><td><b>{$tournament.DURATION}</b></td></tr>
+           {/if}
+	  </table>
+      </td>
+     <td align="center">
+       {if $tournament.TOURNAMENT_TYPE==0}
+           <img src="./img/leagues/olympics.gif" onmouseover="Tip('{translate fonema=LANG_OLYMPIC_SYSTEM_U}')" onmouseout="UnTip()">
+       {elseif $tournament.TOURNAMENT_TYPE==1}
+           <img src="./img/flags/ch.gif" onmouseover="Tip('{translate fonema=LANG_SWISS_SYSTEM_U}')" onmouseout="UnTip()">
+       {elseif $tournament.TOURNAMENT_TYPE==2}
+           <img src="./img/icons/wheel.png" onmouseover="Tip('{translate fonema=LANG_ROUND_SYSTEM_U}')" onmouseout="UnTip()">
+       {/if}
+     </td>
+      <td nowrap>
+         <img src='./img/icons/unlocked.png' onmouseover="Tip('{translate fonema=LANG_LEAGUE_RECRUITMENT_ON_U}')" onmouseout="UnTip()" />
+       	 {if $tournament.INVITE_TYPE==0 || $tournament.INVITE_TYPE ==""}<img src='./img/icons/invite.png' onmouseover="Tip('{translate fonema=LANG_INVITE_ONLY_U}')" onmouseout="UnTip()" />
+         {else if $tournament.INVITE_TYPE==1}<img src='./img/icons/invite_code.png' onmouseover="Tip('{translate fonema=LANG_INVITE_AND_CODE_U}')" onmouseout="UnTip()" />
+         {/if}
+  	 {if isset($tournament.PRIZES)}<img src='./img/icons/cow.png' onmouseover="Tip('{translate fonema=LANG_REAL_PRIZES_U}')" onmouseout="UnTip()" />{/if}
+      </td>
+    </tr>
+    {/if}
+    {/foreach}
+  </table>
+</div>
+</div>
+{$open_tournaments.TOURNAMENTS_PAGING}
+</div>
+{/if}
+{if isset($past_tournaments.TOURNAMENTS)}
+ <div id="tabs-3">
+<div class="portlet"  style="margin:0px">
+<div class="content">
+  <table width="100%">
+    <tr><th>{translate fonema=LANG_TITLE_U} ({translate fonema=LANG_COMMENTS_U})</th>
+      <th>{translate fonema=LANG_PARTICIPANTS_U} ({translate fonema=LANG_MAXIMUM_ABBR_U})</th>
+      <th>{translate fonema=LANG_OWNER_U}</th>
+      <th>{translate fonema=LANG_ENTRY_FEE_U}</th>
+      <th>{translate fonema=LANG_TYPE_U}</th>
+      <th></th>
+    <tr>
+    {foreach $past_tournaments.TOURNAMENTS as $tournament}
+    {if isset($tournament.OWN_TOURNAMENT)}
+    <tr>
+      <td>{if isset($tournament.COUNTRY_DB)}<img src="./img/flags/{$tournament.COUNTRY_DB.CCTLD}.gif" onmouseover="Tip('{$tournament.COUNTRY_DB.COUNTRY_NAME}')" onmouseout="UnTip()">{/if} 
+        <a href="f_manager_tournaments.php?mt_id={$tournament.MT_ID}"><b>{$tournament.TITLE}</b></a> ({$tournament.POSTS}) </td>
+      <td>{$tournament.USERS} ({$tournament.PARTICIPANTS})<br>
+	{if isset($tournament.PROGRESS)}<span class="progress_bar" ><span style="width: {$tournament.PROGRESS.PERCENTS}%;" class="has_progress"></span>{/if}
+      </td>
+      <td>{$tournament.USER_NAME}</td>
+      <td>{$tournament.ENTRY_FEE}</td>
+     <td align="center">
+       {if $tournament.TOURNAMENT_TYPE==0}
+           <img src="./img/leagues/olympics.gif" onmouseover="Tip('{translate fonema=LANG_OLYMPIC_SYSTEM_U}')" onmouseout="UnTip()">
+       {elseif $tournament.TOURNAMENT_TYPE==1}
+           <img src="./img/flags/ch.gif" onmouseover="Tip('{translate fonema=LANG_SWISS_SYSTEM_U}')" onmouseout="UnTip()">
+       {elseif $tournament.TOURNAMENT_TYPE==2}
+           <img src="./img/icons/wheel.png" onmouseover="Tip('{translate fonema=LANG_ROUND_SYSTEM_U}')" onmouseout="UnTip()">
+       {/if}
+     </td>
+      <td nowrap>
+         <img src='./img/icons/locked.png' onmouseover="Tip('{translate fonema=LANG_LEAGUE_RECRUITMENT_OFF_U}')" onmouseout="UnTip()" />
+  	 {if $tournament.INVITE_TYPE==0 || $tournament.INVITE_TYPE ==""}<img src='./img/icons/invite.png' onmouseover="Tip('{translate fonema=LANG_INVITE_ONLY_U}')" onmouseout="UnTip()" />
+         {else if $tournament.INVITE_TYPE==1}<img src='./img/icons/invite_code.png' onmouseover="Tip('{translate fonema=LANG_INVITE_AND_CODE_U}')" onmouseout="UnTip()" />
+         {/if}
+  	 {if isset($tournament.PRIZES)}<img src='./img/icons/cow.png' onmouseover="Tip('{translate fonema=LANG_REAL_PRIZES_U}')" onmouseout="UnTip()" />{/if}
+      </td>
+    </tr>
+    {/if}
+    {if isset($tournament.TOURNAMENT)}
+    <tr>
+      <td>{if isset($tournament.COUNTRY_DB)}<img src="./img/flags/{$tournament.COUNTRY_DB.CCTLD}.gif" onmouseover="Tip('{$tournament.COUNTRY_DB.COUNTRY_NAME}')" onmouseout="UnTip()">{/if} 
+        <a href="f_manager_tournaments.php?mt_id={$tournament.MT_ID}"><b>{$tournament.TITLE}</b></a> ({$tournament.POSTS}) 
+              <br>{$tournament.USER_NAME}</td>
+      <td>{$tournament.USERS} ({$tournament.PARTICIPANTS})<br>
+	{if isset($tournament.PROGRESS)}<span class="progress_bar" ><span style="width: {$tournament.PROGRESS.PERCENTS}%;" class="has_progress"></span>{/if}
+      </td>
+      <td>{$tournament.USER_NAME}</td>
+      <td>{$tournament.ENTRY_FEE}</td>
+     <td align="center">
+       {if $tournament.TOURNAMENT_TYPE==0}
+           <img src="./img/leagues/olympics.gif" onmouseover="Tip('{translate fonema=LANG_OLYMPIC_SYSTEM_U}')" onmouseout="UnTip()">
+       {elseif $tournament.TOURNAMENT_TYPE==1}
+           <img src="./img/flags/ch.gif" onmouseover="Tip('{translate fonema=LANG_SWISS_SYSTEM_U}')" onmouseout="UnTip()">
+       {elseif $tournament.TOURNAMENT_TYPE==2}
+           <img src="./img/icons/wheel.png" onmouseover="Tip('{translate fonema=LANG_ROUND_SYSTEM_U}')" onmouseout="UnTip()">
+       {/if}
+     </td>
+      <td nowrap>
+         <img src='./img/icons/locked.png' onmouseover="Tip('{translate fonema=LANG_LEAGUE_RECRUITMENT_OFF_U}')" onmouseout="UnTip()" />
+       	 {if $tournament.INVITE_TYPE==0 || $tournament.INVITE_TYPE ==""}<img src='./img/icons/invite.png' onmouseover="Tip('{translate fonema=LANG_INVITE_ONLY_U}')" onmouseout="UnTip()" />
+         {else if $tournament.INVITE_TYPE==1}<img src='./img/icons/invite_code.png' onmouseover="Tip('{translate fonema=LANG_INVITE_AND_CODE_U}')" onmouseout="UnTip()" />
+         {/if}
+  	 {if isset($tournament.PRIZES)}<img src='./img/icons/cow.png' onmouseover="Tip('{translate fonema=LANG_REAL_PRIZES_U}')" onmouseout="UnTip()" />{/if}
+      </td>
+    </tr>
+    {/if}
+    {/foreach}
+  </table>
+</div>
+</div>
+{$past_tournaments.TOURNAMENTS_PAGING}
+</div>
+{/if}
+</div>
+{/if}
+
+{if isset($tournament_item)}
+  {$tournament_item}
+{/if}
+
+{if isset($showthings)}
+ <div class="portlet">
+   <div class="content">
+     {if isset($market_status.SEASON_OVER)}<div class="textred">{translate fonema=LANG_SEASON_OVER_U}</div>
+     {elseif isset($market_status.NOMARKET)}
+     <div class="textred">{translate fonema=LANG_MARKET_CLOSED_3_U} <b>{$market_status.NOMARKET.START_DATE} {$market_status.NOMARKET.UTC}</b></div> 
+     {elseif isset($market_status.NOMARKET_DELAY)}
+     <div class="textred">{translate fonema=LANG_MARKET_CLOSED_2_U}</b></div> 
+     {elseif isset($market_status.MARKET_OPEN)}
+     <div class="textgreen">{translate fonema=LANG_MARKET_OPENED_2_U} <b>{$market_status.MARKET_OPEN.START_DATE} {$market_status.MARKET_OPEN.UTC}</b></div> 
+     {/if}
+   </div>
+ </div>
+
+{/if}

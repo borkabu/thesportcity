@@ -1,0 +1,64 @@
+<div style="float:left;height:130px;padding:0px">
+{if !isset($externally_logged)}
+ <div class="portlet" style="float:left;width:450px;padding:0px">
+  <div class="content" style="margin:0;padding:3px">
+   {translate fonema=LANG_EXTERNAL_LOGIN_INSTR1_U} <b>{$external_user['SOURCE']}</b> {translate fonema=LANG_EXTERNAL_LOGIN_INSTR2_U}
+  </div>
+ </div>
+{elseif !isset($logged) && isset($externally_logged)}
+ <script>
+	$(function() {
+		$( "#create").button();
+		$( "#link").button();
+	});
+ </script>
+ <div class="portlet" style="float:left;width:450px;padding:0px">
+  <div class="content" style="margin:0;padding:3px">
+   <b>{translate fonema=LANG_EXTERNAL_ACCOUNT_INSTR_U}</b><br>
+   <form method="post" style="float:right">
+    <input type="hidden" name="propagate" value="true">
+    <input id="create" type="submit" value=" {translate fonema=LANG_CREATE_U} ">
+   </form>
+   1. {translate fonema=LANG_CREATE_NEW_ACCOUNT_FOR_U} <b>{$external_user['USER_NAME']}@{$external_user['SOURCE']}</b>.<br>
+    {translate fonema=LANG_CREATE_NEW_ACCOUNT_FOR2_U}
+   <div style="height:5px;padding:0px"></div>
+   2. {translate fonema=LANG_LINK_TO_EXISTING_ACCOUNT_U}
+   <table class="noborder background">
+    <form method="post">
+     <tr><td><b>{translate fonema=LANG_USER_U}</b></td><td width="100%"><input type="text" name="l_user_name" class="input" size="11" tabindex=1></td><td rowspan="2"><input id="link" type="submit" value=" {translate fonema=LANG_LINK_ACCOUNT_U} "></td></tr>
+     <tr><td><b>{translate fonema=LANG_PASSWORD_U}</b></td><td><input type="password" name="l_password" class="input" size="11" tabindex=2></td></tr>
+    </form>
+   </table>
+   {if isset($external_message)}
+    <span class="textgreen">{$external_message}</span>
+   {/if}
+   {if isset($external_error)}
+    <span class="textred">{$external_error}</span>
+   {/if}
+  </div>
+ </div>
+{else}
+ <div class="portlet" style="float:left;width:450px;padding:0px">
+ <div class="content">
+  <table style="width:100%;" class="noborder background">
+   <tr><td valign="top">
+   <b>{translate fonema=LANG_HI_U}, 
+   <a href="user_public_profile.php" onmouseover="Tip('{translate fonema=LANG_PUBLIC_PROFILE_U}')" onmouseout="UnTip()" target="user_profile" onClick="window.open('','user_profile','width=450,height=620,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');">{$logged.FIRST_NAME}</a></b><br>
+   <b><a href="user_credits_manager.php" onmouseover="Tip('{translate fonema=LANG_CREDITS_INFO_U}')" onmouseout="UnTip()">{translate fonema=LANG_CREDITS_U}</b></a>: <b><span id="credits" class="textbluehuge">{$logged.CREDIT}</span></b> | <b><span id="frozen_credits" class="textbluehuge" onmouseover="Tip('{translate fonema=LANG_FROZEN_CREDITS_U}')" onmouseout="UnTip()">{$logged.FROZEN_CREDITS}</span></b> <br>
+   {translate fonema=LANG_NEW_MESSAGES_U}: <a href="compose_message.php?folder_id=1"><span class="{if isset($logged.UNREAD_PMS) && $logged.UNREAD_PMS > 0}textred{/if}"><b>{$logged.UNREAD}</b></span></a><br>
+   {if isset($logged.CHAT)}
+    <a href="chat2.php" target="tsc_chat" onClick="window.open('','tsc_chat','width=821,height=820,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');">{translate fonema=LANG_CHAT_U}</a> ({$logged.CHAT.USERS})<br>
+   {/if}
+   </td><td valign="top">
+   <a href="user_management_panel.php">{translate fonema=LANG_USER_MANAGEMENT_PANEL}</a><br>
+   {if isset($logged.MODERATOR_PANEL)}
+    {if isset($logged.MODERATOR_PANEL.GROUP_MANAGEMENT_PANEL)}<a href="group_management_panel.php">{translate fonema=LANG_GROUP_MANAGEMENT_PANEL}</a><br>{/if}
+   {/if}
+   <a href="register.php">{translate fonema=LANG_EDIT_PROFILE_U}</a><br>
+   </td>
+   </tr>
+  </table>
+ </div>
+</div>
+{/if}
+</div>

@@ -1,0 +1,14 @@
+  <TPL_SUB:VOTING>
+ <input type="image" src="img/icons/thumbup.gif" onClick="javascript:voteLeagueThumbUp(<TPL:LEAGUE_ID>, <TPL:LEAGUE_TYPE>, 'leagues', 'thumbs_<TPL:LEAGUE_ID>')"/>
+ <input type="image" src="img/icons/thumbdown.gif" onClick="javascript:voteLeagueThumbDown(<TPL:LEAGUE_ID>, <TPL:LEAGUE_TYPE>, 'leagues', 'thumbs_<TPL:LEAGUE_ID>')"/>&nbsp;
+<TPL_SUB:THUMB_UP>
+<div style="float:right;">
+<img src="./img/icons/plus.png" onmouseover="Tip('<_TPL:LANG_VOTE_UP_U>')" onmouseout="UnTip()"/>
+</div>
+</TPL_SUB:THUMB_UP>
+<TPL_SUB:THUMB_DOWN>
+<div style="float:right;">
+<img src="./img/icons/minus.png" onmouseover="Tip('<_TPL:LANG_VOTE_DOWN_U>')" onmouseout="UnTip()"/>
+</div>
+</TPL_SUB:THUMB_DOWN>
+  </TPL_SUB:VOTING>

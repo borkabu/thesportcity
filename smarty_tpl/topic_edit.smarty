@@ -1,0 +1,24 @@
+{if isset($topic)}
+<div class="portlet">
+  <div class="header">{translate fonema=LANG_EDIT_TOPIC_U}</div>
+  <div class="content">
+   {if isset($topic.ERROR)}
+     <p class="red"><b>{$topic.ERROR.MSG}</b></p>
+   {/if}
+ <form action="" method="post"  style="margin:0px">
+  <input type="hidden" name="form_save" value="Y">
+  <input type="hidden" name="lang_id" value="{$topic.LANG_ID}">
+   <table class="noborder">
+   <tr>
+    <td>{translate fonema=LANG_TOPIC_U}</td><td><input type="text" value="{$topic.TOPIC_NAME}" class="input" size="64" maxlength="64" name="topic_name" id="topic_name"></td>
+   </tr><tr>
+    <td>{translate fonema=LANG_DESCRIPTION_U}</td><td><input type="text" value="{$topic.TOPIC_DESCR}" class="input" size="64" maxlength="128" name="topic_descr" id="topic_descr"></td>
+   </tr>
+   </table>
+  <input type="hidden" name="topic_id" value="{$topic.TOPIC_ID}">
+  <input type="hidden" name="forum_id" value="{$topic.FORUM_ID}">
+  <input class="btn" type="submit" value=" {translate fonema=LANG_EDIT_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+ </form>
+ </div>
+</div>
+{/if}

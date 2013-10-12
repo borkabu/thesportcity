@@ -1,0 +1,68 @@
+<div class="portlet">
+<div class="header">{$league['TITLE']}: {translate fonema=LANG_RVS_LEAGUE_DRAFT_PREPARATION_U}</div>
+<div class="content">{translate fonema=LANG_RVS_LEAGUE_DRAFT_PREPARE_INSTR_U}</div>
+</div>
+
+{if isset($not_logged)}
+<div class="portlet">
+<div class="content"><span class="textred"><b>{translate fonema=LANG_ERROR_RVS_MANAGER_LOGIN_U}</b></span></div>
+</div>
+{elseif isset($no_draft_list)}
+<div class="portlet">
+<div class="content">{translate fonema=LANG_RVS_LEAGUE_NO_DRAFT_LISTS_U}</div>
+<div class="content_header">{translate fonema=LANG_SELECTED_CANDIDATES_U}</div>
+<div class="content">
+{if isset($my_candidates)}
+ {foreach $my_candidates as $candidate}
+  <span {if $candidate.ENTRY_ID>0}style="text-decoration: line-through;"{/if}>({$candidate.CURRENT_VALUE_MONEY}) {$candidate.LAST_NAME}, {$candidate.FIRST_NAME} ({$candidate.TEAM_NAME2})</span></br>
+ {/foreach}
+{/if}
+</div>
+</div>
+{else}
+<div>
+<div class="portlet" style="width:249px;float:left">
+<div class="content_header">{translate fonema=LANG_CANDIDATES_U}</div>
+<div class="content" style="margin:0" >
+{if count($candidates) > 0}
+<form method="POST">
+<input type="hidden" name="add_candidates" value="y">
+<input type="submit" class="btn" value=" {translate fonema=LANG_ADD_SELECTED_CANDIDATES_U} "  onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" ><br>
+<SELECT name="candidates[]" MULTIPLE SIZE=30 STYLE="width:244px;font-size:8pt">
+ {foreach $candidates as $candidate}
+ <OPTION VALUE="{$candidate.USER_ID}">({$candidate.CURRENT_VALUE_MONEY}) {$candidate.LAST_NAME}, {$candidate.FIRST_NAME} ({$candidate.TEAM_NAME2})</option>
+ {/foreach}
+</SELECT>
+</form>
+{/if}
+</div>
+</div>
+<div class="portlet" style="width:300px;float:right">
+<div class="content_header">{translate fonema=LANG_SELECTED_CANDIDATES_U}</div>
+<div class="content" style="margin:0">
+<form method="POST" name="my_candidates" id="my_candidates">
+<input id="action" type="hidden" name="action" value="notset">
+<input type="button" class="btn" value=" {translate fonema=LANG_REMOVE_SELECTED_CANDIDATES_U} "  onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" onclick="document.forms['my_candidates'].action.value = 'remove_candidates';document.forms['my_candidates'].submit(); "><br>
+<table class="noborder">
+<tr><td>
+{if isset($my_candidates)}
+<SELECT name="my_candidates[]" MULTIPLE SIZE=30 STYLE="width:244px;font-size:8pt">
+ {foreach $my_candidates as $candidate}
+ <OPTION VALUE="{$candidate.USER_ID}">({$candidate.CURRENT_VALUE_MONEY}) {$candidate.LAST_NAME}, {$candidate.FIRST_NAME} ({$candidate.TEAM_NAME2})</option>
+ {/foreach}
+</SELECT>
+ {/if}
+</td><td>
+{if isset($my_candidates)}
+<input type="button" class="btn" style="font-size:10pt" value=" &uArr; "  onmouseover="this.className='btn btnhov';Tip('{translate fonema=LANG_TO_THE_TOP_U}')" onmouseout="this.className='btn';UnTip()" onclick="document.forms['my_candidates'].action.value = 'top';document.forms['my_candidates'].submit(); "><br>
+<input type="button" class="btn" style="font-size:10pt" value=" &uarr; "  onmouseover="this.className='btn btnhov';Tip('{translate fonema=LANG_ONE_UP_U}')" onmouseout="this.className='btn';UnTip()" onclick="document.forms['my_candidates'].action.value = 'one_up';document.forms['my_candidates'].submit(); "><br>
+<input type="button" class="btn" style="font-size:10pt" value=" &darr; "  onmouseover="this.className='btn btnhov';Tip('{translate fonema=LANG_ONE_DOWN_U}')" onmouseout="this.className='btn';UnTip()" onclick="document.forms['my_candidates'].action.value = 'one_down';document.forms['my_candidates'].submit(); "><br>
+<input type="button" class="btn" style="font-size:10pt" value=" &dArr; "  onmouseover="this.className='btn btnhov';Tip('{translate fonema=LANG_TO_THE_BOTTOM_U}')" onmouseout="this.className='btn';UnTip()" onclick="document.forms['my_candidates'].action.value = 'bottom';document.forms['my_candidates'].submit(); "><br>
+{/if}
+</td></tr></table>
+</form>
+</div>
+</div>
+</div>
+{/if}
+

@@ -1,0 +1,55 @@
+<TPL_INCLUDE:../tpl/adm_head.tpl.html>
+<TPL_INCLUDE:../tpl/adm_menu.tpl.html>
+
+<table border="0" cellspacing="10" cellpadding="0" width="100%">
+<form action="<TPL:SELF>" method="post" name="editform">
+<input type="hidden" name="form_save" value="Y">
+<input type="hidden" name="referer" value="<TPL:REFERER>">
+
+<TPL_SUB:ERROR><tr><td colspan="2" class="error"><TPL:MSG></td></tr></TPL_SUB:ERROR>
+
+<tr width="100%" ><td valign="top">
+
+<table width="100%" border="0" cellspacing="0" cellpadding="1" bgcolor="#000000"><tr><td>
+  <table width="100%" border="0" cellspacing="0" cellpadding="3" bgcolor="#FFFFFF">
+    <tr bgcolor="#6283A0"><td class="list_head" colspan="2">Pavadinimas</td></tr>
+       
+    <tr<TPL_SUB:ODD></TPL_SUB:ODD>>
+      <td class="list_item">Adminas</td>
+      <td class="list_item"><TPL:USER_ID></td>
+    </tr>    
+
+  </table>
+</td></tr></table>
+
+<br>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="1" bgcolor="#000000"><tr><td>
+  <table width="100%" border="0" cellspacing="0" cellpadding="2" bgcolor="#E1E1E1">
+    <tr>
+      <td>
+        <input type="submit" class="input" value="išsaugoti" onclick="resettarget();">
+        <input type="submit" class="input" value="peržiūra" onclick="changetarget('user', 1);">
+        <input type="reset" class="input" value="atšaukti" onclick="return confirm('Tikrai?');">
+        <input type="button" class="input" value="atgal" onclick="window.location='<TPL:REFERER>'">
+      <td>
+    </tr>
+  </table>
+</td></tr></table>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="1" bgcolor="#000000"><tr><td>
+  <table width="100%" border="0" cellspacing="0" cellpadding="2" bgcolor="#FFFFFF">
+    <tr>
+      <td>
+        <input type="button" class="input" value="iliustracijos" onclick="window.open('image.php','_blank','');">
+        <input type="button" class="input" value="pagalba" onClick="window.open('help.html','basket_adm_help','width=300,height=500,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');">
+      <td>
+    </tr>
+  </table>
+</td></tr></table>
+
+</td></tr>
+</form>
+</table>
+
+<TPL_INCLUDE:../tpl/adm_foot.tpl.html>

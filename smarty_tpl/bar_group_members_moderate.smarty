@@ -1,0 +1,44 @@
+{if isset($group_members)}
+<div class="portlet">
+  <div class="header">{translate fonema=LANG_CURRENT_MEMBERS_U}</div>
+  <div class="content">
+    <table width="100%">
+     <tr>
+      <th>{translate fonema=LANG_USER_NAME_U}</th>
+      <th></th>
+     </tr>
+     {foreach $group_members as $member}
+     <tr>
+      <td align="left" width="100%">{$member.USER_NAME}</td>
+      <td align="left">
+        {if isset($member.REMOVE)}
+	<form method="post" style="float:right;margin:0">
+	   <input type="image" border="0" src="./img/icons/delete.png" onClick="return confirm('{translate fonema=LANG_REALLY_U}');" onmouseover="Tip('{translate fonema=LANG_DELETE_U}')" onmouseout="UnTip()" />
+	   <input type="hidden" name="delete_member" value="y">
+   	   <input type="hidden" name="user_id" value="{$member.USER_ID}">
+  	   <input type="hidden" name="group_id" value="{$member.GROUP_ID}">
+        </form>
+	{/if}
+      </td>
+     </tr>          
+    {/foreach}
+    </table>
+  </div>
+</div>
+{else}
+<div class="portlet">
+  <div class="content">
+   {translate fonema=LANG_NO_MEMBERS_U}
+  </div>
+</div>
+{/if}
+<div class="portlet">
+  <div class="header">{translate fonema=LANG_ADD_NEW_MEMBER_U}</div>
+  <div class="content">
+      <form action="" method="post" style="margin:0">      
+        {translate fonema=LANG_USER_NAME_U} <input type="text" name="user_name" size="6" maxlength="12" class="input">
+        <input class="btn" type="submit" value=" {translate fonema=LANG_SUBMIT_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+        <input type="hidden" name="add_member" value="y">    
+      </form>
+  </div>
+</div>

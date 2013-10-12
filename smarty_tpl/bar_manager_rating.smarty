@@ -1,0 +1,20 @@
+<div class="portlet">
+<div class="header">{translate fonema=LANG_RATING_U}</div>
+<div class="content">
+    <table>
+	<tr>
+		<th></th>
+		<th align="left">{translate fonema=LANG_PARTICIPANT_U}</th>
+		<th>{translate fonema=LANG_POINTS_U}</th>
+	</tr>
+	{foreach $rating.USERS as $user}          
+	   <tr>
+	  	<td>{$user.PLACE}</td>
+		<td align="left"  width="100%">{$user.USER_NAME}</td>
+		<td>{$user.KOEFF}</td>
+	   </tr>
+        {/foreach}
+    </table>
+</div>
+<div class="content"><a href="ratings.php">{translate fonema=LANG_ALL_RATINGS_U}</a></div>
+</div>

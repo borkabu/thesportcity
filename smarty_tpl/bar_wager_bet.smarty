@@ -1,0 +1,20 @@
+{if isset($game)}{if !isset($game.ERROR)}
+wager_{$game.WAGER_ID}_1@@@        
+<div {if isset($game.CHOICE1)}style="color:#0000FF;font-weight:bold;"{/if}> {$game.TEAM_NAME1}</div>
+###wager_{$game.WAGER_ID}_-1@@@
+<div {if isset($game.CHOICE_1)}style="color:#0000FF;font-weight:bold;"{/if}>{$game.TEAM_NAME2}</div>
+###{/if}wager_{$game.WAGER_ID}_control@@@{if isset($game.MESSAGE)}<span class="textgreen"><b>{$game.MESSAGE.MSG}<b></span>{/if}
+{if isset($game.ERROR)}<span class="textred"><b>{$game.ERROR.MSG}<b></span>{/if}
+{/if}
+###wager_{$game.WAGER_ID}_buttons@@@
+<div style="float:right;">{translate fonema=LANG_PRIZE_FUND_U}: <b>{$game.STAKES}</b> {translate fonema=LANG_CREDITS_ABBR_U}</div>
+<b>{$game.STAKE}</b> {translate fonema=LANG_CREDITS_ABBR_U}<br>
+{if $game.STAKE==0}
+    <input class="btn" type="button" onClick="javascript:submitWager({$game.WAGER_ID}, document.getElementById('wager_{$game.WAGER_ID}'), 'wager_{$game.WAGER_ID}_control', 0)" value="{translate fonema=LANG_FREE_BET_U}" onmouseout="this.className='btn'" onmouseover="this.className='btn btnhov'" > 
+{/if}
+{if $game.STAKE==0 && $credits>=1}
+    <input type="button" onClick="javascript:submitWager({$game.WAGER_ID}, document.getElementById('wager_{$game.WAGER_ID}'), 'wager_{$game.WAGER_ID}_control', 1)" value="{translate fonema=LANG_BET_1_CREDIT_U}" onmouseout="this.className='btn'" onmouseover="this.className='btn btnhov'" class="btn">
+{/if}
+{if $game.STAKE>=1}
+    <input type="button" onClick="javascript:submitWager({$game.WAGER_ID}, document.getElementById('wager_{$game.WAGER_ID}'), 'wager_{$game.WAGER_ID}_control', 1)" value="{translate fonema=LANG_CHANGE_BET_U}" onmouseout="this.className='btn'" onmouseover="this.className='btn btnhov'" class="btn">
+{/if}

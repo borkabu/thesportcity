@@ -1,0 +1,149 @@
+<div style="clear:both"></div>
+{if isset($forum)}
+<div class="portlet">
+	<div class="header">{translate fonema=LANG_FORUM_U}</div>
+	<div class="content_header">
+		<div style="float:left;"><a href="forum.php?cat_id={$forum.CAT_ID}">{$forum.CAT_NAME}</a></div>
+		<div style="clear:both;"></div>
+	</div>
+   <h2>{$forum.FORUM_NAME}</h2>
+</div>
+
+{if isset($forum.ERROR)}
+<div class="portlet" id="message">
+    <div class="content">
+	<span class="textred"><b>{$forum.ERROR.MSG}</b></span>
+    </div>
+</div>
+{/if}
+
+{if isset($can_edit)}
+<div class="portlet" id="new_topic">
+    <div class="content">
+<form action="" method="post"  style="margin:0px">
+  <input type="hidden" name="post_comment" value="Y">
+  <input type="hidden" name="lang_id" value="{$forum.LANG_ID}">
+   <table class="noborder">
+    <tr><td>
+      {translate fonema=LANG_CREATE_NEW_TOPIC_U}</td><td><input type="text" value="" class="input" size="64" maxlength="64" name="topic_name" id="topic_name">
+    </td></tr> 
+    <tr><td>
+      {translate fonema=LANG_DESCRIPTION_U}</td><td><input type="text" value="" class="input" size="64" maxlength="128" name="topic_descr" id="topic_descr">
+    </td></tr>
+   </table>
+
+  <input class="btn" type="submit" value=" {translate fonema=LANG_CREATE_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+    <textarea id="text" name="text"></textarea>
+	<script type="text/javascript">
+		//<![CDATA[
+
+			// This call can be placed at any point after the
+			// <textarea>, or inside a <head><script> in a
+			// window.onload event handler.
+
+			// Replace the <textarea id="editor"> with an CKEditor
+			// instance, using default configurations.
+			CKEDITOR.replace( 'text' ,
+                            { entities : false,
+                                  on :
+                                 {
+			           instanceReady : function( ev )
+			            {
+                                     // Output paragraphs as <p>Text</p>.
+			                this.dataProcessor.writer.setRules( 'p',
+			                    {
+			                        indent : false,
+                                                breakBeforeOpen : false,
+			                        breakAfterOpen : false,
+			                        breakBeforeClose : false,
+			                        breakAfterClose : false
+                                             });
+			            }
+			        }
+			});
+
+		//]]>
+	</script>
+  <input type="hidden" name="forum_id" value="{$forum.FORUM_ID}">
+</form>
+ </div>
+</div>
+{/if}
+
+<div class="portlet">
+ {if isset($forum.TOPICS)}
+  <div class="content">
+   <table width="100%">
+     <tr><th width="100%">{translate fonema=LANG_TOPIC_U}</th>
+         <th>{translate fonema=LANG_POSTS_U}</th>
+         <th>{translate fonema=LANG_DATE_POSTED_U} & {translate fonema=LANG_LAST_MESSAGE_U}</th>
+         <th></th></tr>
+     </tr>
+    {foreach $forum.TOPICS as $topic}
+     <tr>
+   	<td>{if isset($topic.TOPIC_PINNED)}<img src="./img/icons/pinned.png" border="0" onmouseover="Tip('{translate fonema=LANG_TOPIC_PINNED_U}')" onmouseout="UnTip()">{/if}
+            {if isset($topic.TRACK)}<a href="forum.php?topic_id={$topic.TRACK.TOPIC_ID}&tstmp={$topic.TRACK.TSTMP}"><img src="./img/icons/flag_red.gif" border="0"></a>{/if}
+            <a href="forum.php?topic_id={$topic.TOPIC_ID}"><b>
+             {if isset($forum.CLUB)}
+              {$topic.TOPIC_TITLE}
+             {else if isset($forum.LEAGUE)}             
+              {$topic.TOPIC_NAME}
+             {else}
+              {$topic.TOPIC_NAME}
+	     {/if}
+             </b></a>
+              {if !empty($topic.TOPIC_DESCR)}
+                <br><span class="date_font">{$topic.TOPIC_DESCR}</span>
+              {else if isset($forum.LEAGUE)}             
+                <br><span class="date_font">{$topic.DESCR}</span>
+              {/if}
+        </td>
+        <td width="50px">{$topic.POSTS}</td>                                                                                             
+        <td width="125px" nowrap><b>{$topic.USER_NAME}</b>: <span class="date_font" >{$topic.DATE_POSTED} {$topic.UTC}</span><br>
+        <b>{$topic.LAST_POSTER}</b>: <span class="date_font" >{$topic.LAST_POSTED} {$topic.UTC}</span></td>
+        <td nowrap>
+         {if isset($topic.DELETE)}    
+          <form method="post" style="float:right" >
+           <input type="image" border="0" src="img/icons/delete.png" onClick="return confirm('{translate fonema=LANG_REALLY_U}');" onmouseover="Tip('{translate fonema=LANG_DELETE_U}')" onmouseout="UnTip()" />
+    	   <input type="hidden" name="delete_topic" value="y">
+	   <input type="hidden" name="topic_id" value="{$topic.TOPIC_ID}">
+	   <input type="hidden" name="forum_id" value="{$topic.FORUM_ID}">
+          </form>
+         {/if}
+         {if isset($topic.EDIT)}
+	  <form method="post" style="float:right" action="topic_edit.php">
+	   <input type="image" src="img/icons/edit.png" onmouseover="Tip('{translate fonema=LANG_TOPIC_EDIT_U}')" onmouseout="UnTip()" />
+	   <input type="hidden" name="edit_topic" value="y">
+	   <input type="hidden" name="topic_id" value="{$topic.TOPIC_ID}">
+	   <input type="hidden" name="forum_id" value="{$topic.FORUM_ID}">
+	  </form>
+	 {/if}
+         {if isset($topic.PIN)}
+	  <form method="post" style="float:right">
+	   <input type="image" src="img/icons/pin.png" onmouseover="Tip('{translate fonema=LANG_TOPIC_PIN_U}')" onmouseout="UnTip()" />
+	   <input type="hidden" name="pin_topic" value="y">
+	   <input type="hidden" name="topic_id" value="{$topic.TOPIC_ID}">
+	   <input type="hidden" name="forum_id" value="{$topic.FORUM_ID}">
+	  </form>
+ 	 {/if}
+         {if isset($topic.UNPIN)}
+	  <form method="post" style="float:right">
+	   <input type="image" src="img/icons/unpin.png" onmouseover="Tip('{translate fonema=LANG_TOPIC_UNPIN_U}')" onmouseout="UnTip()" />
+	   <input type="hidden" name="unpin_topic" value="y">
+	   <input type="hidden" name="topic_id" value="{$topic.TOPIC_ID}">
+	   <input type="hidden" name="forum_id" value="{$topic.FORUM_ID}">
+	  </form>
+ 	 {/if}
+         </td> 
+        </tr>
+      {/foreach}
+    </table>
+   </div>
+  {else}
+    <div class="content">
+	<div style="float:left;">{translate fonema=LANG_NO_ENTRIES_U}</div>
+	<div style="clear:both;"></div>
+    </div>
+  {/if}
+</div>
+{/if}

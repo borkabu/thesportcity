@@ -1,0 +1,221 @@
+<div style="clear:both"></div>
+{$bracket_filter_box}
+
+{if isset($error)}
+<div class="portlet" id="message">
+    <div class="content">
+	<span class="textred"><b>{$error.MSG}</b></span>
+    </div>
+</div>
+{/if}
+
+{if isset($arranger_status)}
+<div class="portlet">
+<div class="content">
+<span class="textred"><b>{$arranger_status.MSG}</b></span>
+</div>
+</div>
+{/if}
+
+{if isset($create_account_offer)}
+<div class="portlet" id="create_account_offer">
+ <div class="content">
+  {translate fonema=LANG_CREATE_ARRANGER_ACCOUNT_OFFER_U}
+  <input type="button"  class="btn" value=" {translate fonema=LANG_YES_PLEASE_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" onClick="javascript:createArrangerAccount('create_account', 'create_account_offer')"/>
+ </div>
+</div>
+<div id="create_account">
+</div>
+{/if}
+
+{if isset($logged)}
+<div style="clear:both"></div>
+<script>
+ $(function() {
+	$( "#races" ).tabs({
+		cookie: {
+			expires: 1,
+			name: "races"
+			}
+		}); 
+});
+</script>
+<div id="races">
+ <ul>
+ <li><a href="#tabs-1" title="{translate fonema=LANG_COMPLETED_RACES_U}">{translate fonema=LANG_COMPLETED_RACES_U}</a></li>
+ <li><a href="#tabs-2" title="{translate fonema=LANG_FUTURE_RACES_U}">{translate fonema=LANG_FUTURE_RACES_U}</a></li>
+ </ul>
+ <div id="tabs-1">
+  <div class="portlet"  style="margin:0px">
+   {if isset($logged.PAST_RACES)}
+   <div class="content"  style="overflow: auto;">
+    <form action=""  style="margin:0px" method="POST">
+      {translate fonema=LANG_ARRANGER_SELECT_RACE_U}: {$logged.PAST_RACES.ARRANGER_RACES_FILTER_BOX}
+      <input type="hidden" name="season_id" value="{$logged.PAST_RACES.SEASON_ID}">
+      <input type="hidden" name="select_race" value="y">
+      <input class="btn" type="submit" value=" {translate fonema=LANG_OK_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+    </form>
+   </div>
+   {if isset($logged.PAST_RACES.RACE)}
+   {foreach $logged.PAST_RACES.RACE as $race}
+   <div class="content">
+     <table>
+      <tr>
+       <th>{translate fonema=LANG_PILOT_U}</th>
+       <th>{translate fonema=LANG_ARRANGED_PLACE_U}</th>
+       <th>{translate fonema=LANG_PLACE_U}</th>
+       <th>{translate fonema=LANG_POINTS_U}</th>
+      </tr>
+      {foreach $race.PILOTS as $pilot}
+      <tr>
+       <td>{$pilot.LAST_NAME}, {$pilot.FIRST_NAME} ({$pilot.TEAM_NAME})</td>
+       <td>{$pilot.ARRANGED_PLACE}</th>
+       <td>{$pilot.PLACE}</th>
+       <td>{$pilot.POINTS}</th>
+      </tr>
+      {/foreach}
+      <tr>
+       <th colspan=3>{translate fonema=LANG_TOTAL_POINTS_U}</th>
+       <th>{$race.TOTAL}</th>
+      </tr>
+     </table>
+   </div>
+   {/foreach}
+   {/if}
+   {else}
+   <div class="content">
+    {translate fonema=LANG_NO_RACES_U}
+   </div>
+   {/if}
+   </div>
+ </div>
+ <div id="tabs-2">
+  <script>
+   var order;
+   $(function() {
+	$( "#sortable1, #sortable2" ).sortable({
+		connectWith: ".connectedSortable",
+		receive: function(event, ui) {
+	            // so if > 10
+        	    if ($(this).children().length > 23) {
+	                //ui.sender: will cancel the change.
+        	        //Useful in the 'receive' callback.
+	                $(ui.sender).sortable('cancel');
+        	    }
+        }
+
+	}).disableSelection();
+   });
+  </script>
+  <div class="portlet"  style="margin:0px">
+   {if isset($logged.FUTURE_RACES)}
+   <div class="content"  style="overflow: auto;">
+    <form action=""  style="margin:0px" method="POST">
+      {translate fonema=LANG_ARRANGER_SELECT_RACE_U}: {$logged.FUTURE_RACES.ARRANGER_RACES_FILTER_BOX}
+      <input type="hidden" name="season_id" value="{$logged.FUTURE_RACES.SEASON_ID}">
+      <input type="hidden" name="select_race" value="y">
+      <input class="btn" type="submit" value=" {translate fonema=LANG_OK_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+    </form>
+   </div>
+   {if isset($logged.FUTURE_RACES.ARRANGEMENT_SUBMITED)}
+   <div class="content">
+     <span class="textgreen"><b>{translate fonema=LANG_ARRANGEMENT_SUBMITTED_SUCCESS_U}</b></span>
+   </div>
+   {/if}
+   {if isset($logged.FUTURE_RACES.NOT_ENOUGH_PILOTS)}
+   <div class="content">
+     <span class="textred"><b>{translate fonema=LANG_ARRANGEMENT_SUBMISSION_FAILED_NOT_ENOUGH_PILOTS_U}</b></span>
+   </div>
+   {/if}
+   {if isset($logged.FUTURE_RACES.RACE)}
+   {foreach $logged.FUTURE_RACES.RACE as $race}
+   <div class="content">
+    {translate fonema=LANG_ARRANGER_CONTROL_INSTR_U}
+   </div>
+   <div class="content">
+    <form action=""  style="margin:0px;" method="POST">
+      <input type="hidden" name="race_id" value="{$race.GAME_ID}">
+      <input type="hidden" name="season_id" value="{$race.SEASON_ID}">
+      <input type="hidden" name="random_arrangement" value="y">
+      <input class="btn" type="submit" value=" {translate fonema=LANG_GENERATE_RANDOM_ARRANGEMENT_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+    </form>
+    <form action=""  style="margin:0px;float:left" method="POST">
+      <input type="hidden" name="race_id" value="{$race.GAME_ID}">
+      <input type="hidden" name="season_id" value="{$race.SEASON_ID}">
+      <input type="hidden" name="copy_results" value="y">
+      <input class="btn" type="submit" value=" {translate fonema=LANG_COPY_LAST_RACE_RESULTS_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+    </form>
+    <form action=""  style="margin:0px;" method="POST">
+      <input type="hidden" name="race_id" value="{$race.GAME_ID}">
+      <input type="hidden" name="season_id" value="{$race.SEASON_ID}">
+      <input type="hidden" name="copy_arrangement" value="y">
+      <input class="btn" type="submit" value=" {translate fonema=LANG_COPY_LAST_RACE_ARRANGEMENT_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+    </form>
+   </div>
+   <div class="content" style="overflow: auto;">
+    {if isset($logged.USE_DRAGDROP)}
+    <ol id="sortable1" class="connectedSortable" style="list-style-type: decimal;list-style-position: inside;">
+	{translate fonema=LANG_AVAILABLE_PILOTS_U}
+        {if isset($race.PILOTS)}
+        {foreach $race.PILOTS as $pilot}
+	<li class="ui-state-highlight" id="pilot_{$pilot.NUM}">{$pilot.LAST_NAME}, {$pilot.FIRST_NAME} ({$pilot.TEAM_NAME})
+          <input type="hidden" name="pilots[]" value="{$pilot.M_USER_ID}">
+        </li>
+        {/foreach}
+        {/if}
+    </ol>
+   <form action="" id="neworder" style="margin:0px;" method="POST">
+    <ol id="sortable2" class="connectedSortable" style="min-height:400px; border: 1px solid black; list-style-type: decimal;list-style-position: inside;">
+	{translate fonema=LANG_ARRANGED_PILOTS_U} ({translate fonema=LANG_DROP_HERE_U})
+        {if isset($race.ARRANGED_PILOTS)}
+        {foreach $race.ARRANGED_PILOTS as $pilot}
+	<li class="ui-state-highlight" id="pilot_{$pilot.NUM}">{$pilot.LAST_NAME}, {$pilot.FIRST_NAME} ({$pilot.TEAM_NAME})
+          <input type="hidden" name="pilots[]" value="{$pilot.M_USER_ID}">
+        </li>
+        {/foreach}
+        {/if}
+    </ol>      
+    {else}
+   <form action="" id="neworder" style="margin:0px;" method="POST">
+      <table>
+        {if isset($race.ARRANGED_PILOTS)}
+        {foreach $race.ARRANGED_PILOTS as $pilot}
+          <tr><td>{$pilot.LAST_NAME}, {$pilot.FIRST_NAME} ({$pilot.TEAM_NAME})
+		<input type="hidden" name="pilots[]" value="{$pilot.M_USER_ID}">
+		</td><td><input type="text" id="pilot_{$pilot.M_USER_ID}" name="pilot_{$pilot.M_USER_ID}" value="{$pilot.PLACE}" size="3" maxlength="2" class="input"></td></tr>
+        {/foreach}
+        {/if}
+        {if isset($race.PILOTS)}
+        {foreach $race.PILOTS as $pilot}
+          <tr><td>{$pilot.LAST_NAME}, {$pilot.FIRST_NAME} ({$pilot.TEAM_NAME})
+              <input type="hidden" name="pilots[]" value="{$pilot.M_USER_ID}">
+		</td><td><input type="text" id="pilot_{$pilot.M_USER_ID}" name="pilot_{$pilot.M_USER_ID}" value="" size="3" maxlength="2" class="input"></td></tr>
+        {/foreach}
+        {/if}
+      </table>
+    {/if}
+      <input type="hidden" name="season_id" value="{$race.SEASON_ID}">
+      <input type="hidden" name="race_id" value="{$race.GAME_ID}">
+      <input type="hidden" name="save_arrangement" value="y">
+    {if !isset($logged.USE_DRAGDROP)}
+      <input type="submit" class="btn" value=" {translate fonema=LANG_SAVE_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/><br>
+    {/if}
+   </form>
+   </div>
+   {if isset($logged.USE_DRAGDROP)}
+   <div class="content">
+      <input type="submit" class="btn" value=" {translate fonema=LANG_SAVE_U} " onclick="document.getElementById('neworder').submit();" onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/><br>
+   </div>
+   {/if}
+   </form>
+   {/foreach}
+   {/if}
+   {else}
+   <div class="content">
+    {translate fonema=LANG_NO_RACES_U}
+   </div>
+   {/if}
+  </div>
+ </div>
+</div>
+{/if}

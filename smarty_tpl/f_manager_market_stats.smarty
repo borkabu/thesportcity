@@ -1,0 +1,62 @@
+<div style="clear:both"></div>
+{$manager_filter_box}
+
+<div class="portlet">
+  <div class="header">{translate fonema=LANG_FILTER_U}</div>
+  <div class="content">
+   {if isset($tours)}
+    {translate fonema=LANG_TOURS_U}: 
+    {foreach $tours as $tour}
+        {if isset($tour.SELECTED)}<b>[{$tour.SELECTED.NUMBER}]</b>{/if}
+        {if isset($tour.NORMAL)}<a href="f_manager_market_stats.php?tour_id={$tour.NORMAL.NUMBER}&mseason_id={$tour.NORMAL.MSEASON_ID}">{$tour.NORMAL.NUMBER}</a>{/if}
+    {/foreach} 
+   {/if}
+    {if isset($all)}
+        {if isset($all.SELECTED)}<b>[{translate fonema=LANG_SEASON_STANDINGS_U}]</b>{/if}
+        {if isset($all.NORMAL)}<a href="f_manager_market_stats.php?mseason_id={$all.NORMAL.MSEASON_ID}">[{translate fonema=LANG_SEASON_STANDINGS_U}]</a>{/if}
+    {/if}
+ </div>
+ {if isset($market) && !isset($noaccess)}
+  <div class="content">
+    <form action="" method="post" style="margin:0px">
+       {translate fonema=LANG_SURNAME_U} {$filtering.QUERY}          
+       <input class="btn" type="submit" value=" {translate fonema=LANG_OK_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+       {if isset($filtering.FILTERED)}<a href="">[ {translate fonema=LANG_SHOW_ALL_RECORDS} ]</a>{/if}
+    </form>
+ </div>
+ {/if}
+</div>
+
+{if isset($market) && !isset($noaccess)}
+<div class="portlet">
+  <div class="content">
+    {translate fonema=LANG_TEAM_CHANGED_U}: {$market.CHANGED}
+  </div>
+  <div class="content">
+      <table>
+        <tr>
+          <th>{translate fonema=LANG_PLAYER_U}</th>
+          <th>{translate fonema=LANG_TEAMS_U}</th>
+          <th>{translate fonema=LANG_CAPTAIN_U}</th>
+        </tr>
+        {if isset($market.PLAYERS)}
+         {foreach $market.PLAYERS as $player}
+         <tr valign="top">
+          <td><a href="f_manager_player_info.php?user_id={$player.PLAYER_ID}"  target="f_manager_player_info" onClick="window.open('','f_manager_player_info','width=400,height=400,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');"><b>{$player.LAST_NAME}, {$player.FIRST_NAME}</b></a> <br>
+            {$player.TYPE_NAME} ({$player.TEAM_NAME})</td>
+          <td align="right">{$player.CNT}</td>
+          <td align="right">{$player.CCNT}</td>
+         </tr>
+         {/foreach}
+        {else}
+         <tr>
+           <td colspan="6">{translate fonema=LANG_NO_ENTRIES_U}</td>
+         </tr>
+        {/if}
+      </table>
+	</div>
+</div>
+{$market.PAGING}
+{else}
+  {translate fonema=LANG_NO_MARKET_STATS_AVAILABLE_U}
+{/if}

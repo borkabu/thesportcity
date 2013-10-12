@@ -1,0 +1,52 @@
+{if isset($shortcuts) || isset($mshortcuts)}
+<div class="portlet">
+<div class="header">{translate fonema=LANG_SHORTCUTS_U}</div>
+{if isset($mshortcuts)}
+{foreach $mshortcuts as $shortcut}
+<div class="content">
+  <span style="font-size:8pt">{$shortcut.SEASON_TITLE}</span><br>
+  <a style="font-size:7.5pt" href="f_manager_season_dashboard.php?mseason_id={$shortcut.SEASON_ID}"><b style="font-size:8pt">{translate fonema=LANG_MANAGER_U}</b></a>
+  {if $shortcut.ALLOW_RVS_LEAGUES =='Y'}
+  | <a style="font-size:8pt" href="rvs_manager_season_dashboard.php?mseason_id={$shortcut.SEASON_ID}"><b>{translate fonema=LANG_FANTASY_LEAGUE_U}</b></a>
+  {/if}<br>
+  {if $shortcut.ALLOW_SOLO =='Y'}
+  <a style="font-size:8pt" href="solo_manager_season_dashboard.php?mseason_id={$shortcut.SEASON_ID}"><b>{translate fonema=LANG_SOLO_MANAGER_U}</b></a> | 
+  {/if}
+  <a style="font-size:8pt" href="f_manager_tournament_dashboard.php?mseason_id={$shortcut.SEASON_ID}"><b>{translate fonema=LANG_TOURNAMENTS_U}</b></a>
+</div>
+{/foreach}
+{/if}
+{if isset($shortcuts.TOURNAMENT)}
+{foreach $shortcuts.TOURNAMENT as $shortcut}
+<div class="content">
+  <b style="font-size:8pt">{translate fonema=LANG_TOURNAMENT_U}:</b>
+  <a style="font-size:7.5pt" href="f_manager_tournament_control.php?mt_id={$shortcut.SEASON_ID}">{$shortcut.SEASON_TITLE}</a>
+</div>
+{/foreach}
+{/if}
+{if isset($shortcuts.WAGER)}
+{foreach $shortcuts.WAGER as $shortcut}
+<div class="content">
+  <b style="font-size:8pt">{translate fonema=LANG_WAGER_U}:</b>
+  <a style="font-size:8pt" href="wager_season_dashboard.php?season_id={$shortcut.SEASON_ID}">{$shortcut.SEASON_TITLE}</a>
+</div>
+{/foreach}
+{/if}
+{if isset($shortcuts.ARRANGER)}
+{foreach $shortcuts.ARRANGER as $shortcut}
+<div class="content">
+  <b style="font-size:8pt">{translate fonema=LANG_ARRANGER_U}:</b>
+  <a style="font-size:8pt" href="bracket_season_dashboard.php?tseason_id={$shortcut.SEASON_ID}">{$shortcut.SEASON_TITLE}</a>
+</div>
+{/foreach}
+{/if}
+</div>
+{/if}
+<div class="portlet">
+<div class="content">
+<!-- TheSportCity.Net_180x150 -->
+<script type='text/javascript'>
+GA_googleFillSlot("TheSportCity.Net_180x150");
+</script>
+</div>
+</div>

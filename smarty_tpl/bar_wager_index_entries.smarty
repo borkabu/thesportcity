@@ -1,0 +1,23 @@
+<div class="portlet">
+<div class="header">{translate fonema=LANG_WAGER_U}</div>
+{if isset($last_game.GAMES)}
+{foreach $last_game.GAMES as $game}          
+<div class="content_header">{translate fonema=LANG_NEXT_GAME_U}</div>
+ <div class="content">
+    <span class="date_font2"><b>{$game.START_DATE}</b></span><br>
+    {$game.SEASON_TITLE}<br> {$game.TEAM_NAME1} - {$game.TEAM_NAME2}
+  <span style="float:right"><a href="wager_control.php">{translate fonema=LANG_MORE_U}</a></span>
+ </div>
+{/foreach}
+{else}
+<div class="content">{translate fonema=LANG_NO_GAMES_U}</div>
+{/if}
+<div class="content_header">{translate fonema=LANG_LAST_CHALLENGE_U}</div>
+  {foreach $last_challenge.GAMES as $challenge}          
+  <div class="content">
+    {$challenge.CHALLENGE} {if $challenge.STATUS == 2}/ <span class="textred"><b>{$challenge.USER_NAME2}</b></span> {translate fonema=LANG_DISAGREES_L}{/if}
+    <span style="float:right;"><a href="wager_challenges.php">{translate fonema=LANG_MORE_U}</a></span>
+    <div style="clear:both"></div>
+  </div>
+  {/foreach}
+</div>

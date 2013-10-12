@@ -1,0 +1,240 @@
+<div style="clear:both"></div>
+
+{if isset($error)}
+<div class="portlet" id="message">
+ <div class="content">
+  <span class="textred"><b>{$error.MSG}</b></span>
+ </div>
+</div>
+{/if}
+
+{if isset($data.EVENT)}
+<div class="portlet">
+  <div class="content">
+     {translate fonema=LANG_CLUB_U}: <a href="clubs.php?club_id={$data.EVENT.GROUP_ID}"><b>{$data.EVENT.GROUP_NAME}</b></a> <br>
+     {translate fonema=LANG_CLUB_EVENT_U}: <b>{$data.EVENT.TITLE}</b> <br>
+     {translate fonema=LANG_ENTRY_FEE_U}: <b>{$data.EVENT.ENTRY_FEE}</b><br>
+  </div>
+</div>
+
+{if isset($data.EVENT.PARTICIPATION)}
+<div class="portlet">
+  {if isset($data.EVENT.PARTICIPATION.REGISTRATION_CLOSED)}
+  <div class="content">
+     {translate fonema=LANG_REGISTRATION_CLOSED_U}
+  </div>
+  {/if}
+  {if isset($data.EVENT.PARTICIPATION.PARTICIPATING)}
+  <div class="content">
+     {translate fonema=LANG_CLUB_EVENT_PARTICIPANT_U}
+  </div>
+  {/if}
+  {if isset($data.EVENT.PARTICIPATION.FINISHED)}
+  <div class="content">
+     {translate fonema=LANG_CLUB_EVENT_FINISHED_U}
+  </div>
+  {/if}
+  {if isset($data.EVENT.PARTICIPATION.NOT_PARTICIPATING)}
+  <div class="content">
+    {if isset($data.EVENT.PARTICIPATION.NOT_PARTICIPATING.ENOUGH_CREDITS)}
+      {translate fonema=LANG_CLUB_EVENT_ENTRY_FEE_INSTR_U}<br>
+    {/if}
+    {if isset($data.EVENT.PARTICIPATION.NOT_PARTICIPATING.NOT_ENOUGH_CREDITS)}
+      {translate fonema=LANG_ERROR_NOT_ENOUGH_CREDITS_U}
+    {/if}
+    {if isset($data.EVENT.PARTICIPATION.NOT_PARTICIPATING.BUTTONS)}
+      <form action="" method="post" style="margin:0">
+        <input type="hidden" name="club_id" value="{$data.EVENT.PARTICIPATION.NOT_PARTICIPATING.BUTTONS.CLUB_ID}">
+        <input type="hidden" name="event_id" value="{$data.EVENT.PARTICIPATION.NOT_PARTICIPATING.BUTTONS.EVENT_ID}">
+        <input type="hidden" name="join_event" value="y">
+        {translate fonema=LANG_NO_CLUB_EVENT_PARTICIPANT_U} <input class="btn" type="submit" value=" {translate fonema=LANG_JOIN_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+      </form>
+    {/if}
+  </div>
+  {/if}
+  {if isset($data.EVENT.PARTICIPATION.NOT_CLUB_MEMBER)}
+  <div class="content">
+     {translate fonema=LANG_NOT_CLUB_MEMBER_U}
+  </div>
+  {/if}                             
+</div>
+{/if}
+
+<script>
+ $(function() {
+    $( "#club_event" ).tabs({
+ 	cookie: {
+		expires: 1,
+		name: "club_events"
+		}
+	}); 
+ });
+</script>
+<div id="club_event">
+ <ul>
+  {if isset($data.EVENT.MANAGEMENT)}
+   <li><a href="#tabs-1" title="{translate fonema=LANG_CLUB_EVENT_MANAGEMENT_U}">{translate fonema=LANG_CLUB_EVENT_MANAGEMENT_U}</a></li>
+  {/if}
+  <li><a href="#tabs-2" title="{translate fonema=LANG_DESCRIPTION_U}">{translate fonema=LANG_DESCRIPTION_U}</a></li>
+  <li><a href="#tabs-3" title="{translate fonema=LANG_PARTICIPANTS_U}">{translate fonema=LANG_PARTICIPANTS_U}</a></li>
+  <li><a href="#tabs-4" title="{translate fonema=LANG_RESULTS_U}">{translate fonema=LANG_RESULTS_U}</a></li>
+ </ul>
+ 
+ {if isset($data.EVENT.MANAGEMENT)}
+ <div id="tabs-1">
+  <form action="" method="post">
+    <input type="hidden" name="club_id" value="{$data.EVENT.MANAGEMENT.CLUB_ID}">
+    <input type="hidden" name="event_id" value="{$data.EVENT.MANAGEMENT.EVENT_ID}">
+    <input type="hidden" name="set_info" value="Y">
+  <div class="portlet" style="margin:0px">
+  <div class="content">
+     <b>{translate fonema=LANG_TITLE_U}</b>:
+     <input type="text" size=64 class="input" maxlength="64" name="title" id="title" value="{$data.EVENT.MANAGEMENT.TITLE}">
+  </div>
+  <div class="content">
+     <b>{translate fonema=LANG_DESCRIPTION_U}</b>
+     {$data.EVENT.MANAGEMENT.DESCR}
+      <textarea id="descr" name="descr" >{$data.EVENT.MANAGEMENT.DESCR}</textarea>
+        <TPL_INPUT:forum_group_event.descr>
+	<script type="text/javascript">
+		//<![CDATA[
+
+			// This call can be placed at any point after the
+			// <textarea>, or inside a <head><script> in a
+			// window.onload event handler.
+
+			// Replace the <textarea id="editor"> with an CKEditor
+			// instance, using default configurations.
+			CKEDITOR.replace( 'descr' ,
+                            { entities : true,
+                                  on :
+                                 {
+			           instanceReady : function( ev )
+			            {
+                                     // Output paragraphs as <p>Text</p>.
+			                this.dataProcessor.writer.setRules( 'p',
+			                    {
+			                        indent : false,
+                                                breakBeforeOpen : false,
+			                        breakAfterOpen : false,
+			                        breakBeforeClose : false,
+			                        breakAfterClose : false
+                                             });
+			            }
+			        }
+			});
+
+		//]]>
+		</script>
+   </div>
+   <div class="content">
+     <b>{translate fonema=LANG_RESULTS_U}</b>
+     {$data.EVENT.MANAGEMENT.RESULTS}
+        <textarea id="results" name="results" >{$data.EVENT.MANAGEMENT.RESULTS}</textarea>
+	<script type="text/javascript">
+		//<![CDATA[
+
+			// This call can be placed at any point after the
+			// <textarea>, or inside a <head><script> in a
+			// window.onload event handler.
+
+			// Replace the <textarea id="editor"> with an CKEditor
+			// instance, using default configurations.
+			CKEDITOR.replace( 'results' ,
+                            { entities : true,
+                                  on :
+                                 {
+			           instanceReady : function( ev )
+			            {
+                                     // Output paragraphs as <p>Text</p>.
+			                this.dataProcessor.writer.setRules( 'p',
+			                    {
+			                        indent : false,
+                                                breakBeforeOpen : false,
+			                        breakAfterOpen : false,
+			                        breakBeforeClose : false,
+			                        breakAfterClose : false
+                                             });
+			            }
+			        }
+			});
+
+		//]]>
+		</script>
+    </div>
+    <div class="content">
+            <input class="btn" type="submit" value=" {translate fonema=LANG_SUBMIT_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+    </div>
+  <div class="header">{translate fonema=LANG_SETTINGS_U}</div>
+  <div class="content">
+     <table class="noborder">
+	<tr><td>{translate fonema=LANG_CLUB_EVENT_RECRUITMENT_U}:</td><td> <input type="checkbox" {if $data.EVENT.MANAGEMENT.RECRUITMENT_ACTIVE =='Y'}checked{/if} value="Y" class="" name="recruitment_active"> <img src='./img/icons/information.png' onmouseover="Tip('{translate fonema=LANG_CLUB_EVENT_RECRUITMENT_INFO_U}')" onmouseout="UnTip()" /></td></tr>
+	<tr><td>{translate fonema=LANG_PARTICIPANTS_U}:</td><td> <input type="text" name="participants" value="{$data.EVENT.MANAGEMENT.PARTICIPANTS}" maxlength="3" size="3" class="input"> <img src='./img/icons/information.png' onmouseover="Tip('{translate fonema=LANG_CLUB_EVENT_PARTICIPANTS_INFO_U}')" onmouseout="UnTip()" /></td></tr>
+	<tr><td>{translate fonema=LANG_FINISHED_CLUB_EVENT_U}:</td><td> <input type="checkbox" {if $data.EVENT.MANAGEMENT.FINISHED =='Y'}checked{/if} value="Y" class="" name="finished"> </td></tr>
+        <tr><td>{translate fonema=LANG_ENTRY_FEE_U}:</td><td> <input type="text" name="entry_fee" value="{$data.EVENT.MANAGEMENT.ENTRY_FEE}" maxlength="3" size="3" class="input"></td></tr>
+        <tr><td colspan=2><input class="btn" type="submit" value=" {translate fonema=LANG_SUBMIT_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/></td></tr>
+    </table>
+  </div>
+  </div>
+  </form>
+ </div>
+ {/if}
+ <div id="tabs-2">
+  <div class="portlet" style="margin:0px">
+   <div class="content">
+    {$data.EVENT.DESCR}
+   </div>
+  </div>
+ </div>
+ <div id="tabs-3">
+  <div class="portlet" style="margin:0px">
+   {if isset($data.EVENT.CURRENT_PARTICIPANTS)}
+   <div class="content">
+     <table style="width:100%">
+     <tr>
+      <th width="100%">{translate fonema=LANG_PARTICIPANT_U}</th>
+      {if isset($data.EVENT.CURRENT_PARTICIPANTS.REMOVE)} 
+       <th></th>
+      {/if}
+     </tr> 
+     {foreach $data.EVENT.CURRENT_PARTICIPANTS.PARTICIPANTS as $participant}
+     <tr>
+       <td>
+          {if isset($participant.COUNTRY_DB)}
+	   <img border=1 src="./img/flags/{$participant.COUNTRY_DB.CCTLD}.gif" onmouseover="Tip('$participant.COUNTRY_DB.COUNTRY_NAME}')" onmouseout="UnTip()">
+          {/if}
+	  {$participant.USER_NAME}
+       </td> 
+       {if isset($data.EVENT.CURRENT_PARTICIPANTS.REMOVE)} 
+       <td>
+	<form method="post" style="float:right;" action="">
+	 <input type="image" src="img/icons/delete.png" onClick="return confirm('<_TPL:LANG_REALLY_U>');" onmouseover="Tip('<_TPL:LANG_DELETE_U>')" onmouseout="UnTip()" />
+	 <input type="hidden" name="remove_participant" value="y">
+         <input type="hidden" name="club_id" value="<TPL:CLUB_ID>">
+         <input type="hidden" name="event_id" value="<TPL:EVENT_ID>">
+	 <input type="hidden" name="user_id" value="<TPL:USER_ID>">
+	</form>
+       </td> 
+       {/if}
+     </tr>
+     {/foreach}
+    </table>    
+   </div>
+   {else}
+   <div class="content">
+     {translate fonema=LANG_NO_PARTICIPANTS_U}
+   </div>
+   {/if}
+  </div>
+ </div>
+ <div id="tabs-4">
+ <div title="{translate fonema=LANG_RESULTS_U}">
+  <div class="portlet" style="margin:0px">
+   <div class="content">
+    {$data.EVENT.RESULTS}
+   </div>
+  </div>
+ </div>
+</div>
+</div>
+{/if}

@@ -1,0 +1,101 @@
+<TPL_INCLUDE:../tpl/adm/head.tpl.html>
+<TPL_INCLUDE:../tpl/adm/menu.tpl.html>
+
+<form action="" method="post" name="editform">
+<input type="hidden" name="form_save" value="Y">
+<input type="hidden" name="referer" value="<TPL:REFERER>">
+
+<TPL_SUB:ERROR><span class="error"><TPL:MSG></span></TPL_SUB:ERROR>
+
+<div class="portlet" >
+  <div class="header"><_TPL:LANG_PERIOD_U></div>
+  <div class="content">
+      <table>
+        <tr>
+         <td class="list_item"><_TPL:LANG_FROM_U>:</td>
+	 <td class="list_item"><TPL_INPUT:adm_user.date_started>
+           <input type="button" class="btn" value="<_TPL:LANG_SEASON_START_U>" onclick="fillvalbegin()" onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" onclick="fillvalbegin()">
+         </td>
+        </tr>
+        <tr>
+         <td class="list_item"><_TPL:LANG_TILL_U>:</td>
+         <td class="list_item"><TPL_INPUT:adm_user.date_expired> 
+             <input type="button" class="btn" value="<_TPL:LANG_SEASON_END_U>" onclick="fillvalend()" onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'">
+             <input type="button" class="btn" value="<_TPL:LANG_TILL_NOW_U>" onclick="tillnow()" onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"></td>
+        </tr>
+      </table>
+</div>
+</div>
+
+ <TPL_SUB:TEAM>
+<div class="portlet" >
+  <div class="header"><_TPL:LANG_TEAM_U></div>
+  <div class="content">
+  <table>   
+    <TPL_SUB:TEAMS>    
+    <tr>
+      <td class="list_item"><_TPL:LANG_TEAM_U></td>
+      <td class="list_item"><TPL:TEAM_ID></td>
+    </tr>
+    
+    <tr>
+      <td class="list_item"><_TPL:LANG_POSITION_U> #1</td>
+      <td class="list_item"><TPL:POSITION_ID1></td>
+    </tr>
+    
+    <tr>
+      <td class="list_item"><_TPL:LANG_POSITION_U> #2</td>
+      <td class="list_item"><TPL:POSITION_ID2></td>
+    </tr>
+    
+    <tr>
+      <td class="list_item"><_TPL:LANG_NUMBER_U></td>
+      <td class="list_item"><TPL:NUM></td>
+    </tr>
+    
+    </TPL_SUB:TEAMS>
+    
+  </table>
+</div>
+</div>
+
+ </TPL_SUB:TEAM>
+
+<div class="portlet">
+  <div class="content">
+        <input type="submit" class="btn" value="<_TPL:LANG_SAVE_U>" onclick="resettarget();"  onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" >
+        <input type="reset" class="btn" value="<_TPL:LANG_RESET_U>" onclick="return confirm('<_TPL:LANG_REALLY_U>');"  onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'">
+</div>
+</div>
+
+</form>
+
+
+<script language="JavaScript1.2">
+<!-- 
+function fillvalbegin(){
+  document.forms['editform'].date_started_y.selectedIndex=2;
+  document.forms['editform'].date_started_m.selectedIndex=8;
+  document.forms['editform'].date_started_d.selectedIndex=1;
+}
+
+function fillvalend(){
+  var now = new Date();
+  if (now.getMonth() < 8)
+    document.forms['editform'].date_expired_y.selectedIndex=document.forms['editform'].date_started_y.selectedIndex;
+  else document.forms['editform'].date_expired_y.selectedIndex=2;
+  document.forms['editform'].date_expired_m.selectedIndex=8;
+  document.forms['editform'].date_expired_d.selectedIndex=1;
+}
+
+function tillnow(){
+  var now = new Date();
+  document.forms['editform'].date_expired_y.selectedIndex=0;
+  document.forms['editform'].date_expired_m.selectedIndex=0;
+  document.forms['editform'].date_expired_d.selectedIndex=0;
+}
+
+// -->
+</script>
+
+<TPL_INCLUDE:../tpl/adm/foot.tpl.html>

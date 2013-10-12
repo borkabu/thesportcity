@@ -1,0 +1,3 @@
+{if isset($wager_summary)}
+{$wager_summary.CHALLENGE}
+{/if}

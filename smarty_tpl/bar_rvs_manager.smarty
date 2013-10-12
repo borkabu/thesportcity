@@ -1,0 +1,28 @@
+{if isset($manager_summary)}
+<div class="portlet">
+<div class="header">{translate fonema=LANG_FANTASY_LEAGUE_U}</div>
+<!--div class="content_header">{$manager_summary.SEASON_TITLE}</div -->
+{if isset($manager_league)}
+<div class="content_header">{$manager_league.TITLE}</div>
+{if isset($manager_league.LOG)}
+{foreach $manager_league.LOG as $log_item}
+<div class="content">
+    <b><span class="date_font2">{$log_item.EVENT_DATE} {$log_item.UTC}</span></b><br>{$log_item.LOG_ENTRY}
+    <a href="rvs_manager_log.php?league_id={$manager_league.LEAGUE_ID}" target="log" onClick="window.open('','log','width=300,height=500,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');">{translate fonema=LANG_LEAGUE_LOG_U}</a><br>
+</div>
+{/foreach}
+{/if}
+{if isset($manager_league.USER_LOG)}
+{foreach $manager_league.USER_LOG as $log_item}
+<div class="content">
+    <b><span class="date_font2">{$log_item.EVENT_DATE} {$log_item.UTC}</span></b><br>{$log_item.LOG_ENTRY}
+    <a href="rvs_manager_user_log.php?league_id={$manager_league.LEAGUE_ID}" target="log" onClick="window.open('','log','width=300,height=500,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');">{translate fonema=LANG_PERSONAL_LOG_U}</a>
+</div>
+{/foreach}
+{/if}
+{/if}
+{if isset($manager_summary.LEAGUE)}
+{$manager_summary.LEAGUE}
+{/if}
+</div>
+{/if}

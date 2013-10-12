@@ -1,0 +1,148 @@
+<TPL_INCLUDE:../tpl/adm/head.tpl.html>
+<TPL_INCLUDE:../tpl/adm/menu.tpl.html>
+
+<form action="" method="post" name="editform">
+<input type="hidden" name="form_save" value="Y">
+<input type="hidden" name="referer" value="<TPL:REFERER>">
+<input type="hidden" name="team_id1" value="<TPL:TEAM_ID1>">
+<input type="hidden" name="team_id2" value="<TPL:TEAM_ID2>">
+
+<TPL_SUB:ERROR><span class="error"><TPL:MSG></span></TPL_SUB:ERROR>
+
+<div  style="float:left"> 
+<div class="portlet" >
+  <div class="header"><_TPL:LANG_GENERAL_DATA_U></div>
+  <div class="content">
+   <table>  
+    <tr>
+      <td class="list_item">Sezonas</td>
+      <td class="list_item"><b><TPL:SEASON_TITLE></b></td>
+    </tr>
+    
+    <tr>
+      <td class="list_item">Pradžia</td>
+      <td class="list_item"><b><TPL:START_DATE></b></td>
+    </tr>
+    
+    <tr>
+      <td class="list_item">Komanda #1</td>
+      <td class="list_item"><b><TPL:TEAM_NAME1></b></td>
+    </tr>
+    
+    <tr>
+      <td class="list_item">Komanda #2</td>
+      <td class="list_item"><b><TPL:TEAM_NAME2></b></td>
+    </tr>
+    
+    <tr>
+      <td class="list_item">Publikuoti</td>
+      <td class="list_item"><TPL_INPUT:adm_game.publish></td>
+    </tr>
+    
+  </table>
+
+</div>
+</div>
+
+<div class="portlet">
+  <div class="content">
+        <input type="submit" class="btn" value="<_TPL:LANG_SAVE_U>" onclick="resettarget();"  onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" >
+        <input type="reset" class="btn" value="<_TPL:LANG_RESET_U>" onclick="return confirm('<_TPL:LANG_REALLY_U>');"  onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'">
+        <input type="button" class="btn" value="<_TPL:LANG_RIP_STATISTICS_U>" onclick="window.open('stats_rip_<TPL:SPORT_ID>.php?game_id=<TPL:GAME_ID>','stats','');" onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'">
+</div>
+</div>
+</div>
+
+<!-- results ---------------------------------------------------------------->
+
+
+<TPL_SUB:GOALS>
+<div  style="float:left">
+<div class="portlet">
+  <div class="content">
+    <textarea name="goals" id="goals" cols="30" rows="20" class="input"></textarea>
+  </div>
+</div>
+</div>
+</TPL_SUB:GOALS>
+<TPL_SUB:EVENTS>
+<div  style="float:left;">
+<div class="portlet" style="float:left">
+  <div class="content">
+     <table>
+       <tr>
+         <th>Min.</th>
+         <th>Team name</th>
+         <th>Player</th>
+         <th>Event</th>
+       </tr>
+	<TPL_SUB:ITEMS>
+	<tr>
+	  <td class="list_item"><TPL:MIN></td>
+	  <td class="list_item"><TPL:TEAM_NAME></td>
+	  <td class="list_item"><TPL:LAST_NAME>, <TPL:FIRST_NAME></td>
+	  <td class="list_item"><TPL:EVENT_TYPE></td>
+	</tr>
+      </TPL_SUB:ITEMS>
+    </table>
+  </div>
+</div>
+</div>
+</TPL_SUB:EVENTS>
+
+
+<TPL_SUB:TEAM>
+
+<div class="portlet" >
+  <div class="header"><TPL:TEAM_NAME></div>
+  <div class="content">
+   <table>
+    <tr>
+      <th colspan="3"></td>
+	<TPL_SUB:HEADER>
+	      <th align="center"><TPL:HEADER></th>
+	</TPL_SUB:HEADER>
+	<th></th>
+    </tr>
+
+    <tr class="odd">
+      <td colspan="3"><b><_TPL:LANG_TEAM_U></b></td>
+	<TPL_SUB:STATS>
+	      <td align="center"><input type="text" name="<TPL:STATS>_<TPL:M_TEAM_ID>-" value="<TPL:VALUE>" id="<TPL:STATS>_<TPL:M_TEAM_ID>-" maxlength="3" size="2" class="input"></td>
+	</TPL_SUB:STATS>
+      <td>	
+        <input type="hidden" name="team_id[]" value="<TPL:M_TEAM_ID>">
+        <input type="hidden" name="user_id[]" value="">
+      </td>
+    </tr>
+    <TPL_SUB:ROW>
+    <tr class="<TPL_SUB:EVEN>even</TPL_SUB:EVEN><TPL_SUB:ODD>odd</TPL_SUB:ODD>">
+      <td class="list" align="right"><div id="player_number_<TPL:ID>"><b><TPL:NUM></b> <input type="text" value="<TPL:NUM>" size="2" maxlength=3 class="input" id="number_<TPL:ID>"><img width="12" height="12" border="0" onclick="javascript:playerNumberUpdate(<TPL:ID>, document.getElementById('number_<TPL:ID>').value, 'player_number_<TPL:ID>')" src="../img/adm_ok.gif"></div></td>
+      <td class="list"><TPL:PLAYER_STATE_DIV></td>
+      <td class="list"><a href=ppl_edit.php?user_id=<TPL:M_USER_ID>><TPL:LAST_NAME>, <TPL:FIRST_NAME></a></td>
+	<TPL_SUB:STATS>
+	      <td align="center"><input type="text" name="<TPL:STATS>_<TPL:M_TEAM_ID>-<TPL:M_USER_ID>" value="<TPL:VALUE>" id="<TPL:STATS>_<TPL:M_TEAM_ID>-<TPL:M_USER_ID>" maxlength="3" size="2" class="input"></td>
+	</TPL_SUB:STATS>
+      <td class="list" align="center">
+        <input type="hidden" name="team_id[]" value="<TPL:M_TEAM_ID>">
+        <input type="hidden" name="user_id[]" value="<TPL:M_USER_ID>">
+      </td>
+    </tr>
+    </TPL_SUB:ROW>
+  </table>
+</div>
+</div>
+
+</TPL_SUB:TEAM>
+
+<div class="portlet">
+  <div class="content">
+        <input type="submit" class="btn" value="<_TPL:LANG_SAVE_U>" onclick="resettarget();"  onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" >
+        <input type="reset" class="btn" value="<_TPL:LANG_RESET_U>" onclick="return confirm('<_TPL:LANG_REALLY_U>');"  onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'">
+        <input type="button" class="btn" value="<_TPL:LANG_RIP_STATISTICS_U>" onclick="window.open('stats_rip.php?game_id=<TPL:GAME_ID>','stats','');" onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'">
+</div>
+</div>
+
+</form>
+
+<TPL_INCLUDE:../tpl/adm/foot.tpl.html>

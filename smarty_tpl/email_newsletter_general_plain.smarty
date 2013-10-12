@@ -1,0 +1,12 @@
+{$data.TITLE}
+===============================================
+{translate fonema=LANG_HI_U}, {$data.USER_NAME}
+===============================================
+{$data.HEADER}
+===============================================
+{translate fonema=LANG_NEWSLETTER_HTML_SUPPORT_U}
+http://www.thesportcity.net/user_newsletter.php?id={$data.QUEUE_ID}
+===============================================
+{translate fonema=LANG_NEWSLETTER_UNSUBSCRIBE_INSTR_U} <a href="{$data.URL}">{translate fonema=LANG_NEWSLETTER_UNSUBSCRIBE_U}</a>
+===============================================
+{translate fonema=LANG_EMAIL_LAST_LINE}

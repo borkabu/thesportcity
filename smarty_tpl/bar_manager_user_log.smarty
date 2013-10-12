@@ -1,0 +1,10 @@
+<div class="portlet">
+  <div class="header">{translate fonema=LANG_PERSONAL_MANAGER_LOG_U}</div>
+{foreach $log as $log_item}
+  <div class="content">
+  <b>{$log_item.SEASON_TITLE}</b><br>
+  <b><span class="date_font2">{$log_item.EVENT_DATE} {$log_item.UTC}</span></b><br>{$log_item.LOG_ENTRY}</div>
+{foreachelse}
+  <div class="content">{translate fonema=LANG_NO_ENTRIES_U}</div>
+{/foreach}
+</div>

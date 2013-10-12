@@ -1,0 +1,148 @@
+<div id="drafts">
+<div class="portlet">
+<div class="content">{$draft_message} <input type="submit" class="btn" value=" {translate fonema=LANG_REFRESH_U} " onclick="{if $league['DRAFT_INTERVAL'] > 0}clearTimeout(this_timer);{/if}$('#drafts').load('rvs_manager_perform_drafts.php?league_id={$league.LEAGUE_ID}'); return false;" /></div>
+{if $league['DRAFT_INTERVAL'] > 0 && $league['DRAFT_STATE'] < 3}
+<div class="content">
+ <div id="javascript_countdown_time"></div>
+<script type="text/javascript">
+    var this_timer;
+    var javascript_countdown = function () {
+	var time_left = 10; //number of seconds for countdown
+	var output_element_id = 'javascript_countdown_time';
+	var keep_counting = 1;
+	var no_time_left_message = '{translate fonema=LANG_RVS_MANAGER_DRAFTS_TIMEOUT_U}';
+ 
+	function countdown() {
+		if(time_left < 2) {
+			keep_counting = 0;
+		}
+ 
+		time_left = time_left - 1;
+	}
+ 
+	function add_leading_zero(n) {
+		if(n.toString().length < 2) {
+			return '0' + n;
+		} else {
+			return n;
+		}
+	}
+ 
+	function format_output() {
+		var hours, minutes, seconds;
+		seconds = time_left % 60;
+		minutes = Math.floor(time_left / 60) % 60;
+		hours = Math.floor(time_left / 3600);
+ 
+		seconds = add_leading_zero( seconds );
+		minutes = add_leading_zero( minutes );
+		hours = add_leading_zero( hours );
+ 
+		return '{$draft_info.TIMELEFT_MESSAGE}' + '<span class="textgreenhuge"><b>' + hours + ':' + minutes + ':' + seconds + '</b></span>';
+	}
+ 
+	function show_time_left() {
+		document.getElementById(output_element_id).innerHTML = format_output();//time_left;
+	}
+ 
+	function no_time_left() {
+		document.getElementById(output_element_id).innerHTML = no_time_left_message;
+		clearTimeout(this_timer);
+                $('#drafts').load('rvs_manager_perform_drafts.php?league_id={$league.LEAGUE_ID}')
+	}
+ 
+	return {
+		count: function () {
+			countdown();
+			show_time_left();
+		},
+		timer: function () {
+			javascript_countdown.count();
+ 
+			if(keep_counting) {
+				this_timer = setTimeout("javascript_countdown.timer();", 1000);
+			} else {
+				no_time_left();
+			}
+		},
+		//Kristian Messer requested recalculation of time that is left
+		setTimeLeft: function (t) {
+			time_left = t;
+			if(keep_counting == 0) {
+				javascript_countdown.timer();
+			}
+		},
+		init: function (t, element_id) {
+			time_left = t;
+			output_element_id = element_id;
+			javascript_countdown.timer();
+		}
+	};
+   }();
+//time to countdown in seconds, and element ID
+{if $league['DRAFT_STATE'] > 0}
+clearTimeout(this_timer);
+javascript_countdown.init({$draft_info.TIMELEFT}, 'javascript_countdown_time');
+{/if}
+</script> 
+</div>
+{/if}
+</div>
+<div class="portlet" style="float:left;width:200px;height:600px;">
+<div class="content" style="height:300px;overflow: auto;">
+   <table>
+     <tr>
+       <th>{translate fonema=LANG_USER_NAME_U}</th>
+     </tr>
+    {foreach $users as $user}
+     <tr>
+       <td align="left">{if isset($user.DRAFTER)}<b>{/if} {$user.USER_NAME}{if isset($user.DRAFTER)}</b>{/if}</td>
+     </tr>
+    {/foreach}
+   </table>
+ </div>
+ <div class="content" style="height:280px;overflow: auto;">
+   {$log}
+ </div>
+</div>
+
+{if isset($players)}
+<div class="portlet" style="float:left;width:450px; height:600px;overflow: auto;">
+<div class="content_header">{translate fonema=LANG_PLAYERS_U}</div>
+<div class="content">
+   <table>
+     <tr>
+       <th>{translate fonema=LANG_PLAYER_U}</th>
+       <th>{translate fonema=LANG_TEAM_U}</th>
+       <th>{translate fonema=LANG_PRICE_U}</th>
+       <th>{translate fonema=LANG_PLAYED_U}</th>
+       <th></th>
+     </tr>
+    {foreach $players as $player}
+     <tr>
+       <td align="left">{$player.LAST_NAME}, {$player.FIRST_NAME} ({$player.TYPE_NAME})</td>
+       <td align="left">{$player.TEAM_NAME2}</td>
+       <td align="left">{$player.CURRENT_VALUE_MONEY}</td>
+       <td align="left">{$player.PLAYED}</td>
+       <td align="left">
+         {if isset($allow_draft)}
+            <!--form name="drafts_{$player.USER_ID}" id="drafts_{$player.USER_ID}" action="javascript:return false;" method="get">
+              <input type="hidden" name="league_id" value="{$league.LEAGUE_ID}">
+              <input type="hidden" name="player_id" value="{$player.USER_ID}">
+              <input type="hidden" name="draft_pick" value="Y">
+              <input class="btn" type="submit" value=" {translate fonema=LANG_PICK_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"
+                   onclick="clearTimeout(this_timer);performDrafts({$league.LEAGUE_ID}, {$player.USER_ID}, 'drafts', document.getElementById('drafts_{$player.USER_ID}'));return false;" /> 
+            </form -->
+
+            <input class="btn" type="submit" value=" {translate fonema=LANG_PICK_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"
+                   onclick="{if $league['DRAFT_INTERVAL'] > 0}clearTimeout(this_timer);{/if}$('#drafts').load('rvs_manager_perform_drafts.php?league_id={$league.LEAGUE_ID}&player_id={$player.USER_ID}&draft_pick=Y'); return false;" /> 
+
+         {/if}
+       </td>
+     </tr>
+    {/foreach}
+   </table>
+ </div>
+</div>
+{/if}
+</div>

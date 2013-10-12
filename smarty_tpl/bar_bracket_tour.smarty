@@ -1,0 +1,12 @@
+<div class="portlet">
+ <div class="header">{translate fonema=LANG_SCHEDULER_U}</div>
+  <div class="content_header">
+   {translate fonema=LANG_TOUR_U} {$tour.NUMBER}
+  </div>
+ {foreach $tour.GAMES as $game}
+  <div class="content">
+    <span class="date_font2"><b>{$game.START_DATE} {$game.UTC}<br></b></span>
+    {$game.TITLE}
+  </div>
+ {/foreach}
+</div>

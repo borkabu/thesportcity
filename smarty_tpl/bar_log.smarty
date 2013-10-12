@@ -1,0 +1,9 @@
+<div class="portlet">
+  <div class="header">
+  {if isset($log_name)}{$log_name}{else}{translate fonema=LANG_LOG_U}{/if}</div>
+{foreach $log as $log_item}
+  <div class="content"><b><span class="date_font2">{$log_item.EVENT_DATE} {$log_item.UTC}</span></b><br>{$log_item.LOG_ENTRY}</div>
+{foreachelse}
+  <div class="content">{translate fonema=LANG_NO_ENTRIES_U}</div>
+{/foreach}
+</div>

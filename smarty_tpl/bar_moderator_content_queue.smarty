@@ -1,0 +1,61 @@
+<TPL_SUB:CONTENT_QUEUE>
+<div class="portlet">
+  <div class="header"><_TPL:LANG_CONTENT_QUEUE_U></div>
+<TPL_SUB:ITEMS>
+ <div id="<TPL:NEWS_ID>">
+  <div class="content" style="height:15px">
+	<div style="float:left;"><TPL:USER_NAME></div>
+        <div style="float:right;"><TPL:DATE_CREATED></div>
+  </div>
+  <div class="content">
+         <b><TPL:DESCR></b>
+  </div>
+  <div class="content">
+       <input class="btn" type="submit" value=" <_TPL:LANG_APPROVE_CONTENT_U> " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" onClick="javascript:handleContent(<TPL:NEWS_ID>, 'news_approve', '<TPL:ACTKEY>', '<TPL:NEWS_ID>')"/>
+       <input class="btn" type="submit" value=" <_TPL:LANG_IGNORE_CONTENT_U> " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" onClick="javascript:handleContent(<TPL:NEWS_ID>, 'news_ignore', '<TPL:ACTKEY>', '<TPL:NEWS_ID>')"/>
+       <input class="btn" type="submit" value=" <_TPL:LANG_DISAPPROVE_CONTENT_U> " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" onClick="javascript:handleContent(<TPL:NEWS_ID>, 'news_disapprove', '<TPL:ACTKEY>', '<TPL:NEWS_ID>')"/>
+  </div>
+ </div>
+</TPL_SUB:ITEMS>
+<TPL_SUB:VIDEO>
+ <div id="<TPL:VIDEO_ID>">
+  <div class="content" style="height:15px">
+	<div style="float:left;"><TPL:USER_NAME></div>
+        <div style="float:right;"><TPL:DATE_CREATED></div>
+  </div>
+  <div class="content">
+         <img src="<TPL:THUMBNAIL>"><br>
+         <TPL:LINK><br>
+         <b><TPL:DESCR></b>
+  </div>
+  <div class="content">
+       <input class="btn" type="submit" value=" <_TPL:LANG_APPROVE_CONTENT_U> " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" onClick="javascript:handleContent(<TPL:VIDEO_ID>, 'video_approve', '<TPL:ACTKEY>', '<TPL:VIDEO_ID>')"/>
+       <input class="btn" type="submit" value=" <_TPL:LANG_IGNORE_CONTENT_U> " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" onClick="javascript:handleContent(<TPL:VIDEO_ID>, 'video_ignore', '<TPL:ACTKEY>', '<TPL:VIDEO_ID>')"/>
+       <input class="btn" type="submit" value=" <_TPL:LANG_DISAPPROVE_CONTENT_U> " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" onClick="javascript:handleContent(<TPL:VIDEO_ID>, 'video_disapprove', '<TPL:ACTKEY>', '<TPL:VIDEO_ID>')"/>
+  </div>
+ </div>
+</TPL_SUB:VIDEO>
+<TPL_SUB:SURVEY_ANSWERS>
+ <div id="<TPL:ANSWER_ID>">
+  <div class="content" style="height:15px">
+	<div style="float:left;"><TPL:USER_NAME></div>
+        <div style="float:right;"><TPL:DATE_SUGGESTED></div>
+  </div>
+  <div class="content">
+         <TPL:QUESTION><br>
+         <b><TPL:ANSWER></b>
+  </div>
+  <div class="content">
+       <input class="btn" type="submit" value=" <_TPL:LANG_APPROVE_CONTENT_U> " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" onClick="javascript:handleContent(<TPL:ANSWER_ID>, 'answer_approve', '<TPL:ACTKEY>', '<TPL:ANSWER_ID>')"/>
+       <input class="btn" type="submit" value=" <_TPL:LANG_IGNORE_CONTENT_U> " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" onClick="javascript:handleContent(<TPL:ANSWER_ID>, 'answer_ignore', '<TPL:ACTKEY>', '<TPL:ANSWER_ID>')"/>
+       <input class="btn" type="submit" value=" <_TPL:LANG_DISAPPROVE_CONTENT_U> " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" onClick="javascript:handleContent(<TPL:ANSWER_ID>, 'answer_disapprove', '<TPL:ACTKEY>', '<TPL:ANSWER_ID>')"/>
+  </div>
+ </div>
+</TPL_SUB:SURVEY_ANSWERS>
+<TPL_SUB:NORECORDS>
+  <div class="content">
+         <_TPL:LANG_NO_ENTRIES_U>
+  </div>
+</TPL_SUB:NORECORDS>
+</div>
+</TPL_SUB:CONTENT_QUEUE>      

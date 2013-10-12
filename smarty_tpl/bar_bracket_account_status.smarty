@@ -1,0 +1,18 @@
+{if isset($ignore_leagues)}
+<div id="ignore_leagues">{translate fonema=LANG_INVITATIONS_U} 
+	<img align="right" src="{if isset($ignore_leagues.IGNORE_LEAGUES)}./img/icons/active.png{else}./img/icons/inactive.png{/if}" onmouseover="this.className='btn btnhov';Tip('{if isset($ignore_leagues.IGNORE_LEAGUES)}{translate fonema=LANG_ALLOWED_U} - {translate fonema=LANG_IGNORE_U}{else}{translate fonema=LANG_FORBIDDEN_U} - {translate fonema=LANG_ALLOW_U}{/if}')" onmouseout="this.className='btn';UnTip()" onClick="javascript:flipArrangerAccountStatus({$season_id}, 'ignore_leagues', 'team_status')"/>
+</div>            
+<div style="clear:both"></div>
+{/if}
+{if isset($use_dragdrop)}
+<div id="use_dragdrop">{translate fonema=LANG_USE_DRAGDROP_U} 
+	<img align="right" src="{if isset($use_dragdrop.USE_DRAGDROP)}./img/icons/active.png{else}./img/icons/inactive.png{/if}" onmouseover="this.className='btn btnhov';Tip('{if isset($use_dragdrop.USE_DRAGDROP)}{translate fonema=LANG_YES_U} - {translate fonema=LANG_SWITCH_OFF_U}{else}{translate fonema=LANG_NO_U} - {translate fonema=LANG_SWITCH_ON_U}{/if}')" onmouseout="this.className='btn';UnTip()" onClick="javascript:flipArrangerAccountStatus({$season_id}, 'use_dragdrop', 'team_status')"/>
+</div>            
+<div style="clear:both"></div>
+{/if}
+{if isset($allow_view)}
+<div id="team_squad">{translate fonema=LANG_ARRANGEMENTS_U} 
+	<img align="right" src="{if isset($allow_view.HIDE)}./img/icons/active.png{else}./img/icons/inactive.png{/if}" onmouseover="this.className='btn btnhov';Tip('{if isset($allow_view.HIDE)}{translate fonema=LANG_REVEALED_U} - {translate fonema=LANG_HIDE_U}{else}{translate fonema=LANG_HIDDEN_U} - {translate fonema=LANG_SHOW_U}{/if}')" onmouseout="this.className='btn';UnTip()" onClick="javascript:flipArrangerAccountStatus({$season_id}, 'allow_view', 'team_status')"/>
+</div>
+<div style="clear:both"></div>
+{/if}

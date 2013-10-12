@@ -1,0 +1,7 @@
+{translate fonema=LANG_HI_U} {$data.USER_NAME}
+
+{translate fonema=LANG_EMAIL_PM_NOTIFY_LINE_1} {$data.AUTHOR} {translate fonema=LANG_EMAIL_PM_NOTIFY_LINE_2} "{$data.TOPIC_NAME}"
+
+{translate fonema=LANG_EMAIL_PM_NOTIFY_LINE_3} {$data.URL}
+
+{translate fonema=LANG_EMAIL_LAST_LINE}

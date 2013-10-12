@@ -1,0 +1,123 @@
+<div class="portlet">
+<TPL_SUB:REGISTER>
+<div class="header"><_TPL:LANG_REGISTER_U></div>
+</TPL_SUB:REGISTER>
+<TPL_SUB:UPDATE>
+<div class="header"><_TPL:LANG_EDIT_PROFILE_U></div>
+</TPL_SUB:UPDATE>
+<div class="content">
+      <TPL_SUB:ERROR_MAND><p class="textred"><b><_TPL:LANG_ERROR_MAND_U></b></p></TPL_SUB:ERROR_MAND>
+      <TPL_SUB:ERROR_DUPE_UNAME><p class="textred"><b><_TPL:LANG_ERROR_DUPE_UNAME_U></b></p></TPL_SUB:ERROR_DUPE_UNAME>     
+      <TPL_SUB:ERROR_NAME_RESTR><p class="textred"><b><_TPL:LANG_ERROR_NAME_RESTR_U></b></p></TPL_SUB:ERROR_NAME_RESTR>     
+      <TPL_SUB:ERROR_NAME_RESTR2><p class="textred"><b><_TPL:LANG_ERROR_NAME_RESTR2_U></b></p></TPL_SUB:ERROR_NAME_RESTR2>     
+      <TPL_SUB:ERROR_PASW_MATCH><p class="textred"><b><_TPL:LANG_ERROR_PASW_MATCH_U></b></p></TPL_SUB:ERROR_PASW_MATCH>
+      <TPL_SUB:ERROR_PASW_RESTR><p class="textred"><b><_TPL:LANG_ERROR_PASW_RESTR_U></b></p></TPL_SUB:ERROR_PASW_RESTR>     
+      <TPL_SUB:ERROR_DUPE_EMAIL><p class="textred"><b><_TPL:LANG_ERROR_DUPE_EMAIL_U></b></p></TPL_SUB:ERROR_DUPE_EMAIL>
+      <TPL_SUB:ERROR_EMAIL_RESTR><p class="textred"><b><_TPL:LANG_ERROR_EMAIL_RESTR_U></b></p></TPL_SUB:ERROR_EMAIL_RESTR>     
+      <TPL_SUB:ERROR_MOBILE><p class="textred"><b><_TPL:LANG_ERROR_MOBILE_U></b></p></TPL_SUB:ERROR_MOBILE>     
+      <TPL_SUB:ERROR_DUPE_MOBILE><p class="textred"><b><_TPL:LANG_ERROR_DUPE_MOBILE_U></b></p></TPL_SUB:ERROR_DUPE_MOBILE>
+      <TPL_SUB:ERROR_CAPTCHA><p class="textred"><b><_TPL:LANG_ERROR_CAPTCHA_U></b></p></TPL_SUB:ERROR_CAPTCHA>
+      <TPL_SUB:UNAME>
+        <p align="justify"><_TPL:LANG_REGISTER_INSTR_U></p>
+      </TPL_SUB:UNAME>
+     <table border="0" width="100%">
+<form method="post"  style="margin:0px">
+      <TPL_SUB:UNAME1>
+      <tr>
+        <td align="right"><b><_TPL:LANG_USER_NAME_U></b>:</td>
+        <td><TPL_INPUT:adm_user.user_name></td>
+      </tr>
+      </TPL_SUB:UNAME1>
+      <TPL_SUB:UNAME2>
+      <tr>
+        <td align="right"><b><_TPL:LANG_USER_NAME_U></b>:</td>
+        <td><TPL:USER_NAME></td>
+      </tr>
+      </TPL_SUB:UNAME2>
+      <TPL_SUB:PASSWORD>
+      <tr>
+        <td align="right"><b><_TPL:LANG_PASSWORD_U></b>:</td>
+        <td><TPL_INPUT:adm_user.password></td>
+      </tr>
+      <tr>
+        <td align="right"><b><_TPL:LANG_VERIFY_PASSWORD_U></b>:</td>
+        <td><TPL_INPUT:adm_user.password2></td>
+      </tr>
+      </TPL_SUB:PASSWORD>
+      <tr>
+        <td align="right"><b><_TPL:LANG_NAME_U></b>:</td>
+        <td><TPL_INPUT:adm_user.first_name></td>
+      </tr>
+      <tr>
+        <td align="right"><b><_TPL:LANG_SURNAME_U></b>:</td>
+        <td><TPL_INPUT:adm_user.last_name></td>
+      </tr>
+      <TPL_SUB:EMAIL1>
+      <tr>
+        <td align="right"><b><_TPL:LANG_EMAIL_U></b>:</td>
+        <td><TPL_INPUT:adm_user.email></td>
+      </tr>
+      </TPL_SUB:EMAIL1>
+      <TPL_SUB:EMAIL2>
+      <tr>
+        <td align="right"><b><_TPL:LANG_EMAIL_U></b>:</td>
+        <td><TPL:EMAIL></td>
+      </tr>
+      </TPL_SUB:EMAIL2>
+      <tr>
+        <td align="right"><_TPL:LANG_MOBILE_INST_U>:</td>
+        <td><TPL_INPUT:adm_user.mobile_phone></td>
+      </tr>
+      <tr>
+        <td align="right"><b><_TPL:LANG_COUNTRY_U>:</b></td>
+        <td><TPL:COUNTRY></td>
+      </tr>
+      <tr>
+        <td align="right"><b><_TPL:LANG_TIMEZONE_U>:</b></td>
+        <td><TPL:TIMEZONE></td>
+      </tr>
+      <tr>
+        <td align="right"><_TPL:LANG_TOWN_U>:</td>
+        <td><TPL_INPUT:adm_user.town></td>
+      </tr>
+      <tr>
+        <td align="right" valign="top"><_TPL:LANG_ADDRESS_U>:</td>
+        <td><TPL_INPUT:adm_user.address1><br>
+	    <TPL_INPUT:adm_user.address2></td>
+      </tr>
+      <tr>
+        <td align="right"><_TPL:LANG_POSTCODE_U>:</td>
+        <td><TPL_INPUT:adm_user.postcode></td>
+      </tr>
+
+      <tr>
+        <td align="right"><_TPL:LANG_BIRTHDAY_U>:</td>
+        <td><TPL_INPUT:adm_user.birth_date></td>
+      </tr>
+      <tr>
+        <td align="right"><_TPL:LANG_SEX_U>:</td>
+        <td><TPL:SEX_M> <_TPL:LANG_SEX_MALE_L> &nbsp;&nbsp;&nbsp;<TPL:SEX_F> <_TPL:LANG_SEX_FEMALE_L></td>
+      </tr>
+<TPL_SUB:CAPTCHA>
+      <tr>
+        <td align="right">
+          <img id="captcha" src="./securimage/securimage_show.php" alt="CAPTCHA Image" />
+        </td>
+        <td>
+       	  <input type="text" name="captcha_code" size="10" maxlength="6" />
+	  <a href="#" onclick="document.getElementById('captcha').src = './securimage/securimage_show.php?' + Math.random(); return false"><br><_TPL:LANG_RELOAD_IMAGE_U></a>
+        </td>
+      </tr>
+</TPL_SUB:CAPTCHA>
+      <tr>
+        <td></td>
+        <td>
+          <input type="hidden" name="save" value="y">
+          <input class="btn" type="submit" value=" <_TPL:LANG_SUBMIT_U> " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+          <input class="btn" type="submit" value=" <_TPL:LANG_RESET_U> " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" onclick="form.reset(); return false;"/>
+        </td>
+      </tr>
+  </form>
+    </table>
+</div>
+</div>

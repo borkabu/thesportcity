@@ -1,0 +1,8 @@
+<div style="clear:both"></div>
+{if isset($bracket_log)}
+{$bracket_log.BRACKET_FILTER_BOX}
+                              
+{$bracket_log.BRACKET_LOG}
+
+{$bracket_log.BRACKET_LOG_PAGING}
+{/if}

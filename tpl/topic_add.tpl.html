@@ -1,0 +1,49 @@
+<TPL_SUB:TOPIC>
+<div class="portlet">
+    <div class="header"><TPL:FORUM_NAME></div>
+    <div class="content">
+<TPL_SUB:ERROR><p class="red"><b><TPL:MSG></b></p></TPL_SUB:ERROR>
+<form action="" method="post"  style="margin:0px">
+  <input type="hidden" name="form_save" value="Y">
+  <input type="hidden" name="lang_id" value="<TPL:LANG_ID>">
+   <_TPL:LANG_CREATE_NEW_TOPIC_U> <TPL_INPUT:adm_forum.topic_name><br>
+    <TPL_INPUT:adm_forum.text>
+
+
+			<script type="text/javascript">
+				//<![CDATA[
+
+					// This call can be placed at any point after the
+					// <textarea>, or inside a <head><script> in a
+					// window.onload event handler.
+
+					// Replace the <textarea id="editor"> with an CKEditor
+					// instance, using default configurations.
+					CKEDITOR.replace( 'text' ,
+                                            { entities : false,
+                                                  on :
+                                                 {
+					           instanceReady : function( ev )
+					            {
+                                                     // Output paragraphs as <p>Text</p>.
+					                this.dataProcessor.writer.setRules( 'p',
+					                    {
+					                        indent : false,
+                                                                breakBeforeOpen : false,
+					                        breakAfterOpen : false,
+					                        breakBeforeClose : false,
+					                        breakAfterClose : false
+                                                             });
+					            }
+					        }
+					});
+
+				//]]>
+				</script>
+
+  <input type="hidden" name="forum_id" value="<TPL:FORUM_ID>">
+  <input class="btn" type="submit" value=" <_TPL:LANG_CREATE_U> " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+</form>
+	</div>
+</div>
+</TPL_SUB:TOPIC>

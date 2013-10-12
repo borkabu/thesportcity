@@ -1,0 +1,100 @@
+{if isset($league)}
+<div class="portlet">
+  <div class="content">
+<h3>{$league.TITLE}</h3>
+{if isset($league.VOTING)}
+<div id="thumbs_{$league.VOTING.LEAGUE_ID}" style="float:right;">
+ <input type="image" src="img/icons/thumbup.gif" onClick="javascript:voteLeagueThumbUp({$league.VOTING.LEAGUE_ID}, 4, 'leagues', 'thumbs_{$league.VOTING.LEAGUE_ID}')"/>
+ <input type="image" src="img/icons/thumbdown.gif" onClick="javascript:voteLeagueThumbDown({$league.VOTING.LEAGUE_ID}, 4, 'leagues', 'thumbs_{$league.VOTING.LEAGUE_ID}')"/>&nbsp;
+{if isset($league.VOTING.THUMB_UP)}
+<div style="float:right;">
+<img src="./img/icons/plus.png" onmouseover="Tip('{translate fonema=LANG_VOTE_UP_U}')" onmouseout="UnTip()"/>
+</div>
+{/if}
+{if isset($league.VOTING.THUMB_DOWN)}
+<div style="float:right;">
+<img src="./img/icons/minus.png" onmouseover="Tip('{translate fonema=LANG_VOTE_DOWN_U}')" onmouseout="UnTip()"/>
+</div>
+{/if}
+</div>
+{/if}
+   <table class="noborder" width="100%">
+     <tr>
+     <td>
+     {translate fonema=LANG_OWNER_U}: <b>{$league.OWNER}</b><br>
+     {translate fonema=LANG_LEAGUE_RATING_U}: <b>{$league.LEAGUE_RATING}</b><br>
+     {translate fonema=LANG_OWNER_RATING_U}: <b>{$league.OWNER_RATING}</b><br>
+     {translate fonema=LANG_DRAFT_U}: <b>{$league.DRAFT_TYPE_DESCR}</b><br>
+     {translate fonema=LANG_FORMAT_U}: <b>{$league.FORMAT_DESCR}</b><br>
+     </td><td>
+     {translate fonema=LANG_START_TOUR_U}: <b>{$league.START_TOUR}</b><br>
+     {translate fonema=LANG_END_TOUR_U}: <b>{$league.END_TOUR}</b><br>
+     {translate fonema=LANG_DURATION_U}: <b>{$league.DURATION}</b><br>
+     {translate fonema=LANG_TEAM_SIZE_U}: <b>{$league.TEAM_SIZE}</b><br>
+     {translate fonema=LANG_RESERVE_SIZE_U}: <b>{$league.RESERVE_SIZE}</b><br>
+     {translate fonema=LANG_PARTICIPANTS_U}: <b>{$league.PARTICIPANTS}</b><br>
+     </td><td>
+     {translate fonema=LANG_ENTRY_FEE_U}: <b>{$league.ENTRY_FEE}</b><br>
+     {translate fonema=LANG_FREE_TRANSFER_FEE_U}: <b>{$league.FREE_TRANSFER_FEE}</b><br>
+     {translate fonema=LANG_PRIZE_FUND_U}: <span class="textgreenhuge"><b>{$league.PRIZE_FUND}</b></span><br>
+     {if $league.STATUS ==3}
+       <span class="textred"><b>{translate fonema=LANG_LEAGUE_OVER_U}</b></span>
+     {else}
+       <span class="textgreen"><b>{translate fonema=LANG_LEAGUE_ACTIVE_U}</b></span>
+     {/if}<br>
+     {if $league.MODERATE_TRANSFERS == 'Y'}
+     	<span class="textred"><b>{translate fonema=LANG_LEAGUE_TRANSFERS_MODERATED_U}</b></span>
+     {else}
+        <span class="textgreen"><b>{translate fonema=LANG_LEAGUE_TRANSFERS_NOT_MODERATED_U}</b></span>
+     {/if}
+     </td>     
+     </tr>
+   </table>  
+  </div>
+  <div class="content">
+	  {if $league.DRAFT_STATE == 3}
+	       <span class="textblue"><b>{translate fonema=LANG_RVS_MANAGER_DRAFTS_OVER_U}</b><br></span>
+          {elseif $league.DRAFT_STATE > 0}
+	       <span class="textblue">
+		<b><a href="rvs_manager_drafts.php?league_id={$league.LEAGUE_ID}" target="rvs_manager_draft_{$league.LEAGUE_ID}" onClick="window.open('','rvs_manager_draft_{$league.LEAGUE_ID}','width=1200,height=600,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');">
+  		{translate fonema=LANG_RVS_MANAGER_DRAFTS_ONGOING_U}</a></b><br></span>
+          {elseif $league.DRAFT_TYPE==1 && $league.DRAFT_STATE == 0 && $league.DRAFT_START_DATE != ""}
+       	       <span class="date_font2">{translate fonema=LANG_RVS_LEAGUE_DRAFT_START_SET_U} <b>{$league.DRAFT_START_DATE_UTC}</b> {$league.UTC}<br></span>
+	       <span class="textblue">
+		<b><a href="rvs_manager_drafts.php?league_id={$league.LEAGUE_ID}" target="rvs_manager_draft_{$league.LEAGUE_ID}" onClick="window.open('','rvs_manager_draft_{$league.LEAGUE_ID}','width=1200,height=600,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');">
+  		{translate fonema=LANG_RVS_MANAGER_DRAFTS_WINDOW_U}</a></b><br></span>
+               {if isset($league.IN_LEAGUE)}
+	          <b><a href="rvs_manager_drafts_list.php?league_id={$league.LEAGUE_ID}" target="rvs_manager_draft_list" onClick="window.open('','rvs_manager_draft_list','width=600,height=600,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');">
+                     {translate fonema=LANG_RVS_MANAGER_DRAFTS_PREPARE_U}</a></b><br>
+               {/if}
+          {else}
+	       <span class="textblue"><b>{translate fonema=LANG_RVS_MANAGER_NO_DRAFTS_YET_U}</b><br></span>
+          {/if}
+  </div>
+  {if $league.INVITE_TYPE==1 && isset($league.CAN_JOIN)}
+   <div class="content">
+    {if isset($league.ERROR)}
+  	 <span class="textred"><b>{$league.ERROR.MSG}</b></span><br>
+    {/if}
+    {translate fonema=LANG_MANAGER_LEAGUE_INVITE_CODE_INSTR_U}<br>
+      <form method="POST">
+	 <input type="hidden" name="join_league" value="true">
+	 <input type="text" name="league_code" class="input" size="10" maxsize=8>
+         <input class="btn" type="submit" value=" {translate fonema=LANG_JOIN_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+      </form>
+   </div>
+  {/if}
+  {if isset($league.NOT_ENOUGH_CREDITS)}
+   <div class="content">
+         {translate fonema=LANG_MANAGER_LEAGUE_INVITE_CODE_INSTR_U}<br>
+  	 <span class="textred"><b>{translate fonema=LANG_ERROR_NOT_ENOUGH_CREDITS_U}</b></span><br>
+   </div>
+  {/if}
+  {if isset($league.SUCCESS)}
+   <div class="content">
+  	 <span class="textgreen"><b>{$league.SUCCESS.MSG}</b></span><br>
+   </div>
+  {/if}
+</div>
+
+{/if}

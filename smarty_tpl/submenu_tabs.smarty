@@ -1,0 +1,41 @@
+<script>
+$(function() {
+	$( "#submenu_tabs" ).tabs({
+		ajaxOptions: {
+			error: function( xhr, status, index, anchor ) {
+				$( anchor.hash ).html(
+					"Couldn't load this tab. We'll try to fix this as soon as possible. " +
+					"If this wouldn't be a demo." );
+			}
+		},
+		cookie: {
+				// store cookie for a day, without, it would be a session cookie
+				expires: 1,
+				name: "submenu_tabs"
+			}
+
+	});
+
+	$('.inlineForm').live('submit', function() {
+ 	   $.ajax({ // create an AJAX call...
+		data: $(this).serialize(), // get the form data
+		type: $(this).attr('method'), // GET or POST
+		url: $(this).attr('action'), // the file to call
+		success: function(response) { // on success..
+			$('.ui-tabs-panel:visible').html(response); // update the DIV
+	        }
+           });
+           return false; // cancel original event to prevent form submitting
+        })
+});
+</script>
+
+<div id="submenu_tabs">
+  <ul>
+    {foreach $submenu as $submenu_item}
+    <li><a href="{$submenu_item.LINK}">{$submenu_item.TITLE}</a></li>
+    {/foreach}
+  </ul>
+</div>
+
+

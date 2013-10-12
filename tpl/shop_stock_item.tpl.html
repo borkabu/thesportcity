@@ -1,0 +1,33 @@
+<div style="clear:both"></div>
+<TPL_SUB:SHOP>
+<TPL_SUB:ITEM>
+<div class="portlet">
+<div class="header"><TPL:ITEM_NAME></div>
+	<div class="content">
+		<TPL:DESCR>
+	</div>
+	<div class="content"  style="text-align:center"><img src="./img/<TPL:PIC_LOCATION>"></div>
+	<div class="content">
+           <b><_TPL:LANG_PRICE_U></b><br>
+		<_TPL:LANG_CREDITS_U>: <TPL:PRICE_CREDITS><br>
+		<_TPL:LANG_MONEY_U>: <TPL:PRICE_EURO>&euro;
+	</div>
+        <!-- add to basket -->
+        <form action="" method="POST" style="margin:0">   
+        <TPL_SUB:ATTRIBUTES>
+	<div class="content">
+           <b><TPL:ITEM_NAME></b>: <TPL:ATTRIBUTE>
+	</div>
+        </TPL_SUB:ATTRIBUTES>
+        <TPL_SUB:BASKET_ADD>
+	<div class="content">
+            <input type="hidden" name="add_item" value="y">
+            <input type="hidden" name="item_id" value="<TPL:ITEM_ID>">
+            <_TPL:LANG_QUANTITY_U>: <input type="text" name="quantity" value="" size="3" maxlength="2" class="input">
+            <input type="submit" class="btn" value=" <_TPL:LANG_ADD_TO_BASKET_U> "  onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" >
+	</div>
+        </TPL_SUB:BASKET_ADD>
+        </form>
+</div>
+</TPL_SUB:ITEM>
+</TPL_SUB:SHOP>

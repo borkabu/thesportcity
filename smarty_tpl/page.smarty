@@ -1,0 +1,7 @@
+<div style="clear:both;"></div>
+<div class="portlet">
+    <div class="header">{$title}</div>
+    <div class="content">
+             {$description}
+    </div>
+</div>

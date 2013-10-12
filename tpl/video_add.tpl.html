@@ -1,0 +1,62 @@
+<TPL_SUB:ERROR>
+<div class="portlet" id="message">
+    <div class="content">
+	<span class="textred"><b><TPL:MSG></b></span>
+    </div>
+</div>
+</TPL_SUB:ERROR>
+
+<TPL_SUB:LOGGED>
+<div class="portlet">
+    <div class="header"><_TPL:LANG_EDIT_VIDEO_U></div>
+    <div class="content">
+<form action="" method="post"  style="margin:0px">
+<table class="noborder">
+<tr><td><b><_TPL:LANG_ITEM_NAME_U></b></td><td><TPL_INPUT:video.title>
+<input class="btn" type="submit" value=" <_TPL:LANG_CREATE_U> " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/></td></tr>
+<tr><td><b><_TPL:LANG_SOURCE_U></b></td><td><TPL_INPUT:video.source_name></td></tr>
+<tr><td><b><_TPL:LANG_LINK_U></b></td><td><TPL_INPUT:video.source></td></tr>
+<tr><td><b><_TPL:LANG_THUMBNAIL_U></b></td><td><TPL_INPUT:video.thumbnail></td></tr>
+<tr><td><b><_TPL:LANG_EMBEDDED_VIDEO_U></b></td><td><TPL_INPUT:video.link></td></tr>
+</table>
+<b></b>
+  <input type="hidden" name="post_video" value="Y">
+  <input type="hidden" name="lang_id" value="<TPL:LANG_ID>">
+    <TPL_INPUT:adm_news.descr>
+
+			<script type="text/javascript">
+				//<![CDATA[
+
+					// This call can be placed at any point after the
+					// <textarea>, or inside a <head><script> in a
+					// window.onload event handler.
+
+					// Replace the <textarea id="editor"> with an CKEditor
+					// instance, using default configurations.
+					CKEDITOR.replace( 'descr' ,
+                                            { entities : false,
+						resize_enabled: false,
+                                                  on :
+                                                 {
+					           instanceReady : function( ev )
+					            {
+                                                     // Output paragraphs as <p>Text</p>.
+					                this.dataProcessor.writer.setRules( 'p',
+					                    {
+					                        indent : false,
+                                                                breakBeforeOpen : false,
+					                        breakAfterOpen : false,
+					                        breakBeforeClose : false,
+					                        breakAfterClose : false
+                                                             });
+					            }
+					        }
+					});
+
+				//]]>
+				</script>
+  <input type="hidden" name="video_id" value="<TPL:VIDEO_ID>">
+</form>
+	</div>
+</div>
+</TPL_SUB:LOGGED>

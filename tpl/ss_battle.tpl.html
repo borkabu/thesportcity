@@ -1,0 +1,166 @@
+<div class="portlet">
+    <div class="content">
+	<_TPL:LANG_BATTLE_U>: <TPL:BATTLE_ID> /
+	<_TPL:LANG_ROUNDS_U>: <TPL:ROUNDS> /
+	<_TPL:LANG_POINTS_U>: <TPL:POINTS>
+   </div>
+</div>
+
+<TPL_SUB:GAME_OVER>
+<div class="portlet">
+    <div class="content">
+<_TPL:LANG_GAME_OVER_U>.<br>
+<TPL_SUB:WIN><_TPL:LANG_YOU_WON_U> :)! <TPL:PRIZE> <_TPL:LANG_YOU_WON_COINS_U>.</TPL_SUB:WIN>
+<TPL_SUB:LOST><_TPL:LANG_YOU_LOST_U> :(. <TPL:PRIZE> <_TPL:LANG_YOU_LOST_COINS_U>.</TPL_SUB:LOST>
+<TPL_SUB:DRAW><_TPL:LANG_DRAW_U>!</TPL_SUB:DRAW>
+<a href="ss_battles.php"><_TPL:LANG_EXIT_U></a>
+   </div>
+</div>
+</TPL_SUB:GAME_OVER>
+
+<div style="float:left; width:340">
+<form action="ss_battle.php" method="post" name="playground">
+<TPL_SUB:BOARD>
+<div class="portlet">
+    <div class="content">
+<table width="<TPL:WIDTH>px" height="<TPL:HEIGHT>px" border="0" cellpadding="0" cellspacing="0" style="background-image:url('./img/<TPL:FIELD>.gif')">
+<TPL_SUB:ROWS>
+  <tr>
+   <TPL_SUB:COLS>
+    <td align="center" width="<TPL:WIDTH>" height="<TPL:HEIGHT>" 
+       <TPL_SUB:ATTACK>background="./img/attack_<TPL:SPORT>.gif"</TPL_SUB:ATTACK> 
+       <TPL_SUB:ATTACK_X>background="./img/attackx_<TPL:SPORT>.gif"</TPL_SUB:ATTACK_X> 
+       <TPL_SUB:ATTACKBALL>background="./img/attackball_<TPL:SPORT>.gif"</TPL_SUB:ATTACKBALL> 
+       <TPL_SUB:ATTACKBALL_X>background="./img/attackballx_<TPL:SPORT>.gif"</TPL_SUB:ATTACKBALL_X> 
+       <TPL_SUB:DEFENSE>background="./img/defense_<TPL:SPORT>.gif"</TPL_SUB:DEFENSE> 
+       <TPL_SUB:DEFENSE_X>background="./img/defensex_<TPL:SPORT>.gif"</TPL_SUB:DEFENSE_X> 
+       <TPL_SUB:ATTACKDEFENSE>background="./img/attackdefense_<TPL:SPORT>.gif"</TPL_SUB:ATTACKDEFENSE> 
+       <TPL_SUB:ATTACKDEFENSE_X>background="./img/attackdefense_<TPL:SPORT>.gif"</TPL_SUB:ATTACKDEFENSE_X> 
+       <TPL_SUB:ATTACKBALLDEFENSE>background="./img/attackballdefense_<TPL:SPORT>.gif"</TPL_SUB:ATTACKBALLDEFENSE>
+       <TPL_SUB:ATTACKBALLDEFENSE_X>background="./img/attackballdefensex_<TPL:SPORT>.gif"</TPL_SUB:ATTACKBALLDEFENSE_X> title="<TPL:NAMES>">
+      <TPL_SUB:BUTTON><input name="field" type="radio" value="<TPL:VALUE>" <TPL:CHECKED>></TPL_SUB:BUTTON>      
+    </td>
+   </TPL_SUB:COLS>
+  </tr>
+</TPL_SUB:ROWS>
+</table>
+   </div>
+</div>
+</TPL_SUB:BOARD>
+
+<TPL_SUB:TIMER>
+<script>
+
+function decint() {
+   var timeleft = document.getElementById("timeleft");
+//    if ( ! document.all.timeleft  ) return false;
+    if (timeleft.innerText)  {
+      if (timeleft.innerText > 1 ) timeleft.innerText--
+      else {
+         if (timeleft.innerText == 1) {
+		var tstr = window.location.href;
+		window.location.href = tstr;
+         }
+      }
+    }
+    else if (timeleft.textContent)  {
+      if (timeleft.textContent > 1 ) timeleft.textContent--
+      else {
+         if (timeleft.textContent == 1) {
+		var tstr = window.location.href;
+		window.location.href = tstr;
+         }
+      }
+    }
+
+  
+}
+var int1 = window.setInterval( "decint();", 1000 );
+</script>
+</TPL_SUB:TIMER>
+
+<TPL_SUB:CONTROL>
+<div class="portlet">
+    <div class="header"><b><_TPL:LANG_ACTIONS_U>:</b></div>
+    <div class="content">
+<TPL_SUB:WAITING><_TPL:LANG_WAITING_FOR_MOVE_U><br></TPL_SUB:WAITING>
+<TPL_SUB:BASKETBALL>
+<TPL_SUB:ATTACK>
+<TPL_SUB:NOBALL><_TPL:KREP_LANG_POSITIONAL_ATTACK_ONLY_U></TPL_SUB:NOBALL>
+<TPL_SUB:BALL><_TPL:KREP_LANG_SHOOT_U><input name="attack" type="radio" value="shoot">
+<_TPL:KREP_LANG_DRIBBLE_U> <input name="attack" type="radio" value="dribble">
+<TPL_SUB:PASS>
+<_TPL:KREP_LANG_PASS_TO_U> <TPL:USER_NAME> <input name="attack" type="radio" value="pass_<TPL:USER_ID>"><br>
+</TPL_SUB:PASS>
+</TPL_SUB:BALL>
+<input type="hidden" name="move" value="y">
+<input class="btn" type="submit" value=" <_TPL:LANG_CONFIRM_U> " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+<br>
+</TPL_SUB:ATTACK>
+<TPL_SUB:DEFENSE>
+<TPL_SUB:NOBALL><_TPL:KREP_LANG_POSITIONAL_DEFENCE_ONLY_U></TPL_SUB:NOBALL>
+<TPL_SUB:STEAL><_TPL:KREP_LANG_STEAL_U> <input name="defense" type="radio" value="krep_defense_1"></TPL_SUB:STEAL>
+<TPL_SUB:BLOCK><_TPL:KREP_LANG_BLOCK_U> <input name="defense" type="radio" value="krep_defense_2"></TPL_SUB:BLOCK>
+<input type="hidden" name="move" value="y">
+<input class="btn" type="submit" value=" <_TPL:LANG_CONFIRM_U> " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/><br>
+</TPL_SUB:DEFENSE>
+</TPL_SUB:BASKETBALL>
+<TPL_SUB:FOOTBALL>
+<TPL_SUB:ATTACK>Shoot <input name="attack" type="radio" value="fut_attack_2"><br>
+Dribble <input name="attack" type="radio" value="fut_attack_1"><br>
+<input type="hidden" name="move" value="y">
+<input class="btn" type="submit" value=" <_TPL:LANG_CONFIRM_U> " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/><br>
+</TPL_SUB:ATTACK>
+<TPL_SUB:DEFENSE>Steal <input name="defense" type="radio" value="fut_defense_1"><br>
+Block <input name="defense" type="radio" value="fut_defense_2"><br>
+<input type="hidden" name="move" value="y">
+<input class="btn" type="submit" value=" <_TPL:LANG_CONFIRM_U> " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/><br>
+</TPL_SUB:DEFENSE>
+</TPL_SUB:FOOTBALL>
+</form>
+</div>
+<div class="content">
+Timeout - <span id="timeleft" Style="Visibility:<TPL:TIMELEFT_VISIBILITY>"><TPL:TIMELEFT></span>
+</div>
+<div class="header"><b><_TPL:LANG_USE_ITEM_U>:</b></div>
+<div class="content">
+<TPL_SUB:INVENTORY>
+  <table width="100%" border="1" cellspacing="0" cellpadding="2">
+        <tr><td align="center" colspan="3"><b><_TPL:LANG_INVENTORY_U></b></td></tr>
+        <TPL_SUB:ROWS>
+	<tr> 
+          <TPL_SUB:COLS>          
+          <form method="post"><td width="30%" height="60">
+          <TPL_SUB:USE>
+           <input type="hidden" name="use" value="use">
+           <input type="hidden" name="id" value="<TPL:GENERAL_ID>">
+           <input class="btn" type="submit" value=" <TPL:ITEM_NAME> " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/><br>
+          </TPL_SUB:USE>
+          </td></form>
+        </TPL_SUB:COLS>
+        </tr>
+        </TPL_SUB:ROWS>
+	</table>
+</TPL_SUB:INVENTORY></td>
+</tr></table>
+</div>
+</div>
+</TPL_SUB:CONTROL>
+</div>
+
+<div style="float:left; width:260px">
+
+<TPL_SUB:CHARS>
+<div class="portlet">           
+    <div class="header"><b><_TPL:LANG_ATTRIBUTES_U></b></div>
+    <div class="content">
+ <table border="1" cellspacing="1" cellpadding="1"  width="100%">
+  <tr><TPL_SUB:USER_CHAR><td><_TPL:LANG_STAMINA_U></td><td><TPL:STAMINA></td></TPL_SUB:USER_CHAR></tr>
+ </table>
+</div>
+</div>
+</TPL_SUB:CHARS>
+
+<TPL:PROTOCOL>
+
+</div>

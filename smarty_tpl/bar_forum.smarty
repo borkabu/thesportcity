@@ -1,0 +1,11 @@
+<div class="portlet">
+<div class="header">{translate fonema=LANG_FORUM_U}</div>
+<div class="content" align="center">
+<form action="" method="POST" style="margin:0">
+<input type="hidden"  name="read_all" value="true">
+<input type="hidden"  name="forum_id" value="{$forum.FORUM_ID}">
+<input type="hidden"  name="cat_id" value="{$forum.CAT_ID}">
+<input class="btn" type="submit" value=" {translate fonema=LANG_TOPIC_READ_ALL_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+</form>
+</div>
+</div>

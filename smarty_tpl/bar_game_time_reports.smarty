@@ -1,0 +1,20 @@
+{if isset($reports.REPORTS)}
+<table>
+ <tr>
+   <th>{translate fonema=LANG_START_DATE_U}</th>
+   <th>{translate fonema=LANG_REPORT_SUBMITTED_U}</th>
+   <th>{translate fonema=LANG_REPORTED_BY_U}</th>
+   <th>{translate fonema=LANG_REPORT_STATUS_U}</th>
+ </tr>
+{foreach $reports.REPORTS as $report}
+ <tr>
+   <td><a href="{$report.LINK}" class="date_font2" target="game_report">{$report.REPORTED_START_DATE} +00:00</a></td>
+   <td class="date_font2">{$report.DATE_REPORTED}</td>
+   <td>{$report.USER_NAME}</td>
+   <td>{$report.REPORT_STATUS}</td>
+ </tr>
+{/foreach}
+</table>
+{else}
+{translate fonema=LANG_NO_REPORTS_U}<br>
+{/if}

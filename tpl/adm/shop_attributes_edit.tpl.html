@@ -1,0 +1,71 @@
+<TPL_INCLUDE:../tpl/adm/head.tpl.html>
+<TPL_INCLUDE:../tpl/adm/menu.tpl.html>
+
+<form action="" method="post">
+<input type="hidden" name="form_save" value="Y">
+<input type="hidden" name="referer" value="<TPL:REFERER>">
+<input type="hidden" name="lang_id" value="<TPL:LANG_ID>">
+
+<TPL_SUB:ERROR><span class="error"><TPL:MSG></span></TPL_SUB:ERROR>
+
+<div class="portlet">
+  <div class="header"><_TPL:LANG_GENERAL_DATA_U></div>
+  <div class="content">
+  <table>
+    <tr><th colspan="2"><_TPL:LANG_PARAMETERS_U></td></tr>
+    
+    <tr>
+      <td class="list_item"><_TPL:LANG_TITLE_U></td>
+      <td class="list_item"><TPL_INPUT:adm_item.item_name></td>
+    </tr>
+
+  </table>
+</div>
+</div>
+
+
+<div class="portlet">
+  <div class="header"><_TPL:LANG_VALUES_U> <a href="shop_attributes_values_edit.php?attribute_id=<TPL:ATTRIBUTE_ID>"><img src="../img/adm_edit.gif" width="12" height="12" border="0" alt="redaguoti"></a></div>
+  <div class="content">
+  <table>
+    <tr>
+      <th>N</td>
+      <th><_TPL:LANG_ITEM_NAME_U></td>
+      <th>&nbsp;</td>
+      <th>&nbsp;</td>
+    </tr>
+
+    <TPL_SUB:VALUES>
+
+    <tr class="<TPL_SUB:EVEN>even</TPL_SUB:EVEN><TPL_SUB:ODD>odd</TPL_SUB:ODD>">
+      <td class="list_item"><TPL:NUMBER></td>
+      <td class="list_item"><TPL:ITEM_NAME></td>
+      <td class="list_item" align="center">
+        <TPL_SUB:DEL><a href="<TPL:DEL_URL>" onClick="return confirm('Tikrai?');"><img src="../img/adm_delete.gif" width="12" height="12" border="0" alt="pašalinti"></a></TPL_SUB:DEL>
+        <a href="shop_attributes_values_edit.php?value_id=<TPL:VALUE_ID>&attribute_id=<TPL:ATTRIBUTE_ID>"><img src="../img/adm_edit.gif" width="12" height="12" border="0" alt="redaguoti"></a>
+      </td>
+      <td class="list_item" align="center">
+				<TPL_SUB:LANGS>
+				<TPL_SUB:USED><a href="shop_attributes_values_edit.php?value_id=<TPL:VALUE_ID>&attribute_id=<TPL:ATTRIBUTE_ID>&lang_id=<TPL:SHORT_CODE>"><b><TPL:SHORT_CODE></b></a></TPL_SUB:USED>
+				<TPL_SUB:NOTUSED><a href="shop_attributes_values_edit.php?value_id=<TPL:VALUE_ID>&attribute_id=<TPL:ATTRIBUTE_ID>&lang_id=<TPL:SHORT_CODE>"><TPL:SHORT_CODE></a></TPL_SUB:NOTUSED>
+                            </TPL_SUB:LANGS>
+      </td>
+    </tr>
+    </TPL_SUB:VALUES>
+    <TPL_SUB:NORECORDS>
+    <tr bgcolor="#FFFFFF"><td colspan="7" class="list_item">Įrašų nėra</td></tr>
+    </TPL_SUB:NORECORDS>   
+  </table>
+  </div>
+</div>
+
+<div class="portlet">
+  <div class="content">
+        <input type="submit" class="btn" value="<_TPL:LANG_SAVE_U>" onclick="resettarget();"  onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" >
+        <input type="reset" class="btn" value="<_TPL:LANG_RESET_U>" onclick="return confirm('<_TPL:LANG_REALLY_U>');"  onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'">
+</div>
+</div>
+
+</form>
+
+<TPL_INCLUDE:../tpl/adm/foot.tpl.html>

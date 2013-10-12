@@ -1,0 +1,22 @@
+<div  style="clear:both"></div>
+
+<div style="width:400px;float:left;">
+
+ {$comment_log}
+ {$comment_log_paging}
+
+</div>
+
+<div style="width:300px;float:left;">
+ 
+  <div class="portlet">
+    <div class="content">
+
+    </div>
+  </div>
+
+  <div class="portlet">
+    <div class="content">
+    </div>
+  </div>
+</div>

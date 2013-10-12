@@ -1,0 +1,181 @@
+<div style="clear:both"></div>
+
+{if isset($error)}
+<div class="portlet" id="message">
+ <div class="content">
+  <span class="textred"><b>{$error.MSG}</b></span>
+ </div>
+</div>
+{/if}
+
+{if isset($data.CLUB)}
+<div class="portlet">
+  <div class="content">
+     <h3>{$data.CLUB.GROUP_NAME}</h3><br>
+     {translate fonema=LANG_PREZIDENT_U}: <b>{$data.CLUB.PREZIDENT}</b><br>
+  </div>
+</div>
+
+{if isset($data.CLUB.MEMBERSHIP)}
+<div class="portlet">
+  {foreach $data.CLUB.MEMBERSHIP.MEMBER as $member}
+  <div class="content">
+     {translate fonema=LANG_CLUB_MEMBER_U}
+  </div>
+  {foreachelse}
+  <div class="content">
+     {translate fonema=LANG_NOT_CLUB_MEMBER_U}
+  </div>
+  {/foreach}  
+</div>
+{/if}
+
+<div class="portlet">
+  <div class="header">{translate fonema=LANG_CURRENT_EVENTS_U}</div>
+  {if isset($data.CLUB.ADD_CLUB_EVENT)}
+  <div class="content">
+   <a href="club_event_add.php?club_id={$data.CLUB.ADD_CLUB_EVENT.CLUB_ID}">{translate fonema=LANG_ADD_CLUB_EVENT_U}</a>
+  </div>
+  {/if}
+  {if isset($data.CLUB.CURRENT_EVENTS)}
+  {foreach $data.CLUB.CURRENT_EVENTS as $current_event}
+   <div class="content">
+    <div style="float:left;"><a href="clubs_events.php?club_id={$current_event.GROUP_ID}&event_id={$current_event.EVENT_ID}">{$current_event.TITLE}</a> ({$current_event.POSTS}) ({translate fonema=LANG_PARTICIPANTS_U}: {$current_event.EVENT_MEMBERS})</div>
+    <div style="float:right;">
+      {if isset($current_event.LANGS)}
+        {foreach $current_event.LANGS as $lang}
+ 	  {if isset($lang.USED)}<a href="club_event_add.php?club_id={$lang.CLUB_ID}&event_id={$lang.EVENT_ID}&lang_id={$lang.USED.SHORT_CODE}"><b>{$lang.USED.SHORT_CODE}</b></a>{/if}
+	  {if isset($lang.NOTUSED)}<a href="club_event_add.php?club_id={$lang.CLUB_ID}&event_id={$lang.EVENT_ID}&lang_id={$lang.NOTUSED.SHORT_CODE}">{$lang.NOTUSED.SHORT_CODE}</a>{/if}
+        {/foreach}
+      {/if}
+    </div>
+     <div style="clear:both"></div>
+   </div>
+  {/foreach}
+  {else}
+  <div class="content">
+    {translate fonema=LANG_NO_EVENTS_U}
+  </div>
+  {/if}
+</div>
+
+<script>
+ $(function() {
+    $( "#club" ).tabs({
+ 	cookie: {
+		expires: 1,
+		name: "club"
+		}
+	}); 
+ });
+</script>
+<div id="club">
+ <ul>
+  {if isset($data.CLUB.MANAGEMENT)}
+   <li><a href="#tabs-1" title="{translate fonema=LANG_CLUB_MANAGEMENT_U}">{translate fonema=LANG_CLUB_MANAGEMENT_U}</a></li>
+  {/if}
+  <li><a href="#tabs-2" title="{translate fonema=LANG_DESCRIPTION_U}">{translate fonema=LANG_DESCRIPTION_U}</a></li>
+  <li><a href="#tabs-3" title="{translate fonema=LANG_CURRENT_MEMBERS_U}">{translate fonema=LANG_CURRENT_MEMBERS_U}</a></li>
+  <li><a href="#tabs-4" title="{translate fonema=LANG_PAST_EVENTS_U}">{translate fonema=LANG_PAST_EVENTS_U}</a></li>
+ </ul>
+ 
+ {if isset($data.CLUB.MANAGEMENT)}
+ <div id="tabs-1">
+  <div class="portlet" style="margin:0px">
+  <form action="" method="post">
+  <div class="content">
+     <b>{translate fonema=LANG_DESCRIPTION_U}</b>
+     {$data.CLUB.MANAGEMENT.DESCR}
+        <input type="hidden" name="club_id" value="{$data.CLUB.MANAGEMENT.CLUB_ID}">
+        <input type="hidden" name="lang_id" value="{$data.CLUB.MANAGEMENT.LANG_ID}">
+        <input type="hidden" name="set_info" value="Y">
+        <textarea id="descr" name="descr">{$data.CLUB.MANAGEMENT.DESCR}</textarea>
+	<script type="text/javascript">
+		//<![CDATA[
+
+			// This call can be placed at any point after the
+			// <textarea>, or inside a <head><script> in a
+			// window.onload event handler.
+
+			// Replace the <textarea id="editor"> with an CKEditor
+			// instance, using default configurations.
+			CKEDITOR.replace( 'descr' ,
+                            { entities : true,
+                                  on :
+                                 {
+			           instanceReady : function( ev )
+			            {
+                                     // Output paragraphs as <p>Text</p>.
+			                this.dataProcessor.writer.setRules( 'p',
+			                    {
+			                        indent : false,
+                                                breakBeforeOpen : false,
+			                        breakAfterOpen : false,
+			                        breakBeforeClose : false,
+			                        breakAfterClose : false
+                                             });
+			            }
+			        }
+			});
+
+		//]]>
+		</script>
+    </div>
+    <div class="content">
+       <input class="btn" type="submit" value=" {translate fonema=LANG_SUBMIT_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+    </div>
+  </div>
+ </div>
+ {/if}
+ <div id="tabs-2">
+  <div class="portlet" style="margin:0px">
+   <div class="content">
+    {$data.CLUB.DESCR}
+   </div>
+  </div>
+ </div>
+ <div id="tabs-3">
+  <div class="portlet" style="margin:0px">
+   <div class="content">
+     <table style="width:100%">
+     <tr >
+      <th>{translate fonema=LANG_PARTICIPANT_U}</th>
+     </tr>   
+     {foreach $data.CLUB.MEMBERS as $member}
+     <tr>
+       <td>
+	  {if isset($member.COUNTRY_DB)}<img border=1 src="./img/flags/{$member.COUNTRY_DB.CCTLD}.gif" onmouseover="Tip('{$member.COUNTRY_DB.COUNTRY_NAME}')" onmouseout="UnTip()">{/if}
+	  {$member.USER_NAME}
+       </td> 
+     </tr>
+     {/foreach}
+    </table>    
+   </div>
+  </div>
+ </div>
+ <div id="tabs-4">
+  <div class="portlet" style="margin:0px">
+  {if isset($data.CLUB.PAST_EVENTS)} 
+    {foreach $data.CLUB.PAST_EVENTS as $past_event}
+    <div class="content">
+      <div style="float:left;"><a href="clubs_events.php?club_id={$past_event.GROUP_ID}&event_id={$past_event.EVENT_ID}">{$past_event.TITLE}</a> ({$past_event.POSTS}) ({translate fonema=LANG_PARTICIPANTS_U}: {$past_event.EVENT_MEMBERS})</div>
+      <div style="float:right;">
+      {if isset($past_event.LANGS)}
+        {foreach $past_event.LANGS as $lang}
+ 	  {if isset($lang.USED)}<a href="club_event_add.php?club_id={$lang.CLUB_ID}&event_id={$lang.EVENT_ID}&lang_id={$lang.SHORT_CODE}"><b>{$lang.SHORT_CODE}</b></a>{/if}
+	  {if isset($lang.NOTUSED)}<a href="club_event_add.php?club_id={$lang.CLUB_ID}&event_id={$lang.EVENT_ID}&lang_id={$lang.SHORT_CODE}">{$lang.SHORT_CODE}</a>{/if}
+        {/foreach}
+      {/if}
+      </div>
+      <div style="clear:both"></div>
+    </div>
+    {/foreach}
+  {else} 
+  <div class="content">
+    {translate fonema=LANG_NO_EVENTS_U}
+  </div>
+  {/if}
+  </div>
+ </div>
+</div>
+{/if}

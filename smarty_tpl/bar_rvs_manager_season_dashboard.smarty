@@ -1,0 +1,27 @@
+<div style="float:left">
+<div class="portlet">
+<div class="header">{translate fonema=LANG_SUMMARY_U}</div>
+{if isset($manager_season.RVS_LEAGUES_ALLOWED)}
+ {if isset($manager_season.RVS_LEAGUES_INVITE)}
+ <div class="content"><a href="rvs_manager_league.php?mseason_id={$manager_season.MANAGER_INFO.SEASON_ID}#league_invites">{translate fonema=LANG_RVS_LEAGUE_INVITATIONS_U}:</a> <span class="textred"><b>{$manager_season.RVS_LEAGUES_INVITE.LEAGUES}</b></span></div>
+  {/if}
+ {if isset($manager_season.RVS_LEAGUES)}
+  <div class="content">{translate fonema=LANG_RVS_LEAGUES_U}: <a href="rvs_manager_league.php?mseason_id={$manager_season.MANAGER_INFO.SEASON_ID}&all=y"><b>{$manager_season.RVS_LEAGUES.LEAGUES}</b></a> {if isset($manager_season.RVS_LEAGUES.MY_LEAGUES)}/ <a href="rvs_manager_league.php?mseason_id={$manager_season.MANAGER_INFO.SEASON_ID}"><b>{$manager_season.RVS_LEAGUES.MY_LEAGUES}</b></a>{/if}</div>
+ {else} 
+  <div class="content"><a href="rvs_manager_league.php?mseason_id={$manager_season.MANAGER_INFO.SEASON_ID}&all=y">{translate fonema=LANG_RVS_LEAGUES_U}</a>: <b>0</b></div>
+ {/if}
+{/if}
+{if isset($manager_season.MARKET)}
+<div class="content">
+     {if isset($manager_season.MARKET.SEASON_OVER)}<div class="textred">{translate fonema=LANG_SEASON_OVER_U}</div>
+     {elseif isset($manager_season.MARKET.NOMARKET)}
+     <div>{translate fonema=LANG_MARKET_CLOSED_3_U} <span class="date_font2"><b>{$manager_season.MARKET.NOMARKET.START_DATE} {$manager_season.MARKET.NOMARKET.UTC}</b></span></div> 
+     {elseif isset($manager_season.MARKET.NOMARKET_DELAY)}
+     <div>{translate fonema=LANG_MARKET_CLOSED_2_U}</b></div> 
+     {elseif isset($manager_season.MARKET.MARKET_OPEN)}
+     <div>{translate fonema=LANG_MARKET_OPENED_2_U} <span class="date_font2"><b>{$manager_season.MARKET.MARKET_OPEN.START_DATE} {$manager_season.MARKET.MARKET_OPEN.UTC}</b></span></div> 
+     {/if}
+</div>
+{/if}
+</div>
+</div>

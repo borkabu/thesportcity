@@ -1,0 +1,222 @@
+<div style="clear:both"></div>
+<div class="portlet">
+<div class="header">{translate fonema=LANG_CHAT_U}</div>
+<div class="content">
+<applet name="PJirc" code="IRCApplet.class" codebase="http://www.urwebchat.com/irc/" archive="irc.jar,pixx.jar" width="800" height="600">
+<param name="CABINETS" value="irc.cab,securedirc.cab,pixx.cab">
+
+<param name="gui" value="pixx">
+<param name="language" value="english">
+<param name="pixx:language" value="pixx-english">
+<param name="noasldisplayprefix" value="true" >
+<param name="pixx:helppage" value="http://www.urchat.net/help.html" >
+<param name="pixx:showabout" value="true" >
+<param name="pixx:showconnect" value="true" >
+<param name="pixx:timestamp" value="true" >
+<param name="pixx:highlight" value="true" >
+<param name="pixx:highlightnick" value="true" >
+<param name="pixx:nickfield" value="true" >
+<param name="pixx:styleselector" value="true" >
+<param name="pixx:setfontonstyle" value="true" >
+<param name="host" value="fruit.urchat.net" >
+<param name="port" value="6667" >
+<param name="alternateserver1" value="homebase.urchat.net 6667" >
+<param name="alternateserver2" value="irc.urchat.net 6667" >
+<param name="autoconnection" value="true" >
+<param name="nick" value="{$nick}" >
+<param name="alternatenick" value="{$nick}__" >
+<param name="userid" value="webchat" >
+<param name="name" value="borka Webchat" >
+<param name="useidentserver" value="true">
+<param name="command1" value="/join #thesportcity-net" >
+<param name="soundbeep" value="./snd/join.wav" >
+<param name="soundquery" value="./snd/msg.wav" >
+<param name="useinfo" value="true" >
+<param name="style:sourcefontrule1" value="all all Helvetica 10" >
+<param name="allowdccchat" value="true" >
+<param name="allowdccfile" value="false" >
+param name="style:bitmapsmileys" value="true" >
+                <param name="style:smiley1" value=":) img/emoticons/0.gif" >
+                <param name="style:smiley2" value=":) img/emoticons/0.gif" >
+
+                <param name="style:smiley3" value=":D img/emoticons/6.gif" >
+                <param name="style:smiley4" value=":-D img/emoticons/6.gif" >
+                <param name="style:smiley5" value=":( img/emoticons/1.gif" >
+                <param name="style:smiley6" value=":( img/emoticons/1.gif" >
+                <param name="style:smiley7" value="(h) img/emoticons/26.gif" >
+                <param name="style:smiley8" value="(H) img/emoticons/26.gif" >
+                <param name="style:smiley9" value=";) img/emoticons/19.gif" >
+                <param name="style:smiley10" value=";) img/emoticons/19.gif" >
+                <param name="style:smiley11" value=":p img/emoticons/7.gif" >
+
+                <param name="style:smiley12" value=":-P img/emoticons/7.gif" >
+                <param name="style:smiley13" value=":s img/emoticons/5.gif" >
+                <param name="style:smiley14" value=":S img/emoticons/5.gif" >
+                <param name="style:smiley15" value="<:o) img/emoticons/57.gif" >
+                <param name="style:smiley16" value="<:o) img/emoticons/57.gif" >
+                <param name="style:smiley17" value="|-) img/emoticons/56.gif" >
+                <param name="style:smiley18" value="|-) img/emoticons/56.gif" >
+                <param name="style:smiley19" value="+o( img/emoticons/55.gif" >
+                <param name="style:smiley20" value="+o( img/emoticons/55.gif" >
+
+                <param name="style:smiley21" value="*-) img/emoticons/54.gif" >
+                <param name="style:smiley22" value="*-) img/emoticons/54.gif" >
+                <param name="style:smiley23" value="^o) img/emoticons/53.gif" >
+                <param name="style:smiley24" value="^o) img/emoticons/53.gif" >
+                <param name="style:smiley25" value="(brb) img/emoticons/61.gif" >
+                <param name="style:smiley26" value="(brb) img/emoticons/61.gif" >
+                <param name="style:smiley27" value=":-* img/emoticons/48.gif" >
+                <param name="style:smiley28" value=":-* img/emoticons/48.gif" >
+                <param name="style:smiley29" value=":-# img/emoticons/47.gif" >
+
+                <param name="style:smiley30" value=":-# img/emoticons/47.gif" >
+                <param name="style:smiley31" value="(#) img/emoticons/46.gif" >
+                <param name="style:smiley32" value="(#) img/emoticons/46.gif" >
+                <param name="style:smiley33" value=":'( img/emoticons/33.gif" >
+                <param name="style:smiley34" value=":'( img/emoticons/33.gif" >
+                <param name="style:smiley35" value=":| img/emoticons/2.gif" >
+                <param name="style:smiley36" value=":-| img/emoticons/2.gif" >
+                <param name="style:smiley37" value="(al) img/emoticons/79.gif" >
+                <param name="style:smiley38" value="(al) img/emoticons/79.gif" >
+
+                <param name="style:smiley39" value="8-) img/emoticons/51.gif" >
+                <param name="style:smiley40" value="8-) img/emoticons/51.gif" >
+                <param name="style:smiley41" value="8o| img/emoticons/50.gif" >
+                <param name="style:smiley42" value="8o| img/emoticons/50.gif" >
+                <param name="style:smiley43" value=":^) img/emoticons/49.gif" >
+                <param name="style:smiley44" value=":^) img/emoticons/49.gif" >
+                <param name="style:smiley45" value=":$ img/emoticons/44.gif" >
+                <param name="style:smiley46" value=":-$ img/emoticons/44.gif" >
+                <param name="style:smiley47" value="(6) img/emoticons/40.gif" >
+
+                <param name="style:smiley48" value="(6) img/emoticons/40.gif" >
+                <param name="style:smiley49" value=":@ img/emoticons/36.gif" >
+                <param name="style:smiley50" value=":-@ img/emoticons/36.gif" >
+                <param name="style:smiley51" value=":o img/emoticons/8.gif" >
+                <param name="style:smiley52" value=":-O img/emoticons/8.gif" >
+                <param name="style:smiley53" value="(a) img/emoticons/39.gif" >
+                <param name="style:smiley54" value="(a) img/emoticons/39.gif" >
+                <param name="style:smiley55" value="8-| img/emoticons/52.gif" >
+                <param name="style:smiley56" value="8-| img/emoticons/52.gif" >
+
+                <param name="style:smiley57" value="(?) img/emoticons/35.gif" >
+                <param name="style:smiley58" value="(?) img/emoticons/35.gif" >
+                <param name="style:smiley59" value="(r) img/emoticons/45.gif" >
+                <param name="style:smiley60" value="(R) img/emoticons/45.gif" >
+                <param name="style:smiley61" value="({) img/emoticons/38.gif" >
+                <param name="style:smiley62" value="({) img/emoticons/38.gif" >
+                <param name="style:smiley63" value="(}) img/emoticons/37.gif" >
+                <param name="style:smiley64" value="(}) img/emoticons/37.gif" >
+                <param name="style:smiley65" value="(b) img/emoticons/3.gif" >
+
+                <param name="style:smiley66" value="(B) img/emoticons/3.gif" >
+                <param name="style:smiley67" value="(d) img/emoticons/9.gif" >
+                <param name="style:smiley68" value="(D) img/emoticons/9.gif" >
+                <param name="style:smiley69" value="(pl) img/emoticons/70.gif" >
+                <param name="style:smiley70" value="(pl) img/emoticons/70.gif" >
+                <param name="style:smiley71" value="(u) img/emoticons/4.gif" >
+                <param name="style:smiley72" value="(U) img/emoticons/4.gif" >
+                <param name="style:smiley73" value="(l) img/emoticons/15.gif" >
+                <param name="style:smiley74" value="(l) img/emoticons/15.gif" >
+
+                <param name="style:smiley75" value="(t) img/emoticons/20.gif" >
+                <param name="style:smiley76" value="(T) img/emoticons/20.gif" >
+                <param name="style:smiley77" value="(m) img/emoticons/14.gif" >
+                <param name="style:smiley78" value="(M) img/emoticons/14.gif" >
+                <param name="style:smiley79" value="(k) img/emoticons/13.gif" >
+                <param name="style:smiley80" value="(k) img/emoticons/13.gif" >
+                <param name="style:smiley81" value="(||) img/emoticons/78.gif" >
+                <param name="style:smiley82" value="(||) img/emoticons/78.gif" >
+                <param name="style:smiley83" value="(yn) img/emoticons/77.gif" >
+
+                <param name="style:smiley84" value="(yn) img/emoticons/77.gif" >
+                <param name="style:smiley85" value="(xx) img/emoticons/76.gif" >
+                <param name="style:smiley86" value="(xx) img/emoticons/76.gif" >
+                <param name="style:smiley87" value="(co) img/emoticons/63.gif" >
+                <param name="style:smiley88" value="(co) img/emoticons/63.gif" >
+                <param name="style:smiley89" value="(ci) img/emoticons/62.gif" >
+                <param name="style:smiley90" value="(ci) img/emoticons/62.gif" >
+                <param name="style:smiley91" value="(w) img/emoticons/32.gif" >
+                <param name="style:smiley92" value="(W) img/emoticons/32.gif" >
+
+                <param name="style:smiley93" value="(c) img/emoticons/31.gif" >
+                <param name="style:smiley94" value="(C) img/emoticons/31.gif" >
+                <param name="style:smiley95" value="(y) img/emoticons/18.gif" >
+                <param name="style:smiley96" value="(Y) img/emoticons/18.gif" >
+                <param name="style:smiley97" value="(n) img/emoticons/17.gif" >
+                <param name="style:smiley98" value="(N) img/emoticons/17.gif" >
+                <param name="style:smiley99" value=":[ img/emoticons/16.gif" >
+                <param name="style:smiley100" value=":[ img/emoticons/16.gif" >
+                <param name="style:smiley101" value="(mo) img/emoticons/67.gif" >
+
+                <param name="style:smiley102" value="(mo) img/emoticons/67.gif" >
+                <param name="style:smiley103" value="(li) img/emoticons/66.gif" >
+                <param name="style:smiley104" value="(li) img/emoticons/66.gif" >
+                <param name="style:smiley105" value="(ip) img/emoticons/65.gif" >
+                <param name="style:smiley106" value="(ip) img/emoticons/65.gif" >
+                <param name="style:smiley107" value="(h5) img/emoticons/64.gif" >
+                <param name="style:smiley108" value="(h5) img/emoticons/64.gif" >
+                <param name="style:smiley109" value="(~) img/emoticons/43.gif" >
+                <param name="style:smiley110" value="(~) img/emoticons/43.gif" >
+
+                <param name="style:smiley111" value="(&) img/emoticons/42.gif" >
+                <param name="style:smiley112" value="(&) img/emoticons/42.gif" >
+                <param name="style:smiley113" value="(o) img/emoticons/41.gif" >
+                <param name="style:smiley114" value="(o) img/emoticons/41.gif" >
+                <param name="style:smiley115" value="(@) img/emoticons/30.gif" >
+                <param name="style:smiley116" value="(@) img/emoticons/30.gif" >
+                <param name="style:smiley117" value="(*) img/emoticons/29.gif" >
+                <param name="style:smiley118" value="(*) img/emoticons/29.gif" >
+                <param name="style:smiley119" value="(S) img/emoticons/28.gif" >
+
+                <param name="style:smiley120" value="(S) img/emoticons/28.gif" >
+                <param name="style:smiley121" value="(8) img/emoticons/27.gif" >
+                <param name="style:smiley122" value="(8) img/emoticons/27.gif" >
+                <param name="style:smiley123" value="(^) img/emoticons/34.gif" >
+                <param name="style:smiley124" value="(^) img/emoticons/34.gif" >
+                <param name="style:smiley125" value="(i) img/emoticons/25.gif" >
+                <param name="style:smiley126" value="(I) img/emoticons/25.gif" >
+                <param name="style:smiley127" value="(%) img/emoticons/24.gif" >
+                <param name="style:smiley128" value="(%) img/emoticons/24.gif" >
+
+                <param name="style:smiley129" value="(z) img/emoticons/23.gif" >
+                <param name="style:smiley130" value="(Z) img/emoticons/23.gif" >
+                <param name="style:smiley131" value="(x) img/emoticons/22.gif" >
+                <param name="style:smiley132" value="(X) img/emoticons/22.gif" >
+                <param name="style:smiley133" value="(p) img/emoticons/21.gif" >
+                <param name="style:smiley134" value="(P) img/emoticons/21.gif" >
+                <param name="style:smiley135" value="(f) img/emoticons/12.gif" >
+                <param name="style:smiley136" value="(F) img/emoticons/12.gif" >
+                <param name="style:smiley137" value="(e) img/emoticons/11.gif" >
+
+                <param name="style:smiley138" value="(E) img/emoticons/11.gif" >
+                <param name="style:smiley139" value="(g) img/emoticons/10.gif" >
+                <param name="style:smiley140" value="(G) img/emoticons/10.gif" >
+                <param name="style:smiley141" value="(pi) img/emoticons/69.gif" >
+                <param name="style:smiley142" value="(pi) img/emoticons/69.gif" >
+                <param name="style:smiley143" value="(mp) img/emoticons/68.gif" >
+                <param name="style:smiley144" value="(mp) img/emoticons/68.gif" >
+                <param name="style:smiley145" value="(bah) img/emoticons/60.gif" >
+                <param name="style:smiley146" value="(bah) img/emoticons/60.gif" >
+
+                <param name="style:smiley147" value="(au) img/emoticons/59.gif" >
+                <param name="style:smiley148" value="(au) img/emoticons/59.gif" >
+                <param name="style:smiley149" value="(ap) img/emoticons/58.gif" >
+                <param name="style:smiley150" value="(ap) img/emoticons/58.gif" >
+                <param name="style:smiley151" value="(um) img/emoticons/75.gif" >
+                <param name="style:smiley152" value="(um) img/emoticons/75.gif" >
+                <param name="style:smiley153" value="(tu) img/emoticons/74.gif" >
+                <param name="style:smiley154" value="(tu) img/emoticons/74.gif" >
+                <param name="style:smiley155" value="(st) img/emoticons/73.gif" >
+
+                <param name="style:smiley156" value="(st) img/emoticons/73.gif" >
+                <param name="style:smiley157" value="(so) img/emoticons/72.gif" >
+                <param name="style:smiley158" value="(so) img/emoticons/72.gif" >
+                <param name="style:smiley159" value="(sn) img/emoticons/71.gif" >
+                <param name="style:smiley160" value="(sn) img/emoticons/71.gif" >
+<h1><a href="http://www.urchat.net/">URCHAT</a> Web Chat</h1>
+
+<p>You need an updated version of <a href="http://www.java.com/en/download/manual.jsp" target="_blank">Java</a> installed and enabled to use this chat room. <a href="http://www.java.com/en/download/manual.jsp" target="_blank">Download it now for free.</a></p>
+</applet>
+</div>
+</div>

@@ -1,0 +1,12 @@
+{if isset($ignore_leagues)}
+<div id="ignore_leagues">{translate fonema=LANG_INVITATIONS_U} 
+	<img align="right" src="{if isset($ignore_leagues.IGNORE_LEAGUES)}./img/icons/active.png{else}./img/icons/inactive.png{/if}" onmouseover="this.className='btn btnhov';Tip('{if isset($ignore_leagues.IGNORE_LEAGUES)}{translate fonema=LANG_ALLOWED_U} - {translate fonema=LANG_IGNORE_U}{else}{translate fonema=LANG_FORBIDDEN_U} - {translate fonema=LANG_ALLOW_U}{/if}')" onmouseout="this.className='btn';UnTip()" onClick="javascript:flipWagerAccountStatus({$season_id}, 'ignore_leagues', 'team_status')"/>
+</div>            
+<div style="clear:both"></div>
+{/if}
+{if isset($stake_slider)}
+<div id="stake_slider">{translate fonema=LANG_STAKE_SLIDER_U} 
+	<img align="right" src="{if isset($stake_slider.STAKE_SLIDER)}./img/icons/active.png{else}./img/icons/inactive.png{/if}" onmouseover="this.className='btn btnhov';Tip('{if isset($stake_slider.STAKE_SLIDER)}{translate fonema=LANG_YES_U}{else}{translate fonema=LANG_NO_U}{/if}')" onmouseout="this.className='btn';UnTip()" onClick="javascript:flipWagerAccountStatus({$season_id}, 'stake_slider', 'team_status')"/>
+</div>            
+<div style="clear:both"></div>
+{/if}

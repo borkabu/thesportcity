@@ -1,0 +1,99 @@
+<TPL_INCLUDE:../tpl/adm/head.tpl.html>
+<TPL_INCLUDE:../tpl/adm/menu.tpl.html>
+
+    <form action="<_TPL:FORM_URL>" method="get">
+<div class="portlet">
+  <div class="content">
+      <input type="hidden" name="order" value="<TPL:ORDER>">
+      <_TPL:LANG_SEARCH_U>: <TPL:WHERE> <TPL:QUERY> <input type="image" src="../img/adm_ok.gif" class="input">
+      <TPL_SUB:FILTERED><a href="<_TPL:FORM_URL>">[ <_TPL:LANG_SHOW_ALL_RECORDS> ]</a></TPL_SUB:FILTERED>
+  </div>
+</div>
+    </form>
+
+<TPL_SUB:LET>
+<div class="portlet">
+  <div class="content">
+      <_TPL:LANG_SURNAME_U>: 
+      <TPL_SUB:LETTER>
+        <TPL_SUB:SELECTED><b>[<TPL:TXT>]</b></TPL_SUB:SELECTED>
+        <TPL_SUB:NORMAL><a href="<TPL:URL>">[<TPL:TXT>]</a></TPL_SUB:NORMAL>
+      </TPL_SUB:LETTER>
+  </div>
+</div>
+</TPL_SUB:LET>
+
+<TPL_SUB:PAGING>
+<div class="portlet">
+  <div class="content">
+      <_TPL:LANG_TOTAL_RECORDS_U>: <b><TPL:NUMROWS></b> | 
+      <_TPL:LANG_PAGES_U>:
+      <TPL_SUB:PAGES>
+        <TPL_SUB:SELECTED><b>[<TPL:PAGENUM>]</b></TPL_SUB:SELECTED>
+        <TPL_SUB:NORMAL><a href="<TPL:URL>">[<TPL:PAGENUM>]</a></TPL_SUB:NORMAL>
+      </TPL_SUB:PAGES>
+  </div>
+</div>
+</TPL_SUB:PAGING>
+
+<div class="portlet">
+  <div class="content">
+  <table>
+    <tr>
+      <th>
+        <_TPL:LANG_SURNAME_U>, <_TPL:LANG_NAME_U> 
+        <TPL_SUB:LAST_NAME_DESC_A><img src="../img/adm_desc_a.gif" width="11" height="11" border="0"></TPL_SUB:LAST_NAME_DESC_A>
+        <TPL_SUB:LAST_NAME_DESC><a href="<TPL:URL>"><img src="../img/adm_desc.gif" width="11" height="11" border="0"></a></TPL_SUB:LAST_NAME_DESC>
+        <TPL_SUB:LAST_NAME_ASC_A><img src="../img/adm_asc_a.gif" width="11" height="11" border="0"></TPL_SUB:LAST_NAME_ASC_A>
+        <TPL_SUB:LAST_NAME_ASC><a href="<TPL:URL>"><img src="../img/adm_asc.gif" width="11" height="11" border="0"></a></TPL_SUB:LAST_NAME_ASC>
+      </th>
+      <th>
+        <_TPL:LANG_USER_NAME_U>
+        <TPL_SUB:USER_NAME_DESC_A><img src="../img/adm_desc_a.gif" width="11" height="11" border="0"></TPL_SUB:USER_NAME_DESC_A>
+        <TPL_SUB:USER_NAME_DESC><a href="<TPL:URL>"><img src="../img/adm_desc.gif" width="11" height="11" border="0"></a></TPL_SUB:USER_NAME_DESC>
+        <TPL_SUB:USER_NAME_ASC_A><img src="../img/adm_asc_a.gif" width="11" height="11" border="0"></TPL_SUB:USER_NAME_ASC_A>
+        <TPL_SUB:USER_NAME_ASC><a href="<TPL:URL>"><img src="../img/adm_asc.gif" width="11" height="11" border="0"></a></TPL_SUB:USER_NAME_ASC>
+      </th>
+      <th>
+        Pask. prisijungimas
+        <TPL_SUB:LAST_LOGIN_DESC_A><img src="../img/adm_desc_a.gif" width="11" height="11" border="0"></TPL_SUB:LAST_LOGIN_DESC_A>
+        <TPL_SUB:LAST_LOGIN_DESC><a href="<TPL:URL>"><img src="../img/adm_desc.gif" width="11" height="11" border="0"></a></TPL_SUB:LAST_LOGIN_DESC>
+        <TPL_SUB:LAST_LOGIN_ASC_A><img src="../img/adm_asc_a.gif" width="11" height="11" border="0"></TPL_SUB:LAST_LOGIN_ASC_A>
+        <TPL_SUB:LAST_LOGIN_ASC><a href="<TPL:URL>"><img src="../img/adm_asc.gif" width="11" height="11" border="0"></a></TPL_SUB:LAST_LOGIN_ASC>
+      </th>
+      <th align="center">
+        Aktyv.
+        <TPL_SUB:PUBLISH_DESC_A><img src="../img/adm_desc_a.gif" width="11" height="11" border="0"></TPL_SUB:PUBLISH_DESC_A>
+        <TPL_SUB:PUBLISH_DESC><a href="<TPL:URL>"><img src="../img/adm_desc.gif" width="11" height="11" border="0"></a></TPL_SUB:PUBLISH_DESC>
+        <TPL_SUB:PUBLISH_ASC_A><img src="../img/adm_asc_a.gif" width="11" height="11" border="0"></TPL_SUB:PUBLISH_ASC_A>
+        <TPL_SUB:PUBLISH_ASC><a href="<TPL:URL>"><img src="../img/adm_asc.gif" width="11" height="11" border="0"></a></TPL_SUB:PUBLISH_ASC>
+      </th>
+      <th></td>
+    </tr>
+    
+    <TPL_SUB:ITEM>
+    <tr class="<TPL_SUB:EVEN>even</TPL_SUB:EVEN><TPL_SUB:ODD>odd</TPL_SUB:ODD>">
+      <td class="list_item"><TPL:LAST_NAME>, <TPL:FIRST_NAME></td>
+      <td class="list_item"><TPL:USER_NAME></td>
+      <td class="list_item"><TPL:LAST_LOGIN></td>
+      <td class="list_item" align="center"><img src="../img/adm_publish_<TPL:ACTIVE>.gif" width="12" height="12" border="0">
+                                         <TPL_SUB:ACT_URL2><a href="user.php?user_id=<TPL:USER_ID>&reissue_activation=true">reissue activation</a></TPL_SUB:ACT_URL2></td>
+      <td class="list_item" align="center">
+        <TPL_SUB:DEL><a href="<TPL:DEL_URL>" onClick="return confirm('<_TPL:LANG_REALLY_U>');"><img src="../img/adm_delete.gif" width="12" height="12" border="0" alt="pašalinti"></a></TPL_SUB:DEL>
+        <a href="user_edit.php?user_id=<TPL:USER_ID>"><img src="../img/adm_edit.gif" width="12" height="12" border="0" alt="redaguoti"></a>
+        </td>
+    </tr>
+    </TPL_SUB:ITEM>
+    
+    <TPL_SUB:NORECORDS>
+    <tr bgcolor="#FFFFFF"><td colspan="9" class="list_item"><_TPL:LANG_NO_ENTRIES_U></td></tr>
+    </TPL_SUB:NORECORDS>
+  
+  </table>
+</div>
+</div>
+
+
+<TPL_SUB:PAGING></TPL_SUB:PAGING>
+
+<TPL_INCLUDE:../tpl/adm/foot.tpl.html>

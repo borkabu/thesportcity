@@ -1,0 +1,64 @@
+<TPL_SUB:SURVEY>
+<div class="portlet">
+<div class="header"><TPL:TITLE></div>
+	<div class="content" id='question'>
+	<TPL_SUB:QUESTIONS>        
+        <form style="margin:0" name="barform_<TPL:QUESTION_ID>" id="barform_<TPL:QUESTION_ID>" action="javascript:answerQuestion2(<TPL:QUESTION_ID>, document.getElementById('barform_<TPL:QUESTION_ID>'), 'question')">
+		<b><TPL:QUESTION></b>
+		<ul style="list-style-type: none;margin-left:0px; padding-left:0px;">
+		<TPL_SUB:ANSWERS>		
+		  <li><input type="radio" id="answer_id" name="answer_id" value="<TPL:ANSWER_ID>" /><span><TPL:ANSWER></span>
+			<TPL_SUB:SUGGESTED_BY>(<_TPL:LANG_SUGGESTED_BY_U> <TPL:USER_NAME>)</TPL_SUB:SUGGESTED_BY>
+                  </li>
+		</TPL_SUB:ANSWERS>
+		</ul>
+		<input class="btn" type="submit" value=" <_TPL:LANG_VOTE_U> " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" onclick="valButton(document.getElementById('barform_<TPL:QUESTION_ID>'), 'answer_id');return false;" >
+		<TPL_SUB:SUGGEST>
+ 		<div id="suggest_<TPL:QUESTION_ID>">
+		   <a href="javascript:toggleControl('suggest_<TPL:QUESTION_ID>', 'suggest2_<TPL:QUESTION_ID>')"><_TPL:LANG_SUGGEST_ANSWER_U></a>
+		</div>
+ 		<div id="suggest2_<TPL:QUESTION_ID>" style="display:none;">
+		   <input type="text" name="suggested_answer_<TPL:QUESTION_ID>" class="input" size="13" maxsize="128">
+  		   <input class="btn" type="submit" value=" <_TPL:LANG_SUBMIT_U> " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" onclick="suggestAnswer('<TPL:QUESTION_ID>', document.getElementById('suggest2_<TPL:QUESTION_ID>'));return false;" >
+		</div>
+		</TPL_SUB:SUGGEST>		
+		<TPL_SUB:SUGGESTED>
+ 		<div id="suggest_<TPL:QUESTION_ID>">
+		   <TPL_SUB:0>
+                   <span class="textgreen"><_TPL:LANG_SUGGESTED_ANSWER_ALREADY_U></span>
+		   </TPL_SUB:0>
+		   <TPL_SUB:-1>
+                   <span class="textgreen"><_TPL:LANG_SUGGESTED_ANSWER_DISAPPROVED_U></span>
+		   </TPL_SUB:-1>
+		   <TPL_SUB:1>
+                   <span class="textgreen"><_TPL:LANG_SUGGESTED_ANSWER_IGNORED_U></span>
+		   </TPL_SUB:1>
+		   <TPL_SUB:2>
+                   <span class="textgreen"><_TPL:LANG_SUGGESTED_ANSWER_APPROVED_U> <a href="javascript:toggleControl('<TPL:QUESTION_ID>')"><_TPL:LANG_SUGGEST_ANSWER_U></a></span>
+		   </TPL_SUB:2>
+                </div>
+ 		<div id="suggest2_<TPL:QUESTION_ID>" style="display:none">
+		   <input type="text" name="suggested_answer_<TPL:QUESTION_ID>" class="input" size="50" maxsize="128">
+  		   <input class="btn" type="submit" value=" <_TPL:LANG_SUBMIT_U> " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" onclick="suggestAnswer('<TPL:QUESTION_ID>', document.getElementById('suggest2_<TPL:QUESTION_ID>'));return false;" >
+		</div>		
+		</TPL_SUB:SUGGESTED>		
+		<TPL_SUB:RESET>
+   			<input class="btn" type="submit" value=" <_TPL:LANG_RESET_VOTE_U> " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" onclick="resetVote(<TPL:QUESTION_ID>, 'answer_<TPL:QUESTION_ID>');return false;" >
+		</TPL_SUB:RESET>		
+        </form>
+	</TPL_SUB:QUESTIONS>
+<TPL_SUB:NO_QUESTIONS>
+<_TPL:LANG_SURVEY_DONE_U>
+ <TPL_SUB:RESET>
+  <_TPL:LANG_SURVEY_RESET_U>
+ </TPL_SUB:RESET>		
+</TPL_SUB:NO_QUESTIONS>
+	</div>
+<div class="content">
+  <a href="survey.php?survey_id=<TPL:SURVEY_ID>"><_TPL:LANG_RESULTS_U></a> (<_TPL:LANG_PARTICIPATED_U>: <TPL:USERS>)
+</div>
+<div class="content">
+ <a href="survey.php"><_TPL:LANG_ALL_SURVEYS></a>
+</div>
+</div>
+</TPL_SUB:SURVEY>

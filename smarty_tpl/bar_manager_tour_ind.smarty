@@ -1,0 +1,12 @@
+<div class="portlet">
+ <div class="header">{translate fonema=LANG_SCHEDULER_U}</div>
+  <div class="content_header">
+	{translate fonema=LANG_TOUR_U} {$tour.NUMBER}
+  </div>
+ {foreach $tour.GAMES as $game}
+  <div class="content">
+    <span class="date_font2"><b>{$game.START_DATE} {$game.UTC}<br></b></span>
+      {$game.TITLE} {if isset($game.RESULT)}<a href="game_race_protocol.php?game_id={$game.RESULT.GAME_ID}" target="game_race_protocol" onClick="window.open('','game_race_protocol','width=340,height=700,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');"><b>{translate fonema=LANG_RESULTS_U}</b></a>{/if} 
+  </div>
+ {/foreach}
+</div>

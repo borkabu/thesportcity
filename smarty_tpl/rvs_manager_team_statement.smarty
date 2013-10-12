@@ -1,0 +1,52 @@
+<div class="portlet">
+  <div class="header">{translate fonema=LANG_FILTER_U}</div>
+  <div class="content">
+   {if isset($tours)}
+    {translate fonema=LANG_TOURS_U}: 
+    {foreach $tours as $tour}
+        {if isset($tour.SELECTED)}<b>[{$tour.SELECTED.NUMBER}]</b>{/if}
+        {if isset($tour.NORMAL)}<a href="rvs_manager_team_statement.php?tour_id={$tour.NORMAL.NUMBER}&league_id={$tour.NORMAL.LEAGUE_ID}">{$tour.NORMAL.NUMBER}</a>{/if}
+    {/foreach} 
+   {/if}
+ </div>
+</div>
+
+<div class="portlet">
+  <div class="header">{translate fonema=LANG_TEAM_STATEMENT_U}</div>
+  <div class="content">
+    {if isset($users_tours)}
+      <table>
+        <tr>
+          <th>{translate fonema=LANG_TOUR_U}</td>
+          <th>{translate fonema=LANG_POINTS_U}</th>
+          <th>{translate fonema=LANG_PLACE_U}</th>
+        </tr>
+        {foreach $users_tours as $user_tour}
+          <tr>
+            <td align="left" nowrap>{$user_tour.TOUR_ID}</td>
+            <td align="right">{$user_tour.POINTS}</td>
+            <td align="right">{$user_tour.PLACE}</td>
+          </tr>
+        {/foreach}
+      </table>
+    {/if}
+  </div>
+  <div class="content">
+    {if isset($users)}
+      <table>
+        <tr>
+          <th>{translate fonema=LANG_TOUR_U}</td>
+          <th width="100%">{translate fonema=LANG_PLAYER_U}</th>
+          <th>{translate fonema=LANG_POINTS_U}</th>
+        </tr>
+        {foreach $users as $user}  
+        <tr>
+          <td align="left" nowrap>{$user.NUMBER}</td>
+          <td align="left">{if empty($user.IS_IN_TOUR)}<b>R</b>{/if} <span style="{if empty($user.IS_IN_TOUR)}text-decoration: line-through;{/if}">{$user.LAST_NAME}, {$user.FIRST_NAME}</span></td>
+          <td align="right">{$user.TOTAL_POINTS}</td>
+        </tr>
+         {/foreach}
+       </table>
+     {/if}
+   </div>
+</div>

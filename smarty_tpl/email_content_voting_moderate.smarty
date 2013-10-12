@@ -1,0 +1,19 @@
+{translate fonema=LANG_EMAIL_CONTENT_VOTING_MODERATE_LINE_1}
+----------------------------
+{translate fonema=LANG_USER_NAME_U}: {$data.USER_NAME}
+----------------------------
+{translate fonema=LANG_EMAIL_CONTENT_VOTING_MODERATE_LINE_2}
+
+{$data.TITLE}
+
+{$data.DESCR}
+
+{translate fonema=LANG_VOTING_RESULT_U}
+{foreach $data.VOTING_DETAILS as $voting_detail}
+{$voting_detail.USER_NAME} ({$voting_detail.CONTENT_TRUST_LEVEL}) - {$voting_detail.VOTE}
+{/foreach}
+
+{translate fonema=LANG_APPROVE_VOTING_U} {$data.URL_APPROVE}
+{translate fonema=LANG_DISAPPROVE_VOTING_U} {$data.URL_DISAPPROVE}
+
+{translate fonema=LANG_EMAIL_LAST_LINE}

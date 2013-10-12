@@ -1,0 +1,152 @@
+<div style="clear:both"></div>
+
+<script>
+ $(function() {
+	$( "#credits_tab" ).tabs({
+		cookie: {
+			expires: 1,
+			name: "credits_tab"
+			}
+		}); 
+});
+</script>
+<div id="credits_tab">
+ <ul>
+  <li><a href="#tabs-1" title="{translate fonema=LANG_LOG_U}">{translate fonema=LANG_LOG_U}</a></li>
+  <li><a href="#tabs-2" title="{translate fonema=LANG_MANAGEMENT_U}">{translate fonema=LANG_MANAGEMENT_U}</a></li>
+  <li><a href="#tabs-3" title="{translate fonema=LANG_WANT_MORE_U}">{translate fonema=LANG_WANT_MORE_U}</a></li>
+  <li><a href="#tabs-4" title="{translate fonema=LANG_FROZEN_CREDITS_U}">{translate fonema=LANG_FROZEN_CREDITS_U}</a></li>
+ </ul>
+ <div id="tabs-1">
+  {$credit_log}
+  {$credit_log_paging}
+ </div>                 
+ <div id="tabs-2">
+  <div class="portlet">
+   <div class="header">{translate fonema=LANG_CREDITS_TRANSFER_USER_U}</div>
+   {if isset($transfer)} 
+   <div class="content">
+ 	{translate fonema=LANG_CREDITS_TRANSFER_INSTR_U}
+   </div>
+   {if isset($transfer.ERROR)} 
+   <div class="content">
+ 	<span class="textred">{$transfer.ERROR.MSG}</span>
+    </div>
+   {/if}
+   {if isset($transfer.SUCCESS)} 
+   <div class="content">
+ 	<span class="textgreen">{$transfer.SUCCESS.MSG}</span>
+    </div>
+   {/if}
+   <div class="content">
+     {if isset($transfer.ALLOW_TRANSFER)} 
+      <form action="" method="post" style="margin:0">      
+        {translate fonema=LANG_CREDITS_TRANSFER_INSTR1_U} <input type="text" name="credits" size="3" maxlength="4" class="input"> 
+        {translate fonema=LANG_CREDITS_TRANSFER_INSTR2_U} <input type="text" name="user_name" size="25" maxlength="40" class="input"><br>
+        {translate fonema=LANG_CREDITS_TRANSFER_INSTR3_U} <br>{translate fonema=LANG_SENDER_U} {$transfer.ALLOW_TRANSFER.SENDER} / {translate fonema=LANG_RECEIVER_U} {$transfer.ALLOW_TRANSFER.RECEIVER}<br>
+        <input class="btn" type="submit" value=" {translate fonema=LANG_SUBMIT_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+        <input type="hidden" name="transfer" value="y">    
+      </form>
+     {/if}
+     {if isset($transfer.DENY_TRANSFER)} 
+      <span class="textred">{$transfer.DENY_TRANSFER.MSG}</span>
+     {/if}
+   </div>
+  {/if}
+  </div>
+  {if isset($clan_member)}
+  <div class="portlet">
+   <div class="header">{translate fonema=LANG_CREDITS_TRANSFER_CLAN_U}</div>
+    {if isset($transfer_clan)} 
+     <div class="content">
+  	{translate fonema=LANG_CREDITS_TRANSFER_CLAN_INSTR_U}
+     </div>
+     {if isset($transfer_clan.ERROR)} 
+     <div class="content">
+ 	<span class="textred">{$transfer_clan.ERROR.MSG}</span>
+     </div>
+     {/if}
+     {if isset($transfer_clan.SUCCESS)} 
+     <div class="content">
+ 	<span class="textgreen">{$transfer_clan.SUCCESS.MSG}</span>
+     </div>
+     {/if}
+     <div class="content">
+         {if isset($transfer_clan.ALLOW_TRANSFER)} 
+          <form action="" method="post" style="margin:0">      
+            {translate fonema=LANG_CREDITS_TRANSFER_INSTR1_U} <input type="text" name="credits" size="3" maxlength="4" class="input"> 
+            {translate fonema=LANG_CREDITS_TRANSFER_INSTR4_U} <br>
+            <input class="btn" type="submit" value=" {translate fonema=LANG_SUBMIT_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+            <input type="hidden" name="transfer_clan" value="y">    
+          </form>
+         {/if}
+         {if isset($transfer_clan.DENY_TRANSFER)} 
+          <span class="textred">{$transfer_clan.DENY_TRANSFER.MSG}</span>
+         {/if}
+     </div>
+    {/if} 
+  </div>
+  {/if}
+
+  <div class="portlet">
+   <div class="header">{translate fonema=LANG_REFUND_U}</div>
+   <div class="content">
+ 	{translate fonema=LANG_CREDITS_REFUND_INSTR_U}
+   </div>
+   {foreach $refunds as $refund}
+   <div class="content">
+       <form action="" method="post" style="margin:0">      
+	    <b>{$refund.SEASON_TITLE}</b><br>
+ 	      {translate fonema=LANG_CREDITS_REFUNDABLE_U}: <b>{$refund.REFUNDABLE}</b>
+               <input class="btn" type="submit" value=" {translate fonema=LANG_REFUND_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+               <input type="hidden" name="refund" value="y">    
+               <input type="hidden" name="season_id" value="{$refund.SEASON_ID}">     
+      </form>
+   </div>
+   {foreachelse}
+   <div class="content">
+      {translate fonema=LANG_CREDITS_REFUND_NONE_U}
+   </div>
+   {/foreach}
+  </div>
+ </div>
+ 
+ <div id="tabs-3">
+   {$get_credits}
+ </div>
+ <div id="tabs-4">
+  <div class="portlet">
+   {if isset($frozen_refund)}
+   <div class="header">{translate fonema=LANG_UNFREEZE_CREDITS_U}</div>       
+    <div class="content">
+     {translate fonema=LANG_FROZEN_CREDITS_U}: {$frozen_credits}<br>      
+      {translate fonema=LANG_UNFREEZE_CREDITS_INSTR_U}: {$frozen_refund.FROZEN_CREDITS-$frozen_refund.TOTAL}<br>      
+      <form action="" method="post" style="margin:0">      
+        <input class="btn" type="submit" value=" {translate fonema=LANG_REFUND_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+        <input type="hidden" name="unfreeze" value="y">    
+      </form>
+    </div>       
+   {/if}
+   {if isset($real_frozen_credits)}
+    <div class="header">{translate fonema=LANG_FROZEN_CREDITS_SUMMARY_U}</div>       
+    {foreach $real_frozen_credits as $frozen_credit}
+     <div class="content">
+      {if $frozen_credit.TAG=='MANAGER_CHALLENGES'}
+        {translate fonema=LANG_MANAGER_U} ({translate fonema=LANG_CHALLENGES_U}):
+      {else if $frozen_credit.TAG=='WAGER_CHALLENGES'}
+        {translate fonema=LANG_WAGER_U} ({translate fonema=LANG_CHALLENGES_U}):
+      {/if}
+       {$frozen_credit.TOTAL} {translate fonema=LANG_CREDITS_U}
+     </div>       
+    {foreachelse}
+      {translate fonema=LANG_NO_FROZEN_CREDITS_U}
+    {/foreach}
+   {else}
+   {/if}
+  </div>                 
+ </div>                 
+</div>
+ 
+ 
+ 
+ 

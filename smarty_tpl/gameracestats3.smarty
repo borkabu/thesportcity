@@ -1,0 +1,32 @@
+<div class="portlet">
+    <div class="header"><b>{translate fonema=LANG_PROTOCOL_U}</b></div>
+    <div class="content"><b>{$stats.SEASON_TITLE}</b> - {$stats.TITLE}
+     <br>{$stats.DATE}</div>
+    {if isset($stats.STATS)}
+    {foreach $stats.STATS as $stat}
+    <div class="content">      
+       <table>
+        <tr>
+          <th></th>
+          {foreach $stat.ITEM as $item}
+            <th align="center">{$item.TITLE}</th>
+          {/foreach}
+        </tr>
+        {foreach $stat.PLAYER as $player}
+        <tr>
+          <td>{$player.LAST_NAME}, {$player.FIRST_NAME}</td>
+          {foreach $player.ITEM.VALUE as $item}
+	   <td align="center">{$item}</td>
+          {/foreach}
+        </tr>
+        {/foreach}
+      </table>
+      </div>  
+     {/foreach}
+    {/if}
+    <div class="content">      
+    {foreach $legends as $legend}
+      <b>{$legend.KEY}</b> - {$legend.LEGEND};
+    {/foreach}
+    </div>  
+</div>

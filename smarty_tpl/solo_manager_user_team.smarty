@@ -1,0 +1,38 @@
+<div class="portlet">
+  <div class="content">
+    <table id="teamtable" class="statistics-list" width="100%">
+      <thead>
+        <tr>
+          <th>{translate fonema=LANG_TOUR_U} <a href="javascript:sortTable(0)">&#8661;</a></th>
+          <th>{translate fonema=LANG_PLAYER_U} <a href="javascript:sortTable(1)">&#8661;</a></th>
+          <th nowrap>{translate fonema=LANG_TOTAL_POINTS_U} <a href="javascript:sortTable(2)">&#8661;</a></th>
+        </tr>
+      </thead>
+      <tbody>
+        {foreach $players as $player}
+        <tr valign="top">
+         <td nowrap align="left">{$player.GAME_DAY}</td>
+         <td>
+          <a href="f_manager_player_seasonstats.php?user_id={$player.USER_ID}&seasons={$player.PLAYER_SEASON_STATS.SUBSEASONS}" target="f_manager_player_season_stats" onClick="window.open('','f_manager_player_season_stats','width=800,height=700,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');"><b>{$player.LAST_NAME}, {$player.FIRST_NAME}</b></a> <br>
+            <span class="date_font2">{$player.TEAM_NAME2} ({$player.TYPE_NAME})</span>
+         </td>
+         <td nowrap align="right"><b>{$player.KOEFF}</b></td>
+        </tr>
+        {foreachelse}
+        <tr>
+          <td colspan="3">{translate fonema=LANG_NO_ENTRIES_U}</td>
+        </tr>
+        {/foreach}
+      </tbody>
+     </table>
+   </div>
+</div>
+{literal}
+<script>
+ var aAsc = [];
+ function sortTable(nr) {
+   aAsc[nr] = aAsc[nr]=='asc'?'desc':'asc';
+   $('#teamtable>tbody>tr').tsort('td:eq('+nr+')',{order:aAsc[nr]});
+ }
+</script>
+{/literal}

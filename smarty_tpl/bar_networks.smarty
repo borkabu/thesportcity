@@ -1,0 +1,22 @@
+<div style="clear:both;">
+<div class="portlet">
+<div class="header">{translate fonema=LANG_JOIN_US_U}</div>
+
+<div class="content fb-like-box" data-href="http://www.facebook.com/thesportcity" data-width="200" data-height="80" data-show-faces="false" data-stream="false" data-header="false"></div>
+
+<div class="content" style="text-align:center">
+<a href="http://twitter.com/thesportcitynet" class="twitter-follow-button" data-show-count="false">Follow @thesportcitynet</a>
+<script src="http://platform.twitter.com/widgets.js" type="text/javascript"></script></div>
+<div class="content" style="text-align:center">
+<!-- Place this tag in your head or just before your close body tag -->
+<script type="text/javascript" src="https://apis.google.com/js/plusone.js">
+{if $lang!='en'}
+  {ldelim}lang: '{$lang}'{rdelim} 
+{/if}
+</script>
+
+<!-- Place this tag where you want the +1 button to render -->
+<g:plusone href="http://www.thesportcity.net"></g:plusone>
+</div>
+</div>
+</div>

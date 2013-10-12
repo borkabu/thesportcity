@@ -1,0 +1,36 @@
+<div style="clear:both"></div>
+{$manager_filter_box}
+
+
+{if isset($reports.REPORT)}
+<div class="portlet">
+  <div class="content">
+      <table>
+        <tr>
+          <th>{translate fonema=LANG_PLAYER_U}</th>
+          <th>{translate fonema=LANG_PLAYER_STATE_U} <bR> {translate fonema=LANG_REPORT_SUBMITTED_U}</th>
+          <th>{translate fonema=LANG_PLAYER_REPORT_END_DATE_U}</th>
+          <th>{translate fonema=LANG_REPORTED_BY_U}</th>
+          <th></th>
+        </tr>
+        {foreach $reports.REPORT as $report}
+        <tr valign="top">
+          <td><a href="f_manager_player_info.php?user_id={$report.USER_ID}"  target="f_manager_player_info" onClick="window.open('','f_manager_player_info','width=400,height=400,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');"><b>{$report.LAST_NAME}, {$report.FIRST_NAME}</b></a> <br>
+            {$report.TYPE_NAME} ({$report.TEAM_NAME2})</td>
+          <td align="right">{$report.STATE}</td>
+          <td nowrap align="right">{$report.DATE_REPORTED} <br> {$report.VALID_TILL}</td>
+          <td>{$report.USER_NAME}</td>
+          <td><a href="f_manager_report_injury.php?player_id={$report.PLAYER_ID}&season_id={$report.SEASON_ID}" target="report_injury" onClick="window.open('','report_injury','width=450,height=420,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');">{translate fonema=LANG_SUBMIT_REPORT_U}</a></td>
+        </tr>
+        {/foreach} 
+      </table>
+	</div>
+</div>
+{$reports.PAGING}
+{else}
+<div class="portlet">
+  <div class="content">
+{translate fonema=LANG_NO_ENTRIES_U}
+  </div>
+</div>
+{/if}

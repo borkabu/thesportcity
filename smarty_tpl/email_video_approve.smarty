@@ -1,0 +1,16 @@
+{translate fonema=LANG_EMAIL_VIDEO_APPROVE_LINE_1}
+----------------------------
+{translate fonema=LANG_USER_NAME_U}: {$data.USER_NAME}
+----------------------------
+{translate fonema=LANG_EMAIL_VIDEO_APPROVE_LINE_2}
+
+{$data.TITLE} ({$data.REALITY})
+{translate fonema=LANG_SOURCE_U}: {$data.SOURCE}
+
+{$data.TEXT}
+
+{translate fonema=LANG_APPROVE_CONTENT_U} {$data.URL_APPROVE}
+{translate fonema=LANG_IGNORE_CONTENT_U} {$data.URL_IGNORE}
+{translate fonema=LANG_DISAPPROVE_CONTENT_U} {$data.URL_DISAPPROVE}
+
+{translate fonema=LANG_EMAIL_LAST_LINE}

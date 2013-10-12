@@ -1,0 +1,9 @@
+<div id="submenu">
+   <div class="content">
+  <ul>
+    {foreach $submenu as $submenu_item}
+    <li {if isset($submenu_item.SEL)}class="selected"{else}class="notselected"{/if}><a href="{$submenu_item.LINK}" {if isset($submenu_item.SEL)}class="active"{/if}>{$submenu_item.TITLE}</a></li>
+    {/foreach}
+  </ul>
+</div>
+</div>

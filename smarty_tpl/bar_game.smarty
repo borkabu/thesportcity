@@ -1,0 +1,6 @@
+<div class="portlet">
+<div class="header">{$game_name}</div>
+<div class="content">
+{$descr}
+</div>
+</div>

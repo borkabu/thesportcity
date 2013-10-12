@@ -1,0 +1,16 @@
+<div style="clear:both"></div>
+<div class="portlet">
+  {foreach $surveys as $survey}
+   <div class="content">
+	<div style="float:left;"><a href="survey.php?survey_id={$survey.ID}&lang_id={$survey.LANG}"><b>{$survey.TITLE}</b></a> ({translate fonema=LANG_QUESTIONS_U} {$survey.QUESTIONS}) ({$survey.POSTS}) ({translate fonema=LANG_PARTICIPATED_U}: {$survey.USERS})</div>
+	<div style="float:right;">{$survey.START_DATE} - {$survey.END_DATE}</div>
+	<div style="clear:both;"></div>
+	<TPL:DESCR>
+   </div>
+  {foreachelse}
+   <div class="content">
+	<div style="float:left;">{translate fonema=LANG_NO_ENTRIES_U}</div>
+	<div style="clear:both;"></div>
+   </div>
+  {/foreach}
+</div>

@@ -1,0 +1,19 @@
+<div style="clear:both"></div>
+
+{$bracket_filter_box}
+
+<div class="portlet">
+ <div class="header">{translate fonema=LANG_TOURS_U}</div>
+{foreach $tours as $tour}
+  <div class="content">
+  <a name="tour_{$tour.NUMBER}"></a>
+	{translate fonema=LANG_TOUR_U} {$tour.NUMBER}. <b>{$tour.TITLE}</b> {$tour.TOUR_START_DATE} {$tour.UTC} - {$tour.TOUR_END_DATE} {$tour.UTC} .
+  </div>
+{/foreach}
+</div>
+
+<script type="text/javascript">
+
+location.href = "#tour_{$current_tour}";
+
+</script>

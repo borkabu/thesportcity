@@ -1,0 +1,206 @@
+<div style="clear:both"></div>
+{$wager_filter_box}
+
+{if isset($error)}
+<div class="portlet" id="message">
+  <div class="content">
+    <span class="textred"><b>{$error.MSG}</b></span>
+  </div>
+</div>
+{/if}
+
+<script>
+ $(function() {
+	$( "#wager_challenges" ).tabs({
+		cookie: {
+			expires: 1,
+			name: "wager_challenges"
+			}
+		}); 
+});
+</script>
+<div id="wager_challenges">
+ <ul>
+   <li><a href="#tabs-1" title="{translate fonema=LANG_CHALLENGES_U}">{translate fonema=LANG_CHALLENGES_U}</a></li>
+   <li><a href="#tabs-2" title="{translate fonema=LANG_COMPLETED_CHALLENGES_U}">{translate fonema=LANG_COMPLETED_CHALLENGES_U}</a></li>
+  {if isset($my_challenges)}
+   <li><a href="#tabs-3" title="{translate fonema=LANG_MY_CHALLENGES_U}">{translate fonema=LANG_MY_CHALLENGES_U}</a></li>
+  {/if}
+  {if isset($games)}
+   <li><a href="#tabs-4" title="{translate fonema=LANG_CREATE_CHALLENGE_U}">{translate fonema=LANG_CREATE_CHALLENGE_U}</a></li>
+  {/if}
+ </ul>
+ <div id="tabs-1">
+  <div class="portlet" style="margin:0px">
+  <div class="content">
+  {if isset($challenges)}
+  <table width="100%">
+   <tr>
+       <th>{translate fonema=LANG_CHALLENGES_U}</th>
+       <th>{translate fonema=LANG_STAKE_U}</th>
+       <th></th>
+   </tr>
+   {foreach $challenges as $challenge}
+   <tr>
+     <td>{$challenge.CHALLENGE}</td>
+     <td>{$challenge.STAKE}</td>
+     <td><div id="credit_challenge_{$challenge.CHALLENGE_ID}">
+         {if isset($challenge.ACCEPTED)}
+           <b>{$challenge.USER_NAME2}</b> {translate fonema=LANG_DISAGREES_L}<br><span class="textgreen"><b>{translate fonema=LANG_CHALLENGE_ACCEPTED_U}</b></span>
+         {else if isset($challenge.CAN_ACCEPT)}
+           <input type="button" class="btn" value=" {translate fonema=LANG_WAGER_CHALLENGE_ACCEPT_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" onClick="javascript:wagerAcceptChallenge({$challenge.CHALLENGE_ID}, 'credit_challenge_{$challenge.CHALLENGE_ID}')"/>
+         {/if}
+         </div>
+     </td>
+   </tr>
+   {/foreach}
+  </table> 
+  {else}
+    {translate fonema=LANG_NO_CHALLENGES_U}   
+  {/if}
+  </div>
+  </div>
+ </div>
+ <div id="tabs-2">
+  <div class="portlet" style="margin:0px">
+  <div class="content">
+  {if isset($completed_challenges)}
+  <table width="100%">
+   <tr>
+       <th>{translate fonema=LANG_CHALLENGES_U}</th>
+       <th>{translate fonema=LANG_STAKE_U}</th>
+       <th></th>
+       <th>{translate fonema=LANG_WINNER_U}</th>
+   </tr>
+   {foreach $completed_challenges as $challenge}
+   <tr>
+     <td>{$challenge.CHALLENGE}<br>
+         {if $challenge.STATUS==4 && $challenge.FINAL_OUTCOME==$challenge.OUTCOME}
+             <span class="textgreen"><b>{translate fonema=LANG_CHALLENGE_WON_U}</b></span>
+         {elseif $challenge.STATUS==4 && $challenge.FINAL_OUTCOME!=$challenge.OUTCOME}
+             <span class="textred"><b>{translate fonema=LANG_CHALLENGE_LOST_U}</b></span>
+         {/if}
+     </td>
+     <td>{$challenge.STAKE}</td>
+     <td><div id="credit_challenge_{$challenge.CHALLENGE_ID}">
+         <b>{$challenge.USER_NAME2}</b> {translate fonema=LANG_DISAGREES_L}
+         </div>
+     </td>
+     <td>{if $challenge.STATUS==4 && $challenge.FINAL_OUTCOME==$challenge.OUTCOME}
+             <span class="textgreen"><b>{$challenge.USER_NAME}</b></span>
+         {elseif $challenge.STATUS==4 && $challenge.FINAL_OUTCOME!=$challenge.OUTCOME}
+             <span class="textred"><b>{$challenge.USER_NAME2}</b></span>
+         {/if} 
+     </td>
+   </tr>
+   {/foreach}
+  </table> 
+  {else}
+    {translate fonema=LANG_NO_CHALLENGES_U}   
+  {/if}
+  </div>
+  </div>
+ </div>
+  {if isset($my_challenges)}
+ <div id="tabs-3">
+  <div class="portlet" style="margin:0px">
+  <div class="content">
+  <table width="100%">
+   <tr><th>{translate fonema=LANG_CHALLENGES_U}</th>
+       <th>{translate fonema=LANG_STAKE_U}</th>
+       <th></th>
+       <th>{translate fonema=LANG_WINNER_U}</th>
+   </tr>
+   {foreach $my_challenges as $challenge}
+   <tr>
+     <td>{$challenge.CHALLENGE}</td>
+     <td>{$challenge.STAKE}</td>
+     <td nowrap><div id="credit_challenge_{$challenge.CHALLENGE_ID}">
+         {if $challenge.STATUS==2 || $challenge.STATUS==4}
+           <b>{$challenge.USER_NAME2}</b> {translate fonema=LANG_DISAGREES_L}<br><span class="textgreen"><b>{translate fonema=LANG_CHALLENGE_ACCEPTED_U}</b></span>
+         {elseif $challenge.STATUS==1 || $challenge.STATUS==3}
+             <span class="textblue"><b>{translate fonema=LANG_CHALLENGE_NOT_ACCEPTED_U}</b></span>
+         {/if}
+         </div>
+     </td>
+     <td>{if $challenge.STATUS==4 && $challenge.FINAL_OUTCOME==$challenge.OUTCOME}
+           {if $challenge.ME==$challenge.USER_NAME}
+             <span class="textgreen"><b>{$challenge.USER_NAME}</b></span>
+           {else}
+             <span class="textred"><b>{$challenge.USER_NAME}</b></span>
+           {/if}
+         {elseif $challenge.STATUS==4 && $challenge.FINAL_OUTCOME!=$challenge.OUTCOME}
+           {if $challenge.ME==$challenge.USER_NAME2}
+             <span class="textgreen"><b>{$challenge.USER_NAME2}</b></span>
+           {else}
+             <span class="textred"><b>{$challenge.USER_NAME2}</b></span>
+           {/if}
+
+         {/if} 
+     </td>
+   </tr>
+   {/foreach}
+  </table> 
+  </div>
+  </div>
+ </div>
+  {/if}
+ {if isset($games)}
+ <div id="tabs-4">
+  <div class="portlet" style="margin:0px">
+  <div class="content">
+  <table width="100%">
+   <tr>
+     <th></th>
+     <th>{translate fonema=LANG_STAKE_U}</th>
+   </tr>
+   <tr>
+     {foreach $games.GAMES as $game}
+     <td>
+       <form>
+         {$game.TEAM_NAME1} - {$game.TEAM_NAME2} (<span class="date_font2"><b>{$game.SEASON_TITLE}</b></span>) <br>
+         {translate fonema=LANG_VALID_TILL_U} <span class="date_font2"><b>{$game.END_DATE} {$game.UTC}</b></span><br>
+	 <div id="text_{$game.GAME_ID}">
+           {if isset($game.CAN_WITHDRAW) || isset($game.ACCEPTED)} 
+		{$game.CHALLENGE}
+           {/if}
+         </div>        
+	 <div id="game_{$game.GAME_ID}">
+           {if !isset($game.CAN_WITHDRAW) && !isset($game.ACCEPTED)} 
+           <table style="width:100%">
+             <tr><th width="30%" align="center">{$game.TEAM_NAME1}</td>
+               {if isset($game.DRAWABLE)}<th align="center" width="30%">=</td>{/if}
+                 <th width="30%" align="center">{$game.TEAM_NAME2}</td>
+             <tr>
+               <td align="center"><input type="radio" id="{$game.GAME_ID}" value="1" name="{$game.GAME_ID}" class="input"/></td>
+           {if isset($game.DRAWABLE)}
+	       <td align="center"><input type="radio" id="{$game.GAME_ID}" value="0" name="{$game.GAME_ID}" class="input"/></td>
+           {/if}
+	       <td align="center"><input type="radio" id="{$game.GAME_ID}" value="-1" name="{$game.GAME_ID}" class="input"/></td>
+             </tr>
+           </table>
+           {/if}
+ 	 </div>
+       </form>
+     </td>
+     <td valign=bottom><div id="credit_challenge_{$game.GAME_ID}">
+         {if isset($game.CHALLENGE_THROWN)}
+           {$game.STAKE} {translate fonema=LANG_CREDITS_U}<br>
+           <span class="textgreen"><b>{translate fonema=LANG_WAGER_CHALLENGE_THROWN_U}</b></span>
+           {if isset($game.CAN_WITHDRAW)}<br>
+            <input type="button" class="btn" value=" {translate fonema=LANG_CHALLENGE_WITHDRAW_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" onClick="javascript:wagerWithdrawChallenge({$game.GAME_ID}, 'credit_challenge_{$game.GAME_ID}')"/>
+           {/if}
+         {else if isset($game.CAN_CHALLENGE)}
+           <input type="text" name="credit_stake_{$game.GAME_ID}" id="credit_stake_{$game.GAME_ID}" size="2" maxlength="4" class="input" value="" /> {translate fonema=LANG_CREDITS_U} <input type="button" class="btn" value=" {translate fonema=LANG_WAGER_CHALLENGE_THROW_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" onClick="javascript:wagerThrowChallenge({$game.GAME_ID}, document.getElementById('credit_stake_{$game.GAME_ID}').value, 'credit_challenge_{$game.GAME_ID}', document.getElementById('game_{$game.GAME_ID}'))"/>
+         {/if}
+         </div>
+     </td>
+   </tr>
+   {/foreach}
+  </table> 
+  </div>
+   {$games.PAGING}
+  </div>
+ </div>
+ {/if}
+</div>

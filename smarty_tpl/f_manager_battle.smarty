@@ -1,0 +1,59 @@
+<div style="clear:both"></div>
+{if isset($error)}
+<div class="portlet" id="message">
+    <div class="content">
+	<span class="textred"><b>{$error}</b></span>
+    </div>
+</div>
+{/if}
+
+<div class="portlet" >
+{if isset($active_closed_battles)}
+<div class="header">{translate fonema=LANG_BATTLE_U}: {$battle_id}</div>
+<div class="content">
+  <table>
+    <tr><th colspan=2>{translate fonema=LANG_HOST_U}</th>
+        <th colspan=2>{translate fonema=LANG_VISITOR_U}</th>
+        <th>{translate fonema=LANG_PRIZE_FUND_U}</th>
+        <th></th>
+    </tr>
+    {foreach $active_closed_battles as $active_open_battle}
+    <tr>
+      <td class="date_font2">
+       {foreach $active_open_battle.TEAM1 as $player}
+       <span style="white-space: nowrap;">
+          {if isset($player.COUNTRY_DB)}<img border=1 src="./img/flags/{$player.COUNTRY_DB.CCTLD}.gif" onmouseover="Tip('{$player.COUNTRY_DB.COUNTRY_NAME}')" onmouseout="UnTip()">{/if}
+          <a href="user_public_profile.php?user_id={$player.USER_ID2}" onmouseover="Tip('{translate fonema=LANG_PUBLIC_PROFILE_U}')" onmouseout="UnTip()" target="user_profile" onClick="window.open('','user_profile','width=450,height=620,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');"><img src="./img/icons/user_profile.png" border=0></a>
+          {if ($player.USER_NAME==$player.USER_NAME2)}
+	     <img src="./img/icons/owner.png" onmouseover="Tip('{translate fonema=LANG_OWNER_U}')" onmouseout="UnTip()">
+          {/if}
+          {if isset($player.ALLOW)}<a href="f_manager_user_team.php?user_id={$player.USER_ID2}" target="f_manager_user_team" onClick="window.open('','f_manager_user_team','width=300,height=400,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');">{$player.USER_NAME2}</a>{else}{$player.USER_NAME2}{/if} ({$player.PLACE})<br> 
+       </span>  
+       {/foreach}
+      </td>
+       <td><b>{$active_open_battle.SCORE1}</b></td>
+       <td><b>{$active_open_battle.SCORE2}</b></td>
+      <td class="date_font2">
+       {foreach $active_open_battle.TEAM2 as $player}
+       <span style="white-space: nowrap;">
+          {if isset($player.COUNTRY_DB)}<img border=1 src="./img/flags/{$player.COUNTRY_DB.CCTLD}.gif" onmouseover="Tip('{$player.COUNTRY_DB.COUNTRY_NAME}')" onmouseout="UnTip()">{/if}
+          <a href="user_public_profile.php?user_id={$player.USER_ID2}" onmouseover="Tip('{translate fonema=LANG_PUBLIC_PROFILE_U}')" onmouseout="UnTip()" target="user_profile" onClick="window.open('','user_profile','width=450,height=620,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');"><img src="./img/icons/user_profile.png" border=0></a>
+          {if ($player.USER_NAME==$player.USER_NAME2)}
+	     <img src="./img/icons/owner.png" onmouseover="Tip('{translate fonema=LANG_OWNER_U}')" onmouseout="UnTip()">
+          {/if}
+          {if isset($player.ALLOW)}<a href="f_manager_user_team.php?user_id={$player.USER_ID2}" target="f_manager_user_team" onClick="window.open('','f_manager_user_team','width=300,height=400,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');">{$player.USER_NAME2}</a>{else}{$player.USER_NAME2}{/if} ({$player.PLACE})<br>
+       </span>
+       {/foreach}
+      </td>
+      <td align="right">{$active_open_battle.PRIZE_FUND} {translate fonema=LANG_CREDITS_ABBR_U}</td>
+      <td align="left" class="date_font2">
+      </td>
+    </tr>
+    {/foreach}
+  </table>
+</div>
+{else}
+  {translate fonema=LANG_NO_ACTIVE_CLOSED_BATTLES_U}
+{/if}
+</div>
+</div>

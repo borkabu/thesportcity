@@ -1,0 +1,45 @@
+<div id="rvs_leagues">
+<div class="header">{translate fonema=LANG_RVS_LEAGUE_INVITATIONS_U}</div>
+{foreach $league_invites as $invite}
+<a name="league_invites" />
+<div class="content">
+      <a href="rvs_manager_league.php?league_id={$invite.LEAGUE_ID}"><b>{$invite.TITLE}</b></a><br>
+      {if isset($invite.ENTRY)}{translate fonema=LANG_ENTRY_FEE_U}: <b>{$invite.ENTRY.ENTRY_FEE}</b> {translate fonema=LANG_CREDITS_ABBR_U}<br>{/if}
+      {if isset($invite.ENOUGH_CREDITS)}{translate fonema=LANG_RVS_MANAGER_LEAGUE_ENTRY_FEE_INSTR_U}<br>{/if}
+      {if isset($invite.NOT_ENOUGH_CREDITS)}
+        {translate fonema=LANG_ERROR_NOT_ENOUGH_CREDITS_U}<br>
+        <input class="btn" type="submit" value=" {translate fonema=LANG_REJECT_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" onClick="javascript:handleRvsLeagueInvitation({$invite.LEAGUE_ID}, 'decline_invite', 'rvs_leagues')"/><br>
+      {/if}
+      {if isset($invite.BUTTONS)}
+      <input class="btn" type="submit" value=" {translate fonema=LANG_ACCEPT_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" onClick="javascript:handleRvsLeagueInvitation({$invite.LEAGUE_ID}, 'accept_invite', 'rvs_leagues')"/>
+      <input class="btn" type="submit" value=" {translate fonema=LANG_REJECT_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" onClick="javascript:handleRvsLeagueInvitation({$invite.LEAGUE_ID}, 'decline_invite', 'rvs_leagues')"/><br>
+      {/if}
+</div>
+{foreachelse}
+<div class="content">{translate fonema=LANG_NO_INVITATIONS_U}</div>
+{/foreach}
+<div class="header">{translate fonema=LANG_MY_LEAGUES_U}</div>
+{foreach $leagues as $league}
+ <div class="content">
+    {if isset($league.OWN_LEAGUE)}
+     <img style="margin-right:3px" align="left" src="./img/icons/owner.png" onmouseover="Tip('{translate fonema=LANG_OWNER_U}')" onmouseout="UnTip()">
+    {else}
+     <img style="margin-right:3px" align="left" src="./img/icons/participant.png" onmouseover="Tip('{translate fonema=LANG_PARTICIPANT_U}')" onmouseout="UnTip()">
+    {/if}
+    <span class="date_font">{if isset($league.TRACK)}<a href="rvs_manager_league.php?league_id={$league.LEAGUE_ID}&topic_id={$league.TOPIC_ID}&tstmp={$league.TSTMP}"><img src="./img/icons/flag_red.gif" border="0"  onmouseover="Tip('{translate fonema=LANG_UNREAD_MESSAGES_U}')" onmouseout="UnTip()"></a>{/if} <a href="rvs_manager_league.php?league_id={$league.LEAGUE_ID}" ><b>{$league.TITLE}</b></a>
+    {if $league.LEAGUE_STATUS==1}
+      <div style="float:right;position:relative;top:50%"><img style="margin-left:3px;vertical-align:top" align="right" src="./img/icons/not_ready.png" onmouseover="Tip('{translate fonema=LANG_NOT_STARTED_U}')" onmouseout="UnTip()"></div>
+    {else if $league.LEAGUE_STATUS==2}
+      <div style="float:right;position:relative;top:50%"><img style="margin-left:3px;vertical-align:top" align="right" src="./img/icons/ongoing.png" onmouseover="Tip('{translate fonema=LANG_ONGOING_U}')" onmouseout="UnTip()"></div>
+    {else}
+      <div style="float:right;position:relative;top:50%"><img style="margin-left:3px" align="right" src="./img/icons/finished.png" onmouseover="Tip('{translate fonema=LANG_FINISHED_U}')" onmouseout="UnTip()"></div>
+    {/if}
+    {if isset($league.LEAGUE)}
+      <br>{$league.USER_NAME}
+    {/if}
+    </span>
+ </div>
+  {foreachelse}
+    <div class="content">{translate fonema=LANG_NO_LEAGUES_U}</div>
+   {/foreach}
+</div>

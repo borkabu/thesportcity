@@ -1,0 +1,437 @@
+<div style="clear:both"></div>
+
+{if isset($error)}
+<div class="portlet" id="message">
+    <div class="content">
+	<span class="textred"><b>{$error.MSG}</b></span>
+    </div>
+</div>
+{/if}
+
+{if isset($allow_create_clan)}
+<div class="portlet" id="message">
+    <div class="content">
+	  {translate fonema=LANG_CREATE_CLAN_ACCOUNT_OFFER_INSTR_U}<br>
+    </div>
+</div>
+{/if}
+
+{if isset($create_clan_offer)}
+<div class="portlet" id="create_clan_offer">
+ <div class="content">
+  {translate fonema=LANG_CREATE_CLAN_ACCOUNT_OFFER_U}
+  <input type="button"  class="btn" value=" {translate fonema=LANG_YES_PLEASE_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" onClick="javascript:createClan('create_clan', 'create_clan_offer')"/>
+ </div>
+</div>
+<div id="create_clan">
+</div>
+{/if}
+
+{if isset($clan_item)}
+<div class="portlet">
+  <div class="content">
+    {if !empty($clan_item.PIC_LOCATION)}
+     <img src="./img/{$clan_item.PIC_LOCATION}" style="float:left;overflow:auto;height:50px;padding-right:5px; ">
+    {/if}
+<h3><a href="clans.php?clan_id={$clan_item.CLAN_ID}">{$clan_item.CLAN_NAME}</a></h3>
+     {if isset($clan_item.CHAT)}<a href="chat2.php?title={$clan_item.CHAT.CHAT_CHANNEL}" target="tsc_chat" onClick="window.open('','tsc_chat','width=821,height=820,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');"><img src="./img/icons/chat.png" border=0></a>{/if}<br>
+     {translate fonema=LANG_LEADER_U}: <b>{$clan_item.OWNER}</b><br>
+     {translate fonema=LANG_CLAN_FUND_U}: <b>{$clan_item.CLAN_FUND}</b><br>
+  </div>
+</div>
+
+<script>
+ $(function() {
+    $( "#clan_management" ).tabs({
+ 	cookie: {
+		expires: 1,
+		name: "clan_management"
+		}
+	}); 
+ });
+</script>
+
+<div id="clan_management">
+ <ul>
+  <li><a href="#tabs-1" title="{translate fonema=LANG_DESCRIPTION_U}">{translate fonema=LANG_DESCRIPTION_U}</a></li>
+  <li><a href="#tabs-2" title="{translate fonema=LANG_PARTICIPANTS_U}">{translate fonema=LANG_PARTICIPANTS_U}</a></li>
+  <li><a href="#tabs-3" title="{translate fonema=LANG_TEAMS_U}">{translate fonema=LANG_TEAMS_U}</a></li>
+ </ul>
+ 
+ <div id="tabs-1">
+  <form action="" method="post">
+  <div class="portlet" style="margin:0px">
+   <div class="content">
+     <script>
+       $(function() {
+ 	  $( "#clanrules" ).tabs({
+		cookie: {
+			expires: 1,
+			name: "clanrules"
+			}
+		}); 
+       });
+     </script>
+
+     <div id="clanrules">
+      <ul>
+        <li><a href="#tabs-a" title="{translate fonema=LANG_ADVANCED_EDITOR_U}">{translate fonema=LANG_ADVANCED_EDITOR_U}</a></li>
+        <li><a href="#tabs-b" title="{translate fonema=LANG_SIMPLE_EDITOR_U}">{translate fonema=LANG_SIMPLE_EDITOR_U}</a></li>
+      </ul>
+       <div id="tabs-a">
+       <div class="portlet" style="margin:0px">
+       <div class="content"><b>{translate fonema=LANG_DESCRIPTION_U}</b>
+         <input type="hidden" name="clan_id" value="{$clan_item.CLAN_ID}">
+         <input type="hidden" name="set_info" value="Y">
+         <textarea name="descr" id="descr">{$clan_item.DESCR}</textarea>        
+         <input class="btn" type="submit" value=" {translate fonema=LANG_SUBMIT_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+         {translate fonema=LANG_ADVANCED_EDITOR_INSTR_U}
+        </div>
+       </div>
+      </div>
+      <div id="tabs-b">
+       <div class="portlet" style="margin:0px">
+        <div class="content">
+        <b>{translate fonema=LANG_DESCRIPTION_U}</b><br>
+         <textarea name="simple_text" id="simple_text" rows=15 cols=65">{$clan_item.DESCR}</textarea><br>
+         <input class="btn" type="submit" value=" {translate fonema=LANG_SUBMIT_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/><br>
+        </div> 
+       </div>
+      </div>
+       <script type="text/javascript">
+     	//<![CDATA[
+	replaceEditor('descr');
+     	//]]>
+       </script>
+     </div>
+   </div>
+  </div>
+  </form>
+ </div>
+ <div id="tabs-2">
+  <div class="portlet" style="margin:0px">
+   <div class="content">
+       {if isset($clan_members)}
+        <table width="100%">
+          <tr valign="top">
+            <th>{translate fonema=LANG_PARTICIPANT_U}</th>
+            <th>{translate fonema=LANG_STATUS_U}</th>
+            <th>{translate fonema=LANG_TEAMS_U}</th>
+            <th colspan=2></th>
+          </tr>
+          {if isset($clan_members.OWNER)}
+          <tr valign="top">
+            <td><b>{$clan_members.OWNER.USER_NAME}</b></td>
+            <td>{translate fonema=LANG_OWNER_U}</td>
+            <td>{$clan_members.OWNER.TEAMS}</td>
+              <td colspan=2>
+               <form action="" method="post" style="margin:0">
+                <input type="text" name="credits" maxlength="3" size="4" class="input">
+		<input class="btn" type="submit" value=" {translate fonema=LANG_AWARD_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"  onClick="return confirm('{translate fonema=LANG_REALLY_U}?');"/>
+	        <input type="hidden" name="clan_id" value="{$clan_members.OWNER.CLAN_ID}">
+                <input type="hidden" name="user_id" value="{$clan_members.OWNER.USER_ID}">
+                <input type="hidden" name="award_user" value="Y">
+               </form>
+	      </td>
+          </tr>
+          {/if}
+          <tr valign="top">
+           <th colspan=6 align="center">{translate fonema=LANG_CURRENT_MEMBERS_U}</th>
+          </tr>
+          {if isset($clan_members.CURRENT_MEMBERS)}
+          {foreach $clan_members.CURRENT_MEMBERS as $member}
+            <tr valign="top">
+              <td><b>{$member.USER_NAME}</b></td>
+              <td>{translate fonema=LANG_PARTICIPANT_U}</td>
+              <td>{$member.TEAMS}</td>
+              <td>
+               <form action="" method="post" style="margin:0">
+                <input type="text" name="credits" maxlength="3" size="4" class="input">
+		<input class="btn" type="submit" value=" {translate fonema=LANG_AWARD_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"  onClick="return confirm('{translate fonema=LANG_REALLY_U}?');"/>
+	        <input type="hidden" name="clan_id" value="{$member.CLAN_ID}">
+                <input type="hidden" name="user_id" value="{$member.USER_ID}">
+                <input type="hidden" name="award_user" value="Y">
+               </form>
+	      </td>
+	      <td>
+              {if isset($member.CAN_REMOVE)}
+              <form action="" method="post" style="margin:0">
+		<input class="btn" type="submit" value=" {translate fonema=LANG_DELETE_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"  onClick="return confirm('{translate fonema=LANG_REALLY_U}?');"/>
+	        <input type="hidden" name="clan_id" value="{$member.CLAN_ID}">
+                <input type="hidden" name="user_id" value="{$member.USER_ID}">
+                <input type="hidden" name="remove_user" value="Y">
+              </form>
+              {/if}
+              </td>
+            </tr>
+           {/foreach}
+          {/if}
+          <tr valign="top">
+           <th colspan=6 align="center">{translate fonema=LANG_INVITED_MEMBERS_U}</th>
+          </tr>
+          {if isset($clan_members.INVITED_MEMBERS)}
+          {foreach $clan_members.INVITED_MEMBERS as $member}
+          <tr valign="top">
+            <td><b>{$member.USER_NAME}</b></td>
+            <td>{translate fonema=LANG_INVITED_U}</td>
+            <td>             
+              <form action="" method="post" style="margin:0">
+		<input class="btn" type="submit" value=" {translate fonema=LANG_DELETE_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"  onClick="return confirm('{translate fonema=LANG_REALLY_U}?');"/>
+	        <input type="hidden" name="clan_id" value="{$member.CLAN_ID}">
+                <input type="hidden" name="user_id" value="{$member.USER_ID}">
+                <input type="hidden" name="remove_user2" value="Y">
+               </form>
+	    </td>
+          </tr>
+          {/foreach}
+          {/if}
+          <tr valign="top">
+           <th colspan=6 align="center">{translate fonema=LANG_PAST_MEMBERS_U}</th>
+          </tr>
+          {if isset($clan_members.FORMER_MEMBERS)}
+          {foreach $clan_members.FORMER_MEMBERS as $member}
+          <tr valign="top">
+            <td><b>{$member.USER_NAME}</b></td>
+            <td>{translate fonema=LANG_PAST_MEMBER_U}</td>
+            <td></td>
+          </tr>
+          {/foreach}
+          {/if}
+          <tr valign="top">
+           <th colspan=6 align="center">{translate fonema=LANG_REJECTERS_U}</th>
+          </tr>
+          {if isset($clan_members.DECLINE_MEMBERS)}
+          {foreach $clan_members.DECLINE_MEMBERS as $member}
+          <tr valign="top">
+            <td><b>{$member.USER_NAME}</b></td>
+            <td colspan=4>{translate fonema=LANG_REJECTERS_U}</td>
+          </tr>
+           {/foreach}
+          {/if}
+        </table>
+        {/if}
+
+   </div>
+    {if isset($invite_form)}
+     <div class="header">{translate fonema=LANG_INVITATIONS_U}</div>
+       {if isset($invite_form.INVITE_ERROR)}
+       <div class="content">
+           <span class="textred">
+	    {if isset($invite_form.INVITE_ERROR.NOUSER)}{translate fonema=LANG_ERROR_USER_NOT_FOUND_U}{/if}
+            {if isset($invite_form.INVITE_ERROR.USERDOUBLE)}{translate fonema=LANG_MANAGER_LEAGUE_USER_DOUBLE_U}{/if} 
+            {if isset($invite_form.INVITE_ERROR.USERBELONG)}{translate fonema=LANG_CLAN_USER_BELONG_U}{/if} 
+ 	    {if isset($invite_form.INVITE_ERROR.USERIGNORE)}{translate fonema=LANG_MANAGER_LEAGUE_USER_IGNORE_U}{/if} 
+ 	    {if isset($invite_form.INVITE_ERROR.TOOMANY)}{translate fonema=LANG_CLAN_USER_LIMIT_U}{/if} 
+           </span>
+       </div>
+       {/if}
+     <div class="content">
+        <form action="" method="post" style="margin:0">			  
+           {translate fonema=LANG_INVITE_USER_U}
+           <input type="text" name="user_name" maxlength="40" size="30" class="input">
+           <input type="hidden" name="invite" value="y">
+           <input type="hidden" name="clan_id" value="{$clan_item.CLAN_ID}">
+	<input class="btn" type="submit" value=" {translate fonema=LANG_INVITE_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+        </form>
+     </div>
+    {elseif isset($invite_form_limit)}
+       <div class="content">
+        <span class="textred">{translate fonema=LANG_CLAN_USER_LIMIT_U}</span>
+       </div>
+    {/if}
+
+  </div>
+ </div>
+ <div id="tabs-3">
+  <div class="portlet" style="margin:0px">
+     {foreach $clan_teams as $team}
+      <div class="content">
+        <h3>{$team.SEASON_TITLE}</h3><br>
+        {if $team.TEAM_ID==''}
+         <div id="create_clan_team_offer_{$team.SEASON_ID}">    
+          {translate fonema=LANG_CREATE_CLAN_TEAM_OFFER_U}
+          {if ($clan_item.CLAN_FUND >= 25)}
+  	   <input type="button"  class="btn" value=" {translate fonema=LANG_YES_PLEASE_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" onClick="javascript:createClanTeam('create_clan_team_offer_{$team.SEASON_ID}', {$team.SEASON_ID}, {$team.CLAN_ID}, {$team.EVENT_TYPE})"/>
+          {else}
+            <br><span class="textred"><b>{translate fonema=LANG_ERROR_CLAN_NOT_ENOUGH_CREDITS_U}</b></span>
+          {/if}
+         </div>    
+        {elseif $team.STATUS==1}
+         <div style="float:left; margin-right:5px">
+          <span class="textgreen"><b>{translate fonema=LANG_CLAN_TEAM_CREATED_U}</b></span><br>
+          {if !isset($team.ACTIVE_MEMBERS) || count($team.ACTIVE_MEMBERS) < 5}
+            <span class="textred"><b>{translate fonema=LANG_CLAN_TEAM_NOT_FULL_U}</b></span><br>
+          {/if}
+	  {if isset($team.ALLOW_CHANGE) && $clan_item.CLAN_FUND >= 1}
+            <script>
+             var order;
+             $(function() {
+		$( "#sortable1_{$team.TEAM_ID}" ).sortable({
+			connectWith: ".connectedSortable"
+		}).disableSelection();
+
+		$( "#sortable2_{$team.TEAM_ID}" ).sortable({
+			connectWith: ".connectedSortable",
+			receive: function(event, ui) {
+	            // so if > 10
+                  	    if ($(this).children().length > 5) {
+	                //ui.sender: will cancel the change.
+                  	        //Useful in the 'receive' callback.
+	          	      $(ui.sender).sortable('cancel');
+                  	    }
+                  }          
+		}).disableSelection();
+
+
+		$( "#dialog_{$team.TEAM_ID}" ).dialog({
+				autoOpen: false,
+				width: 700,
+				modal: true,
+				buttons: {
+                                 {if ($clan_item.CLAN_FUND >= 1) || isset($team.FREE_CHANGE)}
+				  "{translate fonema=LANG_SAVE_U}": function() {
+					$("#newteam_{$team.TEAM_ID}").submit();
+					$( this ).dialog( "close" );
+				  },
+				 {/if}
+				  "{translate fonema=LANG_CANCEL_U}": function() {
+					$( this ).dialog( "close" );
+				  }
+                                }
+		});
+                $( "#modify_team_{$team.TEAM_ID}" ).button()
+			.click(function() {
+				$( "#dialog_{$team.TEAM_ID}" ).dialog( "open" );
+				return false;
+			});
+               });
+            </script>
+           {elseif $clan_item.CLAN_FUND < 1}
+            <span class="textred"><b>{translate fonema=LANG_ERROR_CLAN_NOT_ENOUGH_CREDITS_U}</b></span><br>
+           {/if}
+            </div>
+            <div style="float:right">
+            {if isset($team.ALLOW_CHANGE)}
+              <div class="textgreen">{translate fonema=LANG_MARKET_OPENED_2_U} <b>{$team.MARKET_STATUS.MARKET_OPEN.START_DATE} {$team.MARKET_STATUS.MARKET_OPEN.UTC}</b></div> 
+            {else}
+              {if isset($team.MARKET_STATUS.SEASON_OVER)}
+	       <div class="textred">{translate fonema=LANG_SEASON_OVER_U}</div>
+              {elseif isset($team.MARKET_STATUS.NOMARKET)}
+               <div class="textred">{translate fonema=LANG_MARKET_CLOSED_3_U} <b>{$team.MARKET_STATUS.NOMARKET.START_DATE} {$team.MARKET_STATUS.NOMARKET.UTC}</b></div> 
+              {elseif isset($team.MARKET_STATUS.NOMARKET_DELAY)}
+               <div class="textred">{translate fonema=LANG_MARKET_CLOSED_2_U}</b></div> 
+              {/if}
+            {/if}
+            </div>
+            <div style="clear:both"></div>
+            <div style="float:right">
+             {translate fonema=LANG_PLACE_U}: {$team.PLACE} (<a href="f_manager_standings_clans.php?mseason_id={$team.SEASON_ID}">{translate fonema=LANG_STANDINGS_CLANS_U}</a>)
+             <br><a href="f_manager_clan_team_summary.php?clan_id={$clan_item.CLAN_ID}&team_id={$team.TEAM_ID}" target="clan_team_summary" onClick="window.open('','clan_team_summary','width=600,height=300,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');">{translate fonema=LANG_TEAM_STATEMENT_U}</a>
+            </div>
+            <div>
+		<table>
+                  <tr>
+                    <th>{translate fonema=LANG_TEAM_MEMBER_U}</th>
+                    <th>{translate fonema=LANG_PLACE_U}</th>
+                    <th>{translate fonema=LANG_POINTS_U}</th>
+                    <th>{translate fonema=LANG_POINTS_LAST_TOUR_U}</th>
+                    <th>{translate fonema=LANG_TEAM_QUALITY_U}</th>
+                    <th>{translate fonema=LANG_LAST_REVIEWED_U}</th>
+                  </tr>
+		{if isset($team.ACTIVE_MEMBERS)}
+                  {foreach $team.ACTIVE_MEMBERS as $member}
+                  <tr>
+                    <td>{$member.USER_NAME}</td>
+                    <td>{$member.PLACE}</td>
+                    <td>{$member.POINTS}</td>
+                    <td>{$member.POINTS_LAST_TOUR}</td>
+                    <td>{$member.COMPLETENESS}</td>
+                    <td>{$member.LAST_REVIEWED}</td>
+                  </tr>
+                  {/foreach}              
+                 {else}
+                  <tr><td colspan=4>{translate fonema=LANG_TEAM_IS_EMPTY_U}</td></tr>
+                 {/if}
+                </table>
+              </div>
+	    {if isset($team.ALLOW_CHANGE) && $clan_item.CLAN_FUND >= 1}
+            <div style="margin-top:5px">
+              <button id="modify_team_{$team.TEAM_ID}">{translate fonema=LANG_CLAN_TEAM_MODIFY_U}</button>
+            </div>
+            {/if}
+            <div style="clear:both"></div>
+	    {if isset($team.ALLOW_CHANGE)  && $clan_item.CLAN_FUND >= 1}
+             <div class="content" style="overflow: auto;" id="dialog_{$team.TEAM_ID}" title="{translate fonema=LANG_CLAN_TEAM_MODIFY_U}">
+              <div style="width:48%;float:left">
+		<h3>{translate fonema=LANG_AVAILABLE_CLAN_MEMBERS_U}</h3>
+              <ol id="sortable1_{$team.TEAM_ID}" class="connectedSortable" style="width:98%;min-height:200px; border: 1px solid black; list-style-type: decimal;list-style-position: inside;text-align:left;
+	list-style-type: none; margin: 0; padding: 0; float: left; margin-right: 10px; background: #eee; padding: 5px;">
+                  {if isset($team.MEMBERS)}
+                  {foreach $team.MEMBERS as $member}		
+		  <li class="ui-state-highlight" id="member_{$member.USER_ID}"
+		  style="cursor: move; font-size: 1em; margin: 5px; padding: 5px;"><b>{$member.USER_NAME}</b><br>
+                       <table>
+                        <tr>
+                         <th>{translate fonema=LANG_PLACE_U}</th>
+			 <th>{translate fonema=LANG_POINTS_U}</th>
+			 <th colspan=2>{translate fonema=LANG_TEAM_QUALITY_U}</th>
+                        </tr>
+			 <tr>
+                          <td>{$member.PLACE}</td>
+			  <td>{$member.POINTS}</td>
+			  <td>{$member.COMPLETENESS}%</td>
+			  <td>{$member.LAST_REVIEWED}</td>
+                        </tr>
+                       </table>
+                    <input type="hidden" name="members[]" value="{$member.USER_ID}">
+                  </li>
+                  {/foreach}
+                  {/if}
+              </ol>
+             </div>
+             <div style="width:48%;float:right">
+             <form action="" id="newteam_{$team.TEAM_ID}" style="margin:0px;" method="POST">
+	      <h3>{translate fonema=LANG_SELECTED_CLAN_MEMBERS_U}</h3><br> ({translate fonema=LANG_DROP_HERE_U})
+              <ol id="sortable2_{$team.TEAM_ID}" class="connectedSortable" style="float: right;width:98%;min-height:200px; border: 1px solid black; list-style-type: decimal;list-style-position: inside;text-align:left;
+list-style-type: none; margin: 0; padding: 0; background: #eee; padding: 5px;">
+                  {if isset($team.ACTIVE_MEMBERS)}
+                  {foreach $team.ACTIVE_MEMBERS as $member}
+		  <li class="ui-state-highlight" id="member_{$member.USER_ID}"
+			style=" cursor: move; font-size: 1em; margin: 5px; padding: 5px;"><b>{$member.USER_NAME}</b><br>
+                       <table>
+                        <tr>
+                         <th>{translate fonema=LANG_PLACE_U}</th>
+			 <th>{translate fonema=LANG_POINTS_U}</th>
+			 <th colspan=2>{translate fonema=LANG_TEAM_QUALITY_U}</th>
+                        </tr>
+			 <tr>
+                          <td>{$member.PLACE}</td>
+			  <td>{$member.POINTS}</td>
+			  <td>{$member.COMPLETENESS}%</td>
+			  <td>{$member.LAST_REVIEWED}</td>
+                        </tr>
+                       </table>
+                    <input type="hidden" name="members[]" value="{$member.USER_ID}">
+                  </li>
+                  {/foreach}
+                  {/if}
+              </ol>      
+                <input type="hidden" name="season_id" value="{$team.SEASON_ID}">
+                <input type="hidden" name="clan_id" value="{$team.CLAN_ID}">
+                <input type="hidden" name="team_id" value="{$team.TEAM_ID}">
+                <input type="hidden" name="save_team" value="y">
+             </form>
+             </div>        
+            </div>
+          {/if}
+        {/if}
+      </div>
+     {foreachelse}     
+      <div class="content">
+       {translate fonema=LANG_NO_SEASONS_U}
+      </div>
+     {/foreach}
+  </div>
+ </div>
+</div>
+{/if}

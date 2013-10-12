@@ -1,0 +1,20 @@
+<div class="portlet">
+<div class="header">{$user_name}</div>
+<div class="content">
+   <table>
+     <tr>
+       <th></th>
+       <th width="100%">{translate fonema=LANG_MAIN_SQUAD_U}</th>
+       <th>{translate fonema=LANG_POINTS_LAST_TOUR_U}</th>
+     </tr>
+    {foreach $players as $player}
+     <tr>
+       <td align="left">{$player.NUMBER}</td>
+       <td align="left">
+	{$player.LAST_NAME}, {$player.FIRST_NAME} ({$player.TEAM_NAME2})</td>
+       <td align="right">{$player.TOTAL_POINTS}</td>        
+     </tr>
+     {/foreach}
+   </table>
+ </div>
+</div>

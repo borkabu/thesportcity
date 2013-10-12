@@ -1,0 +1,74 @@
+<TPL_SUB:VIDEO>
+<div class="portlet">
+<div class="header"><TPL:TITLE></div>
+<div class="content" style="height:15px">
+	<div style="float:left;"><TPL_SUB:SRC><_TPL:LANG_SOURCE_U>: <i><a href="<TPL:SOURCE>" target="_blank"><TPL:SOURCE_NAME></a></i></TPL_SUB:SRC></div>
+        <div style="float:right;"><TPL:DATE_PUBLISHED></div>
+<script type="text/javascript">
+var addthis_config = {
+     ui_language: "<TPL:LANG>"
+}
+</script>
+<!-- AddThis Button BEGIN -->
+<div class="addthis_toolbox addthis_default_style" style="float:right;">
+<a href="http://www.addthis.com/bookmark.php?v=250&amp;username=xa-4ba3abe51127d424" 
+    class="addthis_button_compact" addthis:title="<TPL:TITLE>"><_TPL:LANG_SHARE_U></a>
+  <span class="addthis_separator">|</span>
+  <a class="addthis_button_facebook"></a>
+  <a class="addthis_button_myspace"></a>
+  <a class="addthis_button_google"></a>
+  <a class="addthis_button_twitter"></a>
+ </div>
+ <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#username=xa-4ba3abe51127d424"></script>
+ <!-- AddThis Button END -->
+</div>
+<div class="content">
+ <TPL_SUB:DELETE>
+<form method="post" style="float:right;" action="delete_video.php">
+ <input type="image" src="img/icons/delete.png" onClick="return confirm('<_TPL:LANG_REALLY_U>');" onmouseover="Tip('<_TPL:LANG_DELETE_U>')" onmouseout="UnTip()" />
+ <input type="hidden" name="delete_video" value="y">
+ <input type="hidden" name="video_id" value="<TPL:VIDEO_ID>">
+</form>
+ </TPL_SUB:DELETE>
+ <TPL_SUB:EDIT>
+<form method="post" style="float:right" action="video_add.php">
+ <input type="image" src="img/icons/edit.png" onmouseover="Tip('<_TPL:LANG_EDIT_VIDEO_U>')" onmouseout="UnTip()" />
+ <input type="hidden" name="edit_video" value="y">
+ <input type="hidden" name="video_id" value="<TPL:VIDEO_ID>">
+</form>
+</TPL_SUB:EDIT>
+  <TPL_SUB:VOTING>
+<div id="thumbs_<TPL:VIDEO_ID>" style="float:right;">
+ <input type="image" src="img/icons/thumbup.gif" onClick="javascript:voteContentThumbUp(<TPL:VIDEO_ID>, 'video', 'thumbs_<TPL:VIDEO_ID>')"/>
+ <input type="image" src="img/icons/thumbdown.gif" onClick="javascript:voteContentThumbDown(<TPL:VIDEO_ID>, 'video', 'thumbs_<TPL:VIDEO_ID>')"/>&nbsp;
+</div>
+ </TPL_SUB:VOTING>
+<TPL_SUB:THUMB_UP>
+<div style="float:right;">
+<img src="./img/icons/plus.png" onmouseover="Tip('<_TPL:LANG_VOTE_UP_U>')" onmouseout="UnTip()"/>
+</div>
+</TPL_SUB:THUMB_UP>
+<TPL_SUB:THUMB_DOWN>
+<div style="float:right;">
+<img src="./img/icons/minus.png" onmouseover="Tip('<_TPL:LANG_VOTE_DOWN_U>')" onmouseout="UnTip()"/>
+</div>
+</TPL_SUB:THUMB_DOWN>
+<TPL_SUB:VOTED_PLUS>
+<div style="float:right;">
+<img src="./img/icons/voted_plus.png"/>
+</div>
+</TPL_SUB:VOTED_PLUS>
+<TPL_SUB:VOTED_MINUS>
+<div style="float:right;">
+<img src="./img/icons/voted_minus.png"/>
+</div>
+</TPL_SUB:VOTED_MINUS>
+	<TPL:LINK>
+	<TPL:DESCR>
+</div>
+<div class="content" style="height:15px">
+	<div style="float:left;"><_TPL:LANG_ADDED_BY_U>: <b><TPL:USER_NAME></b></div> 
+			
+</div>
+</div>
+</TPL_SUB:VIDEO>

@@ -1,0 +1,7 @@
+credit_challenge_{$user_id}@@@{if isset($error)}<span class="textred">{$error}</span><br>{/if}
+{if isset($challenge)}
+{if isset($challenge.CHALLENGE)}{translate fonema=LANG_STAKE_U}: <input type="text" name="credit_stake_{$challenge.CHALLENGE.USER_ID}" id="credit_stake_{$challenge.CHALLENGE.USER_ID}" size="2" maxlength="4" class="input" value="{$challenge.CHALLENGE.STAKE}" /> {translate fonema=LANG_CREDITS_U}
+<input type="button" class="btn" value=" {translate fonema=LANG_CHALLENGE_USER_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" onClick="javascript:challengeUser({$challenge.CHALLENGE.USER_ID}, {$challenge.CHALLENGE.SEASON_ID}, 'credit_challenge_{$challenge.CHALLENGE.USER_ID}', 2, document.getElementById('credit_stake_{$challenge.CHALLENGE.USER_ID}').value)"/>{/if}
+{if isset($challenge.CHALLENGE_THROWN)}{translate fonema=LANG_CHALLENGE_THROWN_U}<br>{translate fonema=LANG_STAKE_U}: <b>{$challenge.CHALLENGE_THROWN.STAKE}</b> {translate fonema=LANG_CREDITS_U} <input type="button" class="btn" value=" {translate fonema=LANG_CHALLENGE_WITHDRAW_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" onClick="javascript:unchallengeUser({$challenge.CHALLENGE_THROWN.USER_ID}, {$challenge.CHALLENGE_THROWN.SEASON_ID}, 2, 'credit_challenge_{$challenge.CHALLENGE_THROWN.USER_ID}')"/>{/if}
+{/if}
+###credits@@@{$user_credits}###frozen_credits@@@{$frozen_credits}

@@ -1,0 +1,254 @@
+<div class="portlet">
+  <div class="header">{translate fonema=LANG_TEAM_U}</div> 
+  <div class="content">
+  <table style="width:100%; border:0">
+   <tr><td  style="border:0"> 
+     {translate fonema=LANG_TEAM_SIZE_U}: {$summary.TEAM_SIZE}/{$summary.MAX_TEAM_SIZE}<br>
+     {if isset($allow_substitutes)}
+       <span class="textgreen"><b>{translate fonema=LANG_SUBSTITUTES_ALLOWED_U}</b></span><br>
+       {translate fonema=LANG_TEAM_SUBSTITUTES_U}: {$summary.USED_SUBSTITUTES}/{$summary.MAX_SUBSTITUTES}<br>
+     {else}
+       <span class="textred"><b>{translate fonema=LANG_SUBSTITUTES_NOT_ALLOWED_U}</b></span><br>
+     {/if}
+     {if !isset($team.CAPTAINCY)}
+      <div id="captain_set"><b><span class="textred">{translate fonema=LANG_CAPTAIN_NOT_ALLOWED_U}</b></span></div>
+     {else if isset($summary.CAPTAIN_SET)}
+      <span class="textgreen"><b>{translate fonema=LANG_CAPTAIN_SET_U}</b></span>
+     {else}
+      <div id="captain_set"><b><span class="textred">{translate fonema=LANG_CAPTAIN_NO_SET_U}</b></span></div>
+     {/if}
+  </td><td  style="border:0"> 
+     {translate fonema=LANG_TEAM_QUALITY_U}<br><div id="team_quality"><span class="textgreenhuge"><b>{$summary.COMPLETENESS}%</b></span></div>
+     {if isset($allow_substitutes)}
+	{translate fonema=LANG_SUBSTITUTES_QUALITY_U}<br>
+	<div id="substitutes_quality"><span class="textgreenhuge"><b>{$summary.SUBSTITUTES_Q}%</b></span></div>
+     {/if}
+  </td></tr></table>
+  </div>
+  <div class="content">
+     {translate fonema=LANG_LAST_REVIEWED_U}: {$summary.LAST_REVIEWED}
+  </div>
+  <div class="header">
+   {if isset($allow_substitutes)}   
+    {translate fonema=LANG_MAIN_SQUAD_U}
+   {else}
+    {translate fonema=LANG_TEAM_U}
+   {/if}
+  </div>
+  <div class="content">
+	{if isset($team)}
+            <table style="width:100%">
+              <tr valign="top">
+                <th>{translate fonema=LANG_PLAYER_U}</th>
+                <th>{translate fonema=LANG_TOUR_POINTS_U}</th>
+                <th>{translate fonema=LANG_START_PRICE_U}</th>
+                <th>{translate fonema=LANG_CURRENT_PRICE_U}</th>
+		{if isset($team.CAPTAINCY)}
+                <th>{translate fonema=LANG_CAPTAIN_U}</th>
+                {/if}
+		<th></th>
+              </tr>
+             {foreach $team_players as $team_player}
+                <tr valign="top" id="market_tr_{$team_player.USER_ID}">
+                  <td>
+		   {if isset($allow_substitutes)}
+  		     {if ($team_player.COVERED==1)}
+                       <img src="./img/icons/insurance.png" width="16" height="16" border="0" onmouseover="Tip('{translate fonema=LANG_COVERED_BY_SUBSTITUTE_U}')" onmouseout="UnTip()" />
+                     {/if}
+                   {/if}
+       		   {if isset($team_player.INT)}
+			<img align="left" src="./img/icons/gone.png" onmouseover="Tip('{translate fonema=LANG_PLAYER_LEFT_TOURNAMENT_U}')" onmouseout="UnTip()">
+		   {/if}
+                 {if isset($team_player.PLAYER_STATE_DIV)}
+<div id="player_state_{$team_player.PLAYER_ID}>_{$team_player.SEASON_ID}" style="float:left;">
+{if isset($team_player.PLAYER_STATE_DIV.INJURY_STATE_DEFAULT) &&
+   isset($team_player.PLAYER_STATE_DIV.QUESTIONABLE_STATE_DEFAULT)}
+<!--
+{elseif isset($team_player.PLAYER_STATE_DIV.INJURY_STATE_ON)}
+<img src="./img/injury.gif" width="12" height="12" border="0" 
+ {if isset($team_player.PLAYER_STATE_DIV.INJURY_STATE_ON.ADMIN)}
+   onClick="javascript:playerStateUpdate({$team_player.SEASON_ID}, {$team_player.PLAYER_ID}, -1, 'player_state_{$team_player.PLAYER_ID}_{$team_player.SEASON_ID}')"
+ {/if}
+ onmouseover="Tip('{translate fonema=LANG_UNFIT_TO_PLAY_U}')" onmouseout="UnTip()" /><!--
+{elseif isset($team_player.PLAYER_STATE_DIV.QUESTIONABLE_STATE_ON)}
+<img src="./img/questionable.png" width="12" height="12" border="0" 
+  {if isset($team_player.PLAYER_STATE_DIV.QUESTIONABLE_STATE_ON.ADMIN)}onClick="javascript:playerStateUpdate({$team_player.SEASON_ID}, {$team_player.PLAYER_ID}, -4, 'player_state_{$team_player.PLAYER_ID}_{$team_player.SEASON_ID}')"
+  {/if}
+ onmouseover="Tip('{translate fonema=LANG_QUESTIONABLE_U}')" onmouseout="UnTip()"/><!--
+{elseif isset($team_player.PLAYER_STATE_DIV.INJURY_STATE_OFF) ||
+        isset($team_player.PLAYER_STATE_DIV.QUESTIONABLE_STATE_OFF)}
+<img src="./img/no_injury.gif" width="12" height="12" border="0" 
+ {if isset($team_player.PLAYER_STATE_DIV.INJURY_STATE_OFF.ADMIN)}
+   onClick="javascript:playerStateUpdate({$team_player.SEASON_ID}, {$team_player.PLAYER_ID}, 1, 'player_state_{$team_player.PLAYER_ID}_{$team_player.SEASON_ID}')"
+ {/if}
+ {if isset($team_player.PLAYER_STATE_DIV.QUESTIONABLE_STATE_OFF.ADMIN)}
+   onClick="javascript:playerStateUpdate({$team_player.SEASON_ID}, {$team_player.PLAYER_ID}, 4, 'player_state_{$team_player.PLAYER_ID}_{$team_player.SEASON_ID}')"
+ {/if}
+  onmouseover="Tip('{translate fonema=LANG_FIT_TO_PLAY_U}')" onmouseout="UnTip()"><!--
+{/if}
+{if isset($team_player.PLAYER_STATE_DIV.SUSPENSION_STATE_DEFAULT)}
+-->
+{elseif isset($team_player.PLAYER_STATE_DIV.SUSPENSION_STATE_ON)}
+--><img src="./img/red_card.gif" width="12" height="12" border="0" 
+ {if isset($team_player.PLAYER_STATE_DIV.SUSPENSION_STATE_ON.ADMIN)}
+  onClick="javascript:playerStateUpdate({$team_player.SEASON_ID}, {$team_player.PLAYER_ID}, -2, 'player_state_{$team_player.PLAYER_ID}_{$team_player.SEASON_ID}')"
+ {/if}
+  onmouseover="Tip('{translate fonema=LANG_SUSPENDED_U}')" onmouseout="UnTip()"/>
+{elseif isset($team_player.PLAYER_STATE_DIV.SUSPENSION_STATE_OFF)}
+--><img src="./img/no_card.gif" width="12" height="12" border="0" 
+ {if isset($team_player.PLAYER_STATE_DIV.SUSPENSION_STATE_OFF.ADMIN)}
+  onClick="javascript:playerStateUpdate({$team_player.SEASON_ID}, {$team_player.PLAYER_ID}, 2, 'player_state_{$team_player.PLAYER_ID}_{$team_player.SEASON_ID}')"
+ {/if}
+  onmouseover="Tip('{translate fonema=LANG_ALLOWED_TO_PLAY_U}')" onmouseout="UnTip()"/>
+{/if}
+</div>
+                 {/if}  
+                 <a href="f_manager_player_info.php?user_id={$team_player.USER_ID}"  target="f_manager_player_info" onClick="window.open('','f_manager_player_info','width=400,height=400,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');"><b>{$team_player.LAST_NAME}, {$team_player.FIRST_NAME}</b></a> <br>
+                    <span class="date_font2">{$team_player.TYPE_NAME} ({$team_player.TEAM_NAME2})</span></td>
+                  <td align="right">{$team_player.TOTAL_POINTS}</td>
+                  <td align="right">{$team_player.BUYING_PRICE}</td>
+                  <td align="right"><b>{$team_player.SELLING_PRICE}</b> 
+		  {if isset($team_player.UP)}
+		    <img src="./img/icons/chart_up.png" border=0>
+                  {/if} 
+		  {if isset($team_player.DOWN)}
+		    <img src="./img/icons/chart_down.png" border=0>
+                  {/if} 
+                  </td>
+		{if isset($team_player.CAPTAINCY)}
+		  <td align="left">
+                     <div id="captain_{$team_player.CAPTAINCY.ENTRY_ID}">
+			{if isset($team_player.CAPTAINCY.CAPTAIN)}
+			  <img src='./img/icons/captain.png' onmouseover="Tip('<span class=\'textred\'>{translate fonema=LANG_CAPTAIN_U}</span>')" onmouseout="UnTip()" />
+                        {elseif isset($team_player.CAPTAINCY.GOOD_DAY)}
+                	  <a href="#" onclick="setCaptain({$team_player.ENTRY_ID}, {$team_player.CAPTAINCY.GOOD_DAY.SEASON_ID}); return false">{translate fonema=LANG_SET_CAPTAIN_U}</a>
+			{/if}
+		      </div>
+		     </td>
+		  {/if}
+                  <td>
+		   {if isset($team_player.GOOD_DAY)}
+	              <form action="" method="post">
+        	              <input type="hidden" name="player" value="{$team_player.PLAYER_ID}">
+                	      <input type="hidden" name="sell" value="y">
+		              <input type="submit" class="btn" type="submit" value=" {translate fonema=LANG_SELL_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+	              </form>
+                   {/if} 
+                   {if isset($team_player.WRONG_DAY)}
+                      <img src='./img/icons/red_exclamation.png' onmouseover="Tip('<span class=\'textred\'>{translate fonema=LANG_MARKET_CLOSED_U}</span>')" onmouseout="UnTip()" /> 
+		   {/if}
+          	   {if isset($team_player.CAN_SUBSTITUTE)}
+	   	      <form action="" method="post" style="margin:0">
+	                 <input type="hidden" name="player" value="{$team_player.USER_ID}">
+        	         <input type="hidden" name="main2substitute" value="y">
+                	 <input type="submit" class="btn" type="submit" value=" {translate fonema=LANG_MAKE_SUBSTITUTE_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+	              </form>
+	           {/if}
+                   {if isset($team_player.PLAYER_REPORTS)}
+	   	      <span style="white-space: nowrap;"><a href="javascript: void()" onclick="reportPlayerState({$team_player.USER_ID}, {$team_player.PLAYER_REPORTS.SEASON_ID}); return false">{translate fonema=LANG_REPORTS_U}</a> ({$team_player.PLAYER_REPORTS.REPORTS})</span>
+		   {/if}
+                  </td>
+                </tr>
+	      {/foreach}
+            </table>
+    {else}
+       {translate fonema=LANG_ERROR_MANAGER_NO_PLAYERS}
+    {/if}
+</div>
+{if isset($allow_substitutes)}
+  <div class="header">{translate fonema=LANG_SUBSTITUTES_U}</div>
+  <div class="content">
+    {if isset($substitutes)}
+            <table style="width:100%">
+              <tr valign="top">
+                <th>{translate fonema=LANG_PLAYER_U}</th>
+                <th>{translate fonema=LANG_TOUR_POINTS_U}</th>
+                <th>{translate fonema=LANG_START_PRICE_U}</th>
+                <th>{translate fonema=LANG_CURRENT_PRICE_U}</th>
+		<th>Covering</th>
+		<th></th>
+              </tr>
+             {foreach $team_substitute_players as $team_player}
+                <tr valign="top" id="market_tr_{$team_player.USER_ID}">
+                  <td>
+       		   {if isset($team_player.INT)}
+			<img align="left" src="./img/icons/gone.png" onmouseover="Tip('{translate fonema=LANG_PLAYER_LEFT_TOURNAMENT_U}')" onmouseout="UnTip()">
+		   {/if}
+                 {if isset($team_player.PLAYER_STATE_DIV)}
+<div id="player_state_{$team_player.PLAYER_ID}>_{$team_player.SEASON_ID}" style="float:left;">
+{if isset($team_player.PLAYER_STATE_DIV.INJURY_STATE_DEFAULT)}
+<!--
+{elseif isset($team_player.PLAYER_STATE_DIV.INJURY_STATE_ON)}
+<img src="./img/injury.gif" width="12" height="12" border="0" 
+ {if isset($team_player.PLAYER_STATE_DIV.INJURY_STATE_ON.ADMIN)}
+   onClick="javascript:playerStateUpdate({$team_player.SEASON_ID}, {$team_player.PLAYER_ID}, -1, 'player_state_{$team_player.PLAYER_ID}_{$team_player.SEASON_ID}')"
+ {/if}
+ onmouseover="Tip('{translate fonema=LANG_UNFIT_TO_PLAY_U}')" onmouseout="UnTip()" /><!--
+{elseif isset($team_player.PLAYER_STATE_DIV.INJURY_STATE_OFF)}
+<img src="./img/no_injury.gif" width="12" height="12" border="0" 
+ {if isset($team_player.PLAYER_STATE_DIV.INJURY_STATE_OFF.ADMIN)}
+   onClick="javascript:playerStateUpdate({$team_player.SEASON_ID}, {$team_player.PLAYER_ID}, 1, 'player_state_{$team_player.PLAYER_ID}_{$team_player.SEASON_ID}')"
+ {/if}
+  onmouseover="Tip('{translate fonema=LANG_FIT_TO_PLAY_U}')" onmouseout="UnTip()"><!--
+{/if}
+{if isset($team_player.PLAYER_STATE_DIV.SUSPENSION_STATE_DEFAULT)}
+-->
+{elseif isset($team_player.PLAYER_STATE_DIV.SUSPENSION_STATE_ON)}
+--><img src="./img/red_card.gif" width="12" height="12" border="0" 
+ {if isset($team_player.PLAYER_STATE_DIV.SUSPENSION_STATE_ON.ADMIN)}
+  onClick="javascript:playerStateUpdate({$team_player.SEASON_ID}, {$team_player.PLAYER_ID}, -2, 'player_state_{$team_player.PLAYER_ID}_{$team_player.SEASON_ID}')"
+ {/if}
+  onmouseover="Tip('{translate fonema=LANG_SUSPENDED_U}')" onmouseout="UnTip()"/>
+{elseif isset($team_player.PLAYER_STATE_DIV.SUSPENSION_STATE_OFF)}
+--><img src="./img/no_card.gif" width="12" height="12" border="0" 
+ {if isset($team_player.PLAYER_STATE_DIV.SUSPENSION_STATE_OFF.ADMIN)}
+  onClick="javascript:playerStateUpdate({$team_player.SEASON_ID}, {$team_player.PLAYER_ID}, 2, 'player_state_{$team_player.PLAYER_ID}_{$team_player.SEASON_ID}')"
+ {/if}
+  onmouseover="Tip('{translate fonema=LANG_ALLOWED_TO_PLAY_U}')" onmouseout="UnTip()"/>
+{/if}
+</div>
+                 {/if}  
+                 <a href="f_manager_player_info.php?user_id={$team_player.USER_ID}"  target="f_manager_player_info" onClick="window.open('','f_manager_player_info','width=400,height=400,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');"><b>{$team_player.LAST_NAME}, {$team_player.FIRST_NAME}</b></a> <br>
+                    <span class="date_font2">{$team_player.TYPE_NAME}</span></td>
+                  <td align="right">{$team_player.TOTAL_POINTS}</td>
+                  <td align="right">{$team_player.BUYING_PRICE}</td>
+                  <td align="right"><b>{$team_player.SELLING_PRICE}</b> 
+		  {if isset($team_player.UP)}
+		    <img src="./img/icons/chart_up.png" border=0>
+                  {/if} 
+		  {if isset($team_player.DOWN)}
+		    <img src="./img/icons/chart_down.png" border=0>
+                  {/if} 
+                  </td>
+		<td>{$team_player.COVERED}</td>
+                  <td>
+		   {if isset($team_player.GOOD_DAY)}
+	              <form action="" method="post">
+        	              <input type="hidden" name="player" value="{$team_player.PLAYER_ID}">
+	                      <input type="hidden" name="unset_substitute" value="y">
+	        	      <input type="submit" class="btn" type="submit" value=" {translate fonema=LANG_REMOVE_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+        	      </form>
+                   {/if}
+          	   {if isset($team_player.CAN_UNSUBSTITUTE)}
+	   	      <form action="" method="post" style="margin:0">
+	                 <input type="hidden" name="player" value="{$team_player.USER_ID}">
+        	         <input type="hidden" name="substitute2main" value="y">
+                	 <input type="submit" class="btn" type="submit" value=" {translate fonema=LANG_BUY_PLAYER_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+	              </form>
+	           {/if}
+                   {if isset($team_player.WRONG_DAY)}
+                      <img src='./img/icons/red_exclamation.png' onmouseover="Tip('<span class=\'textred\'>{translate fonema=LANG_MARKET_CLOSED_U}</span>')" onmouseout="UnTip()" /> 
+		   {/if}
+                   {if isset($team_player.PLAYER_REPORTS)}
+	   	      <span style="white-space: nowrap;"><a href="javascript: void()" onclick="reportPlayerState({$team_player.USER_ID}, {$team_player.PLAYER_REPORTS.SEASON_ID}); return false">{translate fonema=LANG_REPORTS_U}</a> ({$team_player.PLAYER_REPORTS.REPORTS})</span>
+		   {/if}
+                  </td>
+                </tr>
+	      {/foreach}
+        </table>
+    {else}
+       {translate fonema=LANG_ERROR_MANAGER_NO_SUBSTITUTES}
+    {/if}
+  </div>
+  {/if}
+</div>

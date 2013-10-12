@@ -1,0 +1,79 @@
+<TPL_INCLUDE:../tpl/adm_head.tpl.html>
+<TPL_INCLUDE:../tpl/adm_menu.tpl.html>
+
+
+<table width="600" border="0" cellspacing="0" cellpadding="10"><tr><td>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="1" bgcolor="#000000"><tr><td>
+  <table width="100%" border="0" cellspacing="0" cellpadding="1" bgcolor="#E1E1E1">
+    <form action="<_TPL:FORM_URL>" method="get">
+    <tr><td>
+      <input type="hidden" name="order" value="<TPL:ORDER>">
+      Paiedka: <TPL:WHERE> <TPL:QUERY> <input type="image" src="../img/adm_ok.gif" class="input">
+      <TPL_SUB:FILTERED><a href="<_TPL:FORM_URL>">[ rodyti visus įradus ]</a></TPL_SUB:FILTERED>
+    <td></tr>
+    </form>
+  </table>
+</td></tr></table>
+
+<br>
+
+<TPL_SUB:PAGING>
+<table width="100%" border="0" cellspacing="0" cellpadding="1" bgcolor="#000000"><tr><td>
+  <table width="100%" border="0" cellspacing="0" cellpadding="3" bgcolor="#FFFFFF">
+    <tr><td valign="top" nowrap>
+      Iš viso įrašų: <b><TPL:NUMROWS></b> | 
+      Puslapiai:
+    </td><td width="100%">
+      <TPL_SUB:PAGES>
+        <TPL_SUB:SELECTED><b>[<TPL:PAGENUM>]</b></TPL_SUB:SELECTED>
+        <TPL_SUB:NORMAL><a href="<TPL:URL>">[<TPL:PAGENUM>]</a></TPL_SUB:NORMAL>
+      </TPL_SUB:PAGES>
+    <td></tr>
+  </table>
+</td></tr></table>
+</TPL_SUB:PAGING>
+<br>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="1" bgcolor="#000000"><tr><td>
+  <table width="100%" border="0" cellspacing="0" cellpadding="3" bgcolor="#FFFFFF">
+    <tr bgcolor="#6283A0">
+      <td class="list_head">
+        Pavadinimas
+        <TPL_SUB:TITLE_DESC_A><img src="../img/adm_desc_a.gif" width="11" height="11" border="0"></TPL_SUB:TITLE_DESC_A>
+        <TPL_SUB:TITLE_DESC><a href="<TPL:URL>"><img src="../img/adm_desc.gif" width="11" height="11" border="0"></a></TPL_SUB:TITLE_DESC>
+        <TPL_SUB:TITLE_ASC_A><img src="../img/adm_asc_a.gif" width="11" height="11" border="0"></TPL_SUB:TITLE_ASC_A>
+        <TPL_SUB:TITLE_ASC><a href="<TPL:URL>"><img src="../img/adm_asc.gif" width="11" height="11" border="0"></a></TPL_SUB:TITLE_ASC>
+      </td>
+      <td class="list_head_sep" align="center"> | </td>
+      <td class="list_head">&nbsp;</td>
+    </tr>
+    
+    <TPL_SUB:ITEM>
+    <tr bgcolor="<TPL_SUB:EVEN>#FFFFFF</TPL_SUB:EVEN><TPL_SUB:ODD>#CDDDE4</TPL_SUB:ODD>">
+      <td class="list_item"><TPL:TITLE></td>
+      <td class="list_item_sep" align="center"> | </td>
+      <td class="list_item" align="center" nowrap>
+        <TPL_SUB:DEL><a href="<TPL:DEL_URL>" onClick="return confirm('Tikrai?');"><img src="../img/adm_delete.gif" width="12" height="12" border="0" alt="padalinti"></a></TPL_SUB:DEL>
+        <a href="award_edit.php?award_id=<TPL:AWARD_ID>"><img src="../img/adm_edit.gif" width="12" height="12" border="0" alt="redaguoti"></a>
+      </td>
+    </tr>
+    </TPL_SUB:ITEM>
+    
+    <TPL_SUB:NORECORDS>
+    <tr bgcolor="<TPL_SUB:EVEN>#FFFFFF</TPL_SUB:EVEN><TPL_SUB:ODD>#A4BED4</TPL_SUB:ODD>">
+      <td colspan="7" class="list_item">Įrašų nėra</td>
+    </tr>
+    </TPL_SUB:NORECORDS>
+  
+  </table>
+</td></tr></table>
+
+<br>
+
+
+<TPL_SUB:PAGING></TPL_SUB:PAGING>
+
+</td></tr></table>
+
+<TPL_INCLUDE:../tpl/adm_foot.tpl.html>

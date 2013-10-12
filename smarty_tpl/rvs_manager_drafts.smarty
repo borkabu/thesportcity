@@ -1,0 +1,42 @@
+<div class="portlet">
+<div class="header">{$league['TITLE']}: {translate fonema=LANG_DRAFT_U}</div>
+<div class="content">
+<b>{translate fonema=LANG_DRAFT_INTERVAL_U}</b>: {$draft_info.TIMEOUT}; <b>{translate fonema=LANG_DRAFT_PICK_ORDER_TYPE_U}</b>: {$draft_info.PICK_ORDER}
+{if isset($in_draft)}
+<div style="float:right">
+<b><a href="rvs_manager_drafts_list.php?league_id={$league.LEAGUE_ID}" target="rvs_manager_draft_list" onClick="window.open('','rvs_manager_draft_list','width=600,height=600,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');">
+                 {translate fonema=LANG_RVS_MANAGER_DRAFTS_LIST_U}</a></b></div>
+{/if}
+</div>
+</div>
+
+{$perform_drafts}
+
+{if isset($allow_chat)}
+<div class="portlet" style="float:right; width:505px">
+<div class="header">{translate fonema=LANG_CHAT_U}</div>
+<div class="content">
+<OBJECT classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0"
+WIDTH="500" HEIGHT="570" id="Chat">
+<PARAM NAME=movie VALUE="http://free.123flashchat.com/123flashchat.swf?init_room=TSC_draft_{$league.LEAGUE_ID}&init_port=10220&init_group=default&init_user={$user_name}">
+<PARAM NAME=quality VALUE=high>
+<EMBED src="http://free.123flashchat.com/123flashchat.swf?init_room=TSC_draft_{$league.LEAGUE_ID}&init_port=10220&init_group=default&init_user={$user_name}" quality=high WIDTH="500" HEIGHT="570"
+NAME="MyMovieName" ALIGN="" TYPE="application/x-shockwave-flash"
+PLUGINSPAGE="http://www.macromedia.com/go/getflashplayer">
+</EMBED>
+</OBJECT>
+</div>
+</div>
+{else}
+  <span class="textred">{translate fonema=LANG_ERROR_CHAT_LOGIN_U}</span>
+{/if}
+
+<script>
+var refreshId = setInterval(function()
+{
+{if $league['DRAFT_INTERVAL'] > 0}
+     clearTimeout(this_timer);
+{/if}
+     $('#drafts').load('rvs_manager_perform_drafts.php?league_id={$league.LEAGUE_ID}');
+}, 30000);
+</script>

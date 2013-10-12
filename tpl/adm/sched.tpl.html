@@ -1,0 +1,95 @@
+<TPL_INCLUDE:../tpl/adm/head.tpl.html>
+<TPL_INCLUDE:../tpl/adm/menu.tpl.html>
+
+<form action="<_TPL:FORM_URL>" method="get">
+<div class="portlet">
+  <div class="content">
+      <input type="hidden" name="order" value="<TPL:ORDER>">
+      <_TPL:LANG_SEARCH_U>: <TPL:WHERE> <TPL:QUERY> <input type="submit" class="btn" value="<_TPL:LANG_OK_U>" onclick="resettarget();"  onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'">
+      <TPL_SUB:FILTERED><a href="<_TPL:FORM_URL>">[ <_TPL:LANG_SHOW_ALL_RECORDS> ]</a></TPL_SUB:FILTERED>
+      <a href="<TPL:TODAY_URL>"><img src="../img/adm_today.gif" width="46" height="12" alt="pasirinkti šiandien" border="0"></a>
+  </div>
+</div>
+</form>
+
+<TPL_SUB:PAGING>
+<div class="portlet">
+  <div class="content">
+      <_TPL:LANG_TOTAL_RECORDS_U>: <b><TPL:NUMROWS></b> | 
+      <_TPL:LANG_PAGES_U>:
+      <TPL_SUB:PAGES>
+        <TPL_SUB:SELECTED><b>[<TPL:PAGENUM>]</b></TPL_SUB:SELECTED>
+        <TPL_SUB:NORMAL><a href="<TPL:URL>">[<TPL:PAGENUM>]</a></TPL_SUB:NORMAL>
+      </TPL_SUB:PAGES>
+  </div>
+</div>
+</TPL_SUB:PAGING>
+
+<div class="portlet">
+  <div class="content">
+  <table>
+    <tr>
+      <th>
+        Data 
+        <TPL_SUB:START_DATE_DESC_A><img src="../img/adm_desc_a.gif" width="11" height="11" border="0"></TPL_SUB:START_DATE_DESC_A>
+        <TPL_SUB:START_DATE_DESC><a href="<TPL:URL>"><img src="../img/adm_desc.gif" width="11" height="11" border="0"></a></TPL_SUB:START_DATE_DESC>
+        <TPL_SUB:START_DATE_ASC_A><img src="../img/adm_asc_a.gif" width="11" height="11" border="0"></TPL_SUB:START_DATE_ASC_A>
+        <TPL_SUB:START_DATE_ASC><a href="<TPL:URL>"><img src="../img/adm_asc.gif" width="11" height="11" border="0"></a></TPL_SUB:START_DATE_ASC>
+      </td>
+      <th nowrap>
+        Komanda #1
+        <TPL_SUB:TEAM_NAME1_DESC_A><img src="../img/adm_desc_a.gif" width="11" height="11" border="0"></TPL_SUB:TEAM_NAME1_DESC_A>
+        <TPL_SUB:TEAM_NAME1_DESC><a href="<TPL:URL>"><img src="../img/adm_desc.gif" width="11" height="11" border="0"></a></TPL_SUB:TEAM_NAME1_DESC>
+        <TPL_SUB:TEAM_NAME1_ASC_A><img src="../img/adm_asc_a.gif" width="11" height="11" border="0"></TPL_SUB:TEAM_NAME1_ASC_A>
+        <TPL_SUB:TEAM_NAME1_ASC><a href="<TPL:URL>"><img src="../img/adm_asc.gif" width="11" height="11" border="0"></a></TPL_SUB:TEAM_NAME1_ASC>
+      </td>
+      <th nowrap>
+        Komanda #2
+        <TPL_SUB:TEAM_NAME2_DESC_A><img src="../img/adm_desc_a.gif" width="11" height="11" border="0"></TPL_SUB:TEAM_NAME2_DESC_A>
+        <TPL_SUB:TEAM_NAME2_DESC><a href="<TPL:URL>"><img src="../img/adm_desc.gif" width="11" height="11" border="0"></a></TPL_SUB:TEAM_NAME2_DESC>
+        <TPL_SUB:TEAM_NAME2_ASC_A><img src="../img/adm_asc_a.gif" width="11" height="11" border="0"></TPL_SUB:TEAM_NAME2_ASC_A>
+        <TPL_SUB:TEAM_NAME2_ASC><a href="<TPL:URL>"><img src="../img/adm_asc.gif" width="11" height="11" border="0"></a></TPL_SUB:TEAM_NAME2_ASC>
+      </td>
+      <th nowrap>
+        Sezonas
+        <TPL_SUB:SEASON_TITLE_DESC_A><img src="../img/adm_desc_a.gif" width="11" height="11" border="0"></TPL_SUB:SEASON_TITLE_DESC_A>
+        <TPL_SUB:SEASON_TITLE_DESC><a href="<TPL:URL>"><img src="../img/adm_desc.gif" width="11" height="11" border="0"></a></TPL_SUB:SEASON_TITLE_DESC>
+        <TPL_SUB:SEASON_TITLE_ASC_A><img src="../img/adm_asc_a.gif" width="11" height="11" border="0"></TPL_SUB:SEASON_TITLE_ASC_A>
+        <TPL_SUB:SEASON_TITLE_ASC><a href="<TPL:URL>"><img src="../img/adm_asc.gif" width="11" height="11" border="0"></a></TPL_SUB:SEASON_TITLE_ASC>
+      </td>
+      <th align="center" nowrap>
+        Akt.
+        <TPL_SUB:PUBLISH_DESC_A><img src="../img/adm_desc_a.gif" width="11" height="11" border="0"></TPL_SUB:PUBLISH_DESC_A>
+        <TPL_SUB:PUBLISH_DESC><a href="<TPL:URL>"><img src="../img/adm_desc.gif" width="11" height="11" border="0"></a></TPL_SUB:PUBLISH_DESC>
+        <TPL_SUB:PUBLISH_ASC_A><img src="../img/adm_asc_a.gif" width="11" height="11" border="0"></TPL_SUB:PUBLISH_ASC_A>
+        <TPL_SUB:PUBLISH_ASC><a href="<TPL:URL>"><img src="../img/adm_asc.gif" width="11" height="11" border="0"></a></TPL_SUB:PUBLISH_ASC>
+      </td>
+      <th>&nbsp;</td>
+    </tr>
+    
+    <TPL_SUB:ITEM>
+    <tr class="<TPL_SUB:EVEN>even</TPL_SUB:EVEN><TPL_SUB:ODD>odd</TPL_SUB:ODD>">
+      <td class="list_item" nowrap><TPL:START_DATE></td>
+      <td class="list_item"><TPL:TEAM_NAME1></td>
+      <td class="list_item"><TPL:TEAM_NAME2></td>
+      <td class="list_item" nowrap><TPL:SEASON_TITLE></td>
+      <td class="list_item" align="center"><a href="<TPL:ACT_URL>"><img src="../img/adm_publish_<TPL:PUBLISH>.gif" width="12" height="12" border="0"></a></td>
+      <td class="list_item" align="center" nowrap>
+        <TPL_SUB:DEL><a href="<TPL:DEL_URL>" onClick="return confirm('Tikrai?');"><img src="../img/adm_delete.gif" width="12" height="12" border="0" alt="pašalinti"></a></TPL_SUB:DEL>
+        <a href="res_edit.php?game_id=<TPL:GAME_ID>"><img src="../img/adm_res.gif" width="12" height="12" border="0" alt="rezultatai"></a>
+        <a href="sched_edit.php?game_id=<TPL:GAME_ID>"><img src="../img/adm_edit.gif" width="12" height="12" border="0" alt="redaguoti"></a>
+      </td>
+    </tr>
+    </TPL_SUB:ITEM>
+    
+    <TPL_SUB:NORECORDS>
+    <tr bgcolor="#FFFFFF"><td colspan="11" class="list_item">Įrašų nėra</td></tr>
+    </TPL_SUB:NORECORDS>
+  
+  </table>
+ </div>
+</div>
+
+<TPL_SUB:PAGING></TPL_SUB:PAGING>
+
+<TPL_INCLUDE:../tpl/adm/foot.tpl.html>

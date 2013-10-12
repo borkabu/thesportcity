@@ -1,0 +1,16 @@
+<div style="clear:both"></div>
+{$manager_filter_box}
+<div class="background" style="float:left">
+<div class="background" style="float:left;width:200px">
+{$countdown}
+{$sched}
+</div>
+<div style="float:left;width:200px">
+{$manager_season}
+</div>
+<div style="float:left;width:200px">
+{$reports}
+</div>
+<div style="float:left;width:200px">
+</div>
+</div>

@@ -1,0 +1,21 @@
+<TPL_SUB:CUR_BATTLES>
+<div class="portlet">
+<div class="header"><b>Current battles</b></div>
+    <div class="content">
+  	 <table width="100%">
+          <tr><th>Battle type</th>
+              <th>Home team</th>
+              <th>Visitor team</th>
+              <th></th>
+          </tr>
+        <TPL_SUB:ITEMS>
+          <tr><td>Battle: <TPL:BATTLE_TYPE> | <TPL:SPORT></td>
+              <td><TPL_SUB:TEAM1><TPL_SUB:USERS><TPL:USER_NAME><TPL:PRE1></TPL_SUB:USERS></TPL_SUB:TEAM1></td>
+              <td><TPL_SUB:TEAM2><TPL_SUB:USERS><TPL:USER_NAME><TPL:PRE2></TPL_SUB:USERS></TPL_SUB:TEAM2></td>
+              <td><a href="ss_battle_protocol.php?battle_id=<TPL:BATTLE_ID>" target="ss_battle_protocol" onClick="window.open('','ss_battle_protocol','width=450,height=620,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');">View</a></td>
+          </tr>
+         </TPL_SUB:ITEMS>
+         </table>        
+   </div>
+</div>
+</TPL_SUB:CUR_BATTLES>

@@ -1,0 +1,66 @@
+<div style="clear:both"></div>
+<div class="portlet">
+    <div class="content">
+     <_TPL:LANG_GYM_U> - <a href="ss_outside.php"><_TPL:LANG_GO_OUTSIDE_U> </a>
+   </div>
+</div>
+
+<TPL:SPORT_MENU>
+<div  style="clear:both"></div>
+<TPL_SUB:SKILLS>
+<div class="portlet">
+    <div class="header"><b><_TPL:LANG_SKILL_U></b></div>
+    <div class="content">
+<table width="100%" border="1" cellspacing="0" cellpadding="5">
+<th><_TPL:LANG_ITEM_NAME_U></th>
+<th><_TPL:LANG_LEVEL_U></th>
+<th><_TPL:LANG_PRICE_U></th>
+<th><_TPL:LANG_DESCRIPTION_U></th>
+<th></th>
+</tr>
+<TPL_SUB:ITEMS>
+<form method="post">
+<tr><td><TPL:ATTR_NAME></td>
+<td><TPL:AVAIL_LEVEL></td>
+<td><TPL:PRICE></td>
+<td><TPL:DESCR></td>
+   <td>
+    <TPL_SUB:TRAIN>
+      <input type="hidden" name="train" value="train">
+      <input type="hidden" name="attr_id" value="<TPL:ATTR_ID>">
+      <input class="btn" type="submit" value=" <_TPL:LANG_TRAIN_U> " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+    </TPL_SUB:TRAIN>
+    <TPL_SUB:NO_MONEY><_TPL:LANG_NOT_ENOUGH_MONEY_U></TPL_SUB:NO_MONEY>
+    <TPL_SUB:TOO_SOON><_TPL:LANG_TOO_SOON_TRAIN_SKILL_U></TPL_SUB:TOO_SOON>
+    </td>
+</tr>
+<form method="post">
+</TPL_SUB:ITEMS>
+</table>
+</div>
+</div>
+</TPL_SUB:SKILLS>
+
+<TPL_SUB:OWNED_SKILLS>
+<div class="portlet">
+    <div class="header"><b><_TPL:LANG_OWNED_SKILL_U></b></div>
+    <div class="content">
+  <table width="100%" border="1" cellspacing="0" cellpadding="5">
+   <tr>
+     <th><_TPL:LANG_SPORT_U></th>
+     <th><_TPL:LANG_ITEM_NAME_U></th>
+     <th><_TPL:LANG_LEVEL_U></th>
+     <th><_TPL:LANG_DATE_TRAINED_U></th>
+   </tr>  
+   <TPL_SUB:ITEMS>
+   <tr>
+     <td><TPL:SPORT></td>
+     <td><TPL:ATTR_NAME></td>
+     <td><TPL:LEVEL></td>
+     <td><TPL:DATE_TRAINED></td>
+   </tr>    
+   </TPL_SUB:ITEMS>
+ </table>
+</div>
+</div>
+</TPL_SUB:OWNED_SKILLS>

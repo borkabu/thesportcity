@@ -1,0 +1,14 @@
+{translate fonema=LANG_EMAIL_REGISTER_LINE_1}
+{translate fonema=LANG_EMAIL_REGISTER_LINE_2}
+
+{translate fonema=LANG_USER_NAME_U}: {$data.USER_NAME}
+---------------------------------
+{translate fonema=LANG_EMAIL_REGISTER_LINE_3}
+---------------------------------
+{$data.URL}
+
+{translate fonema=LANG_EMAIL_REGISTER_LINE_4}
+{translate fonema=LANG_EMAIL_REGISTER_LINE_5}
+
+{translate fonema=LANG_EMAIL_LAST_LINE}
+

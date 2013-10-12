@@ -1,0 +1,16 @@
+<div class="portlet">
+<div class="header">{translate fonema=LANG_GAMES_U}</div>
+{if isset($games.GAMES)}
+{foreach $games.GAMES as $game}          
+<div class="content_header">{$game.SEASON_TITLE}</div>
+<div class="content">
+   <span class="date_font2"><b>{$game.START_DATE}</b></span><br>
+   {$game.TEAM_NAME1} - {$game.TEAM_NAME2}<br>
+</div>
+  {foreachelse}
+  <div class="content">{translate fonema=LANG_NO_GAMES_U}</div>
+  {/foreach}
+{else}
+<div class="content">{translate fonema=LANG_NO_GAMES_U}</div>
+{/if}
+</div>

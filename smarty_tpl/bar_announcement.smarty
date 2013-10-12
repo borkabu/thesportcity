@@ -1,0 +1,20 @@
+<div class="portlet">
+<div class="header">{translate fonema=LANG_ANNOUNCEMENTS_U}</div>
+  {foreach $news as $news_item}
+	<div class="content">
+		<div>{if isset($news_item.MANAGER_SEASON)}<b>{$news_item.MANAGER_SEASON.SEASON_TITLE}</b><br>{/if}
+		     {if isset($news_item.WAGER_SEASON)}<b>{$news_item.WAGER_SEASON.SEASON_TITLE}</b><br>{/if}
+		   <a href="news.php?news_id={$news_item.NEWS_ID}&lang_id={$news_item.LANG}"><b>{$news_item.TITLE}</b></a> ({$news_item.POSTS})</div>
+		<div style="float:right;">{$news_item.DATE_PUBLISHED}</div>
+		<div style="clear:both;"></div>
+
+		{$news_item.DESCR}
+     <br><a href="news.php?news_id={$news_item.NEWS_ID}&lang_id={$news_item.LANG}">{translate fonema=LANG_READ_ALL_NEWS_U}</a>
+	</div>
+   {/foreach}
+   {if isset($more)}
+<div class="content">
+	<a href="news.php?genre={$more.GENRE}"><b>{translate fonema=LANG_MORE_U}</b></a>
+</div>
+{/if}
+</div>

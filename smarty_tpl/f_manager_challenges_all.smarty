@@ -1,0 +1,42 @@
+<div class="portlet">
+<div class="header">{translate fonema=LANG_CHALLENGES_U}</div>
+
+{if isset($tours)}
+  <div class="content">
+    {translate fonema=LANG_TOURS_U}: 
+    {foreach $tours as $tour}
+        {if isset($tour.SELECTED)}<b>[{$tour.SELECTED.NUMBER}]</b>{/if}
+        {if isset($tour.NORMAL)}<a href="f_manager_challenges_all.php?tour={$tour.NORMAL.NUMBER}&mseason_id={$tour.NORMAL.SEASON_ID}">{$tour.NORMAL.NUMBER}</a>{/if}
+    {/foreach}
+ </div>
+{/if}
+
+<div class="content">
+  {if isset($challenges)}
+  <table>
+    <tr>
+      <th>{translate fonema=LANG_TOUR_U}</th>
+      <th>{translate fonema=LANG_HOST_U}</th>
+      <th></th>
+      <th></th>
+      <th>{translate fonema=LANG_VISITOR_U}</th>
+      <th>{translate fonema=LANG_STAKE_U}</th>
+      <th>{translate fonema=LANG_CHALLENGE_ACCEPTED_U}</th>
+    </tr>
+   {foreach $challenges as $challenge}
+    <tr>
+      <td align="left">{$challenge.TOUR_ID}</td>
+      <td align="left">{$challenge.USER_NAME}</td>
+      <td align="left">{$challenge.POINTS}</td>
+      <td align="left">{$challenge.POINTS1}</td>
+      <td align="left">{$challenge.USER_NAME1}</td>
+      <td align="right">{$challenge.STAKE}</td>
+      <td align="right">{$challenge.DATE_ACCEPTED}</td>
+    </tr>
+   {foreachelse}
+      <td colspan=7>{translate fonema=LANG_NO_CHALLENGES_U}</td>
+   {/foreach}
+  </table>
+ {/if}
+</div>
+</div>

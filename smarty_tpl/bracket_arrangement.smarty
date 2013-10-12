@@ -1,0 +1,30 @@
+<div class="portlet">
+ <div class="header">{$user_name}</div>
+ <div class="content">
+ {if isset($can_view)}
+  <form action=""  style="margin:0px" method="POST">
+   {translate fonema=LANG_ARRANGER_SELECT_RACE_U}: {$arranger_race_filter_box}
+   <input type="hidden" name="season_id" value="{$season_id}">
+   <input type="hidden" name="select_race" value="y">
+   <input class="btn" type="submit" value=" {translate fonema=LANG_OK_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+  </form>
+ </div>
+ <div class="content">
+  <table>
+    <tr>
+      <th></th>
+      <th width="100%">{translate fonema=LANG_ARRANGEMENT_U}</th>
+    </tr>
+    {foreach $players as $player}
+    <tr>
+      <td align="left">{$player.NUMBER}</td>
+      <td align="left">
+	{$player.LAST_NAME}, {$player.FIRST_NAME}</td>
+    </tr>
+    {/foreach}
+  </table>
+ {else}
+  {translate fonema=LANG_NO_ARRANGEMENTS_U}
+ {/if}
+ </div>
+</div>

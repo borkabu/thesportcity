@@ -1,0 +1,23 @@
+<div class="portlet">
+  <div class="header">{translate fonema=LANG_COMMENT_QUEUE_U}</div>
+{foreach $items as $item}
+ <div id="{$item.POST_ID}">
+  <div class="content" style="height:15px">
+	<div style="float:left;">{$item.USER_NAME} - <b>{$item.TOPIC_NAME}</b></div>
+        <div style="float:right;">{$item.DATE_POSTED}</div>
+  </div>
+  <div class="content">
+            <b>{$item.TEXT}</b>
+  </div>
+  <div class="content">
+       <input class="btn" type="submit" value=" {translate fonema=LANG_APPROVE_COMMENT_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" onClick="javascript:handleComment({$item.POST_ID}, 'post_approve', '{$item.ACTKEY}', '{$item.POST_ID}')"/>
+       <input class="btn" type="submit" value=" {translate fonema=LANG_ALLOW_COMMENT_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" onClick="javascript:handleComment({$item.POST_ID}, 'post_allow', '{$item.ACTKEY}', '{$item.POST_ID}')"/>
+       <input class="btn" type="submit" value=" {translate fonema=LANG_DISAPPROVE_COMMENT_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" onClick="javascript:handleComment({$item.POST_ID}, 'post_disapprove', '{$item.ACTKEY}', '{$item.POST_ID}')"/>
+  </div>
+ </div>
+{foreachelse}
+  <div class="content">
+    {translate fonema=LANG_NO_ENTRIES_U}
+  </div>
+{/foreach}
+</div>

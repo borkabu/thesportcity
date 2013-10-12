@@ -1,0 +1,52 @@
+<div class="portlet">
+  <div class="header">{translate fonema=LANG_PORTFOLIO_U}</div>
+  <div class="content">
+    {if isset($portfolio)}
+      <table style="width:100%">
+        <tr valign="top">
+          <th>{translate fonema=LANG_PLAYER_U}</th>
+          <th>{translate fonema=LANG_QUANTITY_U}</th>
+          <th>{translate fonema=LANG_BUYING_PRICE_U}</th>
+          <th>{translate fonema=LANG_SELLING_PRICE_U}</th>
+          <th>{translate fonema=LANG_REVENUE_U}</th>
+          <th>{translate fonema=LANG_PROFIT_U}</th>
+	<th></th>
+	<th></th>
+        </tr>
+        {foreach $portfolio as $player}
+          <tr valign="top">
+            <td>
+              <a href="f_manager_player_info.php?user_id={$player.USER_ID}"  target="f_manager_player_info" onClick="window.open('','f_manager_player_info','width=400,height=400,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');"><b>{$player.LAST_NAME}, {$player.FIRST_NAME}</b></a> <br>
+              <span class="date_font2">{$player.TYPE_NAME} ({$player.TEAM_NAME2})</span></td>
+            <td align="right">{$player.SIZE}</td>
+            <td align="right">{$player.BUYING_PRICE}</td>
+            <td align="right"><b>{$player.SELLING_PRICE}</b> {if isset($player.UP)}<img src="./img/icons/chart_up.png" border=0>{/if} {if isset($player.DOWN)}<img src="./img/icons/chart_down.png" border=0>{/if} </td>
+            <td align="right">{$player.REVENUE}</td>
+            <td align="right">{$player.PROFIT}</td>
+            <td><form action="" method="post">
+                 <input type="hidden" name="player" value="{$player.PLAYER_ID}">
+                 <input type="hidden" name="sell" value="y">
+           <input type="text" name="size" value="0" maxsize="3" size="3" class="input">
+           <input type="submit" class="btn" type="submit" value=" {translate fonema=LANG_SELL_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+          </form>
+            </td>
+            <td align="right">
+              <div id="{$player.ENTRY_ID}">
+	      {if isset($player.NOTIFICATION_ON)}<input type="image" src="./img/icons/notify.png" onmouseover="Tip('{translate fonema=LANG_STOCK_NOTIFICATION_ON_U}')" onmouseout="UnTip()" onClick="javascript:stockNotification({$player.SEASON_ID}, {$player.PLAYER_ID}, 0, {$player.ENTRY_ID})">{/if}
+	      {if isset($player.NOTIFICATION_OFF)}<input type="image" src="./img/icons/notnotify.png" onmouseover="Tip('{translate fonema=LANG_STOCK_NOTIFICATION_OFF_U}')" onmouseout="UnTip()" onClick="javascript:stockNotification({$player.SEASON_ID}, {$player.PLAYER_ID}, 1, {$player.ENTRY_ID})">{/if}
+             </div>
+     </td>
+   </tr>
+    {/foreach}
+        <tr valign="top">
+          <td colspan=4></td>
+          <td><b>{$total.REVENUE}</b></td>
+          <td><b>{$total.PROFIT}</b></td>
+          <td colspan=2></td>
+        </tr> 
+     </table>
+   {else}
+    {translate fonema=LANG_ERROR_MANAGER_NO_PORTFOLIO} 
+   {/if}
+</div>
+</div>

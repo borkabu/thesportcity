@@ -1,0 +1,17 @@
+<div class="portlet">
+<div class="content">
+<div class="background">
+<form action=""  style="margin:0px">
+ <img src="./img/{$manager->season_info.PIC2_LOCATION}" style="float:left;overflow:auto;height:50px;padding-right:5px; ">
+<h2>{$manager->title}</h2>      
+       {translate fonema=LANG_SELECT_SEASON_U}:
+      {$mseason_id}
+      <input class="btn" type="submit" value=" {translate fonema=LANG_OK_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+</form>
+</div>
+<div style="clear:both"></div>
+</div>
+<div class="content" style="text-align:center">
+<iframe src="780x90_2.html" width=729 height=91 frameborder=0 scrolling="no"></iframe>
+</div>
+</div>

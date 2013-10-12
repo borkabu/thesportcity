@@ -1,0 +1,62 @@
+<div class="portlet">
+<div class="header"><div></div>{translate fonema=LANG_ARRANGER_U}</div>
+{foreach $bracket_seasons as $bracket_season}
+<div class="content_header" style="height:25px">
+  {if isset($bracket_season.BRACKET_INFO)}
+      {if isset($bracket_season.PIC_LOCATION)}  
+       <img src="../img/{$bracket_season.PIC_LOCATION}" align="left"  style="height:25px; margin-right:2px" />
+      {/if}
+     <a href="bracket_control.php?season_id={$bracket_season.BRACKET_INFO.SEASON_ID}">{$bracket_season.BRACKET_INFO.SEASON_TITLE}</a>
+     <div style="float:right"><img id="toggle_image_bracket_season_{$bracket_season.BRACKET_INFO.SEASON_ID}" style="vertical-align: middle; margin:2px" src="{if isset($bracket_season.BRACKET_INFO.VISIBLE)}./img/icons/plus.png{/if}{if isset($bracket_season.BRACKET_INFO.INVISIBLE)}./img/icons/minus.png{/if}./img/icons/small_minus.png" onclick="toggleSmall('bracket_season_{$bracket_season.BRACKET_INFO.SEASON_ID}', 'toggle_image_bracket_season_{$bracket_season.BRACKET_INFO.SEASON_ID}'); return false;"></div>
+  {/if}
+</div>
+<div class="collapsable" id="bracket_season_{$bracket_season.SEASON_ID}">
+<div class="content">
+  {if isset($bracket_season.BRACKET_INFO)}
+     <a href="bracket.php?season_id={$bracket_season.BRACKET_INFO.SEASON_ID}">{translate fonema=LANG_RULES_U}</a> | <a href="bracket_prizes.php?season_id={$bracket_season.BRACKET_INFO.SEASON_ID}">{translate fonema=LANG_PRIZES_U}</a> | <a href="bracket_league.php?season_id={$bracket_season.BRACKET_INFO.SEASON_ID}&all=y">{translate fonema=LANG_LEAGUES_U}</a>
+  {/if}
+</div>
+{if isset($bracket_season.LEAGUES_INVITE)}
+<div class="content"><a href="bracket_control.php?season_id={$bracket_season.LEAGUES_INVITE.SEASON_ID}#league_invites">{translate fonema=LANG_LEAGUE_INVITATIONS_U}:</a> <span class="textred"><b>{$bracket_season.LEAGUES_INVITE.LEAGUES}</b></span></div>
+{/if}
+{if isset($bracket_season.BRACKET_STAND)}
+<div class="content">
+    <table>
+	<tr>
+		<th></th>
+		<th align="left">{translate fonema=LANG_PARTICIPANT_U}</th>
+		<th>{translate fonema=LANG_POINTS_U}</th>
+	</tr>
+	{foreach $bracket_season.BRACKET_STAND.USERS as $user}          
+         {if isset($user.GAP)}
+	  <tr><td colspan="3">...</td></tr>
+	 {/if}
+	   <tr>
+	  	<td>{$user.PLACE}</td>
+		<td align="left"  width="100%">{$user.USER_NAME}</td>
+		<td>{$user.KOEFF}</td>
+	   </tr>
+        {/foreach}
+    </table>
+</div>
+{/if}
+<div class="content"><a href="bracket_standings.php?season_id={$bracket_season.BRACKET_INFO.SEASON_ID}">{translate fonema=LANG_STANDINGS_U}</a></div>
+{if isset($bracket_season.BRACKET_LOG)}
+{foreach $bracket_season.BRACKET_LOG.LOG as $log_item}
+<div class="content">
+    <b><span class="date_font2">{$log_item.EVENT_DATE} {$log_item.UTC}</span></b><br>{$log_item.LOG_ENTRY}
+    <a href="bracket_log.php?season_id={$log_item.MSEASON_ID}">{translate fonema=LANG_FULL_LOG_U}</a>
+</div>
+{/foreach}
+{/if}
+{if isset($bracket_season.MARKET)}
+<div class="content">
+     {if isset($bracket_season.MARKET.SEASON_OVER)}<div class="textred">{translate fonema=LANG_SEASON_OVER_U}</div>
+     {elseif isset($bracket_season.MARKET.MARKET_OPEN)}
+     <div>{translate fonema=LANG_ARRANGER_NEXT_TOUR_U} <span class="date_font2"><b>{$bracket_season.MARKET.MARKET_OPEN.START_DATE} {$bracket_season.MARKET.MARKET_OPEN.UTC}</b></span></div> 
+     {/if}
+</div>
+{/if}
+</div>
+{/foreach}
+</div>

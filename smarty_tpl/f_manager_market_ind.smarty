@@ -1,0 +1,106 @@
+<div class="portlet">
+  <div class="content">
+      <table class="statistics-list">
+        <tr>
+          <th>{translate fonema=LANG_PLAYER_U}<span class="sort_arrows"> 
+	    {if isset($market.LAST_NAME_DESC_A)}&dArr;{/if}
+  	    {if isset($market.LAST_NAME_DESC)}<a href="{$market.LAST_NAME_DESC.URL}">&dArr;</a>{/if}
+  	    {if isset($market.LAST_NAME_ASC_A)}&uArr;{/if}
+  	    {if isset($market.LAST_NAME_ASC)}<a href="{$market.LAST_NAME_ASC.URL}">&uArr;</a>{/if}
+	    </span>
+           </th>
+          <th>{translate fonema=LANG_TOUR_POINTS_U}<span class="sort_arrows"> 
+	    {if isset($market.TOTAL_POINTS_PREV1_DESC_A)}&dArr;{/if}
+  	    {if isset($market.TOTAL_POINTS_PREV1_DESC)}<a href="{$market.TOTAL_POINTS_PREV1_DESC.URL}">&dArr;</a>{/if}
+  	    {if isset($market.TOTAL_POINTS_PREV1_ASC_A)}&uArr;{/if}
+  	    {if isset($market.TOTAL_POINTS_PREV1_ASC)}<a href="{$market.TOTAL_POINTS_PREV1_ASC.URL}">&uArr;</a>{/if}
+	   </span></th>
+          <th>{translate fonema=LANG_START_PRICE_U}<span class="sort_arrows"> 
+	    {if isset($market.START_VALUE_MONEY_DESC_A)}&dArr;{/if}
+  	    {if isset($market.START_VALUE_MONEY_DESC)}<a href="{$market.START_VALUE_MONEY_DESC.URL}">&dArr;</a>{/if}
+  	    {if isset($market.START_VALUE_MONEY_ASC_A)}&uArr;{/if}
+  	    {if isset($market.START_VALUE_MONEY_ASC)}<a href="{$market.START_VALUE_MONEY_ASC.URL}">&uArr;</a>{/if}
+	   </span></th>
+          <th>{translate fonema=LANG_PREV_PRICE_ABBR_U}</th>
+          <th>{translate fonema=LANG_CURRENT_PRICE_U}<span class="sort_arrows"> 
+	    {if isset($market.CURRENT_VALUE_MONEY_DESC_A)}&dArr;{/if}
+  	    {if isset($market.CURRENT_VALUE_MONEY_DESC)}<a href="{$market.CURRENT_VALUE_MONEY_DESC.URL}">&dArr;</a>{/if}
+  	    {if isset($market.CURRENT_VALUE_MONEY_ASC_A)}&uArr;{/if}
+  	    {if isset($market.CURRENT_VALUE_MONEY_ASC)}<a href="{$market.CURRENT_VALUE_MONEY_ASC_A.URL}">&uArr;</a>{/if}
+	   </span></th>
+	  <th></th>
+        </tr>
+        {foreach $players as $player}
+        <tr valign="top"  id="market_tr_{$player.USER_ID}">
+           <td>
+{if isset($player.PLAYER_STATE_DIV)}
+ <div id="player_state_{$player.PLAYER_ID}>_{$player.SEASON_ID}" style="float:left;">
+  {if isset($player.PLAYER_STATE_DIV.INJURY_STATE_DEFAULT) &&
+      isset($player.PLAYER_STATE_DIV.QUESTIONABLE_STATE_DEFAULT)}<!--
+  {elseif isset($player.PLAYER_STATE_DIV.INJURY_STATE_ON)}<img src="./img/injury.gif" width="12" height="12" border="0" 
+    {if isset($player.PLAYER_STATE_DIV.INJURY_STATE_ON.ADMIN)}onClick="javascript:playerStateUpdate({$player.SEASON_ID}, {$player.PLAYER_ID}, -1, 'player_state_{$player.PLAYER_ID}_{$player.SEASON_ID}')"{/if}
+   onmouseover="Tip('{translate fonema=LANG_UNFIT_TO_PLAY_U}')" onmouseout="UnTip()" /><!--
+  {elseif isset($player.PLAYER_STATE_DIV.QUESTIONABLE_STATE_ON)}<img src="./img/questionable.png" width="12" height="12" border="0" 
+    {if isset($player.PLAYER_STATE_DIV.QUESTIONABLE_STATE_ON.ADMIN)}onClick="javascript:playerStateUpdate({$player.SEASON_ID}, {$player.PLAYER_ID}, -4, 'player_state_{$player.PLAYER_ID}_{$player.SEASON_ID}')"{/if}
+   onmouseover="Tip('{translate fonema=LANG_QUESTIONABLE_U}')" onmouseout="UnTip()"/><!--
+  {elseif isset($player.PLAYER_STATE_DIV.INJURY_STATE_OFF) ||
+	  isset($player.PLAYER_STATE_DIV.QUESTIONABLE_STATE_OFF)}<img src="./img/no_injury.gif" width="12" height="12" border="0" 
+    {if isset($player.PLAYER_STATE_DIV.INJURY_STATE_OFF.ADMIN)}onClick="javascript:playerStateUpdate({$player.SEASON_ID}, {$player.PLAYER_ID}, 1, 'player_state_{$player.PLAYER_ID}_{$player.SEASON_ID}')"{/if}
+    {if isset($player.PLAYER_STATE_DIV.QUESTIONABLE_STATE_OFF.ADMIN)}onClick="javascript:playerStateUpdate({$player.SEASON_ID}, {$player.PLAYER_ID}, 4, 'player_state_{$player.PLAYER_ID}_{$player.SEASON_ID}')"{/if}
+   onmouseover="Tip('{translate fonema=LANG_FIT_TO_PLAY_U}')" onmouseout="UnTip()"><!--
+  {/if}
+  {if isset($player.PLAYER_STATE_DIV.SUSPENSION_STATE_DEFAULT)}-->
+  {elseif isset($player.PLAYER_STATE_DIV.SUSPENSION_STATE_ON)}--><img src="./img/red_card.gif" width="12" height="12" border="0" 
+    {if isset($player.PLAYER_STATE_DIV.SUSPENSION_STATE_ON.ADMIN)}onClick="javascript:playerStateUpdate({$player.SEASON_ID}, {$player.PLAYER_ID}, -2, 'player_state_{$player.PLAYER_ID}_{$player.SEASON_ID}')"
+    {/if}
+   onmouseover="Tip('{translate fonema=LANG_SUSPENDED_U}')" onmouseout="UnTip()"/>
+  {elseif isset($player.PLAYER_STATE_DIV.SUSPENSION_STATE_OFF)}--><img src="./img/no_card.gif" width="12" height="12" border="0" 
+    {if isset($player.PLAYER_STATE_DIV.SUSPENSION_STATE_OFF.ADMIN)}onClick="javascript:playerStateUpdate({$player.SEASON_ID}, {$player.PLAYER_ID}, 2, 'player_state_{$player.PLAYER_ID}_{$player.SEASON_ID}')"
+    {/if}
+   onmouseover="Tip('{translate fonema=LANG_ALLOWED_TO_PLAY_U}')" onmouseout="UnTip()"/>
+  {/if}
+</div>
+{/if}
+         <a href="f_manager_player_info.php?user_id={$player.USER_ID}"  target="f_manager_player_info" onClick="window.open('','f_manager_player_info','width=400,height=400,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');"><b>{$player.LAST_NAME}, {$player.FIRST_NAME}</b></a> <br>
+            <span class="date_font2">{$player.TYPE_NAME}</span></td>
+          <td nowrap align="right"><b>{$player.POINTS}</b></td>
+          <td>{$player.START_VALUE_MONEY}</td>
+          <td>{$player.PREV_VALUE_MONEY}</td>
+          <td nowrap><b>{$player.CURRENT_VALUE_MONEY}</b> 
+	    {if isset($player.UP)}
+	     <img src="./img/icons/chart_up.png" border=0>
+            {/if} 
+	    {if isset($player.DOWN)}
+	     <img src="./img/icons/chart_down.png" border=0>
+            {/if} 
+          </td>
+	   <td>
+      	  {if isset($player.BUY)}
+	   <form action="" method="post" style="margin:0">
+             <input type="hidden" name="player" value="{$player.USER_ID}">
+             <input type="hidden" name="buy" value="y">
+             <input type="hidden" name="price" value="{$player.CURRENT_VALUE_MONEY}">
+             <input type="submit"  class="btn" type="submit" value=" {translate fonema=LANG_BUY_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+           </form>
+          {/if}
+      	  {if isset($player.SUBSTITUTE)}
+	   <form action="" method="post" style="margin:0">
+             <input type="hidden" name="player" value="{$player.USER_ID}">
+             <input type="hidden" name="substitute" value="y">
+             <input type="submit"  class="btn" type="submit" value=" {translate fonema=LANG_MAKE_SUBSTITUTE_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+           </form>
+          {/if}
+          {if isset($player.BUY_DISABLED)}
+           <img src='./img/icons/red_exclamation.png' onmouseover="Tip('<span class=\'textred\'>{if isset($player.BUY_DISABLED.LOW_MONEY)}{translate fonema=LANG_NOT_ENOUGH_MONEY_U}{elseif isset($player.BUY_DISABLED.FULL_TEAM)}{translate fonema=LANG_ERROR_MANAGER_PLAYER_LIMIT}{elseif isset($player.BUY_DISABLED.WRONG_DAY)}{translate fonema=LANG_MARKET_CLOSED_U}{elseif isset($player.BUY_DISABLED.AMPLUA)}{translate fonema=LANG_MARKET_TOO_MANY_POSITIONS_U}{elseif isset($player.BUY_DISABLED.TEAM_LIMIT)}{translate fonema=LANG_MARKET_TEAM_LIMIT_U}{elseif isset($player.BUY_DISABLED.LOW_TRANSACTIONS)}{translate fonema=LANG_LOW_TRANSACTIONS_U}{/if} </span>')" onmouseout="UnTip()" />          
+          {/if}
+	  <span style="white-space: nowrap;"><a href="javascript: void()" onclick="reportPlayerState({$player.USER_ID}, {$player.SEASON_ID}); return false">{translate fonema=LANG_REPORTS_U}</a> ({$player.REPORTS})</span>
+          </td>
+        </tr>
+        {foreachelse}
+        <tr>
+          <td colspan="8">{translate fonema=LANG_NO_ENTRIES_U}</td>
+        </tr>
+        {/foreach}
+      </table>
+   </div>
+</div>

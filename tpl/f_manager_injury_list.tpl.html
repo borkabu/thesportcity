@@ -1,0 +1,36 @@
+<div style="clear:both"></div>
+<TPL:MANAGER_FILTER_BOX>
+
+
+<TPL_SUB:MARKET>
+<div class="portlet">
+  <div class="content">
+      <table>
+        <tr>
+          <th><_TPL:LANG_PLAYER_U> <TPL_SUB:LAST_NAME_DESC_A>&darr;</TPL_SUB:LAST_NAME_DESC_A> <TPL_SUB:LAST_NAME_DESC><a href="<TPL:URL>">&darr;</a></TPL_SUB:LAST_NAME_DESC> <TPL_SUB:LAST_NAME_ASC_A>&uarr;</TPL_SUB:LAST_NAME_ASC_A> <TPL_SUB:LAST_NAME_ASC><a href="<TPL:URL>">&uarr;</a></TPL_SUB:LAST_NAME_ASC></th>
+          <th><_TPL:LANG_PLAYED_U></th>
+          <th><_TPL:LANG_KOEFF_AB> <TPL_SUB:TOTAL_POINTS_DESC_A>&darr;</TPL_SUB:TOTAL_POINTS_DESC_A> <TPL_SUB:TOTAL_POINTS_DESC><a href="<TPL:URL>">&darr;</a></TPL_SUB:TOTAL_POINTS_DESC> <TPL_SUB:TOTAL_POINTS_ASC_A>&uarr;</TPL_SUB:TOTAL_POINTS_ASC_A> <TPL_SUB:TOTAL_POINTS_ASC><a href="<TPL:URL>">&uarr;</a></TPL_SUB:TOTAL_POINTS_ASC></th>
+          <th><_TPL:LANG_START_PRICE_U> <TPL_SUB:START_VALUE_MONEY_DESC_A>&darr;</TPL_SUB:START_VALUE_MONEY_DESC_A> <TPL_SUB:START_VALUE_MONEY_DESC><a href="<TPL:URL>">&darr;</a></TPL_SUB:START_VALUE_MONEY_DESC> <TPL_SUB:START_VALUE_MONEY_ASC_A>&uarr;</TPL_SUB:START_VALUE_MONEY_ASC_A> <TPL_SUB:START_VALUE_MONEY_ASC><a href="<TPL:URL>">&uarr;</a></TPL_SUB:START_VALUE_MONEY_ASC></th>
+          <th><_TPL:LANG_PREV_PRICE_U></th>
+          <th><_TPL:LANG_CURRENT_PRICE_U> <TPL_SUB:CURRENT_VALUE_MONEY_DESC_A>&darr;</TPL_SUB:CURRENT_VALUE_MONEY_DESC_A> <TPL_SUB:CURRENT_VALUE_MONEY_DESC><a href="<TPL:URL>">&darr;</a></TPL_SUB:CURRENT_VALUE_MONEY_DESC> <TPL_SUB:CURRENT_VALUE_MONEY_ASC_A>&uarr;</TPL_SUB:CURRENT_VALUE_MONEY_ASC_A> <TPL_SUB:CURRENT_VALUE_MONEY_ASC><a href="<TPL:URL>">&uarr;</a></TPL_SUB:CURRENT_VALUE_MONEY_ASC></th>
+        </tr>
+        <TPL_SUB:PLAYERS>
+        <tr valign="top">
+          <td><a href="f_manager_player_info.php?user_id=<TPL:USER_ID>"  target="f_manager_player_info" onClick="window.open('','f_manager_player_info','width=400,height=400,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');"><b><TPL:LAST_NAME>, <TPL:FIRST_NAME></b></a> <br>
+            <TPL:TYPE_NAME> (<TPL:TEAM_NAME2>)</td>
+          <td align="right"><TPL:PLAYED></td>
+          <td nowrap align="right"><b><TPL:POINTS></b></td>
+          <td><TPL:START_VALUE_MONEY></td>
+          <td><TPL:PREV_VALUE_MONEY></td>
+           <td nowrap><b><TPL:CURRENT_VALUE_MONEY></b> <TPL_SUB:UP><img src="./img/icons/chart_up.png" border=0></TPL_SUB:UP> <TPL_SUB:DOWN><img src="./img/icons/chart_down.png" border=0></TPL_SUB:DOWN></td>
+        </tr>
+        </TPL_SUB:PLAYERS> 
+        <TPL_SUB:NORECORDS>
+        <tr >
+          <td colspan="6"><_TPL:LANG_NO_ENTRIES_U></td>
+        </tr>
+        </TPL_SUB:NORECORDS>
+      </table>
+	</div>
+</div>
+</TPL_SUB:MARKET> 

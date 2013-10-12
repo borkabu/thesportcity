@@ -1,0 +1,99 @@
+<TPL_INCLUDE:../tpl/adm_head.tpl.html>
+<TPL_INCLUDE:../tpl/adm_menu.tpl.html>
+
+<table border="0" cellspacing="10" cellpadding="0">
+<form action="<TPL:SELF>" method="post"  name="editform">
+<input type="hidden" name="form_save" value="Y">
+<input type="hidden" name="referer" value="<TPL:REFERER>">
+
+<TPL_SUB:ERROR><tr><td class="error"><TPL:MSG></td></tr></TPL_SUB:ERROR>
+
+<tr><td valign="top">
+
+<table width="100%" border="0" cellspacing="0" cellpadding="1" bgcolor="#000000"><tr><td>
+  <table width="100%" border="0" cellspacing="0" cellpadding="3" bgcolor="#FFFFFF">
+    <tr bgcolor="#6283A0"><td class="list_head" colspan="2">Parametrai</td></tr>
+    
+    <tr>
+      <td class="list_item">Pavadinimas</td>
+      <td class="list_item"><TPL_INPUT:adm_banner.title></td>
+    </tr>
+    
+    <tr>
+      <td class="list_item">Baneris</td>
+      <td class="list_item"><TPL_INPUT:adm_banner.filename><a href="pic.php?iform=editform&ifield=filename&domain=banners" target="picnet" onClick="window.open('','picnet','width=250,height=500,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');"><img src="http://static.krepsinis.net/img/adm_more.gif" width="16" height="12" alt="iliustracijos" border="0"></a></td>
+    </tr>
+
+    <tr>
+      <td class="list_item">Nuoroda</td>
+      <td class="list_item"><TPL_INPUT:adm_banner.link></td>
+    </tr>
+    
+    <tr>
+      <td class="list_item">Prioritetas</td>
+      <td class="list_item"><TPL_INPUT:adm_banner.order_no></td>
+    </tr>
+    
+    <tr>
+      <td class="list_item">Plotis</td>
+      <td class="list_item"><TPL_INPUT:adm_banner.width></td>
+    </tr>
+
+    <tr>
+      <td class="list_item">Procentas</td>
+      <td class="list_item"><TPL_INPUT:adm_banner.percent></td>
+    </tr>
+
+    <tr>
+      <td class="list_item">Aukstis</td>
+      <td class="list_item"><TPL_INPUT:adm_banner.height></td>
+    </tr>
+
+    <tr>
+      <td class="list_item">Formatas</td>
+      <td class="list_item"><TPL_INPUT:adm_banner.format></td>
+    </tr>
+
+    <tr>
+      <td class="list_item">Pozicija</td>
+      <td class="list_item"><TPL:POSITION></td>
+    </tr>
+
+    <tr>
+      <td class="list_item">Tik uzhsenio IP</td>
+      <td class="list_item"><TPL_INPUT:adm_banner.foreign_ips></td>
+    </tr>
+
+    <tr>
+      <td class="list_item">Publikuoti</td>
+      <td class="list_item"><TPL_INPUT:adm_banner.publish></td>
+    </tr>
+
+    <tr>
+      <td class="list_item">Subsaitas</td>
+      <td class="list_item"><TPL:SUBSITE></td>
+    </tr>
+    
+  </table>
+</td></tr></table>
+
+
+<br>
+
+<table border="0" cellspacing="0" cellpadding="1" bgcolor="#000000"><tr><td>
+  <table width="100%" border="0" cellspacing="0" cellpadding="2" bgcolor="#E1E1E1">
+    <tr>
+      <td>
+        <input type="submit" class="input" value="išsaugoti">
+        <input type="reset" class="input" value="atšaukti" onclick="return confirm('Tikrai?');">
+        <input type="button" class="input" value="atgal" onclick="window.location='<TPL:REFERER>'">
+      <td>
+    </tr>
+  </table>
+</td></tr></table>
+
+</td></tr>
+</form>
+</table>
+
+<TPL_INCLUDE:../tpl/adm_foot.tpl.html>

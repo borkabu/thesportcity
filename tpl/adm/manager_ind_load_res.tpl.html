@@ -1,0 +1,54 @@
+<TPL_INCLUDE:../tpl/adm/head.tpl.html>
+<TPL_INCLUDE:../tpl/adm/menu.tpl.html>
+
+<a href="manager_season_edit.php?season_id=<TPL:SEASON_ID>">Edit season</a><bR>
+
+<div class="portlet">
+  <div class="content">
+<form action="" method="POST">
+  <input type="hidden" name="season_id" value="<TPL:SEASON_ID>">
+  <input type="hidden" name="tour_id" value="<TPL:TOUR_ID>">
+  <input type="hidden" name="load_res" value="Y">
+  <table>
+    <tr>
+      <th>&nbsp;</td>
+      <th>
+        <_TPL:LANG_LAST_NAME_U>, <_TPL:LANG_FIRST_NAME_U>
+        <TPL_SUB:LAST_NAME_DESC_A><img src="../img/adm_desc_a.gif" width="11" height="11" border="0"></TPL_SUB:LAST_NAME_DESC_A>
+        <TPL_SUB:LAST_NAME_DESC><a href="<TPL:URL>"><img src="../img/adm_desc.gif" width="11" height="11" border="0"></a></TPL_SUB:LAST_NAME_DESC>
+        <TPL_SUB:LAST_NAME_ASC_A><img src="../img/adm_asc_a.gif" width="11" height="11" border="0"></TPL_SUB:LAST_NAME_ASC_A>
+        <TPL_SUB:LAST_NAME_ASC><a href="<TPL:URL>"><img src="../img/adm_asc.gif" width="11" height="11" border="0"></a></TPL_SUB:LAST_NAME_ASC>
+      </td>
+      <th>
+        <_TPL:LANG_PREV_VALUE_U>
+        </td>
+      <th>Rating</td>
+    </tr>
+    
+    <TPL_SUB:ITEMS>
+    <tr class="<TPL_SUB:EVEN>even</TPL_SUB:EVEN><TPL_SUB:ODD>odd</TPL_SUB:ODD>">
+      <td class="list_item"><TPL:NUM></td>
+      <td class="list_item"><a href="ppl_edit.php?user_id=<TPL:USER_ID>"><TPL:LAST_NAME>, <TPL:FIRST_NAME></a></td>
+      <td class="list_item"><TPL:PREV_VALUE_MONEY>
+ 		<input type="hidden" name="prev_<TPL:USER_ID>" id="prev_<TPL:USER_ID>" size="4" class="input" value="<TPL:PREV_VALUE_MONEY>">
+		<input type="hidden" name="start_<TPL:USER_ID>" id="start_<TPL:USER_ID>" size="4" class="input" value="<TPL:START_VALUE_MONEY>">
+ 		<input type="hidden" name="total_prev_<TPL:USER_ID>" id="total_prev_<TPL:USER_ID>" size="4" class="input" value="<TPL:TOTAL_POINTS_PREV>">
+		</td>
+      <td class="list_item" align="center">
+            <input type="text" name="rating_<TPL:USER_ID>" id="rating_<TPL:USER_ID>" size="4" class="input" value="<TPL:CURRENT_VALUE_MONEY>">
+      </td>
+    </tr>
+    </TPL_SUB:ITEMS>   
+    <TPL_SUB:NORECORDS>
+      <tr bgcolor="#FFFFFF"><td colspan="8" class="list_item">Įrašų nėra</td></tr>
+    </TPL_SUB:NORECORDS> 
+  </table>
+</div>
+<div class="content">
+<input type="submit" class="btn" value="<_TPL:LANG_SUBMIT_U>" onclick="resettarget();"  onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" ><br>
+<input type="button" class="btn" value="<_TPL:LANG_RIP_STATISTICS_U>" onclick="window.open('mstats_rip_ind.php?mseason_id=<TPL:SEASON_ID>&tour_id=<TPL:TOUR_ID>','stats','');" onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'">
+</form>
+</div>
+</div>
+
+<TPL_INCLUDE:../tpl/adm/foot.tpl.html>

@@ -1,0 +1,18 @@
+<div class="portlet">
+ <div class="header">{translate fonema=LANG_SCHEDULER_U}</div>
+{foreach $tours as $tour}
+ <div id="msched">
+ {foreach $tour.GAMES as $game}
+  <div class="content">
+    <span class="date_font2"><b>{$game.START_DATE} {$game.UTC}</b></span>
+      {if isset($game.CAN_REPORT)}
+      <a href="game_report_time.php?game_id={$game.GAME_ID}" target="report_time" onClick="window.open('','report_time','width=450,height=420,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');">
+      <img src="./img/icons/clock_error.png" align="right">
+      </a>
+      {/if}<br>
+      {$game.TEAM_NAME1} {if isset($game.RESULT)}<a href="game_protocol.php?game_id={$game.RESULT.GAME_ID}" target="game_protocol" onClick="window.open('','game_protocol','width=740,height=700,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');"><b>{$game.RESULT.SCORE1}:{$game.RESULT.SCORE2}</b></a>{else}-{/if} {$game.TEAM_NAME2}
+  </div>
+ {/foreach}
+ </div>
+ {/foreach}
+</div>

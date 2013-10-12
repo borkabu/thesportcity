@@ -1,0 +1,185 @@
+<div style="clear:both"></div>
+{$wager_filter_box}
+
+{if isset($error)}
+<div class="portlet" id="message">
+  <div class="content">
+    <span class="textred"><b>{$error.MSG}</b></span>
+  </div>
+</div>
+{/if}
+
+{if isset($wager_status)}
+<div class="portlet">
+<div class="content">
+<span class="textred"><b>{$wager_status.MSG}</b></span>
+</div>
+</div>
+{/if}
+
+{if isset($create_account_offer)}
+<div class="portlet" id="create_account_offer">
+  <div class="content">
+    {translate fonema=LANG_CREATE_WAGER_ACCOUNT_OFFER_U}
+    <input type="button"  class="btn" value=" {translate fonema=LANG_YES_PLEASE_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" onClick="javascript:createWagerAccount('create_account', 'create_account_offer')"/>
+  </div>
+</div>
+<div id="create_account">
+</div>
+{/if}
+
+{if isset($gamemenu)}
+<div class="portlet">
+<div class="content">
+{if isset($gamemenu.PAST_GAMES)}
+<b>{translate fonema=LANG_PAST_GAMES_U}</b> 
+ <a href="wager_control.php?present=y">{translate fonema=LANG_PRESENT_GAMES_U}</a>
+ <a href="wager_control.php?future=y">{translate fonema=LANG_UPCOMING_GAMES_U}</a>
+{/if}
+{if isset($gamemenu.PRESENT_GAMES)}
+<a href="wager_control.php?past=y">{translate fonema=LANG_PAST_GAMES_U}</a> 
+ <b>{translate fonema=LANG_PRESENT_GAMES_U}</b>
+ <a href="wager_control.php?future=y">{translate fonema=LANG_UPCOMING_GAMES_U}</a>
+{/if}
+{if isset($gamemenu.FUTURE_GAMES)}
+<a href="wager_control.php?past=y">{translate fonema=LANG_PAST_GAMES_U}</a> 
+ <a href="wager_control.php?present=y">{translate fonema=LANG_PRESENT_GAMES_U}</a>
+<b>{translate fonema=LANG_UPCOMING_GAMES_U}</b>
+{/if}
+</div>
+</div>
+{/if}
+
+{if isset($logged)}
+ {if isset($logged.SUMMARY)}
+ <div class="portlet">
+   <div class="content">
+     <span class="textred">{translate fonema=LANG_WAGER_LIMITATION_U}</a>
+   </div>
+ </div>
+ {/if}
+ {if isset($logged.DAYS)}
+<form method="post" action="">
+<input type="hidden" name="multiple_bets" value="true">
+<div class="portlet">
+  {foreach $logged.DAYS as $day}
+  <div class="content">
+  <a name="day_{$day.GAME_DAY}"></a>
+   <img style="vertical-align: middle; margin:2px" src="{if isset($day.VISIBLE)}./img/icons/plus.png{/if}{if isset($day.INVISIBLE)}./img/icons/minus.png{/if}" onclick="toggle('day_{$day.GAME_DAY}', this); return false;">
+   {$day.GAME_DAY} - {$day.COUNTER} {translate fonema=LANG_GAMES_U}
+   <div id="day_{$day.GAME_DAY}" {if isset($day.VISIBLE_DIV)}style="display: block;"{/if} {if isset($day.INVISIBLE_DIV)}style="display: none;"{/if}>
+    <table width="100%"> 
+      <tr>
+       {if isset($day.FUTURE)}  
+	<th  style="border-left:0px" width="200px"></td>
+	<th width="100px">{translate fonema=LANG_HOST_U}</td>
+	<th>{translate fonema=LANG_RESULT_U}</td>
+	<th width="100px">{translate fonema=LANG_VISITOR_U}</td>
+	<th>{translate fonema=LANG_STAKE_U}</td>
+       {/if}  
+       {if isset($day.PRESENT)}  
+	<th width="200px">{translate fonema=LANG_STOP_DATE_U}</td>
+	<th>{translate fonema=LANG_HOST_U}</td>
+	<th>{translate fonema=LANG_RESULT_U}</td>
+	<th>{translate fonema=LANG_VISITOR_U}</td>
+	<th>{translate fonema=LANG_STAKE_U}</td>
+	<th>{translate fonema=LANG_PRIZE_FUND_U}</td>
+       {/if}
+       {if isset($day.PAST)}  
+	<th width="200px">{translate fonema=LANG_STOP_DATE_U}</td>
+	<th>{translate fonema=LANG_HOST_U}</td>
+	<th>{translate fonema=LANG_PREDICTED_RESULT_U}</td>
+	<th>{translate fonema=LANG_VISITOR_U}</td>
+	<th>{translate fonema=LANG_RESULT_U}<br>{translate fonema=LANG_WINNINGS_U} ({translate fonema=LANG_STAKE_U})</td>
+	<th></td>
+       {/if}
+      </tr>
+    {foreach $day.GAMES as $game}
+      {if isset($game.FUTURE)}
+       <tr id="wager_{$game.WAGER_ID}">
+	<td align="center">{$game.SEASON_TITLE}<br>
+		<b>{translate fonema=LANG_VALID_TILL_U}</b>: <span  class="date_font">{$game.END_DATE} {$game.UTC}</span><br>
+          <div id="wager_{$game.WAGER_ID}_control"><input type="hidden" name="wager_ids[]" value="{$game.WAGER_ID}">
+	  {if isset($game.MESSAGE)}<span class="textgreen"><b>{$game.MESSAGE.MSG}<b></span>{/if}
+	  {if isset($game.ERROR)}<span class="textred"><b>{$game.ERROR.MSG}<b></span>{/if}</div>
+        </td>
+	<td align="center" valign="top">
+            <div id="wager_{$game.WAGER_ID}_1"> 
+            <div {if isset($game.CHOICE1)}style="color:#0000FF;font-weight:bold;"{/if}> {$game.TEAM_NAME1}</div>
+            </div>
+	</td>
+	<td align="center" valign="top" width="80px" nowrap>
+          <input type="text" name="wager_{$game.WAGER_ID}_host_score" id="wager_{$game.WAGER_ID}_host_score" value="{$game.HOST_SCORE}" maxlength=3 size=1>
+          :
+          <input type="text" name="wager_{$game.WAGER_ID}_visitor_score" id="wager_{$game.WAGER_ID}_visitor_score" value="{$game.VISITOR_SCORE}" maxlength=3 size=1>
+        </td> 
+	<td align="center" valign="top">
+           <div id="wager_{$game.WAGER_ID}_-1"> 
+           <div {if isset($game.CHOICE_1)}style="color:#0000FF;font-weight:bold;"{/if}>{$game.TEAM_NAME2}</div>
+           </div>
+        </td> 
+	<td align="left">
+          <div style="float:left; width:100%" id="wager_{$game.WAGER_ID}_buttons">
+            <div style="float:right;">{translate fonema=LANG_PRIZE_FUND_U}: <b>{$game.STAKES}</b> {translate fonema=LANG_CREDITS_ABBR_U}</div>
+            <b>{$game.STAKE}</b> {translate fonema=LANG_CREDITS_ABBR_U}<br>
+            {if $game.STAKE==0}
+  	       <input class="btn" type="button" onClick="javascript:submitWager({$game.WAGER_ID}, document.getElementById('wager_{$game.WAGER_ID}'), 'wager_{$game.WAGER_ID}_control', 0)" value="{translate fonema=LANG_FREE_BET_U}" onmouseout="this.className='btn'" onmouseover="this.className='btn btnhov'" > 
+            {/if}
+            {if $game.STAKE==0 && $credits>=1}
+	       <input type="button" onClick="javascript:submitWager({$game.WAGER_ID}, document.getElementById('wager_{$game.WAGER_ID}'), 'wager_{$game.WAGER_ID}_control', 1)" value="{translate fonema=LANG_BET_1_CREDIT_U}" onmouseout="this.className='btn'" onmouseover="this.className='btn btnhov'" class="btn">
+            {/if}
+            {if $game.STAKE>=1}
+	       <input type="button" onClick="javascript:submitWager({$game.WAGER_ID}, document.getElementById('wager_{$game.WAGER_ID}'), 'wager_{$game.WAGER_ID}_control', 1)" value="{translate fonema=LANG_CHANGE_BET_U}" onmouseout="this.className='btn'" onmouseover="this.className='btn btnhov'" class="btn">
+            {/if}
+	  </div>
+        </td> 
+       </tr>
+      {/if}
+      {if isset($game.PRESENT)}
+       <tr id="wager_{$game.WAGER_ID}">
+	<td align="center" nowrap>{$game.SEASON_TITLE}<br>
+ 	                 {$game.END_DATE}</td>
+	<td {if isset($game.CHOICE1)}style="color:#0000FF;font-weight:bold;"{/if} align="center">{$game.TEAM_NAME1}</td>
+	<td {if isset($game.CHOICE0)}style="color:#0000FF;font-weight:bold;"{/if} align="center">{$game.HOST_SCORE}:{$game.VISITOR_SCORE} 
+        </td>
+	<td {if isset($game.CHOICE_1)}style="color:#0000FF;font-weight:bold;"{/if} align="center">{$game.TEAM_NAME2}</td> 
+	<td align="center"><b>{$game.STAKE}</b></td>
+	<td align="center">{$game.STAKES}</td>
+       </tr>
+      {/if}
+      {if isset($game.PAST)}
+       <tr id="wager_{$game.WAGER_ID}">
+	<td align="center" nowrap>{$game.SEASON_TITLE}<br>
+			{$game.END_DATE}</td>
+	<td style="{if isset($game.WINNER1)}font-weight:bold;{/if}{if isset($game.CHOICE1)}color:#0000FF;font-weight:bold;{/if}" align="center">{$game.TEAM_NAME1}</td>
+	<td style="{if isset($game.WINNER0)}font-weight:bold;{/if}{if isset($game.CHOICE0)}color:#0000FF;font-weight:bold;{/if}" align="center">{$game.HOST_SCORE}:{$game.VISITOR_SCORE}</td>
+	<td style="{if isset($game.WINNER_1)}font-weight:bold;{/if}{if isset($game.CHOICE_1)}color:#0000FF;font-weight:bold;{/if}" align="center">{$game.TEAM_NAME2}</td> 
+	<td align="center">{$game.SCORE1}:{$game.SCORE2}<br><b>{$game.RETURN}</b> ({$game.STAKE}{if $game.RETURN>0}{/if})</td>
+	<td align="center" nowrap><a target="wager_bet_result" onClick="window.open('','wager_bet_result','width=400,height=620,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');" href="wager_bet_results.php?wager_id={$game.WAGER_ID}">{translate fonema=LANG_RESULTS_U}</a></td>
+
+       </tr>
+      {/if}
+    {/foreach}
+     </table>
+   </div>
+   </div>
+    {/foreach}
+ </div>
+
+{if isset($logged.FUTURE_SUBMIT_ALL)}
+ <div class="portlet">
+  <div class="content">
+   <input class="input" type="submit" value="{translate fonema=LANG_SUBMIT_ALL_U}">
+  </div>
+ </div>
+{/if}
+</form>
+ {$logged.PAGING}
+  {else}
+  <div class="content">
+    <span class="textred"><b>{translate fonema=LANG_NO_GAMES}</b></span>
+   </div>
+  {/if}
+{else}
+{$sched}
+{/if}

@@ -1,0 +1,50 @@
+{if isset($error)}
+<div class="portlet" id="message">
+    <div class="content">
+	<span class="textred"><b>{$error.MSG}</b></span>
+    </div>
+</div>
+{/if}
+
+{if isset($report_form)}
+<script>
+     $(function() {
+	$( "#game_start_date" ).datetimepicker();
+        $( "#game_start_date" ).datetimepicker('setDate', (new Date({$report_form.DATE.YEAR}, {$report_form.DATE.MONTH-1}, {$report_form.DATE.DAY}, {$report_form.DATE.HOUR}, {$report_form.DATE.MINUTE})) );
+     });
+</script>
+
+<form action="" method="post">
+ <input type="hidden" name="report_time" value="y">
+ <input type="hidden" name="game_id" value="{$report_form.GAME_ID}">
+<div class="portlet">
+  <div class="header">{translate fonema=LANG_REPORT_GAME_TIME_U}</div>
+  <div class="content">
+    {translate fonema=LANG_GAME_REPORT_TIME_INSTR_U}.<br>
+  </div>
+  <div class="content">
+   <table class="noborder">
+    <tr><td><b>{translate fonema=LANG_START_DATE_U}</b></td><td>{$report_form.START_DATE} {$report_form.UTC}</td></tr>
+    <tr><td><b>{translate fonema=LANG_SEASON_U}</b></td><td>{$report_form.SEASON_TITLE}</td></tr>
+    <tr><td><b>{translate fonema=LANG_PLAYER_U}</b></td><td>{$report_form.TEAM_NAME1} - {$report_form.TEAM_NAME2}</td></tr>
+    {if isset($report_form.ENABLED)}
+     <tr><td><b>{translate fonema=LANG_LINK_U}</b></td><td><input type="text" class="input" size=40 maxlength=256 name="link" id="link"></td></tr>
+     <tr><td><b>{translate fonema=LANG_START_DATE_U}</b></td><td><input type="text" id="game_start_date" name="game_start_date" style="width: 100px; font-size:10px;" readonly="true"> {$report_form.UTC}</td></tr>
+    {/if}
+   </table>
+  </div>
+  {if isset($report_form.ENABLED_SUBMIT)}
+  <div class="content">
+    <input type="submit" class="btn" type="submit" value=" {translate fonema=LANG_SUBMIT_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/><br/>
+  </div>
+  {/if}
+</div>
+</form>
+{/if}
+
+<div class="portlet">
+  <div class="header">{translate fonema=LANG_ACTIVE_REPORTS_U}</div>
+  <div class="content">
+  {$reports}
+  </div>
+</div>

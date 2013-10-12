@@ -1,0 +1,24 @@
+{if isset($wager_standings)}
+<div class="portlet">
+<div class="header"><a href="wager_standings.php?season_id={$season_id}">{translate fonema=LANG_STANDINGS_U}</a></div>
+<div class="content">
+    <table>
+	<tr>
+	  <th></th>
+	  <th align="left">{translate fonema=LANG_PARTICIPANT_U}</th>
+	  <th>{translate fonema=LANG_BALANCE_U}</th>
+	</tr>
+	{foreach $wager_standings.USERS as $user}          
+         {if isset($user.GAP)}
+	  <tr><td colspan="3">...</td></tr>
+	 {/if}
+	   <tr>
+	  	<td>{$user.PLACE}</td>
+		<td align="left"  width="100%">{$user.USER_NAME}</td>
+		<td>{$user.WEALTH}</td>
+	   </tr>
+        {/foreach}
+    </table>
+</div>
+</div>
+{/if}

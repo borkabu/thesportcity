@@ -1,0 +1,51 @@
+<div class="portlet">
+<div class="header">{$league_name}: {translate fonema=LANG_BLIND_TRADE_CHOICES_U}</div>
+<div class="content_header">{translate fonema=LANG_SELLING_PRICE_U}: {$selling_price}</div>
+<div class="content">
+  {if isset($free_transfer)}
+   {translate fonema=LANG_FREE_TRANSFER_FEE_U}: {$free_transfer_fee}
+   {if isset($not_enough_credits)}
+    <span class="textred"><br><b>{translate fonema=LANG_ERROR_NOT_ENOUGH_CREDITS_U}</b></span>
+   {/if}
+  {/if}
+   <table>
+     <tr>
+       {if isset($free_transfer)}<th></th>{/if}
+       <th>{translate fonema=LANG_PLAYER_U}</th>
+       <th>{translate fonema=LANG_TEAM_U}</th>
+       <th>{translate fonema=LANG_PRICE_U}</th>
+       <th>{translate fonema=LANG_PLAYED_U}</th>
+       {if isset($free_transfer)}<th></th>{/if}
+     </tr>
+    {foreach $players as $player}
+     <tr>
+       {if isset($free_transfer)}
+       <td>{$player.PLAYER_STATE_DIV}</td>
+       {/if}
+       <td align="left">{$player.LAST_NAME}, {$player.FIRST_NAME} ({$player.TYPE_NAME})</td>
+       <td align="left">{$player.TEAM_NAME2}</td>
+       <td align="left">{$player.CURRENT_VALUE_MONEY}</td>
+       <td align="left">{$player.PLAYED}</td>
+       {if isset($free_transfer) && !isset($not_enough_credits)}
+        <td>
+	  <form action="" method="post" style="margin:0;font-size:8.5pt;" onSubmit="freeTransfer({$old_player_id}, this.player.value);// window.opener.document.getElementById('form_{$old_player_id}').submit(); window.close();" >
+            <input type="hidden" name="player" value="{$player.USER_ID}">
+            <input type="hidden" name="free_transfer" value="y">
+            <input type="submit" class="btn" type="submit" value=" {translate fonema=LANG_FREE_TRANSFER_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+          </form>        
+        </td>
+       {/if}
+     </tr>
+    {/foreach}
+   </table>
+ </div>
+</div>
+<script>
+  function freeTransfer(player_id, new_player_id) {
+    window.opener.document.getElementById('form_' + player_id).player.value = player_id;
+    window.opener.document.getElementById('form_' + player_id).new_player.value = new_player_id;
+    window.opener.document.getElementById('form_' + player_id).submit(); 
+    window.close();
+  }
+
+</script>

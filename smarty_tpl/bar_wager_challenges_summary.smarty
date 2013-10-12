@@ -1,0 +1,7 @@
+<div class="portlet">
+<div class="header">{translate fonema=LANG_CHALLENGES_U}</div>
+<div class="content">
+ {translate fonema=LANG_OPEN_CHALLENGES_U} : {$challenges.OPEN_CHALLENGES}<br>
+ {translate fonema=LANG_ACCEPTED_CHALLENGES_U} : {$challenges.ACCEPTED_CHALLENGES}<br>
+</div>
+</div>

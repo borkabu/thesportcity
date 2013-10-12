@@ -1,0 +1,67 @@
+<div class="portlet">
+  {if isset($transfers)}
+    <div class="content">       
+      <table> 
+       {foreach $transfers as $transfer}
+       <tr>
+         <th colspan=2>
+            <b>{$transfer.ROW.USER_NAME}</b>
+         </td>
+         <th></td>
+         <th colspan=2>
+           <b>{$transfer.ROW.USER_NAME2}</b>
+         </td>
+       </tr>
+       <tr>
+         <td>
+            {foreach $transfer.USER_ID as $player}
+	      <a href="f_manager_player_seasonstats.php?user_id={$player.CPLAYER_ID}&seasons={$player.PLAYER_SEASON_STATS.SUBSEASONS}" target="f_manager_player_season_stats" onClick="window.open('','f_manager_player_season_stats','width=800,height=700,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');">{$player.LAST_NAME}, {$player.FIRST_NAME}</a>
+               {$player.TYPE_NAME} ({$player.TEAM_NAME2})
+            {/foreach}
+         </td> 
+         <td>
+            {foreach $transfer.USER_ID as $player}
+	        <b>{$player.CURRENT_VALUE_MONEY}</b>
+            {/foreach}
+         </td>
+         <td>
+             <b>{translate fonema=LANG_TRANSFER_FEE_U}: <span class="textred">{abs($transfer.ROW.FEE)}</span></b><br>
+             {if $transfer.ROW.FEE != 0}
+		<b>{translate fonema=LANG_PAYS_U}: <span class="textred">{$transfer.ROW.PAYER}</span></b><br>
+             {/if}
+            <form action="" method="post" style="margin:0px;">
+              <input type="hidden" name="entry_id" value="{$player.ENTRY_ID}">
+              <input type="hidden" name="user1" value="{$player.USER_ID}">
+              <input type="hidden" name="user2" value="{$player.USER_ID2}">
+              <input type="hidden" name="accept_transfer_moderate" value="y">
+   	      <input type="submit" class="btn" type="submit" value=" {translate fonema=LANG_ACCEPT_TRANSFER_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/>
+	    </form>
+            <form action="" method="post" style="margin:0px;">
+              <input type="hidden" name="entry_id" value="{$player.ENTRY_ID}">
+              <input type="hidden" name="user1" value="{$player.USER_ID}">
+              <input type="hidden" name="user2" value="{$player.USER_ID2}">
+              <input type="hidden" name="reject_transfer_moderate" value="y">
+   	      <input type="submit" class="btn" type="submit" value=" {translate fonema=LANG_REJECT_TRANSFER_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" onClick="return confirm('{translate fonema=LANG_REALLY_U}');"/>
+	    </form>
+         </td>
+         <td>
+           {foreach $transfer.USER_ID2 as $player}
+            <b>{$player.CURRENT_VALUE_MONEY}</b>
+           {/foreach}
+         </td> 
+         <td>
+           {foreach $transfer.USER_ID2 as $player}
+	    <a href="f_manager_player_seasonstats.php?user_id={$player.CPLAYER_ID}&seasons={$player.PLAYER_SEASON_STATS.SUBSEASONS}" target="f_manager_player_season_stats" onClick="window.open('','f_manager_player_season_stats','width=800,height=700,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');">{$player.LAST_NAME}, {$player.FIRST_NAME}</a>
+              {$player.TYPE_NAME} ({$player.TEAM_NAME2})
+           {/foreach}
+         </td> 
+       </tr>
+     {/foreach}
+        </table>
+      </div>
+  {else}
+    <div class="content">
+      {translate fonema=LANG_RVS_MANAGER_NO_MODERATED_TRANSFERS_U}
+    </div>
+  {/if}
+</div>

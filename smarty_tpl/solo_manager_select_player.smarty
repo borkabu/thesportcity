@@ -1,0 +1,107 @@
+<div class="portlet">
+ <div class="header">{translate fonema=LANG_TOUR_U}</div>
+  <div class="content">
+	{$tour.NUMBER}
+  	<div id="tour_{$tour.NUMBER}" {if isset($tour.VISIBLE_DIV)}style="display: block;"{/if} {if isset($tour.INVISIBLE_DIV)}style="display: none;"{/if}>
+         <table  width="100%">
+           <tr>
+             <th>{translate fonema=LANG_MATCHES_U}</th>
+             <th>{translate fonema=LANG_START_DATE_U}</td>
+           </tr>
+           {foreach $tour.GAMES as $game}
+           <tr>
+             <td align="left">{$game.TEAM_NAME1} - {$game.TEAM_NAME2}
+                 {if isset($game.RESULT)}(<a href="game_protocol.php?game_id={$game.RESULT.GAME_ID}" target="game_protocol" onClick="window.open('','game_protocol','width=740,height=700,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');">{$game.RESULT.SCORE1} : {$game.RESULT.SCORE2}</a>){/if}
+		</td>
+             <td align="right" nowrap>{$game.START_DATE} {$game.UTC}</td>
+           </tr>
+           {/foreach}
+         </table>
+	</div>
+  </div>
+</div>
+
+<div class="portlet">
+  <div class="content">
+    <table id="teamtable" class="statistics-list" width="100%">
+      <thead>
+        <tr>
+          <th>{translate fonema=LANG_PLAYER_U} <a href="javascript:sortTable(0)">&#8661;</a></th>
+          <th>{translate fonema=LANG_TEAM_NAME_U} <a href="javascript:sortTable(1)">&#8661;</a></th>
+          <th nowrap>{translate fonema=LANG_TOTAL_POINTS_U} <a href="javascript:sortTable(2)">&#8661;</a></th>
+	  <th>{translate fonema=LANG_REPORTS_U}</th>
+	  <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {foreach $players as $player}
+        <tr valign="top" id="market_tr_{$player.USER_ID}">
+         <td>
+<div style="float:left">
+{if isset($player.PLAYER_STATE_DIV)}
+ <div id="player_state_{$player.PLAYER_ID}>_{$player.SEASON_ID}" style="float:left;">
+  {if isset($player.PLAYER_STATE_DIV.INJURY_STATE_DEFAULT) &&
+      isset($player.PLAYER_STATE_DIV.QUESTIONABLE_STATE_DEFAULT)}<!--
+  {elseif isset($player.PLAYER_STATE_DIV.INJURY_STATE_ON)}<img src="./img/injury.gif" width="12" height="12" border="0" 
+    {if isset($player.PLAYER_STATE_DIV.INJURY_STATE_ON.ADMIN)}onClick="javascript:playerStateUpdate({$player.SEASON_ID}, {$player.PLAYER_ID}, -1, 'player_state_{$player.PLAYER_ID}_{$player.SEASON_ID}')"{/if}
+   onmouseover="Tip('{translate fonema=LANG_UNFIT_TO_PLAY_U}')" onmouseout="UnTip()" /><!--
+  {elseif isset($player.PLAYER_STATE_DIV.QUESTIONABLE_STATE_ON)}<img src="./img/questionable.png" width="12" height="12" border="0" 
+    {if isset($player.PLAYER_STATE_DIV.QUESTIONABLE_STATE_ON.ADMIN)}onClick="javascript:playerStateUpdate({$player.SEASON_ID}, {$player.PLAYER_ID}, -4, 'player_state_{$player.PLAYER_ID}_{$player.SEASON_ID}')"{/if}
+   onmouseover="Tip('{translate fonema=LANG_QUESTIONABLE_U}')" onmouseout="UnTip()"/><!--
+  {elseif isset($player.PLAYER_STATE_DIV.INJURY_STATE_OFF) ||
+	  isset($player.PLAYER_STATE_DIV.QUESTIONABLE_STATE_OFF)}<img src="./img/no_injury.gif" width="12" height="12" border="0" 
+    {if isset($player.PLAYER_STATE_DIV.INJURY_STATE_OFF.ADMIN)}onClick="javascript:playerStateUpdate({$player.SEASON_ID}, {$player.PLAYER_ID}, 1, 'player_state_{$player.PLAYER_ID}_{$player.SEASON_ID}')"{/if}
+    {if isset($player.PLAYER_STATE_DIV.QUESTIONABLE_STATE_OFF.ADMIN)}onClick="javascript:playerStateUpdate({$player.SEASON_ID}, {$player.PLAYER_ID}, 4, 'player_state_{$player.PLAYER_ID}_{$player.SEASON_ID}')"{/if}
+   onmouseover="Tip('{translate fonema=LANG_FIT_TO_PLAY_U}')" onmouseout="UnTip()"><!--
+  {/if}
+  {if isset($player.PLAYER_STATE_DIV.SUSPENSION_STATE_DEFAULT)}-->
+  {elseif isset($player.PLAYER_STATE_DIV.SUSPENSION_STATE_ON)}--><img src="./img/red_card.gif" width="12" height="12" border="0" 
+    {if isset($player.PLAYER_STATE_DIV.SUSPENSION_STATE_ON.ADMIN)}onClick="javascript:playerStateUpdate({$player.SEASON_ID}, {$player.PLAYER_ID}, -2, 'player_state_{$player.PLAYER_ID}_{$player.SEASON_ID}')"
+    {/if}
+   onmouseover="Tip('{translate fonema=LANG_SUSPENDED_U}')" onmouseout="UnTip()"/>
+  {elseif isset($player.PLAYER_STATE_DIV.SUSPENSION_STATE_OFF)}--><img src="./img/no_card.gif" width="12" height="12" border="0" 
+    {if isset($player.PLAYER_STATE_DIV.SUSPENSION_STATE_OFF.ADMIN)}onClick="javascript:playerStateUpdate({$player.SEASON_ID}, {$player.PLAYER_ID}, 2, 'player_state_{$player.PLAYER_ID}_{$player.SEASON_ID}')"
+    {/if}
+   onmouseover="Tip('{translate fonema=LANG_ALLOWED_TO_PLAY_U}')" onmouseout="UnTip()"/>
+  {/if}
+</div>
+{/if}
+</div>
+
+          <a href="f_manager_player_seasonstats.php?user_id={$player.USER_ID}&seasons={$subseasons}" target="f_manager_player_season_stats" onClick="window.open('','f_manager_player_season_stats','width=800,height=700,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');"><b>{$player.LAST_NAME}, {$player.FIRST_NAME}</b></a> <br>
+            <span class="date_font2">{$player.TYPE_NAME}</span>
+         </td>
+         <td nowrap align="left">{$player.TEAM_NAME2}</td>
+         <td nowrap align="right"><b>{$player.TOTAL_POINTS}</b></td>
+         <td><span style="white-space: nowrap;"><a href="javascript: void()" style="font-size:8pt" onclick="reportPlayerState({$player.USER_ID}, {$player.SEASON_ID}); return false">{translate fonema=LANG_REPORTS_U}</a> ({$player.REPORTS})</span></td>
+         <td>
+   	  <form action="" method="post" style="margin:0;font-size:8.5pt;" onSubmit="soloSelectPlayer(this.player.value, '{$game_day}');// window.opener.document.getElementById('form_{$game_day}').submit(); window.close();" >
+            <input type="hidden" name="player" value="{$player.USER_ID}">
+            <input type="submit"  class="smlbtn" type="submit" value=" {translate fonema=LANG_SELECT_PLAYER_U} " onmouseover="this.className='smlbtn smlbtnhov'" onmouseout="this.className='smlbtn'"/>
+           </form>
+        </tr>
+        {foreachelse}
+        <tr>
+          <td colspan="8">{translate fonema=LANG_NO_ENTRIES_U}</td>
+        </tr>
+        {/foreach}
+      </tbody>
+     </table>
+   </div>
+</div>
+<script>
+  function soloSelectPlayer(player_id, game_day) {
+    window.opener.document.getElementById('form_' + game_day).player.value = player_id;
+    window.opener.document.getElementById('form_' + game_day).submit(); 
+    window.close();
+  }
+</script>
+{literal}
+<script>
+ var aAsc = [];
+ function sortTable(nr) {
+   aAsc[nr] = aAsc[nr]=='asc'?'desc':'asc';
+   $('#teamtable>tbody>tr').tsort('td:eq('+nr+')',{order:aAsc[nr]});
+ }
+</script>
+{/literal}

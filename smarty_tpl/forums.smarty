@@ -1,0 +1,45 @@
+<div style="clear:both"></div>
+{if isset($summary)}
+<div class="portlet">
+ <div class="header">{translate fonema=LANG_SUMMARY_U}</div>
+ <div class="content">
+ {foreach $summary as $unread}
+   <a href="forum.php?lang_id={$unread.SHORT_CODE}">{$unread.LATIN_NAME}</a> - {$unread.UNREAD}<br>
+ {/foreach}
+ </div>
+</div>
+{/if}
+<div style="float:right">
+<div class="portlet">
+<div id="adslot1143"></div>
+<script>
+;(function(d, t) {
+  var g = d.createElement(t), s = d.getElementsByTagName(t)[0];
+  g.src = "//serve.adslot.com/ads/1611/adslot1143_1143";
+  s.parentNode.insertBefore(g, s);
+}(document, 'script'));
+</script></div>
+</div>
+<div style="float:left;width:630px">
+{foreach $cats as $cat}
+<div class="portlet">
+<div class="header">{$cat.CAT_NAME}</div>
+	<div class="content">
+	<table width="100%">
+	  <tr><th>{translate fonema=LANG_FORUM_U}</th>
+	      <th>{translate fonema=LANG_TOPICS_U}</th>
+	      <th>{translate fonema=LANG_POSTS_U}</th>
+	      </tr>
+	  </tr>
+	{foreach $cat.FORUMS as $forum}
+	  <tr>
+            <td>{if isset($forum.TRACK)}<img src="./img/icons/flag_red.gif">{/if}<a href="forum.php?forum_id={$forum.FORUM_ID}"><b>{$forum.FORUM_NAME}</b></a></td>
+            <td width="50px">{$forum.TOPICS}</td>
+            <td width="50px">{$forum.POSTS}</td>
+	  </tr>
+	{/foreach}
+	</table>
+	</div>
+</div>
+{/foreach}
+</div>

@@ -1,0 +1,92 @@
+<TPL_INCLUDE:../tpl/adm/head.tpl.html>
+<TPL_INCLUDE:../tpl/adm/menu.tpl.html>
+
+<TPL_SUB:ERROR><span class="error"><TPL:MSG></span></TPL_SUB:ERROR>
+
+<form action="<_TPL:FORM_URL>" method="get">
+<div class="portlet">
+  <div class="content">
+      <input type="hidden" name="order" value="<TPL:ORDER>">
+      <_TPL:LANG_SEARCH_U>: <TPL:WHERE> <TPL:QUERY> <input type="submit" class="btn" value="<_TPL:LANG_OK_U>" onclick="resettarget();"  onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'">
+      <TPL_SUB:FILTERED><a href="<_TPL:FORM_URL>">[ <_TPL:LANG_SHOW_ALL_RECORDS> ]</a></TPL_SUB:FILTERED>
+  </div>
+</div>
+</form>
+
+<TPL_SUB:PAGING>
+<div class="portlet">
+  <div class="content">
+      <_TPL:LANG_TOTAL_RECORDS_U>: <b><TPL:NUMROWS></b> | 
+      <_TPL:LANG_PAGES_U>:
+      <TPL_SUB:PAGES>
+        <TPL_SUB:SELECTED><b>[<TPL:PAGENUM>]</b></TPL_SUB:SELECTED>
+        <TPL_SUB:NORMAL><a href="<TPL:URL>">[<TPL:PAGENUM>]</a></TPL_SUB:NORMAL>
+      </TPL_SUB:PAGES>
+  </div>
+</div>
+</TPL_SUB:PAGING>
+
+<div class="portlet">
+  <div class="content">
+  <table>
+    <tr>
+      <th>
+        Pavadinimas
+        <TPL_SUB:SEASON_TITLE_DESC_A><img src="../img/adm_desc_a.gif" width="11" height="11" border="0"></TPL_SUB:SEASON_TITLE_DESC_A>
+        <TPL_SUB:SEASON_TITLE_DESC><a href="<TPL:URL>"><img src="../img/adm_desc.gif" width="11" height="11" border="0"></a></TPL_SUB:SEASON_TITLE_DESC>
+        <TPL_SUB:SEASON_TITLE_ASC_A><img src="../img/adm_asc_a.gif" width="11" height="11" border="0"></TPL_SUB:SEASON_TITLE_ASC_A>
+        <TPL_SUB:SEASON_TITLE_ASC><a href="<TPL:URL>"><img src="../img/adm_asc.gif" width="11" height="11" border="0"></a></TPL_SUB:SEASON_TITLE_ASC>
+      </td>
+      <th>
+        Pradža
+        <TPL_SUB:START_DATE_DESC_A><img src="../img/adm_desc_a.gif" width="11" height="11" border="0"></TPL_SUB:START_DATE_DESC_A>
+        <TPL_SUB:START_DATE_DESC><a href="<TPL:URL>"><img src="../img/adm_desc.gif" width="11" height="11" border="0"></a></TPL_SUB:START_DATE_DESC>
+        <TPL_SUB:START_DATE_ASC_A><img src="../img/adm_asc_a.gif" width="11" height="11" border="0"></TPL_SUB:START_DATE_ASC_A>
+        <TPL_SUB:START_DATE_ASC><a href="<TPL:URL>"><img src="../img/adm_asc.gif" width="11" height="11" border="0"></a></TPL_SUB:START_DATE_ASC>
+      </td>
+      <th>
+        Pabaiga
+        <TPL_SUB:END_DATE_DESC_A><img src="../img/adm_desc_a.gif" width="11" height="11" border="0"></TPL_SUB:END_DATE_DESC_A>
+        <TPL_SUB:END_DATE_DESC><a href="<TPL:URL>"><img src="../img/adm_desc.gif" width="11" height="11" border="0"></a></TPL_SUB:END_DATE_DESC>
+        <TPL_SUB:END_DATE_ASC_A><img src="../img/adm_asc_a.gif" width="11" height="11" border="0"></TPL_SUB:END_DATE_ASC_A>
+        <TPL_SUB:END_DATE_ASC><a href="<TPL:URL>"><img src="../img/adm_asc.gif" width="11" height="11" border="0"></a></TPL_SUB:END_DATE_ASC>
+      </td>
+      <th>
+        Aktyv.
+        <TPL_SUB:PUBLISH_DESC_A><img src="../img/adm_desc_a.gif" width="11" height="11" border="0"></TPL_SUB:PUBLISH_DESC_A>
+        <TPL_SUB:PUBLISH_DESC><a href="<TPL:URL>"><img src="../img/adm_desc.gif" width="11" height="11" border="0"></a></TPL_SUB:PUBLISH_DESC>
+        <TPL_SUB:PUBLISH_ASC_A><img src="../img/adm_asc_a.gif" width="11" height="11" border="0"></TPL_SUB:PUBLISH_ASC_A>
+        <TPL_SUB:PUBLISH_ASC><a href="<TPL:URL>"><img src="../img/adm_asc.gif" width="11" height="11" border="0"></a></TPL_SUB:PUBLISH_ASC>
+      </td>
+      <th>&nbsp;</td>
+      <th>&nbsp;</td>
+    </tr>
+    
+    <TPL_SUB:ITEM>
+    <tr class="<TPL_SUB:EVEN>even</TPL_SUB:EVEN><TPL_SUB:ODD>odd</TPL_SUB:ODD>">
+      <td class="list_item"><TPL:TSEASON_TITLE></td>
+      <td class="list_item"><TPL:START_DATE></td>
+      <td class="list_item"><TPL:END_DATE></td>
+      <td class="list_item" align="center"><a href="<TPL:ACT_URL>"><img src="../img/adm_publish_<TPL:PUBLISH>.gif" width="12" height="12" border="0"></a></td>
+      <td class="list_item" align="center">
+        <TPL_SUB:DEL><a href="<TPL:DEL_URL>" onClick="return confirm('Tikrai?');"><img src="../img/adm_delete.gif" width="12" height="12" border="0" alt="pašalinti"></a></TPL_SUB:DEL>
+        <a href="bracket_season_edit.php?season_id=<TPL:SEASON_ID>"><img src="../img/adm_edit.gif" width="12" height="12" border="0" alt="redaguoti"></a>
+        <a href="bracket_season.php?season_id=<TPL:SEASON_ID>&copy_season=true" onClick="return confirm('Tikrai?');">Copy</a>
+      </td>
+      <td class="list_item"><TPL_SUB:LANGS>
+				<TPL_SUB:USED><a href="bracket_season_edit.php?season_id=<TPL:SEASON_ID>&lang_id=<TPL:SHORT_CODE>"><b><TPL:SHORT_CODE></b></a></TPL_SUB:USED>
+				<TPL_SUB:NOTUSED><a href="bracket_season_edit.php?season_id=<TPL:SEASON_ID>&lang_id=<TPL:SHORT_CODE>"><TPL:SHORT_CODE></a></TPL_SUB:NOTUSED>
+                            </TPL_SUB:LANGS>
+      </td>
+    </tr>
+    </TPL_SUB:ITEM>
+     
+  </table>
+  <TPL_SUB:NORECORDS><_TPL:LANG_NO_ENTRIES_U></TPL_SUB:NORECORDS>
+</div>
+</div>
+
+<TPL_SUB:PAGING></TPL_SUB:PAGING>
+
+
+<TPL_INCLUDE:../tpl/adm/foot.tpl.html>

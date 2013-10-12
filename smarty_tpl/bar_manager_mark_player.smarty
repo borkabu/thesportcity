@@ -1,0 +1,6 @@
+{if isset($unmarked)}
+<img align="right" src="./img/icons/star_empty.png" onmouseover="this.className='btn btnhov';Tip('{translate fonema=LANG_MARK_U}')" onmouseout="this.className='btn';UnTip()" onClick="javascript:markPlayer({$season_id}, {$player_id}, 'mark_{$player_id}')"/>
+{/if}
+{if isset($marked)}
+<img align="right" src="./img/icons/star.png" onmouseover="this.className='btn btnhov';Tip('{translate fonema=LANG_UNMARK_U}')" onmouseout="this.className='btn';UnTip()" onClick="javascript:unmarkPlayer({$season_id}, {$player_id}, 'mark_{$player_id}')"/>
+{/if}

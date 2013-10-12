@@ -1,0 +1,90 @@
+<TPL_INCLUDE:../tpl/adm/head.tpl.html>
+<TPL_INCLUDE:../tpl/adm/menu.tpl.html>
+
+<form action="" method="post" name="editform">
+<input type="hidden" name="form_save" value="Y">
+<input type="hidden" name="referer" value="<TPL:REFERER>">
+<input type="hidden" name="lang_id" value="<TPL:LANG_ID>">
+<TPL_SUB:ERROR><span class="error"><TPL:MSG></span></TPL_SUB:ERROR>
+
+
+<div class="portlet">
+  <div class="header"><_TPL:LANG_GENERAL_DATA_U></div>
+  <div class="content">
+  <table>
+    <tr>
+      <td class="list_item"><_TPL:LANG_TITLE_U></td>
+      <td class="list_item"><TPL_INPUT:adm_news.title></td>
+    </tr>
+    <tr>
+      <td class="list_item"><_TPL:LANG_PAGE_TITLE_U></td>
+      <td class="list_item"><TPL_INPUT:adm_pages.page_name></td>
+    </tr>
+    <tr>
+      <td class="list_item">Nuotrauka</td>
+      <td class="list_item"><TPL_INPUT:adm_pages.pic_location> <a href="pic.php?iform=editform&ifield=pic_location" target="picnet" onClick="window.open('','picnet','width=250,height=500,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');"><img src="../img/adm_more.gif" width="16" height="12" alt="iliustracijos" border="0"></a></td>
+    </tr>
+    <tr>
+      <td class="list_item">Nuotraukos parashas</td>
+      <td class="list_item"><TPL_INPUT:adm_pages.pic_title> </td>
+    </tr>
+    <tr>
+      <td class="list_item"><_TPL:LANG_PUBLISH_U></td>
+      <td class="list_item"><TPL_INPUT:adm_pages.publish></td>
+    </tr>
+  </table>
+</div>
+</div>
+
+<div class="portlet">
+  <div class="content">
+        <input type="submit" class="btn" value="<_TPL:LANG_SAVE_U>" onclick="resettarget();"  onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" >
+        <input type="reset" class="btn" value="<_TPL:LANG_RESET_U>" onclick="return confirm('<_TPL:LANG_REALLY_U>');"  onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'">
+</div>
+</div>
+
+
+<div class="portlet">
+  <div class="header">Puslapio tekstas</div>
+  <div class="content">
+
+  <table width="100%" border="0" cellspacing="0" cellpadding="3" bgcolor="#FFFFFF">
+      <TPL_INPUT:adm_pages.description>
+
+			<script type="text/javascript">
+				//<![CDATA[
+
+					// This call can be placed at any point after the
+					// <textarea>, or inside a <head><script> in a
+					// window.onload event handler.
+
+					// Replace the <textarea id="editor"> with an CKEditor
+					// instance, using default configurations.
+					CKEDITOR.replace( 'description' ,
+                                            { entities : false,
+						toolbar : 'Full',
+                                                  on :
+                                                 {
+					           instanceReady : function( ev )
+					            {
+                                                     // Output paragraphs as <p>Text</p>.
+					                this.dataProcessor.writer.setRules( 'p',
+					                    {
+					                        indent : false,
+                                                                breakBeforeOpen : false,
+					                        breakAfterOpen : false,
+					                        breakBeforeClose : false,
+					                        breakAfterClose : false
+                                                             });
+					            }
+					        }
+					});
+
+				//]]>
+				</script>
+
+</div>
+</div>
+
+</form>
+<TPL_INCLUDE:../tpl/adm/foot.tpl.html>

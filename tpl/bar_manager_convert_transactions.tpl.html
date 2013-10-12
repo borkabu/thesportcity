@@ -1,0 +1,15 @@
+<TPL_SUB:GET_TRANSACTIONS>
+<div class="content">
+<TPL_SUB:NO_TRANSACTIONS>
+  <_TPL:LANG_NO_TRANSACTIONS_U>
+</TPL_SUB:NO_TRANSACTIONS>
+<TPL_SUB:GET_TRANSACTIONS>
+   <br><_TPL:LANG_CONVERT_CREDITS_TRANSACTIONS>
+    <input type="text" name="trans" id="trans" size="2" maxlength="3" class="input">
+    <input class="btn" type="submit" value=" <_TPL:LANG_CONVERT_U> " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" onClick="javascript:convertCreditsTransactions(<TPL:SEASON_ID>, document.getElementById('trans').value, 'transactions')"/>
+</TPL_SUB:GET_TRANSACTIONS>
+<TPL_SUB:NO_CREDITS>
+  <br><_TPL:LANG_NO_CREDITS_U> <a href=""><_TPL:LANG_GET_MORE_CREDITS_U></a>
+</TPL_SUB:NO_CREDITS>
+</div>
+</TPL_SUB:GET_TRANSACTIONS>

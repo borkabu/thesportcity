@@ -1,0 +1,24 @@
+<div class="portlet">
+{if isset($tournament)}
+<div class="header">{translate fonema=LANG_TOURNAMENT_U}</div>
+<div class="content_header">
+{$tournament.TITLE}
+</div>
+<div class="content">
+{if isset($tournament.REGISTRATION_CLOSED)}{translate fonema=LANG_REGISTRATION_CLOSED_U}<br> {/if}
+{if isset($tournament.REGISTRATION_OPEN)}{translate fonema=LANG_REGISTRATION_OPENED_U}<br> {/if}
+{if isset($tournament.TOURNAMENT_OVER)}{translate fonema=LANG_TOURNAMENT_OVER_U} <b>{$tournament.TOURNAMENT_OVER.USER_NAME}</b><br> {/if}
+{translate fonema=LANG_PARTICIPANTS_U}: <b>{$tournament.JOINED}</b>
+</div>
+{if isset($tournament.MANAGER_TOURNAMENT_LOG)}
+{foreach $tournament.MANAGER_TOURNAMENT_LOG.LOG as $log_item}
+<div class="content">
+    <b><span class="date_font2">{$log_item.EVENT_DATE} {$log_item.UTC}</span></b><br>{$log_item.LOG_ENTRY}
+    <a href="f_manager_tournament_log.php?mt_id={$log_item.MT_ID}" target="log" onClick="window.open('','log','width=300,height=500,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');">{translate fonema=LANG_FULL_LOG_U}</a><br>
+</div>
+{/foreach}
+{/if}
+{/if}
+{$tournaments_summary}
+</div>
+

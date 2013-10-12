@@ -1,0 +1,17 @@
+<div id="player_state_<TPL:PLAYER_ID>_<TPL:SEASON_ID>" style="float:left;">
+<TPL_SUB:INJURY_STATE>
+<TPL_SUB:DEFAULT><!--</TPL_SUB:DEFAULT>
+<TPL_SUB:ON><img src="./img/injury.gif" width="12" height="12" border="0" <TPL_SUB:ADMIN>onClick="javascript:playerStateUpdate(<TPL:SEASON_ID>, <TPL:PLAYER_ID>, -1, 'player_state_<TPL:PLAYER_ID>_<TPL:SEASON_ID>')"</TPL_SUB:ADMIN>  onmouseover="Tip('<_TPL:LANG_UNFIT_TO_PLAY_U>')" onmouseout="UnTip()" /><!--</TPL_SUB:ON>
+<TPL_SUB:OFF><img src="./img/no_injury.gif" width="12" height="12" border="0" <TPL_SUB:ADMIN>onClick="javascript:playerStateUpdate(<TPL:SEASON_ID>, <TPL:PLAYER_ID>, 1, 'player_state_<TPL:PLAYER_ID>_<TPL:SEASON_ID>')"</TPL_SUB:ADMIN>  onmouseover="Tip('<_TPL:LANG_FIT_TO_PLAY_U>')" onmouseout="UnTip()"><!--</TPL_SUB:OFF>
+</TPL_SUB:INJURY_STATE>
+<TPL_SUB:QUESTIONABLE_STATE>
+<TPL_SUB:DEFAULT>--><!--</TPL_SUB:DEFAULT>
+<TPL_SUB:ON>--><img src="./img/questionable.png" width="12" height="12" border="0" <TPL_SUB:ADMIN>onClick="javascript:playerStateUpdate(<TPL:SEASON_ID>, <TPL:PLAYER_ID>, -4, 'player_state_<TPL:PLAYER_ID>_<TPL:SEASON_ID>')"</TPL_SUB:ADMIN>/><!--</TPL_SUB:ON>
+<TPL_SUB:OFF>--><img src="./img/no_injury.gif" width="12" height="12" border="0" <TPL_SUB:ADMIN>onClick="javascript:playerStateUpdate(<TPL:SEASON_ID>, <TPL:PLAYER_ID>, 4, 'player_state_<TPL:PLAYER_ID>_<TPL:SEASON_ID>')"</TPL_SUB:ADMIN>><!--</TPL_SUB:OFF>
+</TPL_SUB:QUESTIONABLE_STATE>
+<TPL_SUB:SUSPENSION_STATE>
+<TPL_SUB:DEFAULT>--></TPL_SUB:DEFAULT>
+<TPL_SUB:ON>--><img src="./img/red_card.gif" width="12" height="12" border="0" <TPL_SUB:ADMIN>onClick="javascript:playerStateUpdate(<TPL:SEASON_ID>, <TPL:PLAYER_ID>, -2, 'player_state_<TPL:PLAYER_ID>_<TPL:SEASON_ID>')"</TPL_SUB:ADMIN>  onmouseover="Tip('<_TPL:LANG_SUSPENDED_U>')" onmouseout="UnTip()"/></TPL_SUB:ON>
+<TPL_SUB:OFF>--><img src="./img/no_card.gif" width="12" height="12" border="0" <TPL_SUB:ADMIN>onClick="javascript:playerStateUpdate(<TPL:SEASON_ID>, <TPL:PLAYER_ID>, 2, 'player_state_<TPL:PLAYER_ID>_<TPL:SEASON_ID>')"</TPL_SUB:ADMIN>  onmouseover="Tip('<_TPL:LANG_ALLOWED_TO_PLAY_U>')" onmouseout="UnTip()"/></TPL_SUB:OFF>
+</TPL_SUB:SUSPENSION_STATE>
+</div>

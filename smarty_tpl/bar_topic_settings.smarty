@@ -1,0 +1,8 @@
+{if isset($subscribe)}
+ {translate fonema=LANG_TOPIC_NOT_SUBSCRIBED_U}<br>
+ <input class="btn" type="submit" value=" {translate fonema=LANG_TOPIC_SUBSCRIBE_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" onClick="javascript:subscribeTopic({$subscribe}, 'topics')"/>
+{/if}
+{if isset($unsubscribe)}
+ {translate fonema=LANG_TOPIC_SUBSCRIBED_U}<br>
+ <input class="btn" type="submit" value=" {translate fonema=LANG_TOPIC_UNSUBSCRIBE_U} " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" onClick="javascript:unsubscribeTopic({$unsubscribe}, 'topics')"/>
+{/if}

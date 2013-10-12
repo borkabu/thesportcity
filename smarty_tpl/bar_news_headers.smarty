@@ -1,0 +1,23 @@
+<div class="portlet">
+<div class="header">{translate fonema=LANG_NEWS_U}</div>
+<div class="content">
+  <div style="text-align:right"><a href="news_add.php">{translate fonema=LANG_ADD_NEWS_U}</a></div>
+</div>
+  {foreach $news as $news_item}
+	<div class="content">
+		<div><b>{if isset($news_item.CAT_NAME)}{$news_item.CAT_NAME}{/if}</b> <div style="float:right">{$news_item.DATE_PUBLISHED}</div>
+                 <br><a href="news.php?news_id={$news_item.NEWS_ID}&lang_id={$news_item.LANG}"><b>{$news_item.TITLE}</b></a> (<span style="font-weight:{$news_item.WEIGHT}">{$news_item.POSTS}</span>)</div>
+		<div style="clear:both;"></div>
+	</div>
+  {foreachelse}
+	<div class="content">
+		<div style="float:left;">{translate fonema=LANG_NO_ENTRIES_U}</div>
+		<div style="clear:both;"></div>
+	</div>
+  {/foreach}
+{if isset($more)}
+<div class="content">
+	<a href="news.php?genre={$more.GENRE}"><b>{translate fonema=LANG_MORE_U}</b></a>
+</div>
+{/if}
+</div>

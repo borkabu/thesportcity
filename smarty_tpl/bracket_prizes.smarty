@@ -1,0 +1,7 @@
+<div style="clear:both"></div>
+{$bracket_filter_box}
+
+<div class="portlet">
+ <div class="header">{translate fonema=LANG_PRIZES_U}</div>
+ <div class="content">{$prizes}</div>
+</div>

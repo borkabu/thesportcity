@@ -1,0 +1,34 @@
+<TPL_INCLUDE:../tpl/adm/small_head.tpl.html>
+
+<form action="<TPL:FORM>" method="post">
+<TPL_SUB:ERROR><div class="error"><TPL:MSG></div></TPL_SUB:ERROR>
+<div style="width:100%; margin:0 auto;">
+<div class="portlet" style="width:300px; margin-left: 50px ;  margin-right: auto ;margin-top:50">
+    <div class="header"><_TPL:LANG_LOGIN_U></div>
+    <div class="content">
+ <table width="100%">    
+    <tr>
+      <td class="list_item"><_TPL:LANG_USER_U></td>
+      <td class="list_item"><input type="text" name="l_user_name" class="input"></td>
+    </tr>
+    
+    <tr>
+      <td class="list_item"><_TPL:LANG_PASSWORD_U></td>
+      <td class="list_item"><input type="password" name="l_password" class="input"></td>
+    </tr>
+
+    <tr>
+      <td class="list_item"><_TPL:LANG_LANGUAGE_U></td>
+      <td class="list_item"><TPL:LANGUAGE></td>
+    </tr>
+    
+    <tr>
+      <td class="list_item" colspan="2" align="center"><input class="btn" type="submit" value=" <_TPL:LANG_ENTER_U> " onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'"/></td>
+    </tr>
+  
+  </table>
+</div>
+</div>
+</form>
+
+<TPL_INCLUDE:../tpl/adm/foot.tpl.html>

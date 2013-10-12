@@ -1,0 +1,18 @@
+<div class="portlet">
+<div class="header">{translate fonema=LANG_VIDEO_NEWS_U}</div>
+<div class="content">
+  <div style="text-align:right;"><a href="video_add.php">{translate fonema=LANG_ADD_VIDEO_NEWS_U}</a></div>
+</div>
+  {foreach $videos as $video_item}
+	<div class="content">
+		<div style="float:left;"><img align="left" src="{$video_item.THUMBNAIL}">&nbsp;<a href="video.php?video_id={$video_item.VIDEO_ID}&lang_id={$video_item.LANG}"><b>{$video_item.TITLE}</b></a> ({$video_item.POSTS}) <br> {$video_item.DESCR}</div>
+		<div style="float:right;">{$video_item.DATE_PUBLISHED}</div>
+		<div style="clear:both;"></div>		
+	</div>
+  {foreachelse}
+	<div class="content">
+		<div style="float:left;">{translate fonema=LANG_NO_ENTRIES_U}</div>
+		<div style="clear:both;"></div>
+	</div>
+  {/foreach}
+</div>

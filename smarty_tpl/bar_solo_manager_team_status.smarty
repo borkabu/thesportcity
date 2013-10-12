@@ -1,0 +1,6 @@
+{if isset($ignore_leagues_solo)}
+<div id="ignore_leagues_solo">{translate fonema=LANG_INVITATIONS_U} 
+	<img align="right" src="{if isset($ignore_leagues_solo.IGNORE_LEAGUES)}./img/icons/active.png{else}./img/icons/inactive.png{/if}" onmouseover="this.className='btn btnhov';Tip('{if isset($ignore_leagues.IGNORE_LEAGUES)}{translate fonema=LANG_ALLOWED_U} - {translate fonema=LANG_IGNORE_U}{else}{translate fonema=LANG_FORBIDDEN_U} - {translate fonema=LANG_ALLOW_U}{/if}')" onmouseout="this.className='btn';UnTip()" onClick="javascript:flipSoloTeamStatus({$season_id}, 'ignore_leagues', 'team_status')"/>
+</div>            
+<div style="clear:both"></div>
+{/if}

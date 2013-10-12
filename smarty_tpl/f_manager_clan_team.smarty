@@ -1,0 +1,25 @@
+<div class="portlet">
+ <div class="header">{$team_name}</div>
+ <div class="content">
+   <table>
+     <tr>
+       <th>{translate fonema=LANG_TEAM_MEMBER_U}</th>
+       <th>{translate fonema=LANG_PLACE_U}</th>
+       <th>{translate fonema=LANG_POINTS_U}</th>
+       <th>{translate fonema=LANG_POINTS_LAST_TOUR_U}</th>
+     </tr>
+    {if isset($team.ACTIVE_MEMBERS)}
+     {foreach $team.ACTIVE_MEMBERS as $member}
+     <tr>
+       <td>{$member.USER_NAME}</td>
+       <td>{$member.PLACE}</td>
+       <td>{$member.POINTS}</td>
+       <td>{$member.POINTS_LAST_TOUR}</td>
+     </tr>
+     {/foreach}              
+    {else}
+     <tr><td colspan=4>{translate fonema=LANG_TEAM_IS_EMPTY_U}</td></tr>
+    {/if}
+   </table>
+ </div>
+</div>

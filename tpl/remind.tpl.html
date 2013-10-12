@@ -1,0 +1,25 @@
+<div class="portlet">
+    <div class="header"><_TPL:LANG_PASSWORD_REMINDER_U></div>
+    <div class="content">
+       <p align="justify"><_TPL:LANG_PASSWORD_REMINDER_INSTR_U></p>
+    <table border="0" width="100%">
+    <form action="<TPL:SELF>" method="post"  style="margin:0px">
+      <tr>
+        <td align="right"><b><_TPL:LANG_USER_NAME_U></b>:</td>
+        <td><TPL_INPUT:adm_user.user_name></td>
+      </tr>
+      <tr>
+        <td align="right"><b><_TPL:LANG_EMAIL_U></b>:</td>
+        <td><TPL_INPUT:adm_user.email></td>
+      </tr>
+      <tr>
+        <td align="right"></td>
+         <td>
+          <input type="hidden" name="remind" value="y">
+          <input type="submit" class="btn" value=" <_TPL:LANG_SUBMIT_U> "  onmouseover="this.className='btn btnhov'" onmouseout="this.className='btn'" >
+        </td>
+      </tr>
+    </form>
+    </table>
+ </div>
+</div>

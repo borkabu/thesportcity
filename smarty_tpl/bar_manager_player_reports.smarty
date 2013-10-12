@@ -1,0 +1,24 @@
+{if isset($reports.REPORTS)}
+<table>
+ <tr>
+   <th>{translate fonema=LANG_STATUS_U}</th>
+   <th>{translate fonema=LANG_REPORT_SUBMITTED_U} /<br> {translate fonema=LANG_PLAYER_REPORT_END_DATE_U}</th>
+   <th>{translate fonema=LANG_REPORTED_BY_U}</th>
+   <th>{translate fonema=LANG_REPORT_STATUS_U}</th>
+ </tr>
+{foreach $reports.REPORTS as $report}
+ <tr>
+   <td><a href="{$report.LINK}" target="player_report">{$report.STATE}</a></td>
+   <td class="date_font2">{$report.DATE_REPORTED} /<br> {$report.VALID_TILL}</td>
+   <td>{$report.USER_NAME}</td>
+   <td>{$report.REPORT_STATUS}</td>
+ </tr>
+{/foreach}
+</table>
+{else}
+{translate fonema=LANG_NO_REPORTS_U}<br>
+{/if}
+<a href="f_manager_report_injury.php?player_id={$reports.PLAYER_ID}&season_id={$reports.SEASON_ID}" target="report_injury" onClick="window.open('','report_injury','width=450,height=420,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,scrollbars=yes');">{translate fonema=LANG_SUBMIT_REPORT_U}</a>
+<div style="float:right">
+<a href="javascript:void()" onclick="hideReports({$reports.PLAYER_ID}); return false">{translate fonema=LANG_HIDE_REPORTS_U}</a>
+</div>

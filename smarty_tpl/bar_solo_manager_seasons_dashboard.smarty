@@ -1,0 +1,92 @@
+<script>
+ $(function() {
+	$( "#solo_manager_seasons" ).tabs({
+		cookie: {
+			expires: 1,
+			name: "solo_manager_seasons"
+			}
+		}); 
+});
+</script>
+<div id="solo_manager_seasons">
+ <ul>
+ <li><a href="#tabs-1" title="{translate fonema=LANG_CURRENT_SEASONS_U}">{translate fonema=LANG_CURRENT_SEASONS_U}</a></li>
+ <li><a href="#tabs-2" title="{translate fonema=LANG_PAST_SEASONS_U}">{translate fonema=LANG_PAST_SEASONS_U}</a></li>
+ </ul>
+ <div id="tabs-1">
+  <table>
+   <tr><td></td>
+       <th>{translate fonema=LANG_SOLO_LEAGUES_U}</th>
+   </tr>
+   {foreach $manager_seasons as $manager_season}
+   {if $manager_season.EXPIRED == 0}
+   <tr>
+     <td><a href="solo_manager_season_dashboard.php?mseason_id={$manager_season.MANAGER_INFO.SEASON_ID}"><b>{$manager_season.MANAGER_INFO.SEASON_TITLE}</b></a><br>
+       {if isset($manager_season.MARKET)}
+        {if isset($manager_season.MARKET.SEASON_OVER)}<div class="textred">{translate fonema=LANG_SEASON_OVER_U}</div>
+        {elseif isset($manager_season.MARKET.NOMARKET)}
+        <div>{translate fonema=LANG_MARKET_CLOSED_3_U} <span class="date_font2"><b>{$manager_season.MARKET.NOMARKET.START_DATE} {$manager_season.MARKET.NOMARKET.UTC}</b></span></div> 
+        {elseif isset($manager_season.MARKET.NOMARKET_DELAY)}
+        <div>{translate fonema=LANG_MARKET_CLOSED_2_U}</b></div> 
+        {elseif isset($manager_season.MARKET.MARKET_OPEN)}
+        <div>{translate fonema=LANG_MARKET_OPENED_2_U} <span class="date_font2"><b>{$manager_season.MARKET.MARKET_OPEN.START_DATE} {$manager_season.MARKET.MARKET_OPEN.UTC}</b></span></div> 
+        {/if}
+       {/if}
+     </td>
+     <td>
+      {if isset($manager_season.SOLO_LEAGUES_ALLOWED)}
+        {if isset($manager_season.SOLO_LEAGUES)}
+         {translate fonema=LANG_TOTAL_U}: <a href="solo_manager_league.php?mseason_id={$manager_season.MANAGER_INFO.SEASON_ID}&all=y"><b>{$manager_season.SOLO_LEAGUES.LEAGUES}</b></a> {if isset($manager_season.SOLO_LEAGUES.MY_LEAGUES)}<br>
+         {translate fonema=LANG_MINE_U}: <a href="solo_manager_league.php?mseason_id={$manager_season.MANAGER_INFO.SEASON_ID}"><b>{$manager_season.SOLO_LEAGUES.MY_LEAGUES}</b></a>{/if}<br>
+        {else} 
+         <a href="solo_manager_league.php?mseason_id={$manager_season.MANAGER_INFO.SEASON_ID}&all=y">{translate fonema=LANG_SOLO_LEAGUES_U}</a>: <b>0</b>
+        {/if}
+        {if isset($manager_season.SOLO_LEAGUES_INVITE)}
+         <a href="solo_manager_league.php?mseason_id={$manager_season.MANAGER_INFO.SEASON_ID}#league_invites">{translate fonema=LANG_INVITATIONS_U}:</a> <span class="textred"><b>{$manager_season.SOLO_LEAGUES_INVITE.LEAGUES}</b></span></br>
+        {/if}
+      {/if}
+     </td>
+   </tr>
+   {/if}
+   {/foreach}
+  </table> 
+</div>
+ <div id="tabs-2">
+  <table>
+   <tr><td></td>
+       <th>{translate fonema=LANG_SOLO_LEAGUES_U}</th>
+   </tr>
+   {foreach $manager_seasons as $manager_season}
+   {if $manager_season.EXPIRED == 1}
+   <tr>
+     <td><a href="solo_manager_season_dashboard.php?mseason_id={$manager_season.MANAGER_INFO.SEASON_ID}"><b>{$manager_season.MANAGER_INFO.SEASON_TITLE}</b></a><br>
+       {if isset($manager_season.MARKET)}
+        {if isset($manager_season.MARKET.SEASON_OVER)}<div class="textred">{translate fonema=LANG_SEASON_OVER_U}</div>
+        {elseif isset($manager_season.MARKET.NOMARKET)}
+        <div>{translate fonema=LANG_MARKET_CLOSED_3_U} <span class="date_font2"><b>{$manager_season.MARKET.NOMARKET.START_DATE} {$manager_season.MARKET.NOMARKET.UTC}</b></span></div> 
+        {elseif isset($manager_season.MARKET.NOMARKET_DELAY)}
+        <div>{translate fonema=LANG_MARKET_CLOSED_2_U}</b></div> 
+        {elseif isset($manager_season.MARKET.MARKET_OPEN)}
+        <div>{translate fonema=LANG_MARKET_OPENED_2_U} <span class="date_font2"><b>{$manager_season.MARKET.MARKET_OPEN.START_DATE} {$manager_season.MARKET.MARKET_OPEN.UTC}</b></span></div> 
+        {/if}
+       {/if}
+     </td>
+     <td>
+      {if isset($manager_season.SOLO_LEAGUES_ALLOWED)}
+        {if isset($manager_season.SOLO_LEAGUES)}
+         {translate fonema=LANG_TOTAL_U}: <a href="solo_manager_league.php?mseason_id={$manager_season.MANAGER_INFO.SEASON_ID}&all=y"><b>{$manager_season.SOLO_LEAGUES.LEAGUES}</b></a> {if isset($manager_season.SOLO_LEAGUES.MY_LEAGUES)}<br>
+         {translate fonema=LANG_MINE_U}: <a href="solo_manager_league.php?mseason_id={$manager_season.MANAGER_INFO.SEASON_ID}"><b>{$manager_season.SOLO_LEAGUES.MY_LEAGUES}</b></a>{/if}<br>
+        {else} 
+         <a href="solo_manager_league.php?mseason_id={$manager_season.MANAGER_INFO.SEASON_ID}&all=y">{translate fonema=LANG_SOLO_LEAGUES_U}</a>: <b>0</b>
+        {/if}
+        {if isset($manager_season.SOLO_LEAGUES_INVITE)}
+         <a href="solo_manager_league.php?mseason_id={$manager_season.MANAGER_INFO.SEASON_ID}#league_invites">{translate fonema=LANG_INVITATIONS_U}:</a> <span class="textred"><b>{$manager_season.SOLO_LEAGUES_INVITE.LEAGUES}</b></span></br>
+        {/if}
+      {/if}
+     </td>
+   </tr>
+   {/if}
+   {/foreach}
+  </table> 
+</div>
+</div>

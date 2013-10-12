@@ -1,0 +1,9 @@
+{translate fonema=LANG_HI_U}, {$data.USER_NAME}
+
+{translate fonema=LANG_EMAIL_RVS_DRAFT_START_LINE_1} {$data.TITLE}
+{translate fonema=LANG_EMAIL_RVS_DRAFT_START_LINE_2} {$data.DRAFT_START_DATE}
+{translate fonema=LANG_EMAIL_RVS_DRAFT_START_LINE_3}
+
+{$data.URL}
+
+{translate fonema=LANG_EMAIL_LAST_LINE}

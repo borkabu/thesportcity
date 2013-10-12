@@ -1,0 +1,2 @@
+{if isset($sugerror)}<span class="textred">{translate fonema=LANG_SUGGEST_CATEGORY_ERROR_U}</span>
+{else}<span class="textgreen">{translate fonema=LANG_SUGGEST_CATEGORY_SUCCESS_U}</span>{/if}

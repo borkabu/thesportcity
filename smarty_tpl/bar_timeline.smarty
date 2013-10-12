@@ -1,0 +1,102 @@
+{if isset($events)}
+<div class="portlet">
+<div class="header">{translate fonema=LANG_TIMELINE_U}</div>
+<div class="content" style="padding:0px;margin:0px">
+  <table class="background">
+    <tr>
+       <td width="100%" colspan="1" rowspan="2"></td>
+        {foreach $daymonths as $daymonth}
+         <td align="center" colspan="{$daymonth.WIDTH}" class="header2">
+	   {if $daymonth.WIDTH> 2}{$daymonth.NAME}{/if}
+         </td>
+        {/foreach}
+     </tr>
+    <tr>
+       {foreach $day_names as $day_name}
+        <td class="date_font2" style="text-align:center;{if $day_name@iteration==2}background-color:yellow{/if}">
+	 <b>{$day_name.DAY}</b></td>
+       {/foreach}
+    </tr>
+  {foreach $events as $event}
+    <tr  style="border:1px solid #7DA3EE;">
+       <td style="border:1px solid #7DA3EE;">
+        <div  style="float:left">
+        {if $event.TYPE=='MANAGER'}
+         {if isset($event.PIC_LOCATION)}
+           <img src="../img/{$event.PIC_LOCATION}" align="left" height=25 style="margin-right:5px"/>
+         {/if}
+	 <b>{translate fonema=LANG_FANTASY_MANAGER_U}:</b> <a href="f_manager_season_dashboard.php?mseason_id={$event.SEASON_ID}"><b>{$event.SEASON_TITLE}</b></a>
+         <br><a class="veryverysmall" href="f_manager_control.php?mseason_id={$event.SEASON_ID}">{translate fonema=LANG_TEAM_MANAGEMENT_U}</a>         
+             {if isset($event.ALLOW_SOLO) && ($event.ALLOW_SOLO=='Y')}  
+              | <a class="veryverysmall" href="solo_manager_control.php?mseason_id={$event.SEASON_ID}">{translate fonema=LANG_SOLO_TEAM_MANAGEMENT_U}</a>{/if}
+        {else if $event.TYPE=='RVS_MANAGER'}
+         {if isset($event.PIC_LOCATION)}
+           <img src="../img/{$event.PIC_LOCATION}" align="left" height=25 style="margin-right:5px"/>
+         {/if}
+	 <b>{translate fonema=LANG_RVS_LEAGUES_U}:</b> <a href="rvs_manager_season_dashboard.php?mseason_id={$event.SEASON_ID}"><b>{$event.SEASON_TITLE}</b></a>
+        {else if $event.TYPE=='MANAGER_TOURNAMENT'}
+         {if isset($event.PIC_LOCATION)}
+           <img src="../img/{$event.PIC_LOCATION}" align="left" height=25 style="margin-right:5px"/>
+         {/if}
+	 <b>{translate fonema=LANG_TOURNAMENTS_U}:</b> <a href="f_manager_tournament_dashboard.php?mseason_id={$event.SEASON_ID}"><b>{$event.SEASON_TITLE}</b></a>
+        {else if $event.TYPE=='ARRANGER'}
+         {if isset($event.PIC_LOCATION)}
+           <img src="../img/{$event.PIC_LOCATION}" align="left" height=25 style="margin-right:5px"/>
+         {/if}
+	 <b>{translate fonema=LANG_ARRANGER_U}:</b> <a href="bracket_season_dashboard.php?tseason_id={$event.SEASON_ID}"><b>{$event.SEASON_TITLE}</b></a>
+        {else if $event.TYPE=='WAGER'}
+	 <b>{translate fonema=LANG_WAGER_U}:</b> <a href="wager_season_dashboard.php?season_id={$event.SEASON_ID}"><b>{$event.SEASON_TITLE}</b></a>
+        {/if}
+        </div> 
+        {if isset($useron)}
+         {if isset($event.NOTIFICATION)}
+          <div style="float:right"><img src="./img/icons/warning.png" onmouseover="Tip('{translate fonema=LANG_ATTENTION_REQUIRED_U}')" onmouseout="UnTip()" /></div>
+         {/if}       
+         {if $event.USER_ID!=""}
+          <div style="float:right"><img src="./img/icons/green_flag.png" onmouseover="Tip('{translate fonema=LANG_PARTICIPATING_U}')" onmouseout="UnTip()" /></div>
+         {else}
+          <div style="float:right"><img src="./img/icons/black_flag.png" onmouseover="Tip('{translate fonema=LANG_NOT_PARTICIPATING_U}')" onmouseout="UnTip()" /></div>
+         {/if}
+        {/if}
+       </td>
+     {if isset($event.STATE)}
+     {foreach $event.STATE as $state}
+       <td {if $state.DAY==0}class="opened"
+	   {else if $state.DAY==1}class="closed"{/if} 
+		style="text-align:center;	
+	   {if isset($state.TODAY)}background-color:yellow;border:1px solid #7DA3EE;
+		{else}border:0px;{/if}
+	   {if $state.OPENING > 0 || $state.CLOSING > 0}width:24px; padding:0;{/if}"
+           {if $state.DAY==0 && $state.OPENING == 0 && $state.CLOSING == 0}
+		onmouseover="Tip('{translate fonema=LANG_MARKET_OPENED_U}')" onmouseout="UnTip()"
+           {else if $state.DAY==1 && $state.OPENING == 0 && $state.CLOSING == 0}
+		onmouseover="Tip('{translate fonema=LANG_MARKET_CLOSED_U}')" onmouseout="UnTip()"
+           {/if}
+           >
+           {if $state.OPENING > 0 && $state.CLOSING == 0}
+            <img src="./img/icons/opening_market.png" onmouseover="Tip('{translate fonema=LANG_MARKET_OPENING_U}')" onmouseout="UnTip()">
+           {else if $state.OPENING == 0 && $state.CLOSING > 0}
+            <img src="./img/icons/closing_market.png" onmouseover="Tip('{translate fonema=LANG_MARKET_CLOSING_U}')" onmouseout="UnTip()">
+           {else if $state.OPENING > 0 && $state.CLOSING == $state.OPENING}
+            <img src="./img/icons/oco_market.png" onmouseover="Tip('{translate fonema=LANG_MARKET_CLOSING_BRIEFLY_U}')" onmouseout="UnTip()">
+           {else if $state.OPENING > 0 && $state.CLOSING > 0&& $state.CLOSING != $state.OPENING}
+            <img src="./img/icons/coc_market.png" onmouseover="Tip('{translate fonema=LANG_MARKET_OPENING_BRIEFLY_U}')" onmouseout="UnTip()">
+	   {/if}
+       </td>
+     {/foreach}
+     {/if}
+     {if isset($event.WAGERS)}
+     {foreach $event.WAGERS as $wager}
+       <td style="text-align:center;	   
+          {if isset($wager.TODAY)}background-color:yellow;border:1px solid #7DA3EE;
+		{/if}">
+        {$wager.GAMES}
+       </td>
+     {/foreach}     
+     {/if}
+    </tr>  
+   {/foreach}
+  </table>
+</div>
+</div>
+{/if}
